@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTS 실시간 속보 위젯 - 모닝증시큐레이터</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap');
+    body {
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+      user-select: none;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 5px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+    @keyframes highlight-flash {
+      0% { background-color: #fef08a; }
+      100% { background-color: #ffffff; }
+    }
+    .card-new {
+      animation: highlight-flash 2.5s ease-out;
+    }
+  </style>
+</head>
+<body class="bg-[#f1f3f7] text-slate-900 flex flex-col h-screen overflow-hidden antialiased">
+
+  <!-- 미니 위젯 상단 헤더 -->
+  <header class="bg-white border-b border-slate-200 px-3 py-2 flex items-center justify-between shrink-0 shadow-sm">
+    <div class="flex items-center space-x-2">
+      <span class="relative flex h-2.5 w-2.5">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+      </span>
+      <h1 class="font-extrabold text-xs text-slate-900 tracking-tight flex items-center space-x-1.5">
+        <i class="fa-solid fa-bolt text-amber-500"></i>
+        <span>HTS 실시간 속보</span>
+      </h1>
+      <span id="countdownBadge" class="text-[10px] bg-slate-100 text-slate-500 px-1.5 py-0.5 rounded font-mono">30s</span>
+    </div>
+
+    <!-- 우측 제어 아이콘 -->
+    <div class="flex items-center space-x-1 text-xs">
+      <button id="btnSound" onclick="toggleSound()" class="p-1.5 text-slate-600 hover:text-amber-600 hover:bg-slate-100 rounded transition" title="알림음 토글 (ON/OFF)">
+        <i class="fa-solid fa-volume-high"></i>
+      </button>
+      <button id="btnNotify" onclick="toggleNotification()" class="p-1.5 text-slate-600 hover:text-blue-600 hover:bg-slate-100 rounded transition" title="윈도우 데스크톱 알림 토글">
+        <i class="fa-solid fa-bell"></i>
+      </button>
+      <button onclick="refreshData()" class="p-1.5 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded transition" title="지금 즉시 새로고침">
+        <i id="refreshIcon" class="fa-solid fa-rotate-right"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- 검색 / 필터 바 -->
+  <div class="bg-slate-50 border-b border-slate-200 px-2.5 py-1.5 flex items-center space-x-1.5 shrink-0">
+    <div class="relative flex-1">
+      <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-2 text-[10px] text-slate-400"></i>
+      <input type="text" id="searchInput" oninput="applyFilter()" placeholder="키워드 검색 (종목명, 특징주 등)..."
+             class="w-full bg-white border border-slate-300 rounded-lg pl-7 pr-6 py-1 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-blue-500 shadow-sm transition">
+      <button id="btnClearSearch" onclick="clearSearch()" class="hidden absolute right-2 top-1.5 text-[10px] text-slate-400 hover:text-slate-600">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <span id="newsCount" class="text-[11px] font-bold text-blue-600 bg-blue-50 border border-blue-200 px-2 py-0.5 rounded-full shrink-0">0건</span>
+  </div>
+
+  <!-- 뉴스 스트림 리스트 -->
+  <main id="newsStream" class="flex-1 overflow-y-auto p-2 space-y-1.5 custom-scrollbar select-text">
+    <div class="flex flex-col items-center justify-center h-48 text-slate-400 space-y-2 text-xs">
+      <i class="fa-solid fa-spinner fa-spin text-lg"></i>
+      <span>실시간 속보 데이터를 불러오는 중...</span>
+    </div>
+  </main>
+
+  <!-- 미니 위젯 하단 툴바 -->
+  <footer class="bg-white border-t border-slate-200 px-3 py-1.5 flex items-center justify-between text-[11px] text-slate-500 shrink-0">
+    <div class="flex items-center space-x-1.5">
+      <i class="fa-regular fa-clock text-[10px]"></i>
+      <span id="clockTime" class="font-mono">--:--:--</span>
+    </div>
+    <div class="flex items-center space-x-2">
+      <button onclick="window.opener ? window.opener.focus() : window.open('/', '_blank')" class="text-blue-600 hover:underline font-semibold">
+        메인창 열기 <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+      </button>
+    </div>
+  </footer>
+
+  <script>
+    let allNews = [];
+    let seenIds = new Set();
+    let isInitialLoad = true;
+    let soundEnabled = localStorage.getItem('hts_mini_sound') !== 'false';
+    let notifyEnabled = localStorage.getItem('hts_mini_notify') !== 'false';
+    let countdown = 25;
+    let countdownTimer = null;
+
+    // 시계 갱신
+    function updateClock() {
+      const now = new Date();
+      document.getElementById('clockTime').innerText = now.toLocaleTimeString('ko-KR', { hour12: false });
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // 오디오 알림 차임 (Web Audio API)
+    function playChime() {
+      if (!soundEnabled) return;
+      try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const now = ctx.currentTime;
+        [659.25, 830.61, 987.77].forEach((f, i) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(f, now + i * 0.08);
+          gain.gain.setValueAtTime(0.12, now + i * 0.08);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.08 + 0.35);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now + i * 0.08);
+          osc.stop(now + i * 0.08 + 0.35);
+        });
+      } catch (e) {
+        console.warn('Audio play error:', e);
+      }
+    }
+
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      localStorage.setItem('hts_mini_sound', soundEnabled);
+      updateButtonsUI();
+      if (soundEnabled) playChime();
+    }
+
+    function toggleNotification() {
+      notifyEnabled = !notifyEnabled;
+      if (notifyEnabled && "Notification" in window && Notification.permission !== "granted") {
+        Notification.requestPermission();
+      }
+      localStorage.setItem('hts_mini_notify', notifyEnabled);
+      updateButtonsUI();
+    }
+
+    function updateButtonsUI() {
+      const btnS = document.getElementById('btnSound');
+      const btnN = document.getElementById('btnNotify');
+      if (soundEnabled) {
+        btnS.className = 'p-1.5 text-amber-600 bg-amber-50 rounded transition';
+        btnS.innerHTML = '<i class="fa-solid fa-volume-high"></i>';
+      } else {
+        btnS.className = 'p-1.5 text-slate-400 hover:text-slate-600 rounded transition';
+        btnS.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
+      }
+
+      if (notifyEnabled) {
+        btnN.className = 'p-1.5 text-blue-600 bg-blue-50 rounded transition';
+        btnN.innerHTML = '<i class="fa-solid fa-bell"></i>';
+      } else {
+        btnN.className = 'p-1.5 text-slate-400 hover:text-slate-600 rounded transition';
+        btnN.innerHTML = '<i class="fa-solid fa-bell-slash"></i>';
+      }
+    }
+
+    // 뉴스 데이터 수집
+    async function refreshData() {
+      const icon = document.getElementById('refreshIcon');
+      icon.classList.add('fa-spin');
+      try {
+        const res = await fetch('/api/news').then(r => r.json());
+        if (res.status === 'ok') {
+          const newItems = res.news || [];
+          
+          let newlyArrived = [];
+          if (!isInitialLoad) {
+            newItems.forEach(item => {
+              if (!seenIds.has(item.id)) {
+                newlyArrived.push(item);
+              }
+            });
+          }
+
+          newItems.forEach(it => seenIds.add(it.id));
+          allNews = newItems;
+
+          if (newlyArrived.length > 0 && !isInitialLoad) {
+            playChime();
+            if (notifyEnabled && "Notification" in window && Notification.permission === "granted") {
+              const latest = newlyArrived[0];
+              const notif = new Notification(`⚡ [속보] ${latest.source}`, {
+                body: latest.title,
+                icon: 'https://ssl.pstatic.net/static/m/stock/im/2016/08/og_stock.png'
+              });
+              notif.onclick = () => {
+                window.focus();
+                window.open(latest.link, '_blank');
+              };
+            }
+          }
+
+          isInitialLoad = false;
+          applyFilter();
+        }
+      } catch (err) {
+        console.error('Fetch error:', err);
+      } finally {
+        icon.classList.remove('fa-spin');
+        countdown = 25;
+      }
+    }
+
+    function applyFilter() {
+      const q = document.getElementById('searchInput').value.trim().toLowerCase();
+      const btnC = document.getElementById('btnClearSearch');
+      if (q) btnC.classList.remove('hidden');
+      else btnC.classList.add('hidden');
+
+      const filtered = allNews.filter(n => {
+        if (!q) return true;
+        return (n.title && n.title.toLowerCase().includes(q)) ||
+               (n.source && n.source.toLowerCase().includes(q)) ||
+               (n.tags && n.tags.some(t => t.toLowerCase().includes(q)));
+      });
+
+      renderList(filtered);
+    }
+
+    function clearSearch() {
+      document.getElementById('searchInput').value = '';
+      applyFilter();
+    }
+
+    function renderList(items) {
+      const container = document.getElementById('newsStream');
+      document.getElementById('newsCount').innerText = `${items.length}건`;
+
+      if (items.length === 0) {
+        container.innerHTML = `
+          <div class="flex flex-col items-center justify-center h-48 text-slate-400 space-y-1 text-xs">
+            <i class="fa-regular fa-folder-open text-base"></i>
+            <span>조건에 맞는 뉴스가 없습니다.</span>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = items.map(n => {
+        const tag = (n.tags && n.tags.length > 0) ? n.tags[0] : '증시일반';
+        return `
+          <div class="bg-white border border-slate-200 hover:border-blue-400 rounded-lg p-2.5 transition shadow-sm hover:shadow group">
+            <div class="flex items-center justify-between text-[10px] text-slate-500 mb-1 font-medium">
+              <div class="flex items-center space-x-1.5">
+                <span class="font-bold text-slate-700 bg-slate-100 px-1.5 py-0.5 rounded">${escapeHtml(n.source)}</span>
+                <span class="font-mono">${escapeHtml(n.display_time)}</span>
+              </div>
+              <span class="text-blue-600 bg-blue-50 border border-blue-200/60 px-1.5 py-0.2 rounded font-medium">${escapeHtml(tag)}</span>
+            </div>
+            <a href="${escapeHtml(n.link)}" target="_blank" class="block font-bold text-xs text-slate-900 group-hover:text-blue-600 leading-snug line-clamp-2 transition hover:underline">
+              ${escapeHtml(n.title)}
+            </a>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/[&<>"']/g, m => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      })[m]);
+    }
+
+    // 카운트다운 타이머
+    setInterval(() => {
+      countdown--;
+      const badge = document.getElementById('countdownBadge');
+      if (countdown <= 0) {
+        refreshData();
+      } else {
+        badge.innerText = `${countdown}s`;
+      }
+    }, 1000);
+
+    // 초기 실행
+    window.addEventListener('DOMContentLoaded', () => {
+      updateButtonsUI();
+      if ("Notification" in window && Notification.permission === "default") {
+        Notification.requestPermission();
+      }
+      refreshData();
+    });
+  </script>
+</body>
+</html>

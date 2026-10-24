@@ -1,0 +1,19 @@
+# Python 캐시 파일
+__pycache__/
+*.py[cod]
+*$py.class
+
+# PyInstaller 빌드 결과물 및 실행파일
+build/
+dist/
+*.spec
+*.exe
+
+# 임시 파일 및 로그
+*.log
+.env
+.venv
+env/
+venv/
+.idea/
+.vscode/
