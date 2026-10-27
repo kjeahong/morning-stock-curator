@@ -110,6 +110,17 @@ def api_closing():
     except Exception as e:
         return json_response({'status': 'error', 'message': str(e)})
 
+@app.route('/api/aftermarket')
+def api_aftermarket():
+    force = request.query.get('refresh', '0') == '1'
+    try:
+        import importlib
+        importlib.reload(collector)
+        data = collector.get_aftermarket_data(force_refresh=force)
+        return json_response(data)
+    except Exception as e:
+        return json_response({'status': 'error', 'message': str(e), 'rising': [], 'falling': []})
+
 @app.route('/api/refresh', method=['GET', 'POST'])
 def api_refresh():
     try:
@@ -131,10 +142,15 @@ def api_refresh():
 import socket
 
 def find_free_port(start_port=5000):
-    for port in range(start_port, start_port + 20):
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-            if s.connect_ex(('127.0.0.1', port)) != 0:
-                return port
+    for port in range(start_port, start_port + 5):
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        try:
+            s.bind(('127.0.0.1', port))
+            s.close()
+            return port
+        except Exception:
+            s.close()
+            continue
     return start_port
 
 def open_browser(port):

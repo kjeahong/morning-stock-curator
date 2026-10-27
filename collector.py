@@ -7,6 +7,8 @@
 - 자동 테마 키워드 태깅 및 시간 파싱
 """
 
+import os
+import json
 import re
 import time
 import math
@@ -20,6 +22,63 @@ from bs4 import BeautifulSoup
 import yfinance as yf
 
 # 테마 분류 키워드 사전
+_jsr_profiles_cache = None
+
+def load_jsr_profiles():
+    """JSR(종산8기) 테마 및 종목 급등 사유 데이터베이스 로드 및 캐싱"""
+    global _jsr_profiles_cache
+    if _jsr_profiles_cache is not None:
+        return _jsr_profiles_cache
+        
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    theme_file = os.path.join(base_dir, 'data', 'theme_stock_data.json')
+    spike_file = os.path.join(base_dir, 'data', 'stock_spike_reasons.json')
+    
+    # 만약 local data 폴더에 없으면 원본 경로 확인
+    if not os.path.exists(theme_file):
+        alt_theme = r'C:\종산8기\JSR v10\JSR v10\data\theme_stock_data.json'
+        if os.path.exists(alt_theme):
+            theme_file = alt_theme
+    if not os.path.exists(spike_file):
+        alt_spike = r'C:\Users\Administrator\Desktop\주식알리미 최종 수정본10.22\stock_spike_reasons.json'
+        if os.path.exists(alt_spike):
+            spike_file = alt_spike
+            
+    themes_data = {}
+    spikes_data = {}
+    try:
+        if os.path.exists(theme_file):
+            with open(theme_file, 'r', encoding='utf-8') as f:
+                themes_data = json.load(f)
+    except Exception:
+        pass
+        
+    try:
+        if os.path.exists(spike_file):
+            with open(spike_file, 'r', encoding='utf-8') as f:
+                spikes_data = json.load(f)
+    except Exception:
+        pass
+        
+    profiles = {}
+    for code, info in themes_data.items():
+        nm = info.get('stock_name')
+        if not nm:
+            continue
+        themes = info.get('themes', [])
+        primary_th = themes[0] if themes else '개별 특징주'
+        raw_spike = spikes_data.get(code, '')
+        clean_spike = re.sub(r'^\d{4}-\d{2}-\d{2}\s*', '', raw_spike).strip()
+        profiles[nm] = {
+            'code': code,
+            'name': nm,
+            'themes': themes,
+            'primary_theme': primary_th,
+            'spike_reason': clean_spike
+        }
+    _jsr_profiles_cache = profiles
+    return _jsr_profiles_cache
+
 THEME_RULES = [
     ('🇺🇸 미증시/매크로', [
         '뉴욕증시', '나스닥', '다우', 'S&P', '월가', '연준', '파월', '금리', '환율', 
@@ -409,10 +468,25 @@ def extract_stock_catalyst(stock_name, headline):
     
     return t if len(t) >= 4 else ''
 
-def polish_stock_catalyst(stock_name, cat):
-    """추출된 재료 문구를 천마뇌검 정통 칼럼 문체에 맞게 세련되게 정제"""
+def polish_stock_catalyst(stock_name, cat, jsr_prof=None):
+    """추출된 재료 문구를 JSR DB 및 천마뇌검 정통 칼럼 문체에 맞게 정밀 정제"""
+    jsr_spike = jsr_prof.get('spike_reason', '') if jsr_prof else ''
+    primary_theme = jsr_prof.get('primary_theme', '') if jsr_prof else ''
+
+    # 만약 뉴스에서 추출된 재료가 없거나 너무 짧거나 추상적인 경우 JSR 사유/테마 적극 보강
+    if not cat or len(cat) < 4 or cat in ['급등', '강세', '상승', '특징주', '상한가']:
+        if jsr_spike:
+            clean_s = re.sub(r'^(?:급등|상승|강세|상한가)\s*', '', jsr_spike).strip()
+            if clean_s:
+                if not (clean_s.endswith('에') or clean_s.endswith('속') or clean_s.endswith('가운데')):
+                    clean_s += '에'
+                return clean_s
+        if primary_theme and primary_theme != '개별 특징주':
+            return f"{primary_theme} 테마 수혜 및 모멘텀 지속에"
+
     if not cat:
-        return ''
+        return f"{primary_theme} 테마 부각에" if primary_theme else ''
+
     c = cat.strip(' ,·:;`\'"“”‘’')
     c = re.sub(r'\[.*?\]', '', c)
     c = re.sub(r'\(.*?\)', '', c)
@@ -454,7 +528,7 @@ def polish_stock_catalyst(stock_name, cat):
             c += '에'
         return c
 
-    if any(w in c for w in ['개발', '체결', '발표', '선고', '성공', '공시', '수주', '무죄', '유증', '무증']):
+    if any(w in c for w in ['개발', '체결', '발표', '선고', '성공', '공시', '수주', '무죄', '유증', '무증', '인수']):
         return f"{c} 소식에"
     elif '기대' in c:
         return f"{c}감에"
@@ -465,6 +539,12 @@ def polish_stock_catalyst(stock_name, cat):
 
 def fetch_single_stock_catalyst(stock, wrap_headlines):
     name = stock['name']
+    profiles = load_jsr_profiles()
+    jsr_prof = profiles.get(name, {})
+    stock['jsr_themes'] = jsr_prof.get('themes', [])
+    stock['primary_theme'] = jsr_prof.get('primary_theme', '')
+    stock['jsr_spike'] = jsr_prof.get('spike_reason', '')
+
     url = f"https://news.google.com/rss/search?q={urllib.parse.quote(name)}+when:1d&hl=ko&gl=KR&ceid=KR:ko"
     req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
     catalyst = ''
@@ -495,7 +575,7 @@ def fetch_single_stock_catalyst(stock, wrap_headlines):
                     raw_headline = h
                     break
 
-    polished = polish_stock_catalyst(name, catalyst)
+    polished = polish_stock_catalyst(name, catalyst, jsr_prof)
     stock['catalyst'] = polished
     stock['raw_headline'] = raw_headline
     return stock
@@ -623,6 +703,18 @@ def get_closing_market_data():
     stocks.sort(key=lambda x: (x['is_limit_up'], x['pct']), reverse=True)
     target_stocks = stocks[:25]
 
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    last_closing_file = os.path.join(base_dir, 'data', 'last_closing_data.json')
+    if not target_stocks and os.path.exists(last_closing_file):
+        try:
+            with open(last_closing_file, 'r', encoding='utf-8') as f:
+                saved = json.load(f)
+                saved['header_line'] = header_line
+                saved['market'] = market
+                return saved
+        except Exception:
+            pass
+
     # 4. 각 종목별 개별 뉴스 상승 촉매(재료) 병렬 수집
     with ThreadPoolExecutor(max_workers=10) as executor:
         futures = [executor.submit(fetch_single_stock_catalyst, s, wrap_headlines) for s in target_stocks]
@@ -632,15 +724,17 @@ def get_closing_market_data():
             except Exception:
                 pass
 
-    # 5. 테마 분류 매핑
+    # 5. 테마 분류 매핑 (JSR DB 1순위 적용)
     theme_buckets = {}
     for s in target_stocks:
-        text = f"{s['name']} {s.get('catalyst', '')} {s.get('raw_headline', '')}"
-        matched_th = '개별 특징주'
-        for th_name, kws in CLOSING_THEME_RULES:
-            if any(kw.lower() in text.lower() for kw in kws):
-                matched_th = th_name
-                break
+        matched_th = s.get('primary_theme') or ''
+        if not matched_th or matched_th == '개별 특징주':
+            text = f"{s['name']} {s.get('catalyst', '')} {s.get('raw_headline', '')}"
+            matched_th = '개별 특징주'
+            for th_name, kws in CLOSING_THEME_RULES:
+                if any(kw.lower() in text.lower() for kw in kws):
+                    matched_th = th_name
+                    break
         s['theme'] = matched_th
         s['reason'] = s.get('catalyst', '')
         if matched_th not in theme_buckets:
@@ -747,7 +841,7 @@ def get_closing_market_data():
             'stocks': st_list
         })
 
-    return {
+    result = {
         'status': 'ok',
         'date_str': date_str,
         'market': market,
@@ -758,6 +852,16 @@ def get_closing_market_data():
         'themes': theme_list,
         'all_top_stocks': target_stocks
     }
+
+    if target_stocks:
+        try:
+            os.makedirs(os.path.join(base_dir, 'data'), exist_ok=True)
+            with open(last_closing_file, 'w', encoding='utf-8') as f:
+                json.dump(result, f, ensure_ascii=False, indent=2)
+        except Exception:
+            pass
+
+    return result
 
 _charts_cache = {
     'data': None,
@@ -949,6 +1053,181 @@ def get_charts_data(force_refresh=False):
     _charts_cache['data'] = result
     _charts_cache['last_time'] = now_ts
     return result
+
+_aftermarket_cache = {
+    'data': None,
+    'last_time': 0
+}
+
+def get_aftermarket_data(force_refresh=False):
+    """애프터마켓(시간외 20:00 마감) 특징주 텔레그램 실시간 수집 및 JSR 연동 모듈"""
+    global _aftermarket_cache
+    now_ts = time.time()
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    cache_file = os.path.join(base_dir, 'data', 'last_aftermarket.json')
+
+    # 메모리 캐시 (10분 유효)
+    if not force_refresh and _aftermarket_cache['data'] and (now_ts - _aftermarket_cache['last_time'] < 600):
+        return _aftermarket_cache['data']
+
+    post_time = ''
+    target_msg = None
+    try:
+        url = 'https://t.me/s/crioppstockfree'
+        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'})
+        with urllib.request.urlopen(req, timeout=8) as resp:
+            html = resp.read().decode('utf-8', errors='ignore')
+            soup = BeautifulSoup(html, 'html.parser')
+
+            for wrap in reversed(soup.find_all('div', class_='tgme_widget_message_wrap')):
+                m = wrap.find('div', class_='tgme_widget_message_text')
+                if m and '에프터마켓' in m.get_text() and '특징주' in m.get_text():
+                    target_msg = m
+                    time_tag = wrap.find('time')
+                    if time_tag and 'datetime' in time_tag.attrs:
+                        post_time = time_tag['datetime']
+                    break
+    except Exception as e:
+        pass
+
+    # 크롤링 실패 시 파일 캐시 확인
+    if not target_msg:
+        if os.path.exists(cache_file):
+            try:
+                with open(cache_file, 'r', encoding='utf-8') as f:
+                    cached_json = json.load(f)
+                    _aftermarket_cache['data'] = cached_json
+                    _aftermarket_cache['last_time'] = now_ts
+                    return cached_json
+            except Exception:
+                pass
+        return {
+            'status': 'empty',
+            'time': '',
+            'rising': [],
+            'falling': [],
+            'cafe_text': '애프터마켓 특징주 데이터가 아직 등록되지 않았습니다.',
+            'cafe_html': '<div>애프터마켓 특징주 데이터가 아직 등록되지 않았습니다.</div>'
+        }
+
+    # a 링크 정리
+    for a in target_msg.find_all('a'):
+        href = a.get('href', '').strip()
+        a.replace_with(href)
+
+    raw = str(target_msg)
+    raw = re.sub(r'<br\s*/?>', '\n', raw)
+    raw = re.sub(r'<[^>]+>', '', raw)
+    lines = [re.sub(r'\s+', ' ', l).strip() for l in raw.splitlines() if l.strip()]
+
+    profiles = load_jsr_profiles()
+    rising = []
+    falling = []
+    is_falling = False
+    curr_stock = None
+
+    for l in lines:
+        if '에프터마켓' in l and '특징주' in l:
+            continue
+        if '───' in l or ('하락' in l and not curr_stock):
+            is_falling = True
+            curr_stock = None
+            continue
+
+        m_stk = re.match(r'^(?:▶\s*)?([가-힣A-Za-z0-9\.\s]+)\s*\(([\+\-]?\d+\.?\d*%)\)', l)
+        if m_stk:
+            name = m_stk.group(1).strip()
+            pct = m_stk.group(2).strip()
+            if not pct.startswith('+') and not pct.startswith('-'):
+                pct = ('-' if is_falling else '+') + pct
+
+            prof = profiles.get(name, {})
+            curr_stock = {
+                'name': name,
+                'pct': pct,
+                'is_up': not pct.startswith('-'),
+                'themes': prof.get('themes', []),
+                'primary_theme': prof.get('primary_theme', ''),
+                'reasons': []
+            }
+            (falling if is_falling else rising).append(curr_stock)
+        elif curr_stock:
+            clean_reason = l.lstrip('→-•* ').strip()
+            if clean_reason:
+                curr_stock['reasons'].append(clean_reason)
+
+    # 1. 텍스트 초안 (카페 / 텔레그램 / 카톡용 마크다운)
+    cafe_lines = ["🔶 애프터마켓 상승 특징주", ""]
+    for s in rising:
+        cafe_lines.append(f"▶{s['name']} ({s['pct']})")
+        for r in s['reasons']:
+            cafe_lines.append(f"→ {r}")
+        cafe_lines.append("")
+
+    cafe_lines.append("🔶 애프터마켓 하락 특징주")
+    cafe_lines.append("")
+    for s in falling:
+        cafe_lines.append(f"▶{s['name']} ({s['pct']})")
+        for r in s['reasons']:
+            cafe_lines.append(f"→ {r}")
+        cafe_lines.append("")
+
+    cafe_text = "\n".join(cafe_lines)
+
+    # 2. 네이버 카페 스마트에디터 ONE 서식 (눈편한 폰트 & 고대비 스타일)
+    html_parts = [
+        '<div style="font-family: \'Apple SD Gothic Neo\', \'Malgun Gothic\', sans-serif; font-size: 15px; color: #1c1917; line-height: 1.8; max-width: 740px;">',
+        '<div style="background-color: #fef2f2; border-left: 5px solid #dc2626; padding: 12px 18px; border-radius: 6px; margin-bottom: 18px;">',
+        '  <h3 style="margin: 0; font-size: 17px; font-weight: 800; color: #b91c1c;">🔶 애프터마켓 상승 특징주</h3>',
+        '</div>'
+    ]
+    for s in rising:
+        th_badge = f'<span style="background-color: #fef3c7; color: #b45309; font-size: 11px; font-weight: 700; padding: 2px 6px; border-radius: 4px; margin-left: 6px;">{s["primary_theme"]}</span>' if s.get('primary_theme') else ''
+        html_parts.append('<div style="margin-bottom: 15px; padding-bottom: 12px; border-bottom: 1px dashed #e2e8f0;">')
+        html_parts.append(f'  <div style="font-size: 16px; font-weight: 800; color: #0f172a;">▶ <span style="color: #dc2626;">{s["name"]}</span> <span style="background-color: #fee2e2; color: #dc2626; font-size: 13px; font-weight: 800; padding: 2px 8px; border-radius: 4px; margin-left: 4px;">{s["pct"]}</span>{th_badge}</div>')
+        for r in s['reasons']:
+            r_html = re.sub(r'\[\[(.*?)\]\]\((https?://[^\s\)]+)\)', r'<a href="\2" target="_blank" style="color: #2563eb; text-decoration: underline; font-weight: 700;">\1</a>', r)
+            r_html = re.sub(r'(?<!")(https?://[^\s\<\)]+)', r'<a href="\1" target="_blank" style="color: #2563eb; text-decoration: underline; font-weight: 600;">[관련기사]</a>', r_html)
+            html_parts.append(f'  <div style="margin-top: 5px; color: #334155; font-size: 14.5px; padding-left: 14px; word-break: keep-all;">→ {r_html}</div>')
+        html_parts.append('</div>')
+
+    html_parts.extend([
+        '<div style="background-color: #eff6ff; border-left: 5px solid #2563eb; padding: 12px 18px; border-radius: 6px; margin: 26px 0 18px 0;">',
+        '  <h3 style="margin: 0; font-size: 17px; font-weight: 800; color: #1d4ed8;">🔶 애프터마켓 하락 특징주</h3>',
+        '</div>'
+    ])
+    for s in falling:
+        th_badge = f'<span style="background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 2px 6px; border-radius: 4px; margin-left: 6px;">{s["primary_theme"]}</span>' if s.get('primary_theme') else ''
+        html_parts.append('<div style="margin-bottom: 15px; padding-bottom: 12px; border-bottom: 1px dashed #e2e8f0;">')
+        html_parts.append(f'  <div style="font-size: 16px; font-weight: 800; color: #0f172a;">▶ <span style="color: #2563eb;">{s["name"]}</span> <span style="background-color: #dbeafe; color: #1d4ed8; font-size: 13px; font-weight: 800; padding: 2px 8px; border-radius: 4px; margin-left: 4px;">{s["pct"]}</span>{th_badge}</div>')
+        for r in s['reasons']:
+            r_html = re.sub(r'\[\[(.*?)\]\]\((https?://[^\s\)]+)\)', r'<a href="\2" target="_blank" style="color: #2563eb; text-decoration: underline; font-weight: 700;">\1</a>', r)
+            r_html = re.sub(r'(?<!")(https?://[^\s\<\)]+)', r'<a href="\1" target="_blank" style="color: #2563eb; text-decoration: underline; font-weight: 600;">[관련기사]</a>', r_html)
+            html_parts.append(f'  <div style="margin-top: 5px; color: #334155; font-size: 14.5px; padding-left: 14px; word-break: keep-all;">→ {r_html}</div>')
+        html_parts.append('</div>')
+    html_parts.append('</div>')
+
+    cafe_html = "\n".join(html_parts)
+
+    data = {
+        'status': 'ok',
+        'time': post_time,
+        'rising': rising,
+        'falling': falling,
+        'cafe_text': cafe_text,
+        'cafe_html': cafe_html
+    }
+
+    try:
+        os.makedirs(os.path.join(base_dir, 'data'), exist_ok=True)
+        with open(cache_file, 'w', encoding='utf-8') as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+    except Exception:
+        pass
+
+    _aftermarket_cache['data'] = data
+    _aftermarket_cache['last_time'] = now_ts
+    return data
 
 if __name__ == '__main__':
     import sys

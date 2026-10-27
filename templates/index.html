@@ -27,35 +27,63 @@
     @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&display=swap');
     
     :root {
-      --bg-body: #f1f3f7;         /* 눈이 편안한 부드러운 소프트 그레이 (눈부심 방지 중간톤) */
-      --bg-panel: #ffffff;        /* 화이트 패널 */
-      --border-panel: #e2e8f0;    /* 선명하고 정돈된 보더 */
-      --text-main: #0f172a;       /* 아주 선명하고 짙은 블랙 (글씨가 한눈에 또렷) */
-      --text-muted: #64748b;      /* 읽기 편한 보조 텍스트 */
-      --text-sub: #334155;        /* 뚜렷한 슬레이트 */
-      --bg-subtle: #e2e8f0;
+      /* [눈이 편안한 웜 톤 (소프트 베이지/아이보리)] - 눈부신 백색과 칠흑 같은 흑색의 양극단을 배제한 눈 피로 방지 모드 */
+      --bg-body: #f4f0e6;         /* 부드럽고 따뜻한 내추럴 웜 베이지 (종이책 느낌) */
+      --bg-panel: #fcfbfa;        /* 따뜻한 미색 패널 (눈부심 0%) */
+      --border-panel: #ded9cd;    /* 정돈되고 차분한 웜 그레이 테두리 */
+      --text-main: #1c1917;       /* 짙은 카본 차콜 (글씨가 선명하고 또렷) */
+      --text-muted: #57534e;      /* 가독성 높은 진한 보조 텍스트 */
+      --text-sub: #44403c;        /* 뚜렷한 다크 웜 슬레이트 */
+      --bg-subtle: #eae5d9;
       --bg-card-inner: #ffffff;
-      --border-card: #f6dfb2;     /* 레퍼런스 화면 샴페인/골드 보더 */
+      --border-card: #e5ded0;
     }
     
     .dark {
-      --bg-body: #0b1120;         /* 고급스러운 다크 네이비/슬레이트 */
-      --bg-panel: #1e293b;
-      --border-panel: #334155;
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-      --text-sub: #cbd5e1;
-      --bg-subtle: #1e293b;
-      --bg-card-inner: #0f172a;
-      --border-card: #334155;
+      /* [부드러운 웜 다크 모드] - 칠흑 같은 검정이 아닌 차분하고 눈이 편안한 웜 슬레이트 차콜 */
+      --bg-body: #1c1f26;         
+      --bg-panel: #262b35;
+      --border-panel: #3a4150;
+      --text-main: #f3f4f6;       /* 편안한 오프화이트 */
+      --text-muted: #9ca3af;
+      --text-sub: #d1d5db;
+      --bg-subtle: #20242d;
+      --bg-card-inner: #191c23;
+      --border-card: #3a4150;
+    }
+
+    /* 패널 및 박스 눈편한 배경색 강제 적용 */
+    header, section, .bg-white {
+      background-color: var(--bg-panel) !important;
+      border-color: var(--border-panel) !important;
+    }
+    .dark header, .dark section, .dark .bg-slate-900, .dark .bg-slate-950 {
+      background-color: var(--bg-panel) !important;
+      border-color: var(--border-panel) !important;
     }
 
     body {
       font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
       background-color: var(--bg-body);
       color: var(--text-main);
+      font-size: 15px; /* 시니어 및 전업투자자를 위해 기본 폰트 크기 업그레이드 */
+      line-height: 1.6;
       user-select: none;
+      transition: background-color 0.2s, color 0.2s;
     }
+
+    /* 큰 글씨 가독성 모드 (버튼 하나로 전체 글자 시원시원하게 확대) */
+    body.large-font {
+      font-size: 17px !important;
+    }
+    body.large-font .text-xs { font-size: 14px !important; }
+    body.large-font .text-\[11px\], body.large-font .text-\[10px\] { font-size: 13px !important; }
+    body.large-font .text-sm { font-size: 16.5px !important; }
+    body.large-font .text-base { font-size: 18.5px !important; }
+    body.large-font h1 { font-size: 21px !important; }
+    body.large-font h2 { font-size: 19px !important; }
+    body.large-font h3 { font-size: 18px !important; }
+    body.large-font .news-card { padding: 15px !important; }
 
     /* Custom scrollbars */
     ::-webkit-scrollbar { width: 6px; height: 6px; }
@@ -101,47 +129,57 @@
         </div>
       </div>
 
-      <!-- 중앙: 3대 모드 전환 탭 (아침 장전뉴스 / 야간선물 & 차트 / 마감 주도주시황) -->
-      <div class="flex items-center space-x-1 bg-slate-100 dark:bg-slate-950 p-1 rounded-xl border border-slate-200 dark:border-slate-800">
-        <button id="tabMorningMode" onclick="setAppMode('morning')" class="flex items-center space-x-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold transition shadow-sm bg-white dark:bg-slate-800 text-blue-600 dark:text-blue-400">
+      <!-- 중앙: 4대 모드 전환 탭 (아침 장전뉴스 / 애프터마켓 특징주 / 야간선물 & 차트 / 마감 주도주시황) -->
+      <div class="flex items-center space-x-1 bg-stone-200/60 dark:bg-slate-950 p-1 rounded-xl border border-stone-300/80 dark:border-slate-800">
+        <button id="tabMorningMode" onclick="setAppMode('morning')" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition shadow-sm bg-white dark:bg-slate-800 text-blue-600 dark:text-blue-400">
           <i class="fa-solid fa-sun text-amber-500"></i>
           <span>🌅 아침 장전뉴스</span>
         </button>
-        <button id="tabChartsMode" onclick="setAppMode('charts')" class="flex items-center space-x-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold transition text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">
+        <button id="tabAftermarketMode" onclick="setAppMode('aftermarket')" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition text-stone-700 dark:text-slate-300 hover:text-stone-900 dark:hover:text-white">
+          <i class="fa-solid fa-bolt text-amber-500"></i>
+          <span>🔶 애프터마켓 특징주</span>
+        </button>
+        <button id="tabChartsMode" onclick="setAppMode('charts')" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition text-stone-700 dark:text-slate-400 hover:text-stone-900 dark:hover:text-white">
           <i class="fa-solid fa-chart-area text-blue-500"></i>
           <span>📈 야간선물 & 글로벌 차트</span>
         </button>
-        <button id="tabClosingMode" onclick="setAppMode('closing')" class="flex items-center space-x-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold transition text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">
+        <button id="tabClosingMode" onclick="setAppMode('closing')" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition text-stone-700 dark:text-slate-400 hover:text-stone-900 dark:hover:text-white">
           <i class="fa-solid fa-moon text-indigo-500"></i>
           <span>🌆 마감 주도주시황</span>
         </button>
       </div>
 
-      <!-- 우측: 알림/사운드/미니창/테마/새로고침 버튼 그룹 -->
+      <!-- 우측: 큰글씨/알림/사운드/미니창/테마/새로고침 버튼 그룹 -->
       <div class="flex items-center space-x-2 text-xs">
         
+        <!-- 가독성 큰 글씨 모드 토글 (눈 피로 방지) -->
+        <button id="btnFontSizeToggle" onclick="toggleLargeFont()" class="flex items-center space-x-1 px-2.5 py-1.5 rounded-lg border border-amber-300/80 dark:border-amber-700 bg-amber-50 dark:bg-amber-950/40 text-amber-900 dark:text-amber-200 hover:bg-amber-100 transition font-bold" title="글자 크기 확대 (시니어 및 눈 피로 방지 가독성 모드)">
+          <i class="fa-solid fa-magnifying-glass-plus text-amber-600"></i>
+          <span id="fontSizeText">큰글씨</span>
+        </button>
+
         <!-- 실시간 뉴스 알림 토글 -->
-        <button id="btnNotifToggle" onclick="toggleDesktopNotification()" class="flex items-center space-x-1 px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition" title="실시간 뉴스 윈도우 바탕화면 알림">
+        <button id="btnNotifToggle" onclick="toggleDesktopNotification()" class="flex items-center space-x-1 px-2.5 py-1.5 rounded-lg border border-stone-300 dark:border-slate-700 bg-stone-100/60 dark:bg-slate-800 text-stone-800 dark:text-slate-300 hover:bg-stone-200 transition font-medium" title="실시간 뉴스 윈도우 바탕화면 알림">
           <i id="notifIcon" class="fa-solid fa-bell text-blue-600"></i>
           <span class="font-semibold">알림 ON</span>
         </button>
 
         <!-- 알림음 토글 -->
-        <button id="btnSoundToggle" onclick="toggleSoundAlert()" class="flex items-center space-x-1 px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition" title="새 속보 도착 시 소리 알림 (차임벨)">
+        <button id="btnSoundToggle" onclick="toggleSoundAlert()" class="flex items-center space-x-1 px-2.5 py-1.5 rounded-lg border border-stone-300 dark:border-slate-700 bg-stone-100/60 dark:bg-slate-800 text-stone-800 dark:text-slate-300 hover:bg-stone-200 transition font-medium" title="새 속보 도착 시 소리 알림 (차임벨)">
           <i id="soundIcon" class="fa-solid fa-volume-high text-amber-500"></i>
           <span class="font-semibold">소리 ON</span>
         </button>
 
         <!-- HTS 미니창 분리 버튼 -->
-        <button onclick="openHtsMiniWindow()" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/60 font-bold hover:bg-emerald-100 dark:hover:bg-emerald-900/60 transition shadow-sm" title="장중 HTS 위에 띄워두고 볼 수 있는 컴팩트 속보창 분리">
+        <button onclick="openHtsMiniWindow()" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-400 border border-emerald-300/70 dark:border-emerald-800 font-bold hover:bg-emerald-100 transition shadow-xs" title="장중 HTS 위에 띄워두고 볼 수 있는 컴팩트 속보창 분리">
           <i class="fa-solid fa-window-restore"></i>
           <span>🗗 HTS 미니창</span>
         </button>
 
-        <!-- 테마 전환 (라이트 / 다크) 명확한 토글 버튼 -->
-        <button id="themeToggleBtn" onclick="toggleTheme()" class="flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-700 transition font-bold shadow-xs" title="화면 모드 전환 (부드러운 라이트 ↔ 다크)">
+        <!-- 테마 전환 (눈편한 웜 모드 ↔ 부드러운 다크) -->
+        <button id="themeToggleBtn" onclick="toggleTheme()" class="flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg border border-stone-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-stone-800 dark:text-slate-100 hover:bg-stone-100 dark:hover:bg-slate-700 transition font-bold shadow-xs" title="화면 색상 모드 (눈편한 웜 톤 ↔ 부드러운 다크)">
           <i id="themeToggleIcon" class="fa-solid fa-moon text-indigo-500"></i>
-          <span id="themeToggleText">다크모드 전환</span>
+          <span id="themeToggleText">다크모드</span>
         </button>
 
         <!-- 실시간 시계 -->
@@ -486,6 +524,102 @@
 
     </div> <!-- closingView 종료 -->
 
+    <!-- ------------------------------------------------------------- -->
+    <!-- [VIEW 4] 🔶 애프터마켓 특징주 뷰 (시간외 20:00 마감)            -->
+    <!-- ------------------------------------------------------------- -->
+    <div id="aftermarketView" class="hidden flex-1 flex overflow-hidden gap-3.5 w-full h-full">
+      <!-- 좌측 패널: 상승/하락 종목 리스트 -->
+      <section class="flex-1 flex flex-col bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden min-w-[500px]">
+        <!-- 상단 헤더 & 원클릭 버튼 -->
+        <div class="p-3 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+          <div class="flex items-center space-x-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse"></span>
+            <h2 class="text-sm font-extrabold text-slate-900 dark:text-white flex items-center space-x-2">
+              <span>애프터마켓 (시간외 20:00 마감) 특징주</span>
+              <span id="aftermarketTimeBadge" class="text-xs bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 px-2.5 py-0.5 rounded font-mono font-bold">실시간 수집</span>
+            </h2>
+          </div>
+          <div class="flex items-center space-x-2">
+            <button onclick="loadAftermarketData(true)" class="flex items-center space-x-1.5 bg-stone-100 dark:bg-slate-800 hover:bg-stone-200 dark:hover:bg-slate-700 text-stone-800 dark:text-slate-200 px-3 py-1.5 rounded-lg text-xs font-bold transition border border-stone-300 dark:border-slate-700 shadow-2xs">
+              <i class="fa-solid fa-arrows-rotate text-amber-600"></i>
+              <span>새로고침</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 스크롤 가능한 본문 영역 (상승 / 하락 카드) -->
+        <div class="flex-1 overflow-y-auto p-4 space-y-6 custom-scrollbar">
+          <!-- 상승 특징주 섹션 -->
+          <div>
+            <div class="flex items-center space-x-2 mb-3 pb-2 border-b-2 border-red-500">
+              <span class="text-base font-black text-red-600 dark:text-red-400 flex items-center">
+                <i class="fa-solid fa-arrow-trend-up mr-1.5"></i>
+                🔶 애프터마켓 상승 특징주
+              </span>
+              <span id="aftermarketRisingCount" class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-300 font-mono">0종목</span>
+            </div>
+            <div id="aftermarketRisingList" class="space-y-2.5">
+              <!-- JS 동적 렌더링 -->
+            </div>
+          </div>
+
+          <!-- 하락 특징주 섹션 -->
+          <div>
+            <div class="flex items-center space-x-2 mb-3 pb-2 border-b-2 border-blue-500">
+              <span class="text-base font-black text-blue-600 dark:text-blue-400 flex items-center">
+                <i class="fa-solid fa-arrow-trend-down mr-1.5"></i>
+                🔶 애프터마켓 하락 특징주
+              </span>
+              <span id="aftermarketFallingCount" class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300 font-mono">0종목</span>
+            </div>
+            <div id="aftermarketFallingList" class="space-y-2.5">
+              <!-- JS 동적 렌더링 -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 우측 패널: 네이버 카페 원클릭 복사 & 미리보기 편집 데스크 -->
+      <section class="w-[480px] flex flex-col bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden shrink-0">
+        <div class="p-3 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+          <div class="flex items-center space-x-2">
+            <i class="fa-solid fa-file-pen text-amber-500 text-sm"></i>
+            <h2 class="text-sm font-extrabold text-slate-900 dark:text-white">네이버 카페 원클릭 복사 데스크</h2>
+          </div>
+          <span class="text-[11px] text-stone-500 font-medium">스마트에디터 ONE 서식</span>
+        </div>
+
+        <div class="flex-1 flex flex-col p-3 overflow-hidden space-y-2.5">
+          <!-- 미리보기 / 편집 텍스트에리어 -->
+          <div class="flex-1 flex flex-col overflow-hidden">
+            <textarea id="aftermarketDraftText" class="w-full flex-1 p-3.5 rounded-xl border border-stone-300 dark:border-slate-700 bg-stone-50/50 dark:bg-slate-950 text-stone-900 dark:text-slate-100 font-sans text-sm leading-relaxed resize-none focus:outline-none focus:ring-2 focus:ring-amber-500 custom-scrollbar shadow-inner" placeholder="애프터마켓 데이터 로딩 중..."></textarea>
+          </div>
+
+          <!-- 네이버 카페 서식 복사 버튼 (메인) -->
+          <button onclick="copyForAftermarketCafe()" class="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 active:scale-98 text-white py-3 rounded-xl font-black text-sm transition shadow-md shadow-amber-500/25">
+            <i class="fa-solid fa-copy text-base"></i>
+            <span>✨ [애프터마켓 특징주] 네이버 카페 서식 복사 (Ctrl+V용)</span>
+          </button>
+
+          <!-- 보조 버튼들 -->
+          <div class="grid grid-cols-3 gap-2 text-xs">
+            <button onclick="copyAftermarketPlainText()" class="flex items-center justify-center space-x-1.5 bg-stone-100 dark:bg-slate-800 hover:bg-stone-200 dark:hover:bg-slate-700 text-stone-800 dark:text-slate-200 py-2 rounded-lg font-bold transition border border-stone-300 dark:border-slate-700" title="일반 텍스트 복사 (텔레그램/카톡용)">
+              <i class="fa-regular fa-file-lines text-xs"></i>
+              <span>텍스트 복사</span>
+            </button>
+            <a href="https://cafe.naver.com/ca-fe/cafes/11974608" target="_blank" class="flex items-center justify-center space-x-1 bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 hover:bg-blue-100 border border-blue-200 dark:border-blue-800/60 py-2 rounded-lg font-bold transition">
+              <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+              <span>주차연 글쓰기</span>
+            </a>
+            <a href="https://cafe.naver.com/marketnew" target="_blank" class="flex items-center justify-center space-x-1 bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 hover:bg-amber-100 border border-amber-200 dark:border-amber-800/60 py-2 rounded-lg font-bold transition">
+              <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+              <span>마켓랩 글쓰기</span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </div> <!-- aftermarketView 종료 -->
+
   </main>
 
   <!-- ================= [3] 모달 및 토스트 알림 ================= -->
@@ -537,8 +671,8 @@
     let desktopNotifEnabled = localStorage.getItem('desktop_notif') !== 'false';
     let soundAlertEnabled = localStorage.getItem('sound_alert') !== 'false';
 
-    // 테마 설정 (대표님 요청: 기본 밝은 톤 'light')
-    let currentTheme = localStorage.getItem('app_theme') || 'light';
+    // 테마 설정 (대표님 요청: 양극단 배제, 눈이 편안한 웜 톤 'comfort' 기본값)
+    let currentTheme = localStorage.getItem('app_theme') || 'comfort';
     applyTheme(currentTheme);
 
     function applyTheme(theme) {
@@ -549,11 +683,11 @@
       if (theme === 'dark') {
         document.documentElement.classList.add('dark');
         if (icon) icon.className = 'fa-solid fa-sun text-amber-400';
-        if (text) text.innerText = '부드러운 밝은모드로 전환';
+        if (text) text.innerText = '눈편한 웜톤 전환';
       } else {
         document.documentElement.classList.remove('dark');
         if (icon) icon.className = 'fa-solid fa-moon text-indigo-500';
-        if (text) text.innerText = '다크모드로 전환';
+        if (text) text.innerText = '다크모드 전환';
       }
       if (typeof renderNightFuturesChart === 'function' && chartsData) {
         renderNightFuturesChart();
@@ -564,7 +698,28 @@
     }
 
     function toggleTheme() {
-      applyTheme(currentTheme === 'light' ? 'dark' : 'light');
+      applyTheme(currentTheme === 'dark' ? 'comfort' : 'dark');
+    }
+
+    // 큰 글씨 가독성 모드 토글 (시니어 및 눈 피로 방지)
+    let isLargeFont = localStorage.getItem('large_font') === 'true';
+    if (isLargeFont) {
+      document.body.classList.add('large-font');
+    }
+
+    function toggleLargeFont() {
+      isLargeFont = !isLargeFont;
+      localStorage.setItem('large_font', isLargeFont);
+      const txt = document.getElementById('fontSizeText');
+      if (isLargeFont) {
+        document.body.classList.add('large-font');
+        if (txt) txt.innerText = '보통글씨';
+        showToast('🔍 큰 글씨 모드 ON', '글자 크기가 시원시원하게 확대되었습니다.');
+      } else {
+        document.body.classList.remove('large-font');
+        if (txt) txt.innerText = '큰글씨';
+        showToast('🔍 보통 글씨 모드', '기본 글자 크기로 복귀했습니다.');
+      }
     }
 
     // 오디오 알림 차임벨 (Web Audio API)
@@ -645,32 +800,44 @@
     setInterval(updateDigitalClock, 1000);
     updateDigitalClock();
 
-    // 모드 전환
+    // 4대 모드 전환
+    let aftermarketData = null;
+
     function setAppMode(mode) {
       appMode = mode;
       const morningView = document.getElementById('morningView');
+      const aftermarketView = document.getElementById('aftermarketView');
       const chartsView = document.getElementById('chartsView');
       const closingView = document.getElementById('closingView');
       
       const tabMorning = document.getElementById('tabMorningMode');
+      const tabAftermarket = document.getElementById('tabAftermarketMode');
       const tabCharts = document.getElementById('tabChartsMode');
       const tabClosing = document.getElementById('tabClosingMode');
 
       // 모두 숨기기
       morningView.classList.add('hidden');
+      if (aftermarketView) aftermarketView.classList.add('hidden');
       chartsView.classList.add('hidden');
       closingView.classList.add('hidden');
 
-      const activeClass = 'flex items-center space-x-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold transition shadow-sm bg-white dark:bg-slate-800 text-blue-600 dark:text-blue-400';
-      const inactiveClass = 'flex items-center space-x-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold transition text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white';
+      const activeClass = 'flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition shadow-sm bg-white dark:bg-slate-800 text-blue-600 dark:text-blue-400';
+      const inactiveClass = 'flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition text-stone-700 dark:text-slate-300 hover:text-stone-900 dark:hover:text-white';
 
       tabMorning.className = inactiveClass;
+      if (tabAftermarket) tabAftermarket.className = inactiveClass;
       tabCharts.className = inactiveClass;
       tabClosing.className = inactiveClass;
 
       if (mode === 'morning') {
         morningView.classList.remove('hidden');
         tabMorning.className = activeClass;
+      } else if (mode === 'aftermarket') {
+        if (aftermarketView) aftermarketView.classList.remove('hidden');
+        if (tabAftermarket) tabAftermarket.className = activeClass;
+        if (!aftermarketData) {
+          loadAftermarketData();
+        }
       } else if (mode === 'charts') {
         chartsView.classList.remove('hidden');
         tabCharts.className = activeClass;
@@ -691,11 +858,151 @@
     function refreshCurrentMode() {
       if (appMode === 'morning') {
         refreshData();
+      } else if (appMode === 'aftermarket') {
+        loadAftermarketData(true);
       } else if (appMode === 'charts') {
         loadChartsData(true);
       } else {
         loadClosingData(true);
       }
+    }
+
+    // ================= [VIEW 4: 애프터마켓 특징주 API & UI] =================
+    async function loadAftermarketData(force = false) {
+      const refreshIcon = document.getElementById('refreshIcon');
+      if (refreshIcon) refreshIcon.classList.add('fa-spin');
+      try {
+        const url = force ? '/api/aftermarket?refresh=1' : '/api/aftermarket';
+        const res = await fetch(url).then(r => r.json());
+        if (res.status === 'ok') {
+          aftermarketData = res;
+          renderAftermarketView(res);
+          showToast('애프터마켓 동기화 완료', `상승 ${res.rising.length}건, 하락 ${res.falling.length}건 수집 완료`);
+        } else {
+          showToast('애프터마켓 안내', '새로운 게시글을 확인 중입니다.');
+        }
+      } catch (err) {
+        console.error('Aftermarket load error:', err);
+        showToast('애프터마켓 연결 확인', '데이터를 불러오는 중 오류가 발생했습니다.');
+      } finally {
+        if (refreshIcon) refreshIcon.classList.remove('fa-spin');
+      }
+    }
+
+    function renderAftermarketView(data) {
+      if (!data) return;
+      const timeBadge = document.getElementById('aftermarketTimeBadge');
+      if (timeBadge && data.time) {
+        try {
+          const dt = new Date(data.time);
+          timeBadge.innerText = `${dt.getMonth()+1}/${dt.getDate()} ${String(dt.getHours()).padStart(2,'0')}:${String(dt.getMinutes()).padStart(2,'0')} 갱신`;
+        } catch(e) {
+          timeBadge.innerText = data.time.slice(0, 16);
+        }
+      }
+      
+      const risingCountEl = document.getElementById('aftermarketRisingCount');
+      if (risingCountEl) risingCountEl.innerText = `${(data.rising || []).length}종목`;
+      const fallingCountEl = document.getElementById('aftermarketFallingCount');
+      if (fallingCountEl) fallingCountEl.innerText = `${(data.falling || []).length}종목`;
+
+      const draftEl = document.getElementById('aftermarketDraftText');
+      if (draftEl) {
+        draftEl.value = data.cafe_text || '';
+      }
+
+      // 상승 특징주 렌더링
+      const risingList = document.getElementById('aftermarketRisingList');
+      if (risingList) {
+        if (!data.rising || data.rising.length === 0) {
+          risingList.innerHTML = '<div class="text-xs text-stone-500 py-3 text-center">상승 특징주 데이터가 없습니다.</div>';
+        } else {
+          risingList.innerHTML = data.rising.map(s => {
+            const thBadge = s.primary_theme ? `<span class="text-[11px] font-bold px-2 py-0.5 rounded bg-amber-100 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300 ml-1.5">${escapeHtml(s.primary_theme)}</span>` : '';
+            const reasonsHtml = (s.reasons || []).map(r => {
+              let rHtml = escapeHtml(r);
+              rHtml = rHtml.replace(/\[\[(.*?)\]\]\((https?:\/\/[^\s\)]+)\)/g, '<a href="$2" target="_blank" class="text-blue-600 dark:text-blue-400 font-bold hover:underline">$1</a>');
+              rHtml = rHtml.replace(/(?<!")(https?:\/\/[^\s<)]+)/g, '<a href="$1" target="_blank" class="text-blue-600 dark:text-blue-400 font-bold hover:underline">[관련기사]</a>');
+              return `<div class="text-xs text-stone-700 dark:text-stone-300 pl-3 border-l-2 border-red-300 dark:border-red-800 mt-1.5 leading-relaxed word-keep-all">→ ${rHtml}</div>`;
+            }).join('');
+
+            return `
+              <div class="p-3.5 rounded-xl bg-stone-50/80 dark:bg-slate-950 border border-stone-200 dark:border-slate-800 hover:border-red-300 dark:hover:border-red-900 transition shadow-2xs">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center">
+                    <span class="text-base font-extrabold text-stone-900 dark:text-white">${escapeHtml(s.name)}</span>
+                    ${thBadge}
+                  </div>
+                  <span class="text-sm font-black font-mono text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-950/40 px-2 py-0.5 rounded border border-red-200 dark:border-red-900/60">${escapeHtml(s.pct)}</span>
+                </div>
+                ${reasonsHtml}
+              </div>
+            `;
+          }).join('');
+        }
+      }
+
+      // 하락 특징주 렌더링
+      const fallingList = document.getElementById('aftermarketFallingList');
+      if (fallingList) {
+        if (!data.falling || data.falling.length === 0) {
+          fallingList.innerHTML = '<div class="text-xs text-stone-500 py-3 text-center">하락 특징주 데이터가 없습니다.</div>';
+        } else {
+          fallingList.innerHTML = data.falling.map(s => {
+            const thBadge = s.primary_theme ? `<span class="text-[11px] font-bold px-2 py-0.5 rounded bg-stone-200 text-stone-700 dark:bg-slate-800 dark:text-slate-300 ml-1.5">${escapeHtml(s.primary_theme)}</span>` : '';
+            const reasonsHtml = (s.reasons || []).map(r => {
+              let rHtml = escapeHtml(r);
+              rHtml = rHtml.replace(/\[\[(.*?)\]\]\((https?:\/\/[^\s\)]+)\)/g, '<a href="$2" target="_blank" class="text-blue-600 dark:text-blue-400 font-bold hover:underline">$1</a>');
+              rHtml = rHtml.replace(/(?<!")(https?:\/\/[^\s<)]+)/g, '<a href="$1" target="_blank" class="text-blue-600 dark:text-blue-400 font-bold hover:underline">[관련기사]</a>');
+              return `<div class="text-xs text-stone-700 dark:text-stone-300 pl-3 border-l-2 border-blue-300 dark:border-blue-800 mt-1.5 leading-relaxed word-keep-all">→ ${rHtml}</div>`;
+            }).join('');
+
+            return `
+              <div class="p-3.5 rounded-xl bg-stone-50/80 dark:bg-slate-950 border border-stone-200 dark:border-slate-800 hover:border-blue-300 dark:hover:border-blue-900 transition shadow-2xs">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center">
+                    <span class="text-base font-extrabold text-stone-900 dark:text-white">${escapeHtml(s.name)}</span>
+                    ${thBadge}
+                  </div>
+                  <span class="text-sm font-black font-mono text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/40 px-2 py-0.5 rounded border border-blue-200 dark:border-blue-900/60">${escapeHtml(s.pct)}</span>
+                </div>
+                ${reasonsHtml}
+              </div>
+            `;
+          }).join('');
+        }
+      }
+    }
+
+    async function copyForAftermarketCafe() {
+      if (!aftermarketData || !aftermarketData.cafe_html) {
+        showToast('내용이 없습니다', '애프터마켓 데이터를 먼저 불러와주세요.');
+        return;
+      }
+      const html = aftermarketData.cafe_html;
+      const plain = (document.getElementById('aftermarketDraftText') || {}).value || aftermarketData.cafe_text || '';
+      try {
+        if (navigator.clipboard && window.ClipboardItem) {
+          const blobHtml = new Blob([html], { type: 'text/html' });
+          const blobText = new Blob([plain], { type: 'text/plain' });
+          await navigator.clipboard.write([
+            new ClipboardItem({ 'text/html': blobHtml, 'text/plain': blobText })
+          ]);
+        } else {
+          copyFallback(plain);
+        }
+        showToast('✨ 애프터마켓 카페 서식 복사 완료!', '카페 글쓰기 창에서 [Ctrl + V]를 누르면 서식 그대로 붙여넣어집니다.');
+      } catch (e) {
+        copyFallback(plain);
+        showToast('텍스트로 복사되었습니다', '카페 글쓰기 창에서 Ctrl+V를 누르세요.');
+      }
+    }
+
+    function copyAftermarketPlainText() {
+      const plain = (document.getElementById('aftermarketDraftText') || {}).value || (aftermarketData && aftermarketData.cafe_text) || '';
+      if (!plain) return;
+      copyFallback(plain);
+      showToast('📄 일반 텍스트 복사 완료', '클립보드에 복사되었습니다.');
     }
 
     // ================= [아침 장전뉴스 API] =================
