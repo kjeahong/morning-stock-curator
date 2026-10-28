@@ -1059,6 +1059,13 @@ _aftermarket_cache = {
     'last_time': 0
 }
 
+def _clean_invisible(s):
+    """제로 너비 공백, NBSP 등 보이지 않는 특수문자 완벽 제거"""
+    if not s:
+        return ''
+    s = re.sub(r'[\u200b\u200c\u200d\ufeff\xa0\u3000]', '', s)
+    return s.strip()
+
 def _parse_blog_aftermarket(log_no, profiles):
     """네이버 블로그 게시글에서 에프터마켓 특징주 정밀 파싱"""
     url = f"https://blog.naver.com/PostView.naver?blogId=crioppstock&logNo={log_no}"
@@ -1071,9 +1078,14 @@ def _parse_blog_aftermarket(log_no, profiles):
             return None
         
         date_elem = soup.find('span', class_='se_publishDate') or soup.find('span', class_='date')
-        pub_date = date_elem.get_text().strip() if date_elem else ''
+        pub_date = _clean_invisible(date_elem.get_text()) if date_elem else ''
 
-        lines = [l.strip() for l in main.get_text('\n').splitlines() if l.strip()]
+        lines = []
+        for raw_line in main.get_text('\n').splitlines():
+            c_line = _clean_invisible(raw_line)
+            if c_line:
+                lines.append(c_line)
+
         rising = []
         falling = []
         mode = None
@@ -1094,10 +1106,11 @@ def _parse_blog_aftermarket(log_no, profiles):
                 continue
 
             if mode:
-                m_stk = re.match(r'^(?:▶\s*)?([가-힣A-Za-z0-9\.\s]+)\s*\(([\+\-]?\d+\.?\d*%)\)', l)
+                # & / . 등 영문/특수기호 포함 종목명(예: HL D&I) 완벽 매칭
+                m_stk = re.match(r'^(?:▶\s*)?([가-힣A-Za-z0-9\.\s&\-\/\+]+?)\s*\(([\+\-]?\d+\.?\d*%)\)', l)
                 if m_stk:
-                    name = m_stk.group(1).strip()
-                    pct = m_stk.group(2).strip()
+                    name = _clean_invisible(m_stk.group(1))
+                    pct = _clean_invisible(m_stk.group(2))
                     if not pct.startswith('+') and not pct.startswith('-'):
                         pct = ('-' if mode == 'falling' else '+') + pct
                     prof = profiles.get(name, {})
@@ -1111,10 +1124,10 @@ def _parse_blog_aftermarket(log_no, profiles):
                     }
                     (rising if mode == 'rising' else falling).append(curr_stk)
                 elif curr_stk:
-                    if l.startswith('→') or l.startswith('-') or l.startswith('•') or l.startswith('['):
-                        curr_stk['reasons'].append(l.lstrip('→-•* ').strip())
-                    elif not l.startswith('───') and not l.startswith('<') and not l.startswith('('):
-                        curr_stk['reasons'].append(l)
+                    r = _clean_invisible(l.lstrip('→-•* '))
+                    # 의미 있는 사유(2글자 이상, 구분선/헤더 제외)만 추가
+                    if len(r) >= 2 and not r.startswith('───') and not r.startswith('<') and not r.startswith('('):
+                        curr_stk['reasons'].append(r)
 
         if rising or falling:
             return {
@@ -1136,7 +1149,7 @@ def _parse_telegram_aftermarket(target_msg, post_time, profiles):
     raw = str(target_msg)
     raw = re.sub(r'<br\s*/?>', '\n', raw)
     raw = re.sub(r'<[^>]+>', '', raw)
-    lines = [re.sub(r'\s+', ' ', l).strip() for l in raw.splitlines() if l.strip()]
+    lines = [_clean_invisible(l) for l in raw.splitlines() if _clean_invisible(l)]
 
     rising = []
     falling = []
@@ -1151,10 +1164,10 @@ def _parse_telegram_aftermarket(target_msg, post_time, profiles):
             curr_stock = None
             continue
 
-        m_stk = re.match(r'^(?:▶\s*)?([가-힣A-Za-z0-9\.\s]+)\s*\(([\+\-]?\d+\.?\d*%)\)', l)
+        m_stk = re.match(r'^(?:▶\s*)?([가-힣A-Za-z0-9\.\s&\-\/\+]+?)\s*\(([\+\-]?\d+\.?\d*%)\)', l)
         if m_stk:
-            name = m_stk.group(1).strip()
-            pct = m_stk.group(2).strip()
+            name = _clean_invisible(m_stk.group(1))
+            pct = _clean_invisible(m_stk.group(2))
             if not pct.startswith('+') and not pct.startswith('-'):
                 pct = ('-' if is_falling else '+') + pct
 
@@ -1169,8 +1182,8 @@ def _parse_telegram_aftermarket(target_msg, post_time, profiles):
             }
             (falling if is_falling else rising).append(curr_stock)
         elif curr_stock:
-            clean_reason = l.lstrip('→-•* ').strip()
-            if clean_reason:
+            clean_reason = _clean_invisible(l.lstrip('→-•* '))
+            if len(clean_reason) >= 2 and not clean_reason.startswith('───') and not clean_reason.startswith('<'):
                 curr_stock['reasons'].append(clean_reason)
 
     if rising or falling:
@@ -1234,7 +1247,6 @@ def get_aftermarket_data(force_refresh=False):
                         p_time = time_tag['datetime'] if time_tag and 'datetime' in time_tag.attrs else ''
                         telegram_candidate = _parse_telegram_aftermarket(m_div, p_time, profiles)
                         if telegram_candidate:
-                            # 텔레그램 타임스탬프에서 날짜 키 추출 (예: 2026-10-27)
                             telegram_candidate['date_key'] = p_time[:10] if p_time else ''
                             telegram_candidate['raw_time'] = p_time
                             break
@@ -1244,14 +1256,9 @@ def get_aftermarket_data(force_refresh=False):
     # 3. 최신성 비교 및 최적 후보 선택
     chosen = None
     if blog_candidate and telegram_candidate:
-        # 블로그와 텔레그램 둘 다 있을 경우:
-        # 텔레그램 날짜(KST)와 블로그 날짜를 비교
-        # 텔레그램 글이 블로그 글 이후에 나온 요약본인지 판단
         t_time = telegram_candidate.get('raw_time', '')
-        b_date_key = blog_candidate.get('date_key', '') # 예: "10/28"
-        # 만약 텔레그램 날짜(UTC 기준)가 10-27인데 블로그는 10/28이면 블로그가 최신!
+        b_date_key = blog_candidate.get('date_key', '')
         if b_date_key and ('-' + b_date_key.replace('/', '-')) not in t_time:
-            # 텔레그램 글의 날짜가 블로그 날짜와 다르고 블로그가 최신이면 블로그 우선
             chosen = blog_candidate
         else:
             chosen = telegram_candidate
@@ -1283,57 +1290,63 @@ def get_aftermarket_data(force_refresh=False):
     post_time = chosen.get('time', '')
     source_label = chosen.get('source', '')
 
-    # 5. 네이버 카페 / 텔레그램 텍스트 생성
-    cafe_lines = ["🔶 애프터마켓 상승 특징주", ""]
+    # 5. 네이버 카페 / 텔레그램 일반 텍스트 생성 (빈 화살표 100% 제거)
+    cafe_lines = ["◆ 애프터마켓 상승 특징주", ""]
     for s in rising:
-        cafe_lines.append(f"▶{s['name']} ({s['pct']})")
+        th = f" [{s['primary_theme']}]" if s.get('primary_theme') else ""
+        cafe_lines.append(f"▶ {s['name']} ({s['pct']}){th}")
         for r in s['reasons']:
-            cafe_lines.append(f"→ {r}")
+            if r:
+                cafe_lines.append(f"→ {r}")
         cafe_lines.append("")
 
-    cafe_lines.append("🔶 애프터마켓 하락 특징주")
+    cafe_lines.append("◆ 애프터마켓 하락 특징주")
     cafe_lines.append("")
     for s in falling:
-        cafe_lines.append(f"▶{s['name']} ({s['pct']})")
+        th = f" [{s['primary_theme']}]" if s.get('primary_theme') else ""
+        cafe_lines.append(f"▶ {s['name']} ({s['pct']}){th}")
         for r in s['reasons']:
-            cafe_lines.append(f"→ {r}")
+            if r:
+                cafe_lines.append(f"→ {r}")
         cafe_lines.append("")
 
-    cafe_text = "\n".join(cafe_lines)
+    cafe_text = "\n".join(cafe_lines).strip()
 
-    # 6. 네이버 카페 스마트에디터 ONE 서식 (눈편한 폰트 & 가독성 고대비 디자인)
+    # 6. 네이버 카페 스마트에디터 ONE 서식 (점선 칸/불필요한 테두리 완전 제거)
     html_parts = [
-        '<div style="font-family: \'Apple SD Gothic Neo\', \'Malgun Gothic\', sans-serif; font-size: 15px; color: #1c1917; line-height: 1.8; max-width: 740px;">',
-        '<div style="background-color: #fef2f2; border-left: 5px solid #dc2626; padding: 12px 18px; border-radius: 6px; margin-bottom: 18px;">',
-        '  <h3 style="margin: 0; font-size: 17px; font-weight: 800; color: #b91c1c;">🔶 애프터마켓 상승 특징주</h3>',
-        '</div>'
+        '<div style="font-family: \'Apple SD Gothic Neo\', \'Malgun Gothic\', sans-serif; font-size: 14.5px; color: #1f2937; line-height: 1.7; max-width: 740px;">',
+        '  <div style="background-color: #fef2f2; padding: 10px 14px; border-radius: 4px; margin-bottom: 16px;">',
+        '    <span style="font-size: 16px; font-weight: 800; color: #dc2626;">◆ 애프터마켓 상승 특징주</span>',
+        '  </div>'
     ]
+
     for s in rising:
-        th_badge = f'<span style="background-color: #fef3c7; color: #b45309; font-size: 11px; font-weight: 700; padding: 2px 6px; border-radius: 4px; margin-left: 6px;">{s["primary_theme"]}</span>' if s.get('primary_theme') else ''
-        html_parts.append('<div style="margin-bottom: 15px; padding-bottom: 12px; border-bottom: 1px dashed #e2e8f0;">')
-        html_parts.append(f'  <div style="font-size: 16px; font-weight: 800; color: #0f172a;">▶ <span style="color: #dc2626;">{s["name"]}</span> <span style="background-color: #fee2e2; color: #dc2626; font-size: 13px; font-weight: 800; padding: 2px 8px; border-radius: 4px; margin-left: 4px;">{s["pct"]}</span>{th_badge}</div>')
+        th_badge = f'<span style="background-color: #fef3c7; color: #b45309; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;">{s["primary_theme"]}</span>' if s.get('primary_theme') else ''
+        html_parts.append('  <div style="margin-bottom: 16px;">')
+        html_parts.append(f'    <div style="font-size: 15px; font-weight: 800; color: #111827;">▶ <span style="color: #dc2626;">{s["name"]}</span> <span style="color: #dc2626; margin-left: 3px;">{s["pct"]}</span>{th_badge}</div>')
         for r in s['reasons']:
-            r_html = re.sub(r'\[\[(.*?)\]\]\((https?://[^\s\)]+)\)', r'<a href="\2" target="_blank" style="color: #2563eb; text-decoration: underline; font-weight: 700;">\1</a>', r)
+            r_html = re.sub(r'\[\[(.*?)\]\]\((https?://[^\s\)]+)\)', r'<a href="\2" target="_blank" style="color: #2563eb; text-decoration: underline; font-weight: 600;">\1</a>', r)
             r_html = re.sub(r'(?<!")(https?://[^\s\<\)]+)', r'<a href="\1" target="_blank" style="color: #2563eb; text-decoration: underline; font-weight: 600;">[관련기사]</a>', r_html)
-            html_parts.append(f'  <div style="margin-top: 5px; color: #334155; font-size: 14.5px; padding-left: 14px; word-break: keep-all;">→ {r_html}</div>')
-        html_parts.append('</div>')
+            html_parts.append(f'    <div style="margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;">→ {r_html}</div>')
+        html_parts.append('  </div>')
 
     html_parts.extend([
-        '<div style="background-color: #eff6ff; border-left: 5px solid #2563eb; padding: 12px 18px; border-radius: 6px; margin: 26px 0 18px 0;">',
-        '  <h3 style="margin: 0; font-size: 17px; font-weight: 800; color: #1d4ed8;">🔶 애프터마켓 하락 특징주</h3>',
-        '</div>'
+        '  <div style="background-color: #eff6ff; padding: 10px 14px; border-radius: 4px; margin: 26px 0 16px 0;">',
+        '    <span style="font-size: 16px; font-weight: 800; color: #2563eb;">◆ 애프터마켓 하락 특징주</span>',
+        '  </div>'
     ])
-    for s in falling:
-        th_badge = f'<span style="background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 2px 6px; border-radius: 4px; margin-left: 6px;">{s["primary_theme"]}</span>' if s.get('primary_theme') else ''
-        html_parts.append('<div style="margin-bottom: 15px; padding-bottom: 12px; border-bottom: 1px dashed #e2e8f0;">')
-        html_parts.append(f'  <div style="font-size: 16px; font-weight: 800; color: #0f172a;">▶ <span style="color: #2563eb;">{s["name"]}</span> <span style="background-color: #dbeafe; color: #1d4ed8; font-size: 13px; font-weight: 800; padding: 2px 8px; border-radius: 4px; margin-left: 4px;">{s["pct"]}</span>{th_badge}</div>')
-        for r in s['reasons']:
-            r_html = re.sub(r'\[\[(.*?)\]\]\((https?://[^\s\)]+)\)', r'<a href="\2" target="_blank" style="color: #2563eb; text-decoration: underline; font-weight: 700;">\1</a>', r)
-            r_html = re.sub(r'(?<!")(https?://[^\s\<\)]+)', r'<a href="\1" target="_blank" style="color: #2563eb; text-decoration: underline; font-weight: 600;">[관련기사]</a>', r_html)
-            html_parts.append(f'  <div style="margin-top: 5px; color: #334155; font-size: 14.5px; padding-left: 14px; word-break: keep-all;">→ {r_html}</div>')
-        html_parts.append('</div>')
-    html_parts.append('</div>')
 
+    for s in falling:
+        th_badge = f'<span style="background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;">{s["primary_theme"]}</span>' if s.get('primary_theme') else ''
+        html_parts.append('  <div style="margin-bottom: 16px;">')
+        html_parts.append(f'    <div style="font-size: 15px; font-weight: 800; color: #111827;">▶ <span style="color: #2563eb;">{s["name"]}</span> <span style="color: #2563eb; margin-left: 3px;">{s["pct"]}</span>{th_badge}</div>')
+        for r in s['reasons']:
+            r_html = re.sub(r'\[\[(.*?)\]\]\((https?://[^\s\)]+)\)', r'<a href="\2" target="_blank" style="color: #2563eb; text-decoration: underline; font-weight: 600;">\1</a>', r)
+            r_html = re.sub(r'(?<!")(https?://[^\s\<\)]+)', r'<a href="\1" target="_blank" style="color: #2563eb; text-decoration: underline; font-weight: 600;">[관련기사]</a>', r_html)
+            html_parts.append(f'    <div style="margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;">→ {r_html}</div>')
+        html_parts.append('  </div>')
+
+    html_parts.append('</div>')
     cafe_html = "\n".join(html_parts)
 
     data = {
