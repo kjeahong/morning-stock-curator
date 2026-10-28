@@ -1059,58 +1059,76 @@ _aftermarket_cache = {
     'last_time': 0
 }
 
-def get_aftermarket_data(force_refresh=False):
-    """애프터마켓(시간외 20:00 마감) 특징주 텔레그램 실시간 수집 및 JSR 연동 모듈"""
-    global _aftermarket_cache
-    now_ts = time.time()
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    cache_file = os.path.join(base_dir, 'data', 'last_aftermarket.json')
-
-    # 메모리 캐시 (10분 유효)
-    if not force_refresh and _aftermarket_cache['data'] and (now_ts - _aftermarket_cache['last_time'] < 600):
-        return _aftermarket_cache['data']
-
-    post_time = ''
-    target_msg = None
+def _parse_blog_aftermarket(log_no, profiles):
+    """네이버 블로그 게시글에서 에프터마켓 특징주 정밀 파싱"""
+    url = f"https://blog.naver.com/PostView.naver?blogId=crioppstock&logNo={log_no}"
+    req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'})
     try:
-        url = 'https://t.me/s/crioppstockfree'
-        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'})
-        with urllib.request.urlopen(req, timeout=8) as resp:
-            html = resp.read().decode('utf-8', errors='ignore')
-            soup = BeautifulSoup(html, 'html.parser')
+        html = urllib.request.urlopen(req, timeout=8).read().decode('utf-8', errors='ignore')
+        soup = BeautifulSoup(html, 'html.parser')
+        main = soup.find('div', class_='se-main-container') or soup.find(id='postViewArea')
+        if not main:
+            return None
+        
+        date_elem = soup.find('span', class_='se_publishDate') or soup.find('span', class_='date')
+        pub_date = date_elem.get_text().strip() if date_elem else ''
 
-            for wrap in reversed(soup.find_all('div', class_='tgme_widget_message_wrap')):
-                m = wrap.find('div', class_='tgme_widget_message_text')
-                if m and '에프터마켓' in m.get_text() and '특징주' in m.get_text():
-                    target_msg = m
-                    time_tag = wrap.find('time')
-                    if time_tag and 'datetime' in time_tag.attrs:
-                        post_time = time_tag['datetime']
-                    break
+        lines = [l.strip() for l in main.get_text('\n').splitlines() if l.strip()]
+        rising = []
+        falling = []
+        mode = None
+        curr_stk = None
+
+        for l in lines:
+            if any(k in l for k in ['에프터마켓 상승률 순위', '에프터마켓 급등주', '애프터마켓 상승']):
+                mode = 'rising'
+                curr_stk = None
+                continue
+            elif any(k in l for k in ['에프터마켓 하락률 순위', '에프터마켓 하락', '애프터마켓 하락']):
+                mode = 'falling'
+                curr_stk = None
+                continue
+            elif mode and any(k in l for k in ['52주 신고가', '정규장 급등주', '정규장 급락주', '시장종합', '특징 상한가', '텔레그램 공개 채널에서 공유']):
+                mode = None
+                curr_stk = None
+                continue
+
+            if mode:
+                m_stk = re.match(r'^(?:▶\s*)?([가-힣A-Za-z0-9\.\s]+)\s*\(([\+\-]?\d+\.?\d*%)\)', l)
+                if m_stk:
+                    name = m_stk.group(1).strip()
+                    pct = m_stk.group(2).strip()
+                    if not pct.startswith('+') and not pct.startswith('-'):
+                        pct = ('-' if mode == 'falling' else '+') + pct
+                    prof = profiles.get(name, {})
+                    curr_stk = {
+                        'name': name,
+                        'pct': pct,
+                        'is_up': (mode == 'rising'),
+                        'themes': prof.get('themes', []),
+                        'primary_theme': prof.get('primary_theme', ''),
+                        'reasons': []
+                    }
+                    (rising if mode == 'rising' else falling).append(curr_stk)
+                elif curr_stk:
+                    if l.startswith('→') or l.startswith('-') or l.startswith('•') or l.startswith('['):
+                        curr_stk['reasons'].append(l.lstrip('→-•* ').strip())
+                    elif not l.startswith('───') and not l.startswith('<') and not l.startswith('('):
+                        curr_stk['reasons'].append(l)
+
+        if rising or falling:
+            return {
+                'source': f'네이버 블로그 (글번호 {log_no})',
+                'time': pub_date,
+                'rising': rising,
+                'falling': falling
+            }
     except Exception as e:
-        pass
+        print(f"Error parsing blog {log_no}: {e}")
+    return None
 
-    # 크롤링 실패 시 파일 캐시 확인
-    if not target_msg:
-        if os.path.exists(cache_file):
-            try:
-                with open(cache_file, 'r', encoding='utf-8') as f:
-                    cached_json = json.load(f)
-                    _aftermarket_cache['data'] = cached_json
-                    _aftermarket_cache['last_time'] = now_ts
-                    return cached_json
-            except Exception:
-                pass
-        return {
-            'status': 'empty',
-            'time': '',
-            'rising': [],
-            'falling': [],
-            'cafe_text': '애프터마켓 특징주 데이터가 아직 등록되지 않았습니다.',
-            'cafe_html': '<div>애프터마켓 특징주 데이터가 아직 등록되지 않았습니다.</div>'
-        }
-
-    # a 링크 정리
+def _parse_telegram_aftermarket(target_msg, post_time, profiles):
+    """텔레그램 텍스트 메시지에서 에프터마켓 특징주 정밀 파싱"""
     for a in target_msg.find_all('a'):
         href = a.get('href', '').strip()
         a.replace_with(href)
@@ -1120,14 +1138,13 @@ def get_aftermarket_data(force_refresh=False):
     raw = re.sub(r'<[^>]+>', '', raw)
     lines = [re.sub(r'\s+', ' ', l).strip() for l in raw.splitlines() if l.strip()]
 
-    profiles = load_jsr_profiles()
     rising = []
     falling = []
     is_falling = False
     curr_stock = None
 
     for l in lines:
-        if '에프터마켓' in l and '특징주' in l:
+        if ('에프터마켓' in l or '애프터마켓' in l) and '특징주' in l:
             continue
         if '───' in l or ('하락' in l and not curr_stock):
             is_falling = True
@@ -1156,7 +1173,117 @@ def get_aftermarket_data(force_refresh=False):
             if clean_reason:
                 curr_stock['reasons'].append(clean_reason)
 
-    # 1. 텍스트 초안 (카페 / 텔레그램 / 카톡용 마크다운)
+    if rising or falling:
+        return {
+            'source': '텔레그램 채널',
+            'time': post_time,
+            'rising': rising,
+            'falling': falling
+        }
+    return None
+
+def get_aftermarket_data(force_refresh=False):
+    """애프터마켓(시간외 20:00 마감) 특징주 네이버 블로그 및 텔레그램 실시간 수집 모듈"""
+    global _aftermarket_cache
+    now_ts = time.time()
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    cache_file = os.path.join(base_dir, 'data', 'last_aftermarket.json')
+
+    # 메모리 캐시 (10분 유효)
+    if not force_refresh and _aftermarket_cache['data'] and (now_ts - _aftermarket_cache['last_time'] < 600):
+        return _aftermarket_cache['data']
+
+    profiles = load_jsr_profiles()
+    blog_candidate = None
+    telegram_candidate = None
+
+    # 1. 네이버 블로그 최신글 우선 탐색 (매일 밤 10시경 가장 먼저 포스팅됨)
+    try:
+        api_url = 'https://blog.naver.com/PostTitleListAsync.naver?blogId=crioppstock&viewdate=&currentPage=1&categoryNo=0&parentCategoryNo=&countPerPage=10'
+        req_b = urllib.request.Request(api_url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'})
+        raw_b = urllib.request.urlopen(req_b, timeout=6).read().decode('ms949', errors='ignore')
+        pattern = r'\"logNo\"\s*:\s*\"(\d+)\".*?\"title\"\s*:\s*\"([^\"]+)\"'
+        for m in re.finditer(pattern, raw_b):
+            log_no = m.group(1)
+            title = urllib.parse.unquote_plus(m.group(2))
+            if any(k in title for k in ['에프터마켓', '애프터마켓']):
+                blog_candidate = _parse_blog_aftermarket(log_no, profiles)
+                if blog_candidate:
+                    blog_candidate['title'] = title
+                    # 제목에서 날짜 추출 (예: 10/28)
+                    m_date = re.search(r'\((\d+/\d+)\)', title)
+                    blog_candidate['date_key'] = m_date.group(1) if m_date else ''
+                    blog_candidate['log_no'] = int(log_no)
+                break
+    except Exception as e:
+        print(f"Blog crawl error: {e}")
+
+    # 2. 텔레그램 채널 탐색 (다음날 아침 7시 10분경 본문 공유됨)
+    try:
+        t_url = 'https://t.me/s/crioppstockfree'
+        req_t = urllib.request.Request(t_url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'})
+        with urllib.request.urlopen(req_t, timeout=6) as resp:
+            html_t = resp.read().decode('utf-8', errors='ignore')
+            soup_t = BeautifulSoup(html_t, 'html.parser')
+            for wrap in reversed(soup_t.find_all('div', class_='tgme_widget_message_wrap')):
+                m_div = wrap.find('div', class_='tgme_widget_message_text')
+                if m_div and ('에프터마켓' in m_div.get_text() or '애프터마켓' in m_div.get_text()):
+                    txt = m_div.get_text()
+                    if '(' in txt and '%' in txt:
+                        time_tag = wrap.find('time')
+                        p_time = time_tag['datetime'] if time_tag and 'datetime' in time_tag.attrs else ''
+                        telegram_candidate = _parse_telegram_aftermarket(m_div, p_time, profiles)
+                        if telegram_candidate:
+                            # 텔레그램 타임스탬프에서 날짜 키 추출 (예: 2026-10-27)
+                            telegram_candidate['date_key'] = p_time[:10] if p_time else ''
+                            telegram_candidate['raw_time'] = p_time
+                            break
+    except Exception as e:
+        print(f"Telegram crawl error: {e}")
+
+    # 3. 최신성 비교 및 최적 후보 선택
+    chosen = None
+    if blog_candidate and telegram_candidate:
+        # 블로그와 텔레그램 둘 다 있을 경우:
+        # 텔레그램 날짜(KST)와 블로그 날짜를 비교
+        # 텔레그램 글이 블로그 글 이후에 나온 요약본인지 판단
+        t_time = telegram_candidate.get('raw_time', '')
+        b_date_key = blog_candidate.get('date_key', '') # 예: "10/28"
+        # 만약 텔레그램 날짜(UTC 기준)가 10-27인데 블로그는 10/28이면 블로그가 최신!
+        if b_date_key and ('-' + b_date_key.replace('/', '-')) not in t_time:
+            # 텔레그램 글의 날짜가 블로그 날짜와 다르고 블로그가 최신이면 블로그 우선
+            chosen = blog_candidate
+        else:
+            chosen = telegram_candidate
+    else:
+        chosen = blog_candidate or telegram_candidate
+
+    # 4. 수집 실패 시 이전 캐시 확인
+    if not chosen or (not chosen.get('rising') and not chosen.get('falling')):
+        if os.path.exists(cache_file):
+            try:
+                with open(cache_file, 'r', encoding='utf-8') as f:
+                    cached_json = json.load(f)
+                    _aftermarket_cache['data'] = cached_json
+                    _aftermarket_cache['last_time'] = now_ts
+                    return cached_json
+            except Exception:
+                pass
+        return {
+            'status': 'empty',
+            'time': '',
+            'rising': [],
+            'falling': [],
+            'cafe_text': '애프터마켓 특징주 데이터가 아직 등록되지 않았습니다.',
+            'cafe_html': '<div>애프터마켓 특징주 데이터가 아직 등록되지 않았습니다.</div>'
+        }
+
+    rising = chosen['rising']
+    falling = chosen['falling']
+    post_time = chosen.get('time', '')
+    source_label = chosen.get('source', '')
+
+    # 5. 네이버 카페 / 텔레그램 텍스트 생성
     cafe_lines = ["🔶 애프터마켓 상승 특징주", ""]
     for s in rising:
         cafe_lines.append(f"▶{s['name']} ({s['pct']})")
@@ -1174,7 +1301,7 @@ def get_aftermarket_data(force_refresh=False):
 
     cafe_text = "\n".join(cafe_lines)
 
-    # 2. 네이버 카페 스마트에디터 ONE 서식 (눈편한 폰트 & 고대비 스타일)
+    # 6. 네이버 카페 스마트에디터 ONE 서식 (눈편한 폰트 & 가독성 고대비 디자인)
     html_parts = [
         '<div style="font-family: \'Apple SD Gothic Neo\', \'Malgun Gothic\', sans-serif; font-size: 15px; color: #1c1917; line-height: 1.8; max-width: 740px;">',
         '<div style="background-color: #fef2f2; border-left: 5px solid #dc2626; padding: 12px 18px; border-radius: 6px; margin-bottom: 18px;">',
@@ -1212,6 +1339,7 @@ def get_aftermarket_data(force_refresh=False):
     data = {
         'status': 'ok',
         'time': post_time,
+        'source': source_label,
         'rising': rising,
         'falling': falling,
         'cafe_text': cafe_text,

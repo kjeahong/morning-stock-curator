@@ -892,13 +892,19 @@
     function renderAftermarketView(data) {
       if (!data) return;
       const timeBadge = document.getElementById('aftermarketTimeBadge');
-      if (timeBadge && data.time) {
+      if (timeBadge) {
+        let label = data.time || '실시간';
+        if (data.source) {
+          label = `${data.source} · ${label}`;
+        }
         try {
           const dt = new Date(data.time);
-          timeBadge.innerText = `${dt.getMonth()+1}/${dt.getDate()} ${String(dt.getHours()).padStart(2,'0')}:${String(dt.getMinutes()).padStart(2,'0')} 갱신`;
-        } catch(e) {
-          timeBadge.innerText = data.time.slice(0, 16);
-        }
+          if (!isNaN(dt.getTime())) {
+            const timeStr = `${dt.getMonth()+1}/${dt.getDate()} ${String(dt.getHours()).padStart(2,'0')}:${String(dt.getMinutes()).padStart(2,'0')}`;
+            label = data.source ? `${data.source} (${timeStr})` : `${timeStr} 갱신`;
+          }
+        } catch(e) {}
+        timeBadge.innerText = label;
       }
       
       const risingCountEl = document.getElementById('aftermarketRisingCount');

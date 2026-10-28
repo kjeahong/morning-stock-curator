@@ -128,13 +128,17 @@ def api_refresh():
         collector._cache['indices'] = {}
         collector._cache['last_news_time'] = 0
         collector._cache['last_indices_time'] = 0
+        collector._aftermarket_cache['data'] = None
+        collector._aftermarket_cache['last_time'] = 0
         news = collector.get_all_news(force_refresh=True)
         indices = collector.get_market_indices()
+        aftermarket = collector.get_aftermarket_data(force_refresh=True)
         return json_response({
             'status': 'ok', 
             'news_count': len(news), 
             'news': news,
-            'indices': indices
+            'indices': indices,
+            'aftermarket': aftermarket
         })
     except Exception as e:
         return json_response({'status': 'error', 'message': str(e)})
