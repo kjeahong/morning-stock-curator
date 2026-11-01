@@ -849,8 +849,18 @@
         'bottom-right': '우측 하단 (기본 구석)'
       };
       
-      // 위치 변경 즉시 해당 위치에 테스트 알림 팝업
-      showToast('🎯 알림 위치 변경 완료', `앞으로 모든 뉴스 속보와 알림이 [${posNames[toastPosition]}]에 큼직하게 뜹니다.`);
+      // 위치 변경 즉시 웹 토스트 + 데스크톱 HTS 최상단 HUD 동시 테스트 팝업!
+      showToast('🎯 알림 위치 변경 완료', `앞으로 모든 뉴스 속보가 [${posNames[toastPosition]}]에 큼직하게 뜹니다.`);
+      fetch('/api/trigger_hud', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: `[알림 위치 설정 완료] HTS를 보고 계셔도 화면 ${posNames[toastPosition]}에 이 속보창이 뜹니다!`,
+          source: '모닝큐레이터',
+          link: 'http://localhost:5000',
+          position: toastPosition
+        })
+      }).catch(() => {});
     }
 
     function updateToastPositionUI() {
@@ -1217,6 +1227,18 @@
             const latest = newlyArrived[0];
             // [43인치 대화면 맞춤] 화면 상단/중앙에 큼직한 실시간 속보 HUD 배너 팝업!
             showBreakingNewsBanner(latest);
+
+            // [HTS 전체화면 오버레이] 브라우저를 내려놓아도 HTS 화면 위 중앙에 속보 HUD 알림 표시!
+            fetch('/api/trigger_hud', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                title: latest.title,
+                source: latest.source,
+                link: latest.link,
+                position: toastPosition
+              })
+            }).catch(() => {});
             
             if (desktopNotifEnabled && "Notification" in window && Notification.permission === "granted") {
               const n = new Notification(`⚡ [속보] ${latest.source}`, {

@@ -35,6 +35,9 @@ import webbrowser
 from threading import Timer
 from bottle import Bottle, run, request, response, static_file
 import collector
+from desktop_hud import show_desktop_hud
+import threading
+import time
 
 app = Bottle()
 
@@ -143,6 +146,52 @@ def api_refresh():
     except Exception as e:
         return json_response({'status': 'error', 'message': str(e)})
 
+@app.route('/api/trigger_hud', method=['GET', 'POST'])
+def api_trigger_hud():
+    """브라우저 또는 외부 호출을 받아 바탕화면 최상단(HTS 위)에 큼직한 HUD 속보창 표시"""
+    try:
+        data = request.json or {}
+        title = data.get('title') or request.params.get('title', '실시간 증시 속보')
+        source = data.get('source') or request.params.get('source', '속보')
+        link = data.get('link') or request.params.get('link', '')
+        pos = data.get('position') or request.params.get('position', 'top-center')
+        show_desktop_hud(title=title, source=source, link=link, position=pos)
+        return json_response({'status': 'ok'})
+    except Exception as e:
+        return json_response({'status': 'error', 'message': str(e)})
+
+_seen_news_ids = set()
+_watcher_initialized = False
+
+def background_news_watcher():
+    """브라우저를 내려놓거나 닫아두어도 HTS 위로 실시간 속보창을 띄워주는 독립 백그라운드 감시기"""
+    global _watcher_initialized
+    time.sleep(3)
+    while True:
+        try:
+            news_list = collector.get_all_news(force_refresh=True)
+            if not _watcher_initialized:
+                for it in news_list:
+                    _seen_news_ids.add(it['id'])
+                _watcher_initialized = True
+            else:
+                new_items = [it for it in news_list if it['id'] not in _seen_news_ids]
+                for it in new_items:
+                    _seen_news_ids.add(it['id'])
+                if new_items:
+                    latest = new_items[0]
+                    show_desktop_hud(
+                        title=latest['title'],
+                        source=latest.get('source', '속보'),
+                        link=latest.get('link', ''),
+                        position='top-center',
+                        duration_sec=7
+                    )
+        except Exception:
+            pass
+        time.sleep(30)
+
+
 import socket
 
 def find_free_port(start_port=5000):
@@ -186,6 +235,9 @@ if __name__ == '__main__':
     
     # 1.5초 후 브라우저 자동 오픈
     Timer(1.5, open_browser, args=[port]).start()
+    
+    # HTS 위 속보 오버레이 백그라운드 감시 스레드 시작
+    threading.Thread(target=background_news_watcher, daemon=True).start()
     
     # 서버 실행
     run(app, host='127.0.0.1', port=port, quiet=True)
