@@ -221,6 +221,19 @@ def check_already_running(port=5000):
     return False
 
 if __name__ == '__main__':
+    # 1. 만약 --hud 인자로 호출된 경우: 웹 서버가 아니라 단독 속보 HUD 창만 띄우고 즉시 종료!
+    if len(sys.argv) > 1 and sys.argv[1] == '--hud':
+        title = sys.argv[2] if len(sys.argv) > 2 else "실시간 증시 속보"
+        source = sys.argv[3] if len(sys.argv) > 3 else "속보"
+        link = sys.argv[4] if len(sys.argv) > 4 else ""
+        pos = sys.argv[5] if len(sys.argv) > 5 else "top-center"
+        dur = 7
+        if len(sys.argv) > 6:
+            try: dur = int(sys.argv[6])
+            except Exception: pass
+        from desktop_hud import run_hud_window
+        run_hud_window(title, source, link, pos, dur)
+        sys.exit(0)
     # 이미 서버가 실행 중인 경우 브라우저만 띄우고 종료
     if check_already_running(5000):
         webbrowser.open('http://localhost:5000')

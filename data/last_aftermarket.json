@@ -1,234 +1,483 @@
 {
   "status": "ok",
-  "time": "8시간 전",
-  "source": "네이버 블로그 (글번호 224457111635)",
+  "time": "2시간 전",
+  "source": "네이버 블로그 (글번호 224461071990)",
   "rising": [
     {
-      "name": "서울반도체",
-      "pct": "+17.17%",
-      "is_up": true,
-      "themes": [
-        "마이크로 LED",
-        "LED"
-      ],
-      "primary_theme": "마이크로 LED",
-      "reasons": [
-        "장 마감 후 [서울반도체, '희토류 필요없는' 초소형 백색 LED 최초 개발] 기사"
-      ]
-    },
-    {
-      "name": "씨티알모빌리티",
-      "pct": "+6.35%",
-      "is_up": true,
-      "themes": [
-        "자동차부품",
-        "전기차"
-      ],
-      "primary_theme": "자동차부품",
-      "reasons": [
-        "계열사 씨티알, 아틀라스 '컨트롤암' 부품 담당 소식 등에 정규장 급등"
-      ]
-    },
-    {
-      "name": "LG화학",
-      "pct": "+3.60%",
-      "is_up": true,
-      "themes": [
-        "폴더블폰",
-        "바이오시밀러(복제 바이오의약품)",
-        "밸류업(24년 기업가치 제고계획 발표)",
-        "고령화 사회(노인복지)",
-        "비만치료제",
-        "탄소나노튜브(CNT)",
-        "전기차",
-        "OLED(유기 발광 다이오드)",
-        "니켈",
-        "석유화학",
-        "아이폰",
-        "2차전지",
-        "2차전지(소재/부품)",
-        "리튬"
-      ],
-      "primary_theme": "폴더블폰",
-      "reasons": [
-        "장 마감 후 ㈜LG에너지솔루션 주식 6,535,939주를 2.49조원에 처분하기로 결정(처분후지분율:76.59%, 처분예정일:2026-11-27) 및 LG에너지솔루션 지분 2.5조원 매각 결정에 따른 주주환원 계획 안내 공시. 3,000억원 규모 자사주 취득 신탁계약 체결 결정(기간:2026-12-01~2027-05-31, KB증권), 보통주 1,247,265주, 종류주 142,586주 소각 결정 공시"
-      ]
-    },
-    {
-      "name": "HL D&I",
-      "pct": "+3.23%",
-      "is_up": true,
-      "themes": [
-        "건설 중소형",
-        "GTX(수도권 광역급행철도)"
-      ],
-      "primary_theme": "건설 중소형",
-      "reasons": [
-        "장 마감 후 강암피에프브이 주식회사와 2,539.05억원(최근 매출액대비 14.58%) 규모 공급계약(청주 송절4지구 A1BL 공동주택 신축공사) 체결 공시"
-      ]
-    },
-    {
-      "name": "진양산업",
-      "pct": "+2.49%",
+      "name": "HLB바이오스텝",
+      "pct": "+20.98%",
       "is_up": true,
       "themes": [],
       "primary_theme": "",
       "reasons": [
-        "애프터마켓 일부 정치/인맥(오세훈) 테마 상승. [오세훈 항소심 무죄, '공감'이 앞섰다…45.5% vs 39.1%] 기사"
+        "애프터마켓 일부 HLB 그룹주 상승. [김동건 엘레바 대표 “리보세라닙, 곧 클래스 1·2 결론…유럽 허가도 추진”]"
       ]
     },
     {
-      "name": "한국정보인증",
-      "pct": "+2.29%",
+      "name": "HLB제약",
+      "pct": "+12.21%",
       "is_up": true,
       "themes": [
-        "인터넷은행",
-        "보안주(정보)",
-        "삼성페이",
-        "핀테크(FinTech)",
-        "STO(토큰증권 발행)",
-        "스테이블코인",
-        "양자암호/양자컴퓨팅"
+        "건강기능식품",
+        "제약업체",
+        "고령화 사회(노인복지)",
+        "치매",
+        "비만치료제"
       ],
-      "primary_theme": "인터넷은행",
+      "primary_theme": "건강기능식품",
       "reasons": [
-        "애프터마켓 일부 보안주(정보) 테마 상승"
+        "애프터마켓 일부 HLB 그룹주 상승"
       ]
     },
     {
-      "name": "디아이",
-      "pct": "+1.73%",
+      "name": "HLB글로벌",
+      "pct": "+11.08%",
       "is_up": true,
       "themes": [
-        "반도체 장비",
-        "시스템반도체",
-        "HBM(고대역폭메모리)"
+        "화장품"
       ],
-      "primary_theme": "반도체 장비",
+      "primary_theme": "화장품",
       "reasons": [
-        "반도체 관련주 상승 속 범용과 HBM 동시 수혜 전망 등에 정규장 급등"
+        "애프터마켓 일부 HLB 그룹주 상승"
       ]
     },
     {
-      "name": "KBI메탈",
-      "pct": "+1.57%",
+      "name": "HLB테라퓨틱스",
+      "pct": "+10.22%",
       "is_up": true,
       "themes": [
-        "전선",
-        "자동차부품",
-        "전력설비"
+        "콜드체인(저온 유통)"
       ],
-      "primary_theme": "전선",
+      "primary_theme": "콜드체인(저온 유통)",
       "reasons": [
-        "애프터마켓 일부 전선/ 전력설비 테마 상승"
-      ]
-    }
-  ],
-  "falling": [
-    {
-      "name": "한미글로벌",
-      "pct": "-5.82%",
-      "is_up": false,
-      "themes": [
-        "원자력발전"
-      ],
-      "primary_theme": "원자력발전",
-      "reasons": [
-        "장 마감 후 팩토리뮤추얼인슈런스컴퍼니가 780.29억원(자기자본대비 31.7%) 규모 구상금 청구의 소 제기 공시"
+        "애프터마켓 일부 HLB 그룹주 상승"
       ]
     },
     {
-      "name": "LG에너지솔루션",
-      "pct": "-4.24%",
-      "is_up": false,
+      "name": "HLB파나진",
+      "pct": "+7.55%",
+      "is_up": true,
       "themes": [
-        "밸류업(24년 기업가치 제고계획 발표)",
-        "전기차",
-        "니켈",
-        "폐배터리",
-        "전력저장장치(ESS)",
-        "2차전지",
-        "2차전지(LFP/리튬인산철)",
-        "리튬",
-        "2차전지(전고체)",
-        "스페이스X(SpaceX)",
-        "2차전지(생산)",
-        "2차전지(나트륨이온)"
+        "유전자 치료제/분석"
       ],
-      "primary_theme": "밸류업(24년 기업가치 제고계획 발표)",
+      "primary_theme": "유전자 치료제/분석",
       "reasons": [
-        "애프터마켓 일부 2차전지/ 전력저장장치(ESS)/ 전기차 테마 하락. 장 마감 후 LG화학, 재무구조 개선 및 주주가치 제고 목적으로 ㈜LG에너지솔루션 주식 6,535,939주를 2.49조원에 처분 결정(처분후지분율:76.59%, 처분예정일:2026-11-27) 공시. [LG화학, LG엔솔 지분 2.5조 매각…재무구조 개선 추진] 기사"
+        "애프터마켓 일부 HLB 그룹주 상승"
       ]
     },
     {
-      "name": "글로벌테크놀로지",
-      "pct": "-1.66%",
-      "is_up": false,
+      "name": "HLB이노베이션",
+      "pct": "+6.54%",
+      "is_up": true,
       "themes": [
-        "2026 하반기 신규상장",
-        "시스템반도체"
+        "반도체 재료/부품"
       ],
-      "primary_theme": "2026 하반기 신규상장",
+      "primary_theme": "반도체 재료/부품",
       "reasons": [
-        "애프터마켓 일부 반도체 관련주 하락"
+        "애프터마켓 일부 HLB 그룹주 상승"
       ]
     },
     {
-      "name": "이뮨온시아",
-      "pct": "-1.57%",
-      "is_up": false,
+      "name": "HLB",
+      "pct": "+5.50%",
+      "is_up": true,
       "themes": [
         "면역항암제"
       ],
       "primary_theme": "면역항암제",
       "reasons": [
-        "장 마감 후 공시불이행으로 불성실공시법인 지정예고(결정시한:2026-11-20) 공시"
+        "애프터마켓 일부 HLB 그룹주 상승"
       ]
     },
     {
-      "name": "삼기에너지솔루션즈",
-      "pct": "-1.56%",
-      "is_up": false,
-      "themes": [
-        "전기차",
-        "전기차 화재 방지(배터리 열폭주 등)",
-        "2차전지",
-        "2차전지(소재/부품)"
-      ],
-      "primary_theme": "전기차",
-      "reasons": [
-        "애프터마켓 일부 2차전지/ 전기차 테마 하락. 장 마감 후 782,122주(발행주식총수 대비 1.25%) 규모 전환청구권 행사 및 2,541,893주 추가상장(국내사모 CB전환) 공시"
-      ]
-    },
-    {
-      "name": "명신산업",
-      "pct": "-1.52%",
-      "is_up": false,
-      "themes": [
-        "자동차부품",
-        "코리아 밸류업 지수(Korea Value-up Index)",
-        "전기차"
-      ],
-      "primary_theme": "자동차부품",
-      "reasons": [
-        "애프터마켓 일부 전기차 테마 하락"
-      ]
-    },
-    {
-      "name": "아스플로",
-      "pct": "-1.42%",
-      "is_up": false,
+      "name": "케이씨",
+      "pct": "+4.74%",
+      "is_up": true,
       "themes": [
         "반도체 장비"
       ],
       "primary_theme": "반도체 장비",
       "reasons": [
-        "애프터마켓 일부 반도체 관련주 하락"
+        "장 마감 후 3분기 실적 발표, 연결기준 매출액 2,514.72억원(전년동기대비 +43.69%), 영업이익 254.52억원(전년동기대비 +833.67%)"
+      ]
+    },
+    {
+      "name": "화천기계",
+      "pct": "+3.80%",
+      "is_up": true,
+      "themes": [
+        "자동차부품",
+        "공작기계"
+      ],
+      "primary_theme": "자동차부품",
+      "reasons": [
+        "애프터마켓 일부 정치/인맥(조국) 테마 상승"
+      ]
+    },
+    {
+      "name": "파이오링크",
+      "pct": "+3.72%",
+      "is_up": true,
+      "themes": [
+        "클라우드 컴퓨팅",
+        "마이데이터",
+        "보안주(정보)",
+        "통신장비"
+      ],
+      "primary_theme": "클라우드 컴퓨팅",
+      "reasons": [
+        "연이은 해킹 사고 속 바이낸스 대규모 해킹 가능성 제기 등에 애프터마켓 일부 보안주(정보) 테마 상승"
+      ]
+    },
+    {
+      "name": "큐리옥스바이오시스템즈",
+      "pct": "+2.83%",
+      "is_up": true,
+      "themes": [],
+      "primary_theme": "",
+      "reasons": []
+    },
+    {
+      "name": "HLB제넥스",
+      "pct": "+2.75%",
+      "is_up": true,
+      "themes": [
+        "코로나19(진단키트)",
+        "코로나19(진단/치료제/백신 개발 등)",
+        "마이크로바이옴",
+        "유전자 치료제/분석"
+      ],
+      "primary_theme": "코로나19(진단키트)",
+      "reasons": [
+        "애프터마켓 일부 HLB 그룹주 상승"
+      ]
+    },
+    {
+      "name": "안랩",
+      "pct": "+2.71%",
+      "is_up": true,
+      "themes": [
+        "클라우드 컴퓨팅",
+        "보안주(정보)"
+      ],
+      "primary_theme": "클라우드 컴퓨팅",
+      "reasons": [
+        "연이은 해킹 사고 속 바이낸스 대규모 해킹 가능성 제기 등에 애프터마켓 일부 보안주(정보) 테마 상승"
+      ]
+    },
+    {
+      "name": "진양산업",
+      "pct": "+2.00%",
+      "is_up": true,
+      "themes": [],
+      "primary_theme": "",
+      "reasons": [
+        "애프터마켓 일부 정치/인맥(오세훈) 테마 상승"
+      ]
+    },
+    {
+      "name": "엑스게이트",
+      "pct": "+1.78%",
+      "is_up": true,
+      "themes": [
+        "보안주(정보)",
+        "양자암호/양자컴퓨팅"
+      ],
+      "primary_theme": "보안주(정보)",
+      "reasons": [
+        "연이은 해킹 사고 속 바이낸스 대규모 해킹 가능성 제기 등에 애프터마켓 일부 보안주(정보) 테마 상승"
+      ]
+    }
+  ],
+  "falling": [
+    {
+      "name": "효성화학",
+      "pct": "-15.27%",
+      "is_up": false,
+      "themes": [
+        "수소에너지(수소차/연료전지 등)",
+        "석유화학"
+      ],
+      "primary_theme": "수소에너지(수소차/연료전지 등)",
+      "reasons": [
+        "장 마감 후 3분기 실적 발표, 연결기준 매출액 7,335.58억원(전년동기대비 +26.40%), 영업손실 195.27억원(전년동기대비 적자지속)"
+      ]
+    },
+    {
+      "name": "인텔리빅스",
+      "pct": "-7.42%",
+      "is_up": false,
+      "themes": [],
+      "primary_theme": "",
+      "reasons": []
+    },
+    {
+      "name": "티앤이코리아",
+      "pct": "-5.01%",
+      "is_up": false,
+      "themes": [],
+      "primary_theme": "",
+      "reasons": [
+        "신규 상장 첫날 급등, 이튿날 정규장 급락"
+      ]
+    },
+    {
+      "name": "HL만도",
+      "pct": "-4.05%",
+      "is_up": false,
+      "themes": [
+        "자동차부품",
+        "자동차 대표주",
+        "자율주행차",
+        "리비안(RIVIAN)",
+        "스마트카(SMART CAR)",
+        "로봇(산업용/협동로봇 등)",
+        "전기차"
+      ],
+      "primary_theme": "자동차부품",
+      "reasons": [
+        "장 마감 후 3분기 실적 발표, 연결기준 매출액 2.32조원(전년동기대비 -0.03%), 영업이익 515.38억원(전년동기대비 -45.26%)"
+      ]
+    },
+    {
+      "name": "SOOP",
+      "pct": "-3.50%",
+      "is_up": false,
+      "themes": [
+        "스포츠행사 수혜(올림픽, 월드컵 등)",
+        "가상현실(VR)",
+        "SNS(소셜네트워크서비스)",
+        "코리아 밸류업 지수(Korea Value-up Index)"
+      ],
+      "primary_theme": "스포츠행사 수혜(올림픽, 월드컵 등)",
+      "reasons": [
+        "장 마감 후 3분기 실적 발표, 연결기준 매출액 1,056.87억원(전년동기대비 -16.02%), 영업이익 145.22억원(전년동기대비 -59.94%). 2026년 사업연도 배당 계획 공시"
+      ]
+    },
+    {
+      "name": "메쥬",
+      "pct": "-3.26%",
+      "is_up": false,
+      "themes": [
+        "의료기기",
+        "2026 상반기 신규상장"
+      ],
+      "primary_theme": "의료기기",
+      "reasons": []
+    },
+    {
+      "name": "삼성바이오로직스",
+      "pct": "-3.03%",
+      "is_up": false,
+      "themes": [
+        "오가노이드",
+        "제약업체",
+        "모더나(MODERNA)"
+      ],
+      "primary_theme": "오가노이드",
+      "reasons": [
+        "[삼성바이오 노사, 교섭 앞두고 정면충돌…서로 \"진정성 없다\"] 기사"
+      ]
+    },
+    {
+      "name": "대원제약",
+      "pct": "-3.00%",
+      "is_up": false,
+      "themes": [
+        "건강기능식품",
+        "의료기기",
+        "제약업체",
+        "고령화 사회(노인복지)",
+        "비만치료제"
+      ],
+      "primary_theme": "건강기능식품",
+      "reasons": []
+    },
+    {
+      "name": "삼아알미늄",
+      "pct": "-2.92%",
+      "is_up": false,
+      "themes": [
+        "비철금속",
+        "2차전지",
+        "2차전지(소재/부품)"
+      ],
+      "primary_theme": "비철금속",
+      "reasons": [
+        "애프터마켓 일부 2차전지 테마 하락"
+      ]
+    },
+    {
+      "name": "빅웨이브로보틱스",
+      "pct": "-2.83%",
+      "is_up": false,
+      "themes": [
+        "2026 하반기 신규상장",
+        "로봇(산업용/협동로봇 등)",
+        "피지컬 AI/휴머노이드 로봇"
+      ],
+      "primary_theme": "2026 하반기 신규상장",
+      "reasons": [
+        "애프터마켓 일부 피지컬 AI/휴머노이드 로봇/ 로봇(산업용/협동로봇 등) 테마 하락"
+      ]
+    },
+    {
+      "name": "뉴파워프라즈마",
+      "pct": "-2.68%",
+      "is_up": false,
+      "themes": [
+        "OLED(유기 발광 다이오드)",
+        "반도체 재료/부품"
+      ],
+      "primary_theme": "OLED(유기 발광 다이오드)",
+      "reasons": [
+        "알파벳·인텔·아마존發 AI 수익성 우려 등에 애프터마켓 일부 반도체 관련주 하락. 장중 주식등의 대량보유자 소유주식수 변동 전자공시(JP모건, 장내매도 등)"
+      ]
+    },
+    {
+      "name": "엘리스",
+      "pct": "-2.60%",
+      "is_up": false,
+      "themes": [
+        "클라우드 컴퓨팅",
+        "2026 하반기 신규상장",
+        "지능형로봇/인공지능(AI)"
+      ],
+      "primary_theme": "클라우드 컴퓨팅",
+      "reasons": [
+        "애프터마켓 일부 지능형로봇/인공지능(AI) 테마 하락"
+      ]
+    },
+    {
+      "name": "나무가",
+      "pct": "-2.44%",
+      "is_up": false,
+      "themes": [
+        "가상현실(VR)",
+        "증강현실(AR)",
+        "스마트폰",
+        "카메라모듈/부품",
+        "갤럭시 부품주",
+        "로봇(산업용/협동로봇 등)"
+      ],
+      "primary_theme": "가상현실(VR)",
+      "reasons": [
+        "애프터마켓 일부 로봇(산업용/협동로봇 등) 테마 하락"
+      ]
+    },
+    {
+      "name": "빛과전자",
+      "pct": "-2.39%",
+      "is_up": false,
+      "themes": [
+        "5G(5세대 이동통신)",
+        "통신장비",
+        "광통신(광케이블/광섬유 등)"
+      ],
+      "primary_theme": "5G(5세대 이동통신)",
+      "reasons": [
+        "애프터마켓 일부 광통신(광케이블/광섬유 등) 테마 하락"
+      ]
+    },
+    {
+      "name": "유나이티드제약",
+      "pct": "-2.25%",
+      "is_up": false,
+      "themes": [
+        "제약업체"
+      ],
+      "primary_theme": "제약업체",
+      "reasons": [
+        "장 마감 후 3분기 실적 발표, 별도기준 매출액 680.68억원(전년동기대비 -8.50%), 영업이익 28.22억원(전년동기대비 -77.44%)"
+      ]
+    },
+    {
+      "name": "멜콘",
+      "pct": "-2.18%",
+      "is_up": false,
+      "themes": [
+        "2026 하반기 신규상장",
+        "반도체 장비"
+      ],
+      "primary_theme": "2026 하반기 신규상장",
+      "reasons": [
+        "알파벳·인텔·아마존發 AI 수익성 우려 등에 애프터마켓 일부 반도체 관련주 하락"
+      ]
+    },
+    {
+      "name": "파수AI",
+      "pct": "-2.17%",
+      "is_up": false,
+      "themes": [
+        "재택근무/스마트워크",
+        "마이데이터",
+        "블록체인",
+        "보안주(정보)",
+        "딥페이크(deepfake)",
+        "밸류업(25년 기업가치 제고계획 발표)"
+      ],
+      "primary_theme": "재택근무/스마트워크",
+      "reasons": []
+    },
+    {
+      "name": "액스비스",
+      "pct": "-2.11%",
+      "is_up": false,
+      "themes": [
+        "카메라모듈/부품",
+        "2026 상반기 신규상장",
+        "전기차",
+        "2차전지"
+      ],
+      "primary_theme": "카메라모듈/부품",
+      "reasons": [
+        "애프터마켓 일부 2차전지 테마 하락"
+      ]
+    },
+    {
+      "name": "우림피티에스",
+      "pct": "-2.09%",
+      "is_up": false,
+      "themes": [
+        "농업",
+        "풍력에너지",
+        "셰일가스(Shale Gas)",
+        "철도",
+        "로봇(산업용/협동로봇 등)",
+        "피지컬 AI/휴머노이드 로봇"
+      ],
+      "primary_theme": "농업",
+      "reasons": [
+        "애프터마켓 일부 피지컬 AI/휴머노이드 로봇/ 로봇(산업용/협동로봇 등) 테마 하락"
+      ]
+    },
+    {
+      "name": "앤로보틱스",
+      "pct": "-1.98%",
+      "is_up": false,
+      "themes": [
+        "로봇(산업용/협동로봇 등)"
+      ],
+      "primary_theme": "로봇(산업용/협동로봇 등)",
+      "reasons": [
+        "애프터마켓 일부 로봇(산업용/협동로봇 등) 테마 하락"
+      ]
+    },
+    {
+      "name": "샘씨엔에스",
+      "pct": "-1.96%",
+      "is_up": false,
+      "themes": [
+        "반도체 재료/부품"
+      ],
+      "primary_theme": "반도체 재료/부품",
+      "reasons": [
+        "알파벳·인텔·아마존發 AI 수익성 우려 등에 애프터마켓 일부 반도체 관련주 하락"
       ]
     },
     {
       "name": "에스엠벡셀",
-      "pct": "-1.14%",
+      "pct": "-1.85%",
       "is_up": false,
       "themes": [
         "자동차부품",
@@ -238,43 +487,168 @@
       ],
       "primary_theme": "자동차부품",
       "reasons": [
-        "애프터마켓 일부 2차전지/ 전력저장장치(ESS) 테마 하락"
+        "애프터마켓 일부 2차전지 테마 하락"
       ]
     },
     {
-      "name": "에스티팜",
-      "pct": "-1.04%",
+      "name": "크리에이츠",
+      "pct": "-1.82%",
       "is_up": false,
-      "themes": [
-        "밸류업(25년 기업가치 제고계획 발표)",
-        "제약업체",
-        "모더나(MODERNA)",
-        "mRNA(메신저 리보핵산)"
-      ],
-      "primary_theme": "밸류업(25년 기업가치 제고계획 발표)",
+      "themes": [],
+      "primary_theme": "",
       "reasons": [
-        "3분기 영업이익 컨센서스 하회 분석 등에 정규장 하락"
+        "신규 상장 첫날 정규장 급락"
       ]
     },
     {
-      "name": "고려아연",
-      "pct": "-1.01%",
+      "name": "글로벌테크놀로지",
+      "pct": "-1.77%",
       "is_up": false,
       "themes": [
-        "귀금속(금/은)",
-        "환율하락 수혜",
-        "희귀금속(희토류 등)",
+        "2026 하반기 신규상장",
+        "시스템반도체"
+      ],
+      "primary_theme": "2026 하반기 신규상장",
+      "reasons": [
+        "알파벳·인텔·아마존發 AI 수익성 우려 등에 애프터마켓 일부 반도체 관련주 하락"
+      ]
+    },
+    {
+      "name": "상지건설",
+      "pct": "-1.77%",
+      "is_up": false,
+      "themes": [
+        "건설 중소형"
+      ],
+      "primary_theme": "건설 중소형",
+      "reasons": []
+    },
+    {
+      "name": "한양디지텍",
+      "pct": "-1.76%",
+      "is_up": false,
+      "themes": [
+        "반도체 재료/부품"
+      ],
+      "primary_theme": "반도체 재료/부품",
+      "reasons": [
+        "알파벳·인텔·아마존發 AI 수익성 우려 등에 애프터마켓 일부 반도체 관련주 하락"
+      ]
+    },
+    {
+      "name": "티에프이",
+      "pct": "-1.70%",
+      "is_up": false,
+      "themes": [
+        "반도체 장비",
+        "소캠(SOCAMM)"
+      ],
+      "primary_theme": "반도체 장비",
+      "reasons": [
+        "알파벳·인텔·아마존發 AI 수익성 우려 등에 애프터마켓 일부 반도체 관련주 하락"
+      ]
+    },
+    {
+      "name": "성호전자",
+      "pct": "-1.66%",
+      "is_up": false,
+      "themes": [
+        "공기청정기",
+        "전기차",
+        "LED",
+        "광통신(광케이블/광섬유 등)"
+      ],
+      "primary_theme": "공기청정기",
+      "reasons": [
+        "애프터마켓 일부 광통신(광케이블/광섬유 등) 테마 하락"
+      ]
+    },
+    {
+      "name": "알멕",
+      "pct": "-1.59%",
+      "is_up": false,
+      "themes": [
+        "자동차부품",
         "비철금속",
-        "밸류업(24년 기업가치 제고계획 발표)",
+        "리비안(RIVIAN)",
+        "전기차",
+        "우주항공산업(누리호/인공위성 등)",
         "2차전지",
         "2차전지(소재/부품)"
       ],
-      "primary_theme": "귀금속(금/은)",
+      "primary_theme": "자동차부품",
       "reasons": [
-        "[고려아연 지분 콜옵션 공방 ‘배임 논란’으로 확산…영풍 “풋옵션으로 원금 회수 가능” 반박] 기사"
+        "애프터마켓 일부 2차전지 테마 하락"
+      ]
+    },
+    {
+      "name": "한화솔루션",
+      "pct": "-1.55%",
+      "is_up": false,
+      "themes": [
+        "수소에너지(수소차/연료전지 등)",
+        "태양광에너지",
+        "日 수출 규제(국산화 등)",
+        "석유화학",
+        "우주태양광(페로브스카이트 등)"
+      ],
+      "primary_theme": "수소에너지(수소차/연료전지 등)",
+      "reasons": [
+        "3분기 영업이익 컨센서스 하회 및 4분기 실적 부진 전망 등에 정규장 하락"
+      ]
+    },
+    {
+      "name": "저스템",
+      "pct": "-1.49%",
+      "is_up": false,
+      "themes": [
+        "반도체 장비"
+      ],
+      "primary_theme": "반도체 장비",
+      "reasons": [
+        "알파벳·인텔·아마존發 AI 수익성 우려 등에 애프터마켓 일부 반도체 관련주 하락"
+      ]
+    },
+    {
+      "name": "신성델타테크",
+      "pct": "-1.40%",
+      "is_up": false,
+      "themes": [
+        "초전도체",
+        "로봇(산업용/협동로봇 등)",
+        "2차전지",
+        "2차전지(소재/부품)"
+      ],
+      "primary_theme": "초전도체",
+      "reasons": [
+        "애프터마켓 일부 2차전지, 로봇(산업용/협동로봇 등) 테마 하락"
+      ]
+    },
+    {
+      "name": "산일전기",
+      "pct": "-1.36%",
+      "is_up": false,
+      "themes": [
+        "전력설비"
+      ],
+      "primary_theme": "전력설비",
+      "reasons": [
+        "애프터마켓 일부 전력설비 테마 하락"
+      ]
+    },
+    {
+      "name": "대한제강",
+      "pct": "-1.30%",
+      "is_up": false,
+      "themes": [
+        "철강 주요종목"
+      ],
+      "primary_theme": "철강 주요종목",
+      "reasons": [
+        "장 마감 후 3분기 실적 발표, 연결기준 매출액 3,594.59억원(전년동기대비 +17.39%), 영업손실 14.20억원(전년동기대비 적자전환)"
       ]
     }
   ],
-  "cafe_text": "◆ 애프터마켓 상승 특징주\n\n▶ 서울반도체 (+17.17%) [마이크로 LED]\n→ 장 마감 후 [서울반도체, '희토류 필요없는' 초소형 백색 LED 최초 개발] 기사\n\n▶ 씨티알모빌리티 (+6.35%) [자동차부품]\n→ 계열사 씨티알, 아틀라스 '컨트롤암' 부품 담당 소식 등에 정규장 급등\n\n▶ LG화학 (+3.60%) [폴더블폰]\n→ 장 마감 후 ㈜LG에너지솔루션 주식 6,535,939주를 2.49조원에 처분하기로 결정(처분후지분율:76.59%, 처분예정일:2026-11-27) 및 LG에너지솔루션 지분 2.5조원 매각 결정에 따른 주주환원 계획 안내 공시. 3,000억원 규모 자사주 취득 신탁계약 체결 결정(기간:2026-12-01~2027-05-31, KB증권), 보통주 1,247,265주, 종류주 142,586주 소각 결정 공시\n\n▶ HL D&I (+3.23%) [건설 중소형]\n→ 장 마감 후 강암피에프브이 주식회사와 2,539.05억원(최근 매출액대비 14.58%) 규모 공급계약(청주 송절4지구 A1BL 공동주택 신축공사) 체결 공시\n\n▶ 진양산업 (+2.49%)\n→ 애프터마켓 일부 정치/인맥(오세훈) 테마 상승. [오세훈 항소심 무죄, '공감'이 앞섰다…45.5% vs 39.1%] 기사\n\n▶ 한국정보인증 (+2.29%) [인터넷은행]\n→ 애프터마켓 일부 보안주(정보) 테마 상승\n\n▶ 디아이 (+1.73%) [반도체 장비]\n→ 반도체 관련주 상승 속 범용과 HBM 동시 수혜 전망 등에 정규장 급등\n\n▶ KBI메탈 (+1.57%) [전선]\n→ 애프터마켓 일부 전선/ 전력설비 테마 상승\n\n◆ 애프터마켓 하락 특징주\n\n▶ 한미글로벌 (-5.82%) [원자력발전]\n→ 장 마감 후 팩토리뮤추얼인슈런스컴퍼니가 780.29억원(자기자본대비 31.7%) 규모 구상금 청구의 소 제기 공시\n\n▶ LG에너지솔루션 (-4.24%) [밸류업(24년 기업가치 제고계획 발표)]\n→ 애프터마켓 일부 2차전지/ 전력저장장치(ESS)/ 전기차 테마 하락. 장 마감 후 LG화학, 재무구조 개선 및 주주가치 제고 목적으로 ㈜LG에너지솔루션 주식 6,535,939주를 2.49조원에 처분 결정(처분후지분율:76.59%, 처분예정일:2026-11-27) 공시. [LG화학, LG엔솔 지분 2.5조 매각…재무구조 개선 추진] 기사\n\n▶ 글로벌테크놀로지 (-1.66%) [2026 하반기 신규상장]\n→ 애프터마켓 일부 반도체 관련주 하락\n\n▶ 이뮨온시아 (-1.57%) [면역항암제]\n→ 장 마감 후 공시불이행으로 불성실공시법인 지정예고(결정시한:2026-11-20) 공시\n\n▶ 삼기에너지솔루션즈 (-1.56%) [전기차]\n→ 애프터마켓 일부 2차전지/ 전기차 테마 하락. 장 마감 후 782,122주(발행주식총수 대비 1.25%) 규모 전환청구권 행사 및 2,541,893주 추가상장(국내사모 CB전환) 공시\n\n▶ 명신산업 (-1.52%) [자동차부품]\n→ 애프터마켓 일부 전기차 테마 하락\n\n▶ 아스플로 (-1.42%) [반도체 장비]\n→ 애프터마켓 일부 반도체 관련주 하락\n\n▶ 에스엠벡셀 (-1.14%) [자동차부품]\n→ 애프터마켓 일부 2차전지/ 전력저장장치(ESS) 테마 하락\n\n▶ 에스티팜 (-1.04%) [밸류업(25년 기업가치 제고계획 발표)]\n→ 3분기 영업이익 컨센서스 하회 분석 등에 정규장 하락\n\n▶ 고려아연 (-1.01%) [귀금속(금/은)]\n→ [고려아연 지분 콜옵션 공방 ‘배임 논란’으로 확산…영풍 “풋옵션으로 원금 회수 가능” 반박] 기사",
-  "cafe_html": "<div style=\"font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 14.5px; color: #1f2937; line-height: 1.7; max-width: 740px;\">\n  <div style=\"background-color: #fef2f2; padding: 10px 14px; border-radius: 4px; margin-bottom: 16px;\">\n    <span style=\"font-size: 16px; font-weight: 800; color: #dc2626;\">◆ 애프터마켓 상승 특징주</span>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #dc2626;\">서울반도체</span> <span style=\"color: #dc2626; margin-left: 3px;\">+17.17%</span><span style=\"background-color: #fef3c7; color: #b45309; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">마이크로 LED</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 장 마감 후 [서울반도체, '희토류 필요없는' 초소형 백색 LED 최초 개발] 기사</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #dc2626;\">씨티알모빌리티</span> <span style=\"color: #dc2626; margin-left: 3px;\">+6.35%</span><span style=\"background-color: #fef3c7; color: #b45309; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">자동차부품</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 계열사 씨티알, 아틀라스 '컨트롤암' 부품 담당 소식 등에 정규장 급등</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #dc2626;\">LG화학</span> <span style=\"color: #dc2626; margin-left: 3px;\">+3.60%</span><span style=\"background-color: #fef3c7; color: #b45309; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">폴더블폰</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 장 마감 후 ㈜LG에너지솔루션 주식 6,535,939주를 2.49조원에 처분하기로 결정(처분후지분율:76.59%, 처분예정일:2026-11-27) 및 LG에너지솔루션 지분 2.5조원 매각 결정에 따른 주주환원 계획 안내 공시. 3,000억원 규모 자사주 취득 신탁계약 체결 결정(기간:2026-12-01~2027-05-31, KB증권), 보통주 1,247,265주, 종류주 142,586주 소각 결정 공시</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #dc2626;\">HL D&I</span> <span style=\"color: #dc2626; margin-left: 3px;\">+3.23%</span><span style=\"background-color: #fef3c7; color: #b45309; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">건설 중소형</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 장 마감 후 강암피에프브이 주식회사와 2,539.05억원(최근 매출액대비 14.58%) 규모 공급계약(청주 송절4지구 A1BL 공동주택 신축공사) 체결 공시</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #dc2626;\">진양산업</span> <span style=\"color: #dc2626; margin-left: 3px;\">+2.49%</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 애프터마켓 일부 정치/인맥(오세훈) 테마 상승. [오세훈 항소심 무죄, '공감'이 앞섰다…45.5% vs 39.1%] 기사</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #dc2626;\">한국정보인증</span> <span style=\"color: #dc2626; margin-left: 3px;\">+2.29%</span><span style=\"background-color: #fef3c7; color: #b45309; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">인터넷은행</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 애프터마켓 일부 보안주(정보) 테마 상승</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #dc2626;\">디아이</span> <span style=\"color: #dc2626; margin-left: 3px;\">+1.73%</span><span style=\"background-color: #fef3c7; color: #b45309; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">반도체 장비</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 반도체 관련주 상승 속 범용과 HBM 동시 수혜 전망 등에 정규장 급등</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #dc2626;\">KBI메탈</span> <span style=\"color: #dc2626; margin-left: 3px;\">+1.57%</span><span style=\"background-color: #fef3c7; color: #b45309; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">전선</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 애프터마켓 일부 전선/ 전력설비 테마 상승</div>\n  </div>\n  <div style=\"background-color: #eff6ff; padding: 10px 14px; border-radius: 4px; margin: 26px 0 16px 0;\">\n    <span style=\"font-size: 16px; font-weight: 800; color: #2563eb;\">◆ 애프터마켓 하락 특징주</span>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">한미글로벌</span> <span style=\"color: #2563eb; margin-left: 3px;\">-5.82%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">원자력발전</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 장 마감 후 팩토리뮤추얼인슈런스컴퍼니가 780.29억원(자기자본대비 31.7%) 규모 구상금 청구의 소 제기 공시</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">LG에너지솔루션</span> <span style=\"color: #2563eb; margin-left: 3px;\">-4.24%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">밸류업(24년 기업가치 제고계획 발표)</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 애프터마켓 일부 2차전지/ 전력저장장치(ESS)/ 전기차 테마 하락. 장 마감 후 LG화학, 재무구조 개선 및 주주가치 제고 목적으로 ㈜LG에너지솔루션 주식 6,535,939주를 2.49조원에 처분 결정(처분후지분율:76.59%, 처분예정일:2026-11-27) 공시. [LG화학, LG엔솔 지분 2.5조 매각…재무구조 개선 추진] 기사</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">글로벌테크놀로지</span> <span style=\"color: #2563eb; margin-left: 3px;\">-1.66%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">2026 하반기 신규상장</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 애프터마켓 일부 반도체 관련주 하락</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">이뮨온시아</span> <span style=\"color: #2563eb; margin-left: 3px;\">-1.57%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">면역항암제</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 장 마감 후 공시불이행으로 불성실공시법인 지정예고(결정시한:2026-11-20) 공시</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">삼기에너지솔루션즈</span> <span style=\"color: #2563eb; margin-left: 3px;\">-1.56%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">전기차</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 애프터마켓 일부 2차전지/ 전기차 테마 하락. 장 마감 후 782,122주(발행주식총수 대비 1.25%) 규모 전환청구권 행사 및 2,541,893주 추가상장(국내사모 CB전환) 공시</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">명신산업</span> <span style=\"color: #2563eb; margin-left: 3px;\">-1.52%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">자동차부품</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 애프터마켓 일부 전기차 테마 하락</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">아스플로</span> <span style=\"color: #2563eb; margin-left: 3px;\">-1.42%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">반도체 장비</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 애프터마켓 일부 반도체 관련주 하락</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">에스엠벡셀</span> <span style=\"color: #2563eb; margin-left: 3px;\">-1.14%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">자동차부품</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 애프터마켓 일부 2차전지/ 전력저장장치(ESS) 테마 하락</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">에스티팜</span> <span style=\"color: #2563eb; margin-left: 3px;\">-1.04%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">밸류업(25년 기업가치 제고계획 발표)</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 3분기 영업이익 컨센서스 하회 분석 등에 정규장 하락</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">고려아연</span> <span style=\"color: #2563eb; margin-left: 3px;\">-1.01%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">귀금속(금/은)</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ [고려아연 지분 콜옵션 공방 ‘배임 논란’으로 확산…영풍 “풋옵션으로 원금 회수 가능” 반박] 기사</div>\n  </div>\n</div>"
+  "cafe_text": "◆ 애프터마켓 상승 특징주\n\n▶ HLB바이오스텝 (+20.98%)\n→ 애프터마켓 일부 HLB 그룹주 상승. [김동건 엘레바 대표 “리보세라닙, 곧 클래스 1·2 결론…유럽 허가도 추진”]\n\n▶ HLB제약 (+12.21%) [건강기능식품]\n→ 애프터마켓 일부 HLB 그룹주 상승\n\n▶ HLB글로벌 (+11.08%) [화장품]\n→ 애프터마켓 일부 HLB 그룹주 상승\n\n▶ HLB테라퓨틱스 (+10.22%) [콜드체인(저온 유통)]\n→ 애프터마켓 일부 HLB 그룹주 상승\n\n▶ HLB파나진 (+7.55%) [유전자 치료제/분석]\n→ 애프터마켓 일부 HLB 그룹주 상승\n\n▶ HLB이노베이션 (+6.54%) [반도체 재료/부품]\n→ 애프터마켓 일부 HLB 그룹주 상승\n\n▶ HLB (+5.50%) [면역항암제]\n→ 애프터마켓 일부 HLB 그룹주 상승\n\n▶ 케이씨 (+4.74%) [반도체 장비]\n→ 장 마감 후 3분기 실적 발표, 연결기준 매출액 2,514.72억원(전년동기대비 +43.69%), 영업이익 254.52억원(전년동기대비 +833.67%)\n\n▶ 화천기계 (+3.80%) [자동차부품]\n→ 애프터마켓 일부 정치/인맥(조국) 테마 상승\n\n▶ 파이오링크 (+3.72%) [클라우드 컴퓨팅]\n→ 연이은 해킹 사고 속 바이낸스 대규모 해킹 가능성 제기 등에 애프터마켓 일부 보안주(정보) 테마 상승\n\n▶ 큐리옥스바이오시스템즈 (+2.83%)\n\n▶ HLB제넥스 (+2.75%) [코로나19(진단키트)]\n→ 애프터마켓 일부 HLB 그룹주 상승\n\n▶ 안랩 (+2.71%) [클라우드 컴퓨팅]\n→ 연이은 해킹 사고 속 바이낸스 대규모 해킹 가능성 제기 등에 애프터마켓 일부 보안주(정보) 테마 상승\n\n▶ 진양산업 (+2.00%)\n→ 애프터마켓 일부 정치/인맥(오세훈) 테마 상승\n\n▶ 엑스게이트 (+1.78%) [보안주(정보)]\n→ 연이은 해킹 사고 속 바이낸스 대규모 해킹 가능성 제기 등에 애프터마켓 일부 보안주(정보) 테마 상승\n\n◆ 애프터마켓 하락 특징주\n\n▶ 효성화학 (-15.27%) [수소에너지(수소차/연료전지 등)]\n→ 장 마감 후 3분기 실적 발표, 연결기준 매출액 7,335.58억원(전년동기대비 +26.40%), 영업손실 195.27억원(전년동기대비 적자지속)\n\n▶ 인텔리빅스 (-7.42%)\n\n▶ 티앤이코리아 (-5.01%)\n→ 신규 상장 첫날 급등, 이튿날 정규장 급락\n\n▶ HL만도 (-4.05%) [자동차부품]\n→ 장 마감 후 3분기 실적 발표, 연결기준 매출액 2.32조원(전년동기대비 -0.03%), 영업이익 515.38억원(전년동기대비 -45.26%)\n\n▶ SOOP (-3.50%) [스포츠행사 수혜(올림픽, 월드컵 등)]\n→ 장 마감 후 3분기 실적 발표, 연결기준 매출액 1,056.87억원(전년동기대비 -16.02%), 영업이익 145.22억원(전년동기대비 -59.94%). 2026년 사업연도 배당 계획 공시\n\n▶ 메쥬 (-3.26%) [의료기기]\n\n▶ 삼성바이오로직스 (-3.03%) [오가노이드]\n→ [삼성바이오 노사, 교섭 앞두고 정면충돌…서로 \"진정성 없다\"] 기사\n\n▶ 대원제약 (-3.00%) [건강기능식품]\n\n▶ 삼아알미늄 (-2.92%) [비철금속]\n→ 애프터마켓 일부 2차전지 테마 하락\n\n▶ 빅웨이브로보틱스 (-2.83%) [2026 하반기 신규상장]\n→ 애프터마켓 일부 피지컬 AI/휴머노이드 로봇/ 로봇(산업용/협동로봇 등) 테마 하락\n\n▶ 뉴파워프라즈마 (-2.68%) [OLED(유기 발광 다이오드)]\n→ 알파벳·인텔·아마존發 AI 수익성 우려 등에 애프터마켓 일부 반도체 관련주 하락. 장중 주식등의 대량보유자 소유주식수 변동 전자공시(JP모건, 장내매도 등)\n\n▶ 엘리스 (-2.60%) [클라우드 컴퓨팅]\n→ 애프터마켓 일부 지능형로봇/인공지능(AI) 테마 하락\n\n▶ 나무가 (-2.44%) [가상현실(VR)]\n→ 애프터마켓 일부 로봇(산업용/협동로봇 등) 테마 하락\n\n▶ 빛과전자 (-2.39%) [5G(5세대 이동통신)]\n→ 애프터마켓 일부 광통신(광케이블/광섬유 등) 테마 하락\n\n▶ 유나이티드제약 (-2.25%) [제약업체]\n→ 장 마감 후 3분기 실적 발표, 별도기준 매출액 680.68억원(전년동기대비 -8.50%), 영업이익 28.22억원(전년동기대비 -77.44%)\n\n▶ 멜콘 (-2.18%) [2026 하반기 신규상장]\n→ 알파벳·인텔·아마존發 AI 수익성 우려 등에 애프터마켓 일부 반도체 관련주 하락\n\n▶ 파수AI (-2.17%) [재택근무/스마트워크]\n\n▶ 액스비스 (-2.11%) [카메라모듈/부품]\n→ 애프터마켓 일부 2차전지 테마 하락\n\n▶ 우림피티에스 (-2.09%) [농업]\n→ 애프터마켓 일부 피지컬 AI/휴머노이드 로봇/ 로봇(산업용/협동로봇 등) 테마 하락\n\n▶ 앤로보틱스 (-1.98%) [로봇(산업용/협동로봇 등)]\n→ 애프터마켓 일부 로봇(산업용/협동로봇 등) 테마 하락\n\n▶ 샘씨엔에스 (-1.96%) [반도체 재료/부품]\n→ 알파벳·인텔·아마존發 AI 수익성 우려 등에 애프터마켓 일부 반도체 관련주 하락\n\n▶ 에스엠벡셀 (-1.85%) [자동차부품]\n→ 애프터마켓 일부 2차전지 테마 하락\n\n▶ 크리에이츠 (-1.82%)\n→ 신규 상장 첫날 정규장 급락\n\n▶ 글로벌테크놀로지 (-1.77%) [2026 하반기 신규상장]\n→ 알파벳·인텔·아마존發 AI 수익성 우려 등에 애프터마켓 일부 반도체 관련주 하락\n\n▶ 상지건설 (-1.77%) [건설 중소형]\n\n▶ 한양디지텍 (-1.76%) [반도체 재료/부품]\n→ 알파벳·인텔·아마존發 AI 수익성 우려 등에 애프터마켓 일부 반도체 관련주 하락\n\n▶ 티에프이 (-1.70%) [반도체 장비]\n→ 알파벳·인텔·아마존發 AI 수익성 우려 등에 애프터마켓 일부 반도체 관련주 하락\n\n▶ 성호전자 (-1.66%) [공기청정기]\n→ 애프터마켓 일부 광통신(광케이블/광섬유 등) 테마 하락\n\n▶ 알멕 (-1.59%) [자동차부품]\n→ 애프터마켓 일부 2차전지 테마 하락\n\n▶ 한화솔루션 (-1.55%) [수소에너지(수소차/연료전지 등)]\n→ 3분기 영업이익 컨센서스 하회 및 4분기 실적 부진 전망 등에 정규장 하락\n\n▶ 저스템 (-1.49%) [반도체 장비]\n→ 알파벳·인텔·아마존發 AI 수익성 우려 등에 애프터마켓 일부 반도체 관련주 하락\n\n▶ 신성델타테크 (-1.40%) [초전도체]\n→ 애프터마켓 일부 2차전지, 로봇(산업용/협동로봇 등) 테마 하락\n\n▶ 산일전기 (-1.36%) [전력설비]\n→ 애프터마켓 일부 전력설비 테마 하락\n\n▶ 대한제강 (-1.30%) [철강 주요종목]\n→ 장 마감 후 3분기 실적 발표, 연결기준 매출액 3,594.59억원(전년동기대비 +17.39%), 영업손실 14.20억원(전년동기대비 적자전환)",
+  "cafe_html": "<div style=\"font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 14.5px; color: #1f2937; line-height: 1.7; max-width: 740px;\">\n  <div style=\"background-color: #fef2f2; padding: 10px 14px; border-radius: 4px; margin-bottom: 16px;\">\n    <span style=\"font-size: 16px; font-weight: 800; color: #dc2626;\">◆ 애프터마켓 상승 특징주</span>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #dc2626;\">HLB바이오스텝</span> <span style=\"color: #dc2626; margin-left: 3px;\">+20.98%</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 애프터마켓 일부 HLB 그룹주 상승. [김동건 엘레바 대표 “리보세라닙, 곧 클래스 1·2 결론…유럽 허가도 추진”]</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #dc2626;\">HLB제약</span> <span style=\"color: #dc2626; margin-left: 3px;\">+12.21%</span><span style=\"background-color: #fef3c7; color: #b45309; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">건강기능식품</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 애프터마켓 일부 HLB 그룹주 상승</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #dc2626;\">HLB글로벌</span> <span style=\"color: #dc2626; margin-left: 3px;\">+11.08%</span><span style=\"background-color: #fef3c7; color: #b45309; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">화장품</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 애프터마켓 일부 HLB 그룹주 상승</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #dc2626;\">HLB테라퓨틱스</span> <span style=\"color: #dc2626; margin-left: 3px;\">+10.22%</span><span style=\"background-color: #fef3c7; color: #b45309; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">콜드체인(저온 유통)</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 애프터마켓 일부 HLB 그룹주 상승</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #dc2626;\">HLB파나진</span> <span style=\"color: #dc2626; margin-left: 3px;\">+7.55%</span><span style=\"background-color: #fef3c7; color: #b45309; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">유전자 치료제/분석</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 애프터마켓 일부 HLB 그룹주 상승</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #dc2626;\">HLB이노베이션</span> <span style=\"color: #dc2626; margin-left: 3px;\">+6.54%</span><span style=\"background-color: #fef3c7; color: #b45309; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">반도체 재료/부품</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 애프터마켓 일부 HLB 그룹주 상승</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #dc2626;\">HLB</span> <span style=\"color: #dc2626; margin-left: 3px;\">+5.50%</span><span style=\"background-color: #fef3c7; color: #b45309; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">면역항암제</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 애프터마켓 일부 HLB 그룹주 상승</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #dc2626;\">케이씨</span> <span style=\"color: #dc2626; margin-left: 3px;\">+4.74%</span><span style=\"background-color: #fef3c7; color: #b45309; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">반도체 장비</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 장 마감 후 3분기 실적 발표, 연결기준 매출액 2,514.72억원(전년동기대비 +43.69%), 영업이익 254.52억원(전년동기대비 +833.67%)</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #dc2626;\">화천기계</span> <span style=\"color: #dc2626; margin-left: 3px;\">+3.80%</span><span style=\"background-color: #fef3c7; color: #b45309; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">자동차부품</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 애프터마켓 일부 정치/인맥(조국) 테마 상승</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #dc2626;\">파이오링크</span> <span style=\"color: #dc2626; margin-left: 3px;\">+3.72%</span><span style=\"background-color: #fef3c7; color: #b45309; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">클라우드 컴퓨팅</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 연이은 해킹 사고 속 바이낸스 대규모 해킹 가능성 제기 등에 애프터마켓 일부 보안주(정보) 테마 상승</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #dc2626;\">큐리옥스바이오시스템즈</span> <span style=\"color: #dc2626; margin-left: 3px;\">+2.83%</span></div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #dc2626;\">HLB제넥스</span> <span style=\"color: #dc2626; margin-left: 3px;\">+2.75%</span><span style=\"background-color: #fef3c7; color: #b45309; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">코로나19(진단키트)</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 애프터마켓 일부 HLB 그룹주 상승</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #dc2626;\">안랩</span> <span style=\"color: #dc2626; margin-left: 3px;\">+2.71%</span><span style=\"background-color: #fef3c7; color: #b45309; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">클라우드 컴퓨팅</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 연이은 해킹 사고 속 바이낸스 대규모 해킹 가능성 제기 등에 애프터마켓 일부 보안주(정보) 테마 상승</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #dc2626;\">진양산업</span> <span style=\"color: #dc2626; margin-left: 3px;\">+2.00%</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 애프터마켓 일부 정치/인맥(오세훈) 테마 상승</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #dc2626;\">엑스게이트</span> <span style=\"color: #dc2626; margin-left: 3px;\">+1.78%</span><span style=\"background-color: #fef3c7; color: #b45309; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">보안주(정보)</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 연이은 해킹 사고 속 바이낸스 대규모 해킹 가능성 제기 등에 애프터마켓 일부 보안주(정보) 테마 상승</div>\n  </div>\n  <div style=\"background-color: #eff6ff; padding: 10px 14px; border-radius: 4px; margin: 26px 0 16px 0;\">\n    <span style=\"font-size: 16px; font-weight: 800; color: #2563eb;\">◆ 애프터마켓 하락 특징주</span>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">효성화학</span> <span style=\"color: #2563eb; margin-left: 3px;\">-15.27%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">수소에너지(수소차/연료전지 등)</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 장 마감 후 3분기 실적 발표, 연결기준 매출액 7,335.58억원(전년동기대비 +26.40%), 영업손실 195.27억원(전년동기대비 적자지속)</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">인텔리빅스</span> <span style=\"color: #2563eb; margin-left: 3px;\">-7.42%</span></div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">티앤이코리아</span> <span style=\"color: #2563eb; margin-left: 3px;\">-5.01%</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 신규 상장 첫날 급등, 이튿날 정규장 급락</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">HL만도</span> <span style=\"color: #2563eb; margin-left: 3px;\">-4.05%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">자동차부품</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 장 마감 후 3분기 실적 발표, 연결기준 매출액 2.32조원(전년동기대비 -0.03%), 영업이익 515.38억원(전년동기대비 -45.26%)</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">SOOP</span> <span style=\"color: #2563eb; margin-left: 3px;\">-3.50%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">스포츠행사 수혜(올림픽, 월드컵 등)</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 장 마감 후 3분기 실적 발표, 연결기준 매출액 1,056.87억원(전년동기대비 -16.02%), 영업이익 145.22억원(전년동기대비 -59.94%). 2026년 사업연도 배당 계획 공시</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">메쥬</span> <span style=\"color: #2563eb; margin-left: 3px;\">-3.26%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">의료기기</span></div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">삼성바이오로직스</span> <span style=\"color: #2563eb; margin-left: 3px;\">-3.03%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">오가노이드</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ [삼성바이오 노사, 교섭 앞두고 정면충돌…서로 \"진정성 없다\"] 기사</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">대원제약</span> <span style=\"color: #2563eb; margin-left: 3px;\">-3.00%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">건강기능식품</span></div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">삼아알미늄</span> <span style=\"color: #2563eb; margin-left: 3px;\">-2.92%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">비철금속</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 애프터마켓 일부 2차전지 테마 하락</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">빅웨이브로보틱스</span> <span style=\"color: #2563eb; margin-left: 3px;\">-2.83%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">2026 하반기 신규상장</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 애프터마켓 일부 피지컬 AI/휴머노이드 로봇/ 로봇(산업용/협동로봇 등) 테마 하락</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">뉴파워프라즈마</span> <span style=\"color: #2563eb; margin-left: 3px;\">-2.68%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">OLED(유기 발광 다이오드)</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 알파벳·인텔·아마존發 AI 수익성 우려 등에 애프터마켓 일부 반도체 관련주 하락. 장중 주식등의 대량보유자 소유주식수 변동 전자공시(JP모건, 장내매도 등)</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">엘리스</span> <span style=\"color: #2563eb; margin-left: 3px;\">-2.60%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">클라우드 컴퓨팅</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 애프터마켓 일부 지능형로봇/인공지능(AI) 테마 하락</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">나무가</span> <span style=\"color: #2563eb; margin-left: 3px;\">-2.44%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">가상현실(VR)</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 애프터마켓 일부 로봇(산업용/협동로봇 등) 테마 하락</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">빛과전자</span> <span style=\"color: #2563eb; margin-left: 3px;\">-2.39%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">5G(5세대 이동통신)</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 애프터마켓 일부 광통신(광케이블/광섬유 등) 테마 하락</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">유나이티드제약</span> <span style=\"color: #2563eb; margin-left: 3px;\">-2.25%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">제약업체</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 장 마감 후 3분기 실적 발표, 별도기준 매출액 680.68억원(전년동기대비 -8.50%), 영업이익 28.22억원(전년동기대비 -77.44%)</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">멜콘</span> <span style=\"color: #2563eb; margin-left: 3px;\">-2.18%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">2026 하반기 신규상장</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 알파벳·인텔·아마존發 AI 수익성 우려 등에 애프터마켓 일부 반도체 관련주 하락</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">파수AI</span> <span style=\"color: #2563eb; margin-left: 3px;\">-2.17%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">재택근무/스마트워크</span></div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">액스비스</span> <span style=\"color: #2563eb; margin-left: 3px;\">-2.11%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">카메라모듈/부품</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 애프터마켓 일부 2차전지 테마 하락</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">우림피티에스</span> <span style=\"color: #2563eb; margin-left: 3px;\">-2.09%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">농업</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 애프터마켓 일부 피지컬 AI/휴머노이드 로봇/ 로봇(산업용/협동로봇 등) 테마 하락</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">앤로보틱스</span> <span style=\"color: #2563eb; margin-left: 3px;\">-1.98%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">로봇(산업용/협동로봇 등)</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 애프터마켓 일부 로봇(산업용/협동로봇 등) 테마 하락</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">샘씨엔에스</span> <span style=\"color: #2563eb; margin-left: 3px;\">-1.96%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">반도체 재료/부품</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 알파벳·인텔·아마존發 AI 수익성 우려 등에 애프터마켓 일부 반도체 관련주 하락</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">에스엠벡셀</span> <span style=\"color: #2563eb; margin-left: 3px;\">-1.85%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">자동차부품</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 애프터마켓 일부 2차전지 테마 하락</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">크리에이츠</span> <span style=\"color: #2563eb; margin-left: 3px;\">-1.82%</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 신규 상장 첫날 정규장 급락</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">글로벌테크놀로지</span> <span style=\"color: #2563eb; margin-left: 3px;\">-1.77%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">2026 하반기 신규상장</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 알파벳·인텔·아마존發 AI 수익성 우려 등에 애프터마켓 일부 반도체 관련주 하락</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">상지건설</span> <span style=\"color: #2563eb; margin-left: 3px;\">-1.77%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">건설 중소형</span></div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">한양디지텍</span> <span style=\"color: #2563eb; margin-left: 3px;\">-1.76%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">반도체 재료/부품</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 알파벳·인텔·아마존發 AI 수익성 우려 등에 애프터마켓 일부 반도체 관련주 하락</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">티에프이</span> <span style=\"color: #2563eb; margin-left: 3px;\">-1.70%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">반도체 장비</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 알파벳·인텔·아마존發 AI 수익성 우려 등에 애프터마켓 일부 반도체 관련주 하락</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">성호전자</span> <span style=\"color: #2563eb; margin-left: 3px;\">-1.66%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">공기청정기</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 애프터마켓 일부 광통신(광케이블/광섬유 등) 테마 하락</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">알멕</span> <span style=\"color: #2563eb; margin-left: 3px;\">-1.59%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">자동차부품</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 애프터마켓 일부 2차전지 테마 하락</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">한화솔루션</span> <span style=\"color: #2563eb; margin-left: 3px;\">-1.55%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">수소에너지(수소차/연료전지 등)</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 3분기 영업이익 컨센서스 하회 및 4분기 실적 부진 전망 등에 정규장 하락</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">저스템</span> <span style=\"color: #2563eb; margin-left: 3px;\">-1.49%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">반도체 장비</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 알파벳·인텔·아마존發 AI 수익성 우려 등에 애프터마켓 일부 반도체 관련주 하락</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">신성델타테크</span> <span style=\"color: #2563eb; margin-left: 3px;\">-1.40%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">초전도체</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 애프터마켓 일부 2차전지, 로봇(산업용/협동로봇 등) 테마 하락</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">산일전기</span> <span style=\"color: #2563eb; margin-left: 3px;\">-1.36%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">전력설비</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 애프터마켓 일부 전력설비 테마 하락</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">대한제강</span> <span style=\"color: #2563eb; margin-left: 3px;\">-1.30%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">철강 주요종목</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 장 마감 후 3분기 실적 발표, 연결기준 매출액 3,594.59억원(전년동기대비 +17.39%), 영업손실 14.20억원(전년동기대비 적자전환)</div>\n  </div>\n</div>"
 }
