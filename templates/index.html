@@ -413,8 +413,8 @@
           </div>
 
           <div class="flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 px-1 font-mono pt-1">
-            <span>1분봉 / 18:00-06:00 / 711개</span>
-            <span>최저 852.10 | 최고 865.50</span>
+            <span id="nfChartPeriodInfo">1분봉 / 18:00-06:00 / 711개</span>
+            <span id="nfChartHighLow">최저 852.10 | 최고 865.50</span>
           </div>
         </section>
 
@@ -1028,11 +1028,7 @@
       } else if (mode === 'charts') {
         chartsView.classList.remove('hidden');
         tabCharts.className = activeClass;
-        if (!chartsData) {
-          loadChartsData();
-        } else {
-          renderNightFuturesChart();
-        }
+        loadChartsData(false);
       } else if (mode === 'closing') {
         closingView.classList.remove('hidden');
         tabClosing.className = activeClass;
@@ -1660,16 +1656,24 @@
 
     // ================= [VIEW 2: 야간선물 & 글로벌 차트 엔진] =================
     async function loadChartsData(force = false) {
+      const refreshIcon = document.getElementById('refreshIcon');
+      if (force && refreshIcon) refreshIcon.classList.add('fa-spin');
       try {
-        const res = await fetch('/api/charts').then(r => r.json());
+        const url = force ? '/api/charts?refresh=1' : '/api/charts';
+        const res = await fetch(url).then(r => r.json());
         if (res.status === 'ok') {
           chartsData = res;
           renderNightFuturesHeader(res.night_futures);
           renderNightFuturesChart();
           renderGlobalCards(res.global_cards);
+          if (force) {
+            showToast('📈 차트 갱신 완료', '야간선물 및 8개 글로벌 자산 시세를 새로고침했습니다.');
+          }
         }
       } catch (err) {
         console.error('Charts load error:', err);
+      } finally {
+        if (refreshIcon) refreshIcon.classList.remove('fa-spin');
       }
     }
 
@@ -1686,6 +1690,16 @@
       } else {
         pEl.className = 'text-5xl font-black font-mono tracking-tight text-[#3b96f8]';
         chgEl.className = 'text-sm font-bold font-mono text-[#3b96f8]';
+      }
+
+      const statusBadge = document.getElementById('nfStatusBadge');
+      if (statusBadge) {
+        statusBadge.innerText = nf.status || '마감';
+        if (nf.status === '실시간' || nf.status === '거래중') {
+          statusBadge.className = 'text-[11px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-400 animate-pulse';
+        } else {
+          statusBadge.className = 'text-[11px] font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300';
+        }
       }
 
       document.getElementById('nfTimestamp').innerText = nf.timestamp;
@@ -1732,8 +1746,11 @@
       }
 
       const prices = points.map(p => p.price);
-      const minP = Math.min(...prices, 851.38);
-      const maxP = Math.max(...prices, 867.12);
+      const rawMin = Math.min(...prices);
+      const rawMax = Math.max(...prices);
+      const pDiff = (rawMax - rawMin) || 2.0;
+      const minP = rawMin - pDiff * 0.06;
+      const maxP = rawMax + pDiff * 0.06;
       const rangeP = (maxP - minP) || 1;
 
       const padTop = 15;
@@ -1747,8 +1764,11 @@
       const getX = idx => padLeft + (idx / (points.length - 1)) * chartW;
       const getY = val => padTop + chartH - ((val - minP) / rangeP) * chartH;
 
-      // 1. 수평 그리드선 및 Y축 가격 눈금
-      const gridSteps = [867.12, 863.18, 859.25, 855.32, 851.38];
+      // 1. 수평 그리드선 및 Y축 가격 눈금 (동적 5분할)
+      const gridSteps = [];
+      for (let s = 0; s < 5; s++) {
+        gridSteps.push(maxP - (rangeP / 4) * s);
+      }
       gridSteps.forEach(pVal => {
         const y = getY(pVal);
         ctx.strokeStyle = currentTheme === 'dark' ? '#1e293b' : '#f1f5f9';
@@ -1765,7 +1785,7 @@
       });
 
       // 2. 시가 기준선 (점선)
-      const openVal = parseFloat(nf.open) || 862.45;
+      const openVal = parseFloat((nf.open || '').replace(/,/g, '')) || prices[0];
       const openY = getY(openVal);
       ctx.save();
       ctx.setLineDash([4, 4]);
@@ -1777,7 +1797,11 @@
       ctx.stroke();
       ctx.restore();
 
-      // 3. 곡선 차트 채우기 (연한 블루 그라디언트)
+      const mainColor = nf.is_up ? '#f14944' : '#3b96f8';
+      const gradTop = nf.is_up ? 'rgba(241, 73, 68, 0.20)' : 'rgba(59, 150, 248, 0.20)';
+      const gradBottom = nf.is_up ? 'rgba(241, 73, 68, 0.01)' : 'rgba(59, 150, 248, 0.01)';
+
+      // 3. 곡선 차트 채우기 (동적 그라디언트)
       ctx.beginPath();
       ctx.moveTo(getX(0), getY(points[0].price));
       for (let i = 1; i < points.length; i++) {
@@ -1788,23 +1812,23 @@
       ctx.closePath();
 
       const grad = ctx.createLinearGradient(0, padTop, 0, padTop + chartH);
-      grad.addColorStop(0, 'rgba(59, 150, 248, 0.18)');
-      grad.addColorStop(1, 'rgba(59, 150, 248, 0.01)');
+      grad.addColorStop(0, gradTop);
+      grad.addColorStop(1, gradBottom);
       ctx.fillStyle = grad;
       ctx.fill();
 
-      // 4. 메인 파선 라인 (레퍼런스 정밀 블루 #3b96f8)
+      // 4. 메인 곡선 라인 (상승 시 레드, 하락 시 블루)
       ctx.beginPath();
       ctx.moveTo(getX(0), getY(points[0].price));
       for (let i = 1; i < points.length; i++) {
         ctx.lineTo(getX(i), getY(points[i].price));
       }
-      ctx.strokeStyle = '#3b96f8';
+      ctx.strokeStyle = mainColor;
       ctx.lineWidth = 1.6;
       ctx.lineJoin = 'round';
       ctx.stroke();
 
-      // 5. 우측 축 종가 지점 마커 필(Pill) 뱃지 (861.70)
+      // 5. 우측 축 종가 지점 마커 필(Pill) 뱃지
       const lastX = getX(points.length - 1);
       const lastY = getY(points[points.length - 1].price);
       
@@ -1813,7 +1837,7 @@
       const pillX = w - padRight + 4;
       const pillY = Math.max(padTop, Math.min(padTop + chartH - pillH, lastY - pillH / 2));
       
-      ctx.fillStyle = '#3b96f8';
+      ctx.fillStyle = mainColor;
       ctx.beginPath();
       if (ctx.roundRect) {
         ctx.roundRect(pillX, pillY, pillW, pillH, 3);
@@ -1828,16 +1852,31 @@
       ctx.textBaseline = 'middle';
       ctx.fillText(nf.price, pillX + pillW / 2, pillY + pillH / 2);
 
-      // 6. 하단 시간 축 레이블 (18:00 ~ 06:00, 7개 구간)
+      // 6. 하단 시간 축 레이블 (동적 7개 분할)
       ctx.fillStyle = currentTheme === 'dark' ? '#94a3b8' : '#64748b';
       ctx.font = '10px Pretendard, sans-serif';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'alphabetic';
-      const timeLabels = ['18:00', '20:00', '22:00', '00:00', '02:00', '04:00', '06:00'];
-      timeLabels.forEach((tLabel, i) => {
-        const xPos = padLeft + (chartW / (timeLabels.length - 1)) * i;
+      const count = 7;
+      for (let i = 0; i < count; i++) {
+        const pIdx = Math.floor((points.length - 1) * (i / (count - 1)));
+        const tLabel = points[pIdx] ? points[pIdx].time : '';
+        const xPos = padLeft + (chartW / (count - 1)) * i;
         ctx.fillText(tLabel, xPos, h - 8);
-      });
+      }
+
+      // 7. 하단 안내 정보 갱신
+      const periodEl = document.getElementById('nfChartPeriodInfo');
+      if (periodEl) {
+        const tfName = tf === '1m' ? '1분봉' : tf === '5m' ? '5분봉' : tf === '15m' ? '15분봉' : '일봉';
+        const startT = series.length > 0 ? series[0].time : '18:00';
+        const endT = series.length > 0 ? series[series.length - 1].time : '06:00';
+        periodEl.innerText = `${tfName} / ${startT}-${endT} / ${series.length}개`;
+      }
+      const hlEl = document.getElementById('nfChartHighLow');
+      if (hlEl) {
+        hlEl.innerText = `최저 ${nf.low} | 최고 ${nf.high}`;
+      }
     }
 
     // 8개 글로벌 매크로 & 빅테크 카드 렌더링 (레퍼런스 이미지 2열 정밀 구현)
@@ -2273,9 +2312,22 @@
         Notification.requestPermission();
       }
 
-      // 주기적 자동 갱신 (60초마다 새 뉴스 확인)
+      // 주기적 자동 갱신 (뉴스 60초, 야간선물/글로벌차트 20초 주기 실시간 자동 갱신)
       setInterval(() => {
-        loadData(false);
+        if (appMode === 'morning') {
+          loadData(false);
+        } else if (appMode === 'charts') {
+          loadChartsData(false);
+        } else if (appMode === 'aftermarket') {
+          loadAftermarketData(false);
+        }
+      }, 20000);
+
+      // 백그라운드 뉴스 업데이트 (차트나 특징주 화면에서도 새 뉴스 자동 누적)
+      setInterval(() => {
+        if (appMode !== 'morning') {
+          loadData(false);
+        }
       }, 60000);
     });
   </script>

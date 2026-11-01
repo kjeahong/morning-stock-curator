@@ -98,7 +98,8 @@ def api_charts():
     try:
         import importlib
         importlib.reload(collector)
-        data = collector.get_charts_data()
+        force = request.query.get('refresh', '0') == '1'
+        data = collector.get_charts_data(force_refresh=force)
         return json_response(data)
     except Exception as e:
         return json_response({'status': 'error', 'message': str(e)})
