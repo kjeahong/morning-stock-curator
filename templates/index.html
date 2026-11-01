@@ -164,6 +164,12 @@
           <span class="font-semibold">알림 ON</span>
         </button>
 
+        <!-- 알림 위치 설정 (43인치 대형 화면 최적화: 상단 중앙 / 화면 중앙 / 우측 하단) -->
+        <button id="btnNotifPosToggle" onclick="toggleToastPosition()" class="flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg border border-purple-300 dark:border-purple-800 bg-purple-50 dark:bg-purple-950/40 text-purple-900 dark:text-purple-200 hover:bg-purple-100 transition font-bold" title="뉴스 알림 위치 변경 (43인치 대형화면 맞춤: 상단 중앙 / 화면 중앙 / 우측 하단)">
+          <i class="fa-solid fa-crosshairs text-purple-600 dark:text-purple-400"></i>
+          <span id="notifPosText">알림: 상단중앙</span>
+        </button>
+
         <!-- 알림음 토글 -->
         <button id="btnSoundToggle" onclick="toggleSoundAlert()" class="flex items-center space-x-1 px-2.5 py-1.5 rounded-lg border border-stone-300 dark:border-slate-700 bg-stone-100/60 dark:bg-slate-800 text-stone-800 dark:text-slate-300 hover:bg-stone-200 transition font-medium" title="새 속보 도착 시 소리 알림 (차임벨)">
           <i id="soundIcon" class="fa-solid fa-volume-high text-amber-500"></i>
@@ -644,12 +650,53 @@
     </div>
   </div>
 
-  <!-- 토스트 알림 메시지 바 -->
-  <div id="toast" class="fixed bottom-6 right-6 z-50 flex items-center space-x-2 bg-slate-900 text-white dark:bg-white dark:text-slate-900 px-4 py-2.5 rounded-xl shadow-2xl opacity-0 pointer-events-none transform translate-y-3 transition-all duration-300 text-xs">
-    <i id="toastIcon" class="fa-solid fa-circle-check text-emerald-400"></i>
+  <!-- [43인치 대화면 맞춤] 실시간 속보 HUD 배너 (화면 상단/중앙 대형 알림) -->
+  <div id="breakingNewsBanner" onmouseenter="pauseBreakingNewsTimer()" onmouseleave="resumeBreakingNewsTimer()" style="top: 32px; left: 50%; transform: translateX(-50%);" class="fixed z-[9999] opacity-0 pointer-events-none transition-all duration-300 max-w-2xl w-[92vw] md:w-[700px]">
+    <div class="bg-slate-900/95 dark:bg-stone-900/95 backdrop-blur-md text-white p-4 sm:p-5 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] border-2 border-amber-500/90 flex flex-col space-y-2.5 relative">
+      <!-- 상단 헤더: 속보 뱃지, 출처, 시간, 닫기 버튼 -->
+      <div class="flex items-center justify-between pb-2 border-b border-slate-700/80">
+        <div class="flex items-center space-x-2">
+          <span class="flex h-3 w-3 relative">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+          </span>
+          <span class="bg-gradient-to-r from-red-600 to-amber-600 text-white text-xs font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider">⚡ 실시간 속보</span>
+          <span id="breakingSource" class="bg-slate-800 text-amber-300 border border-slate-700 text-xs font-bold px-2 py-0.5 rounded">출처</span>
+          <span id="breakingTime" class="text-xs text-slate-400 font-mono">방금 전</span>
+        </div>
+        <button onclick="hideBreakingNewsBanner()" class="text-slate-400 hover:text-white p-1 rounded-lg transition" title="닫기 (ESC)">
+          <i class="fa-solid fa-xmark text-base"></i>
+        </button>
+      </div>
+
+      <!-- 본문: 대형 굵은 폰트 헤드라인 (43인치 고해상도 맞춤 시원한 글씨) -->
+      <div id="breakingTitle" class="text-base sm:text-lg font-black text-white hover:text-amber-300 transition cursor-pointer leading-snug line-clamp-2" onclick="openBreakingNewsLink()">
+        속보 헤드라인이 표시됩니다
+      </div>
+
+      <!-- 하단 액션 버튼 -->
+      <div class="flex items-center justify-between pt-1 text-xs">
+        <span class="text-slate-400 text-[11px] hidden sm:inline">💡 제목을 누르면 기사 원문으로 바로 이동합니다</span>
+        <div class="flex items-center space-x-2 ml-auto">
+          <button id="btnBreakingAddBasket" onclick="addBreakingToBasket()" class="flex items-center space-x-1.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-black px-3.5 py-1.5 rounded-lg transition shadow">
+            <i class="fa-solid fa-plus"></i>
+            <span>내 바구니 담기</span>
+          </button>
+          <button onclick="openBreakingNewsLink()" class="flex items-center space-x-1.5 bg-blue-600 hover:bg-blue-700 text-white font-bold px-3.5 py-1.5 rounded-lg transition shadow">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            <span>기사 바로보기</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 토스트 알림 메시지 바 (43인치 대화면 가독성 & 위치 연동) -->
+  <div id="toast" style="top: 32px; left: 50%; transform: translateX(-50%);" class="fixed z-[9990] flex items-center space-x-3 bg-slate-900/95 dark:bg-stone-900/95 text-white border border-slate-700 px-5 py-3.5 rounded-2xl shadow-2xl opacity-0 pointer-events-none transition-all duration-300 max-w-lg">
+    <i id="toastIcon" class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>
     <div>
-      <h4 id="toastTitle" class="font-bold leading-tight">알림</h4>
-      <p id="toastMessage" class="text-[11px] opacity-80"></p>
+      <h4 id="toastTitle" class="font-extrabold text-sm sm:text-base leading-tight">알림</h4>
+      <p id="toastMessage" class="text-xs sm:text-sm text-slate-300 mt-0.5 leading-relaxed"></p>
     </div>
   </div>
 
@@ -670,6 +717,8 @@
     // 알림 설정 (기본 ON)
     let desktopNotifEnabled = localStorage.getItem('desktop_notif') !== 'false';
     let soundAlertEnabled = localStorage.getItem('sound_alert') !== 'false';
+    // 알림 위치 설정 (43인치 대형 화면 최적화: 기본값 'top-center' 화면 상단 중앙)
+    let toastPosition = localStorage.getItem('toast_position') || 'top-center';
 
     // 테마 설정 (대표님 요청: 양극단 배제, 눈이 편안한 웜 톤 'comfort' 기본값)
     let currentTheme = localStorage.getItem('app_theme') || 'comfort';
@@ -779,6 +828,134 @@
         btnS.innerHTML = '<i class="fa-solid fa-volume-high text-amber-500"></i><span class="font-semibold">소리 ON</span>';
       } else {
         btnS.innerHTML = '<i class="fa-solid fa-volume-xmark text-slate-400"></i><span class="font-semibold text-slate-400">소리 OFF</span>';
+      }
+    }
+
+    // [43인치 대화면 맞춤] 알림 위치 토글 핸들러 (상단 중앙 ↔ 화면 정중앙 ↔ 우측 하단)
+    function toggleToastPosition() {
+      if (toastPosition === 'top-center') {
+        toastPosition = 'center';
+      } else if (toastPosition === 'center') {
+        toastPosition = 'bottom-right';
+      } else {
+        toastPosition = 'top-center';
+      }
+      localStorage.setItem('toast_position', toastPosition);
+      updateToastPositionUI();
+
+      const posNames = {
+        'top-center': '화면 상단 중앙 (43인치 모니터 최적화)',
+        'center': '화면 정중앙 (대형 팝업)',
+        'bottom-right': '우측 하단 (기본 구석)'
+      };
+      
+      // 위치 변경 즉시 해당 위치에 테스트 알림 팝업
+      showToast('🎯 알림 위치 변경 완료', `앞으로 모든 뉴스 속보와 알림이 [${posNames[toastPosition]}]에 큼직하게 뜹니다.`);
+    }
+
+    function updateToastPositionUI() {
+      const btn = document.getElementById('btnNotifPosToggle');
+      const txt = document.getElementById('notifPosText');
+      if (!btn || !txt) return;
+
+      if (toastPosition === 'top-center') {
+        txt.innerText = '알림: 상단중앙(43")';
+        btn.className = 'flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg border border-purple-400 dark:border-purple-700 bg-purple-100/90 dark:bg-purple-950/70 text-purple-900 dark:text-purple-200 font-extrabold transition shadow-xs';
+      } else if (toastPosition === 'center') {
+        txt.innerText = '알림: 화면정중앙';
+        btn.className = 'flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg border border-amber-400 dark:border-amber-700 bg-amber-100/90 dark:bg-amber-950/70 text-amber-900 dark:text-amber-200 font-extrabold transition shadow-xs';
+      } else {
+        txt.innerText = '알림: 우측하단';
+        btn.className = 'flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg border border-stone-300 dark:border-slate-700 bg-stone-100/60 dark:bg-slate-800 text-stone-700 dark:text-slate-300 font-medium transition';
+      }
+
+      const toast = document.getElementById('toast');
+      const banner = document.getElementById('breakingNewsBanner');
+      if (toast) applyToastPosition(toast);
+      if (banner) applyToastPosition(banner);
+    }
+
+    function applyToastPosition(el) {
+      if (!el) return;
+      if (toastPosition === 'top-center') {
+        el.style.top = '32px';
+        el.style.bottom = 'auto';
+        el.style.left = '50%';
+        el.style.right = 'auto';
+        el.style.transform = 'translateX(-50%)';
+      } else if (toastPosition === 'center') {
+        el.style.top = '50%';
+        el.style.bottom = 'auto';
+        el.style.left = '50%';
+        el.style.right = 'auto';
+        el.style.transform = 'translate(-50%, -50%)';
+      } else { // bottom-right
+        el.style.top = 'auto';
+        el.style.bottom = '32px';
+        el.style.left = 'auto';
+        el.style.right = '32px';
+        el.style.transform = 'none';
+      }
+    }
+
+    // ================= [43인치 대화면 속보 HUD 배너 제어] =================
+    let currentBreakingNews = null;
+    let breakingNewsTimer = null;
+
+    function showBreakingNewsBanner(newsItem) {
+      if (!newsItem) return;
+      currentBreakingNews = newsItem;
+
+      const banner = document.getElementById('breakingNewsBanner');
+      if (!banner) return;
+
+      applyToastPosition(banner);
+
+      const srcEl = document.getElementById('breakingSource');
+      const timeEl = document.getElementById('breakingTime');
+      const titleEl = document.getElementById('breakingTitle');
+
+      if (srcEl) srcEl.innerText = newsItem.source || '속보';
+      if (timeEl) timeEl.innerText = newsItem.display_time || new Date().toLocaleTimeString('ko-KR');
+      if (titleEl) titleEl.innerText = newsItem.title || '';
+
+      banner.classList.remove('opacity-0', 'pointer-events-none');
+      banner.classList.add('opacity-100');
+
+      if (breakingNewsTimer) clearTimeout(breakingNewsTimer);
+      // 43인치 대화면에서 편안하게 읽을 수 있도록 7.5초 동안 여유롭게 노출
+      breakingNewsTimer = setTimeout(() => {
+        hideBreakingNewsBanner();
+      }, 7500);
+    }
+
+    function hideBreakingNewsBanner() {
+      const banner = document.getElementById('breakingNewsBanner');
+      if (!banner) return;
+      banner.classList.remove('opacity-100');
+      banner.classList.add('opacity-0', 'pointer-events-none');
+      if (breakingNewsTimer) clearTimeout(breakingNewsTimer);
+    }
+
+    function pauseBreakingNewsTimer() {
+      if (breakingNewsTimer) clearTimeout(breakingNewsTimer);
+    }
+
+    function resumeBreakingNewsTimer() {
+      if (breakingNewsTimer) clearTimeout(breakingNewsTimer);
+      breakingNewsTimer = setTimeout(hideBreakingNewsBanner, 3000);
+    }
+
+    function openBreakingNewsLink() {
+      if (currentBreakingNews && currentBreakingNews.link) {
+        window.open(currentBreakingNews.link, '_blank');
+      }
+    }
+
+    function addBreakingToBasket() {
+      if (currentBreakingNews) {
+        addToBasket(currentBreakingNews.id);
+        hideBreakingNewsBanner();
       }
     }
 
@@ -1038,7 +1215,8 @@
           if (newlyArrived.length > 0 && !isInitialNewsLoad) {
             playAlertChime();
             const latest = newlyArrived[0];
-            showToast('⚡ 신규 속보 도착!', `${latest.source}: ${latest.title}`);
+            // [43인치 대화면 맞춤] 화면 상단/중앙에 큼직한 실시간 속보 HUD 배너 팝업!
+            showBreakingNewsBanner(latest);
             
             if (desktopNotifEnabled && "Notification" in window && Notification.permission === "granted") {
               const n = new Notification(`⚡ [속보] ${latest.source}`, {
@@ -2020,14 +2198,22 @@
       document.body.removeChild(textarea);
     }
 
-    function showToast(title, message) {
+    let toastTimer = null;
+    function showToast(title, message, duration = 3500) {
       const toast = document.getElementById('toast');
+      if (!toast) return;
+      applyToastPosition(toast);
       document.getElementById('toastTitle').innerText = title;
       document.getElementById('toastMessage').innerText = message;
-      toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-3');
-      setTimeout(() => {
-        toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-3');
-      }, 3000);
+      
+      toast.classList.remove('opacity-0', 'pointer-events-none');
+      toast.classList.add('opacity-100');
+      
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.remove('opacity-100');
+        toast.classList.add('opacity-0', 'pointer-events-none');
+      }, duration);
     }
 
     function escapeHtml(str) {
@@ -2036,6 +2222,14 @@
         '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
       })[m]);
     }
+
+    // ESC 키로 속보 배너 및 모달 즉시 닫기
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        hideBreakingNewsBanner();
+        if (typeof closePreviewModal === 'function') closePreviewModal();
+      }
+    });
 
     // 윈도우 리사이즈 시 차트 재렌더링
     window.addEventListener('resize', () => {
@@ -2048,6 +2242,7 @@
     window.addEventListener('DOMContentLoaded', () => {
       initDefaultTitle();
       updateHeaderNotifUI();
+      updateToastPositionUI();
       loadSavedBasket();
       renderBasket();
       loadData(false);
