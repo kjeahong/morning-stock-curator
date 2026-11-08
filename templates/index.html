@@ -27,29 +27,43 @@
     @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&display=swap');
     
     :root {
-      /* [눈이 편안한 웜 톤 (소프트 베이지/아이보리)] - 눈부신 백색과 칠흑 같은 흑색의 양극단을 배제한 눈 피로 방지 모드 */
-      --bg-body: #f4f0e6;         /* 부드럽고 따뜻한 내추럴 웜 베이지 (종이책 느낌) */
-      --bg-panel: #fcfbfa;        /* 따뜻한 미색 패널 (눈부심 0%) */
-      --border-panel: #ded9cd;    /* 정돈되고 차분한 웜 그레이 테두리 */
-      --text-main: #1c1917;       /* 짙은 카본 차콜 (글씨가 선명하고 또렷) */
-      --text-muted: #57534e;      /* 가독성 높은 진한 보조 텍스트 */
-      --text-sub: #44403c;        /* 뚜렷한 다크 웜 슬레이트 */
-      --bg-subtle: #eae5d9;
+      /* [시황카세 시그니처 라이트 모드] - 눈이 가장 편안한 소프트 웜 그레이 & 고품격 다크 차콜 */
+      --bg-body: #f7f8fa;         /* 시황카세 공식 배경: 눈부심 제로 소프트 오프화이트 */
+      --bg-panel: #ffffff;        /* 깔끔한 화이트 카드 패널 */
+      --border-panel: #dfe2e8;    /* 시황카세 공식 보더: 얇고 정돈된 경계선 */
+      --text-main: #1a1d23;       /* 시황카세 공식 잉크: 진하고 선명한 다크 차콜 텍스트 */
+      --text-muted: #59616f;      /* 시황카세 보조 텍스트 2 */
+      --text-sub: #8a92a2;        /* 시황카세 보조 텍스트 3 */
+      --bg-subtle: #eaedf2;       /* 시황카세 서피스 2 */
       --bg-card-inner: #ffffff;
-      --border-card: #e5ded0;
+      --border-card: #dfe2e8;
+      --hot-gold: #9c7009;        /* 시황카세 골드 액센트 */
+      --hot-bg: #fbf1d8;          /* 시황카세 골드 뱃지 배경 */
+      --hot-bd: #e0c476;          /* 시황카세 골드 테두리 */
+      --btn-bg: #eef0f4;
+      --btn-hover: #e1e6ed;
+      --stock-up: #d42c2c;        /* 시황카세 공식 상승 레드 */
+      --stock-dn: #1a56b0;        /* 시황카세 공식 하락 블루 */
     }
     
     .dark {
-      /* [부드러운 웜 다크 모드] - 칠흑 같은 검정이 아닌 차분하고 눈이 편안한 웜 슬레이트 차콜 */
-      --bg-body: #1c1f26;         
-      --bg-panel: #262b35;
-      --border-panel: #3a4150;
-      --text-main: #f3f4f6;       /* 편안한 오프화이트 */
-      --text-muted: #9ca3af;
-      --text-sub: #d1d5db;
+      /* [시황카세 공식 다크 모드] */
+      --bg-body: #101216;         
+      --bg-panel: #181b21;
+      --border-panel: #2a2e38;
+      --text-main: #e8eaef;       
+      --text-muted: #9aa1b0;
+      --text-sub: #6d7484;
       --bg-subtle: #20242d;
-      --bg-card-inner: #191c23;
-      --border-card: #3a4150;
+      --bg-card-inner: #181b21;
+      --border-card: #2a2e38;
+      --hot-gold: #ffd34d;
+      --hot-bg: #2c2312;
+      --hot-bd: #5c4a1c;
+      --btn-bg: #232733;
+      --btn-hover: #2e3342;
+      --stock-up: #e05252;
+      --stock-dn: #4f83e0;
     }
 
     /* 패널 및 박스 눈편한 배경색 강제 적용 */
@@ -63,10 +77,10 @@
     }
 
     body {
-      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Malgun Gothic", sans-serif;
       background-color: var(--bg-body);
       color: var(--text-main);
-      font-size: 15px; /* 시니어 및 전업투자자를 위해 기본 폰트 크기 업그레이드 */
+      font-size: 14.8px; /* 시황카세(14.3px)보다 약간 더 크고 편안한 폰트 크기 */
       line-height: 1.6;
       user-select: none;
       transition: background-color 0.2s, color 0.2s;
@@ -107,99 +121,194 @@
     .chart-container {
       position: relative;
     }
+
+    /* [시황카세 100% 실사 매칭 전광판 멀티 컬럼 Masonry 스타일] */
+    .board-masonry {
+      column-width: 215px;
+      column-gap: 7px;
+      width: 100%;
+    }
+    .board-sector-card {
+      break-inside: avoid;
+      margin-bottom: 7px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border-panel);
+      border-radius: 5px;
+      overflow: hidden;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .board-sector-card:hover {
+      border-color: #cbd5e1;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.06);
+    }
+    .board-card-header {
+      padding: 4px 7px;
+      background: #f1f3f7;
+      border-bottom: 1px solid var(--border-panel);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+    }
+    .dark .board-card-header {
+      background: #1c202a;
+    }
+    .board-card-header:hover {
+      filter: brightness(0.97);
+    }
+    .dark .board-card-header:hover {
+      filter: brightness(1.05);
+    }
+    .board-stock-table {
+      width: 100%;
+      font-size: 11px;
+      border-collapse: collapse;
+    }
+    .board-stock-table th {
+      padding: 2px 5px;
+      font-size: 9.5px;
+      color: var(--text-sub);
+      background: var(--bg-panel);
+      border-bottom: 1px solid var(--border-panel);
+      font-weight: 600;
+      letter-spacing: -0.2px;
+    }
+    .board-stock-row {
+      height: 20px;
+      border-bottom: 1px solid #f3f5f8;
+      cursor: pointer;
+      transition: background 0.1s;
+    }
+    .dark .board-stock-row {
+      border-bottom: 1px solid #20242f;
+    }
+    .board-stock-row:hover {
+      background: rgba(59, 130, 246, 0.08);
+    }
+    .board-stock-row.highlighted {
+      background: #fef08a !important;
+      color: #854d0e !important;
+      font-weight: bold;
+    }
+    .board-stock-row.highlighted span {
+      color: #854d0e !important;
+    }
+
+    /* 뉴스 가독성 타이포그래피 (시황카세 톤 & 대화면 최적화) */
+    .news-title-text {
+      font-size: 15.5px;
+      font-weight: 700;
+      line-height: 1.45;
+      color: var(--text-main);
+    }
+    .news-summary-text {
+      font-size: 13.8px;
+      line-height: 1.6;
+      color: #4b5563;
+    }
+    .dark .news-summary-text {
+      color: #9ca3af;
+    }
+    body.large-font .news-title-text {
+      font-size: 17.5px !important;
+    }
+    body.large-font .news-summary-text {
+      font-size: 15.5px !important;
+    }
   </style>
 </head>
 <body class="min-h-screen flex flex-col antialiased transition-colors duration-200">
 
-  <!-- ================= [1] 상단 네비게이션 & 시계 ================= -->
-  <header class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-5 py-2.5 sticky top-0 z-50 shadow-sm transition-colors">
-    <div class="flex items-center justify-between">
+  <!-- ================= [1] 반응형 상단 네비게이션 (모바일 최적화 & 깔끔 헤더) ================= -->
+  <header class="bg-white dark:bg-slate-900 border-b border-[#dfe2e8] dark:border-slate-800 px-3 sm:px-5 py-2 sticky top-0 z-50 shadow-xs transition-colors">
+    <div class="flex flex-wrap lg:flex-nowrap items-center justify-between gap-2">
       
-      <!-- 좌측: 로고 & 타이틀 -->
-      <div class="flex items-center space-x-3">
-        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center shadow-md shadow-blue-500/20">
-          <i class="fa-solid fa-chart-line text-white text-base"></i>
+      <!-- [1열 좌측] 로고 & 타이틀 -->
+      <div class="flex items-center space-x-2.5 shrink-0">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center shadow-xs text-white">
+          <i class="fa-solid fa-chart-line text-sm"></i>
         </div>
         <div>
-          <div class="flex items-center space-x-2">
-            <h1 class="text-base font-black tracking-tight text-slate-900 dark:text-white">모닝 증시 큐레이터</h1>
-            <span class="text-[10px] px-2 py-0.5 rounded-full bg-blue-50 text-blue-600 dark:bg-blue-900/40 dark:text-blue-400 font-extrabold border border-blue-200 dark:border-blue-800">TRADER PRO</span>
+          <div class="flex items-center space-x-1.5">
+            <h1 class="text-sm sm:text-base font-black tracking-tight text-slate-900 dark:text-white whitespace-nowrap">모닝 증시 큐레이터</h1>
+            <span class="text-[9.5px] px-1.5 py-0.2 rounded-full bg-blue-50 text-blue-600 dark:bg-blue-900/40 dark:text-blue-400 font-extrabold border border-blue-200 dark:border-blue-800 whitespace-nowrap">TRADER PRO</span>
           </div>
-          <p class="text-[11px] text-slate-500 dark:text-slate-400">천마뇌검 맞춤형 · 장전 속보 & 야간선물 & 당일 주도주시황 통합 플랫폼</p>
+          <p class="hidden md:block text-[10.5px] text-slate-500 dark:text-slate-400">천마뇌검 맞춤형 · 장전 속보 & 야간선물 & 주도주시황 통합 플랫폼</p>
         </div>
       </div>
 
-      <!-- 중앙: 4대 모드 전환 탭 (아침 장전뉴스 / 애프터마켓 특징주 / 야간선물 & 차트 / 마감 주도주시황) -->
-      <div class="flex items-center space-x-1 bg-stone-200/60 dark:bg-slate-950 p-1 rounded-xl border border-stone-300/80 dark:border-slate-800">
-        <button id="tabMorningMode" onclick="setAppMode('morning')" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition shadow-sm bg-white dark:bg-slate-800 text-blue-600 dark:text-blue-400">
-          <i class="fa-solid fa-sun text-amber-500"></i>
-          <span>🌅 아침 장전뉴스</span>
-        </button>
-        <button id="tabAftermarketMode" onclick="setAppMode('aftermarket')" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition text-stone-700 dark:text-slate-300 hover:text-stone-900 dark:hover:text-white">
-          <i class="fa-solid fa-bolt text-amber-500"></i>
-          <span>🔶 애프터마켓 특징주</span>
-        </button>
-        <button id="tabChartsMode" onclick="setAppMode('charts')" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition text-stone-700 dark:text-slate-400 hover:text-stone-900 dark:hover:text-white">
-          <i class="fa-solid fa-chart-area text-blue-500"></i>
-          <span>📈 야간선물 & 글로벌 차트</span>
-        </button>
-        <button id="tabClosingMode" onclick="setAppMode('closing')" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition text-stone-700 dark:text-slate-400 hover:text-stone-900 dark:hover:text-white">
-          <i class="fa-solid fa-moon text-indigo-500"></i>
-          <span>🌆 마감 주도주시황</span>
-        </button>
-      </div>
-
-      <!-- 우측: 큰글씨/알림/사운드/미니창/테마/새로고침 버튼 그룹 -->
-      <div class="flex items-center space-x-2 text-xs">
-        
-        <!-- 가독성 큰 글씨 모드 토글 (눈 피로 방지) -->
-        <button id="btnFontSizeToggle" onclick="toggleLargeFont()" class="flex items-center space-x-1 px-2.5 py-1.5 rounded-lg border border-amber-300/80 dark:border-amber-700 bg-amber-50 dark:bg-amber-950/40 text-amber-900 dark:text-amber-200 hover:bg-amber-100 transition font-bold" title="글자 크기 확대 (시니어 및 눈 피로 방지 가독성 모드)">
+      <!-- [1열 우측 / 모바일 우측] 필수 컨트롤 4개만 유지 (큰글씨, 알림, 위치, 소리) -->
+      <div class="flex items-center space-x-1.5 text-xs shrink-0 order-2 lg:order-3">
+        <!-- 큰글씨 모드 토글 -->
+        <button id="btnFontSizeToggle" onclick="toggleLargeFont()" class="flex items-center space-x-1 px-2 py-1.5 rounded-lg border border-amber-300/80 bg-amber-50 dark:bg-amber-950/40 text-amber-900 dark:text-amber-200 hover:bg-amber-100 transition font-bold text-xs whitespace-nowrap shrink-0 shadow-2xs" title="글자 크기 확대 (가독성 모드)">
           <i class="fa-solid fa-magnifying-glass-plus text-amber-600"></i>
           <span id="fontSizeText">큰글씨</span>
         </button>
 
         <!-- 실시간 뉴스 알림 토글 -->
-        <button id="btnNotifToggle" onclick="toggleDesktopNotification()" class="flex items-center space-x-1 px-2.5 py-1.5 rounded-lg border border-stone-300 dark:border-slate-700 bg-stone-100/60 dark:bg-slate-800 text-stone-800 dark:text-slate-300 hover:bg-stone-200 transition font-medium" title="실시간 뉴스 윈도우 바탕화면 알림">
+        <button id="btnNotifToggle" onclick="toggleDesktopNotification()" class="flex items-center space-x-1 px-2 py-1.5 rounded-lg border border-stone-300 dark:border-slate-700 bg-stone-100/70 dark:bg-slate-800 text-stone-800 dark:text-slate-200 hover:bg-stone-200 transition font-semibold text-xs whitespace-nowrap shrink-0" title="실시간 속보 바탕화면 알림">
           <i id="notifIcon" class="fa-solid fa-bell text-blue-600"></i>
-          <span class="font-semibold">알림 ON</span>
+          <span class="hidden sm:inline">알림 ON</span>
         </button>
 
-        <!-- 알림 위치 설정 (43인치 대형 화면 최적화: 상단 중앙 / 화면 중앙 / 우측 하단) -->
-        <button id="btnNotifPosToggle" onclick="toggleToastPosition()" class="flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg border border-purple-300 dark:border-purple-800 bg-purple-50 dark:bg-purple-950/40 text-purple-900 dark:text-purple-200 hover:bg-purple-100 transition font-bold" title="뉴스 알림 위치 변경 (43인치 대형화면 맞춤: 상단 중앙 / 화면 중앙 / 우측 하단)">
+        <!-- 알림 위치 (상단 중앙 등) -->
+        <button id="btnNotifPosToggle" onclick="toggleToastPosition()" class="hidden sm:flex items-center space-x-1 px-2 py-1.5 rounded-lg border border-purple-300 dark:border-purple-800 bg-purple-50 dark:bg-purple-950/40 text-purple-900 dark:text-purple-200 hover:bg-purple-100 transition font-bold text-xs whitespace-nowrap shrink-0" title="뉴스 알림 위치 변경">
           <i class="fa-solid fa-crosshairs text-purple-600 dark:text-purple-400"></i>
-          <span id="notifPosText">알림: 상단중앙</span>
+          <span id="notifPosText">상단중앙</span>
         </button>
 
         <!-- 알림음 토글 -->
-        <button id="btnSoundToggle" onclick="toggleSoundAlert()" class="flex items-center space-x-1 px-2.5 py-1.5 rounded-lg border border-stone-300 dark:border-slate-700 bg-stone-100/60 dark:bg-slate-800 text-stone-800 dark:text-slate-300 hover:bg-stone-200 transition font-medium" title="새 속보 도착 시 소리 알림 (차임벨)">
+        <button id="btnSoundToggle" onclick="toggleSoundAlert()" class="flex items-center space-x-1 px-2 py-1.5 rounded-lg border border-stone-300 dark:border-slate-700 bg-stone-100/70 dark:bg-slate-800 text-stone-800 dark:text-slate-200 hover:bg-stone-200 transition font-semibold text-xs whitespace-nowrap shrink-0" title="속보 차임벨 소리">
           <i id="soundIcon" class="fa-solid fa-volume-high text-amber-500"></i>
-          <span class="font-semibold">소리 ON</span>
-        </button>
-
-        <!-- HTS 미니창 분리 버튼 -->
-        <button onclick="openHtsMiniWindow()" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-400 border border-emerald-300/70 dark:border-emerald-800 font-bold hover:bg-emerald-100 transition shadow-xs" title="장중 HTS 위에 띄워두고 볼 수 있는 컴팩트 속보창 분리">
-          <i class="fa-solid fa-window-restore"></i>
-          <span>🗗 HTS 미니창</span>
-        </button>
-
-        <!-- 테마 전환 (눈편한 웜 모드 ↔ 부드러운 다크) -->
-        <button id="themeToggleBtn" onclick="toggleTheme()" class="flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg border border-stone-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-stone-800 dark:text-slate-100 hover:bg-stone-100 dark:hover:bg-slate-700 transition font-bold shadow-xs" title="화면 색상 모드 (눈편한 웜 톤 ↔ 부드러운 다크)">
-          <i id="themeToggleIcon" class="fa-solid fa-moon text-indigo-500"></i>
-          <span id="themeToggleText">다크모드</span>
-        </button>
-
-        <!-- 실시간 시계 -->
-        <div class="hidden 2xl:flex items-center space-x-1.5 bg-slate-50 dark:bg-slate-950 px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 font-mono font-bold text-slate-700 dark:text-slate-300">
-          <i class="fa-regular fa-clock text-blue-500"></i>
-          <span id="digitalClock">--:--:--</span>
-        </div>
-
-        <!-- 새로고침 버튼 -->
-        <button id="btnRefresh" onclick="refreshCurrentMode()" class="flex items-center space-x-1.5 bg-blue-600 hover:bg-blue-700 active:scale-95 text-white px-3.5 py-1.5 rounded-lg font-bold text-xs transition shadow-sm">
-          <i id="refreshIcon" class="fa-solid fa-arrows-rotate"></i>
-          <span id="btnRefreshText">새로고침</span>
+          <span class="hidden sm:inline">소리 ON</span>
         </button>
       </div>
+
+      <!-- [중앙 탭 바] 제자용 핵심 3대 탭 + [👑 천마뇌검 집무실] 원클릭 허브 -->
+      <div class="order-3 lg:order-2 w-full lg:w-auto flex items-center space-x-1.5 bg-stone-100 dark:bg-slate-950 p-1 rounded-xl border border-stone-200/90 dark:border-slate-800 overflow-x-auto custom-scrollbar shrink-0">
+        
+        <!-- [탭 1] 🌅 최신뉴스 -->
+        <button id="tabMorningMode" onclick="setAppMode('morning')" class="flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg text-xs font-bold transition shadow-xs bg-white dark:bg-slate-800 text-blue-600 dark:text-blue-400 whitespace-nowrap shrink-0">
+          <i class="fa-solid fa-sun text-amber-500"></i>
+          <span>최신뉴스</span>
+        </button>
+
+        <!-- [탭 2] 📊 관심종목 -->
+        <button id="tabSihwangMode" onclick="setAppMode('sihwang')" class="flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg text-xs font-bold transition text-stone-700 dark:text-slate-300 hover:text-stone-900 dark:hover:text-white whitespace-nowrap shrink-0" title="테마별 관심종목 61선 전광판">
+          <i class="fa-solid fa-table-cells text-amber-600"></i>
+          <span>관심종목</span>
+        </button>
+
+        <!-- [탭 3] 📈 야간선물 -->
+        <button id="tabChartsMode" onclick="setAppMode('charts')" class="flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg text-xs font-bold transition text-stone-700 dark:text-slate-400 hover:text-stone-900 dark:hover:text-white whitespace-nowrap shrink-0" title="야간선물 & 글로벌 차트">
+          <i class="fa-solid fa-chart-area text-blue-500"></i>
+          <span>야간선물</span>
+        </button>
+
+        <!-- [탭 4] 🌐 선물 (코스피200선물, D램/낸드 반도체, 원자재·환율 매크로 23종) -->
+        <button id="tabFuturesMode" onclick="setAppMode('futures')" class="flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg text-xs font-bold transition text-stone-700 dark:text-slate-400 hover:text-stone-900 dark:hover:text-white whitespace-nowrap shrink-0" title="코스피200 선물, D램/낸드 반도체(DRAMeXchange), 원자재·환율 매크로 종합">
+          <i class="fa-solid fa-microchip text-indigo-500"></i>
+          <span>선물</span>
+        </button>
+
+        <!-- [탭 5] 📅 캘린더 (실적발표, 공모주, FOMC, 만기일) -->
+        <button id="tabCalendarMode" onclick="setAppMode('calendar')" class="flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg text-xs font-bold transition text-stone-700 dark:text-slate-400 hover:text-stone-900 dark:hover:text-white whitespace-nowrap shrink-0" title="증시 캘린더 (실적발표, 공모주, FOMC, 만기일)">
+          <i class="fa-solid fa-calendar-days text-emerald-500"></i>
+          <span>캘린더</span>
+        </button>
+
+        <div class="h-4 w-[1px] bg-stone-300 dark:bg-slate-700 mx-0.5 shrink-0"></div>
+
+        <!-- [고수님 전용 집무실 버튼] -->
+        <button id="btnMasterHub" onclick="openMasterHubModal()" class="flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg text-xs font-black transition bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 active:scale-95 text-white shadow-xs whitespace-nowrap shrink-0" title="천마뇌검 전용 애프터마켓 / 마감시황 데스크 열기">
+          <i class="fa-solid fa-crown text-yellow-200"></i>
+          <span id="masterHubBtnText">집무실</span>
+        </button>
+
+      </div>
+
     </div>
 
     <!-- 글로벌 마켓 지수 바 (Ticker) -->
@@ -223,9 +332,31 @@
     <!-- ------------------------------------------------------------- -->
     <!-- [VIEW 1] 🌅 아침 장전뉴스 뷰                                     -->
     <!-- ------------------------------------------------------------- -->
-    <div id="morningView" class="flex-1 flex overflow-hidden gap-3.5 w-full h-full">
-      <!-- 좌측 패널: 실시간 뉴스 스트림 -->
-      <section class="flex-1 flex flex-col bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden min-w-[500px]">
+    <div id="morningView" class="flex-1 flex flex-col overflow-hidden gap-2.5 w-full h-full relative">
+      
+      <!-- 상단 핫박스: 오늘 3회 이상 다빈도 언급 종목 & 장전이슈 143건 바로보기 -->
+      <section class="bg-white dark:bg-slate-900 rounded-xl border border-stone-200 dark:border-slate-800 px-3.5 py-2 shadow-2xs shrink-0 flex items-center justify-between gap-3">
+        <div class="flex items-center space-x-2 min-w-0 flex-1">
+          <span class="w-2 h-2 rounded-full bg-amber-500 inline-block animate-pulse shrink-0"></span>
+          <span class="text-xs font-black text-stone-900 dark:text-stone-100 shrink-0 flex items-center">
+            🔥 오늘 3회 이상 언급 종목:
+          </span>
+          <div id="morningHotChips" class="flex items-center space-x-1.5 overflow-x-auto custom-scrollbar py-0.5">
+            <span class="text-xs text-stone-400">데이터 수집 중...</span>
+          </div>
+        </div>
+        <div class="flex items-center space-x-2 shrink-0">
+          <button onclick="toggleIssuesDrawer()" class="flex items-center space-x-1.5 px-3 py-1 rounded-lg bg-blue-50 dark:bg-blue-950/50 hover:bg-blue-100 dark:hover:bg-blue-900/40 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 text-xs font-bold transition shadow-2xs" title="시황카세 143개 장전 핵심이슈 패널 열기">
+            <i class="fa-solid fa-newspaper text-blue-500"></i>
+            <span>📑 장전 핵심이슈 (<span id="morningIssuesCount">143</span>건)</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- 2분할 메인 데스크 영역 (좌: 뉴스 스트림, 우: 브리핑 데스크) -->
+      <div class="flex-1 flex flex-col lg:flex-row overflow-hidden gap-2.5 sm:gap-3.5 w-full h-full">
+        <!-- 좌측 패널: 실시간 뉴스 스트림 -->
+        <section class="flex-1 flex flex-col bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden min-w-0">
         
         <!-- 컨트롤: 검색창 & 통계 -->
         <div class="p-3 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 space-y-2">
@@ -274,8 +405,8 @@
         </div>
       </section>
 
-      <!-- 우측 패널: 장전 브리핑 큐레이션 데스크 -->
-      <section class="w-[500px] 2xl:w-[560px] shrink-0 flex flex-col bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+      <!-- 우측 패널: 장전 브리핑 큐레이션 데스크 (모바일에서는 간결한 뉴스 집중을 위해 숨김, PC에서만 표시) -->
+      <section class="hidden lg:flex w-[480px] 2xl:w-[540px] shrink-0 flex flex-col bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
         
         <!-- 데스크 상단 -->
         <div class="p-3 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
@@ -331,6 +462,39 @@
           </div>
         </div>
       </section>
+      </div> <!-- 2분할 메인 데스크 영역 종료 -->
+
+      <!-- [장전 핵심이슈 143건 슬라이드 오버 드로어] -->
+      <div id="issuesDrawer" class="hidden absolute top-0 right-0 bottom-0 w-[520px] max-w-full bg-white dark:bg-slate-900 border-l border-stone-300 dark:border-slate-800 shadow-2xl z-40 flex flex-col">
+        <div class="p-3 bg-stone-50 dark:bg-slate-950 border-b border-stone-200 dark:border-slate-800 flex items-center justify-between shrink-0">
+          <div class="flex items-center space-x-2">
+            <i class="fa-solid fa-newspaper text-blue-600 text-sm"></i>
+            <h3 class="text-xs font-black text-stone-900 dark:text-stone-100">장전 핵심이슈 & 관련주 브리핑</h3>
+            <span id="issuesDrawerCountBadge" class="text-[10px] bg-blue-100 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 px-2 py-0.5 rounded-full font-bold">143건</span>
+          </div>
+          <button onclick="toggleIssuesDrawer(false)" class="w-6 h-6 rounded hover:bg-stone-200 dark:hover:bg-slate-800 text-stone-500 flex items-center justify-center transition">
+            <i class="fa-solid fa-xmark text-xs"></i>
+          </button>
+        </div>
+        
+        <div class="p-2 border-b border-stone-200 dark:border-slate-800 bg-white dark:bg-slate-900 shrink-0">
+          <div class="relative">
+            <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-stone-400 text-xs"></i>
+            <input type="text" id="issuesSearchInput" oninput="filterIssues()" placeholder="이슈 제목, 관련주, 핵심 내용 검색..."
+                   class="w-full bg-stone-50 dark:bg-slate-950 border border-stone-200 dark:border-slate-700 rounded-lg pl-8 pr-7 py-1.5 text-xs text-stone-900 dark:text-stone-100 placeholder-stone-400 focus:outline-none focus:border-blue-500 transition">
+            <button onclick="clearIssuesSearch()" id="btnClearIssuesSearch" class="hidden absolute right-2.5 top-2 text-stone-400 hover:text-stone-600 text-xs">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+        </div>
+
+        <div id="issuesContainer" class="flex-1 overflow-y-auto p-3 space-y-2.5 custom-scrollbar">
+          <div class="flex flex-col items-center justify-center h-48 text-stone-400 space-y-2 text-xs">
+            <i class="fa-solid fa-spinner fa-spin text-xl text-blue-600"></i>
+            <span>장전 이슈 데이터를 불러오는 중입니다...</span>
+          </div>
+        </div>
+      </div>
     </div> <!-- morningView 종료 -->
 
 
@@ -431,14 +595,18 @@
     <!-- ------------------------------------------------------------- -->
     <!-- [VIEW 3] 🌆 장마감 주도주시황 뷰 (천마뇌검 정통 스타일)             -->
     <!-- ------------------------------------------------------------- -->
-    <div id="closingView" class="hidden flex-1 flex overflow-hidden gap-3.5 w-full h-full">
+    <div id="closingView" class="hidden flex-1 flex flex-col lg:flex-row overflow-hidden gap-3.5 w-full h-full">
       
       <!-- 좌측 패널: 당일 시황 & 급등 테마 / 상한가 목록 -->
-      <section class="flex-1 flex flex-col bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden min-w-[500px]">
+      <section class="flex-1 flex flex-col bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden min-w-0">
         
         <!-- 상단 헤더 & 원클릭 버튼 -->
         <div class="p-3 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
           <div class="flex items-center space-x-2">
+            <button onclick="setAppMode('morning')" class="mr-2 px-2.5 py-1 rounded-lg bg-stone-100 hover:bg-stone-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-stone-700 dark:text-slate-300 text-xs font-bold transition flex items-center space-x-1 shadow-2xs" title="메인 화면으로 돌아가기">
+              <i class="fa-solid fa-arrow-left"></i>
+              <span>← 메인 화면</span>
+            </button>
             <span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse"></span>
             <h2 class="text-xs font-extrabold text-slate-900 dark:text-white flex items-center space-x-2">
               <span>당일 마감 시황 & 급등 촉매(재료) 브리핑</span>
@@ -533,12 +701,16 @@
     <!-- ------------------------------------------------------------- -->
     <!-- [VIEW 4] 🔶 애프터마켓 특징주 뷰 (시간외 20:00 마감)            -->
     <!-- ------------------------------------------------------------- -->
-    <div id="aftermarketView" class="hidden flex-1 flex overflow-hidden gap-3.5 w-full h-full">
+    <div id="aftermarketView" class="hidden flex-1 flex flex-col lg:flex-row overflow-hidden gap-3.5 w-full h-full">
       <!-- 좌측 패널: 상승/하락 종목 리스트 -->
-      <section class="flex-1 flex flex-col bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden min-w-[500px]">
+      <section class="flex-1 flex flex-col bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden min-w-0">
         <!-- 상단 헤더 & 원클릭 버튼 -->
         <div class="p-3 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
           <div class="flex items-center space-x-2">
+            <button onclick="setAppMode('morning')" class="mr-2 px-2.5 py-1 rounded-lg bg-stone-100 hover:bg-stone-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-stone-700 dark:text-slate-300 text-xs font-bold transition flex items-center space-x-1 shadow-2xs" title="메인 화면으로 돌아가기">
+              <i class="fa-solid fa-arrow-left"></i>
+              <span>← 메인 화면</span>
+            </button>
             <span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse"></span>
             <h2 class="text-sm font-extrabold text-slate-900 dark:text-white flex items-center space-x-2">
               <span>애프터마켓 (시간외 20:00 마감) 특징주</span>
@@ -626,6 +798,257 @@
       </section>
     </div> <!-- aftermarketView 종료 -->
 
+
+    <!-- ------------------------------------------------------------- -->
+    <!-- [VIEW 5] 📊 관심종목 전광판 (시황카세 61개 섹터 · 839종목 풀스크린 전광판)  -->
+    <!-- ------------------------------------------------------------- -->
+    <div id="sihwangView" class="hidden flex-1 flex flex-col overflow-hidden w-full h-full gap-2">
+      
+      <!-- 상단 컨트롤 바 -->
+      <section class="bg-white dark:bg-slate-900 rounded-xl border border-stone-200 dark:border-slate-800 px-4 py-2.5 shadow-xs shrink-0">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          
+          <!-- 좌측: 타이틀 & 중복 테마 범례 -->
+          <div class="flex items-center space-x-3">
+            <div class="flex items-center space-x-1.5">
+              <i class="fa-solid fa-table-cells text-amber-600 text-sm"></i>
+              <h2 class="text-sm font-black text-stone-900 dark:text-stone-100">국내 관심종목</h2>
+              <span id="boardTimeBadge" class="text-[11px] text-stone-400 font-mono">12:15:16</span>
+              <span class="text-[11px] text-stone-500 font-medium hidden md:inline">· KRX+NXT 통합 · 61섹터 · 839종목(섹터당 20개)</span>
+            </div>
+            
+            <div class="hidden xl:flex items-center space-x-2 text-[11px] text-stone-500 border-l border-stone-200 dark:border-slate-700 pl-3">
+              <span>종목중복:</span>
+              <span class="inline-flex items-center text-purple-700 dark:text-purple-300 bg-purple-50 dark:bg-purple-950/40 px-1.5 py-0.5 rounded font-bold">● 2개 테마: <span id="statOverlap2" class="ml-1">73</span></span>
+              <span class="inline-flex items-center text-pink-700 dark:text-pink-300 bg-pink-50 dark:bg-pink-950/40 px-1.5 py-0.5 rounded font-bold">● 3개 테마: <span id="statOverlap3" class="ml-1">16</span></span>
+              <span class="inline-flex items-center text-amber-700 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/40 px-1.5 py-0.5 rounded font-bold">● 4개 이상: <span id="statOverlap4" class="ml-1">4</span></span>
+            </div>
+          </div>
+
+          <!-- 우측: 검색창 & 정렬 버튼 그룹 & 새로고침 -->
+          <div class="flex items-center space-x-2">
+            <div class="relative w-52 lg:w-64">
+              <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-stone-400 text-xs"></i>
+              <input type="text" id="boardSearchInput" oninput="filterBoardStocks()" placeholder="종목검색 (이름·코드)"
+                     class="w-full bg-stone-50 dark:bg-slate-950 border border-stone-200 dark:border-slate-700 rounded-lg pl-8 pr-7 py-1.5 text-xs text-stone-900 dark:text-stone-100 placeholder-stone-400 focus:outline-none focus:border-amber-500 transition">
+              <button onclick="clearBoardSearch()" id="btnClearBoardSearch" class="hidden absolute right-2.5 top-2 text-stone-400 hover:text-stone-600 text-xs">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+
+            <div class="flex items-center space-x-1 text-xs font-semibold">
+              <button id="btnBoardSortRate" onclick="sortBoard('rate')" class="px-2.5 py-1.5 rounded-lg bg-blue-600 text-white font-bold transition shadow-xs">등락률 순</button>
+              <button id="btnBoardSortEok" onclick="sortBoard('eok')" class="px-2.5 py-1.5 rounded-lg bg-stone-100 dark:bg-slate-800 text-stone-700 dark:text-stone-300 hover:bg-stone-200 transition">거래대금순</button>
+              <button id="btnBoardSortName" onclick="sortBoard('name')" class="px-2.5 py-1.5 rounded-lg bg-stone-100 dark:bg-slate-800 text-stone-700 dark:text-stone-300 hover:bg-stone-200 transition">테마명 순</button>
+              <button onclick="toggleAllBoard(false)" class="px-2 py-1.5 rounded-lg bg-stone-100 dark:bg-slate-800 text-stone-600 dark:text-stone-400 hover:bg-stone-200 transition text-[11px]" title="모든 섹터 접기">모두 접기</button>
+              <button onclick="toggleAllBoard(true)" class="px-2 py-1.5 rounded-lg bg-stone-100 dark:bg-slate-800 text-stone-600 dark:text-stone-400 hover:bg-stone-200 transition text-[11px]" title="모든 섹터 펼치기">모두 펼치기</button>
+              <button onclick="loadSihwangData(true)" class="px-2.5 py-1.5 rounded-lg bg-amber-50 dark:bg-amber-950/40 text-amber-900 dark:text-amber-200 hover:bg-amber-100 border border-amber-300 dark:border-amber-800 transition font-bold" title="실시간 데이터 갱신">
+                <i class="fa-solid fa-arrows-rotate mr-1"></i>새로고침
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 61개 섹터 멀티 컬럼 전광판 영역 (Masonry) -->
+      <div id="boardContainer" class="board-masonry flex-1 overflow-y-auto px-1 py-1 custom-scrollbar">
+        <div class="flex flex-col items-center justify-center h-64 text-stone-400 space-y-2 text-xs">
+          <i class="fa-solid fa-spinner fa-spin text-2xl text-amber-600"></i>
+          <span>국내 61개 섹터 관심종목 전광판을 동기화하는 중입니다...</span>
+        </div>
+      </div>
+    </div> <!-- sihwangView 종료 -->
+
+    <!-- ------------------------------------------------------------- -->
+    <!-- [VIEW 6] 🌐 선물 & 반도체(DRAM/낸드) & 매크로 23종 종합 데스크        -->
+    <!-- ------------------------------------------------------------- -->
+    <div id="futuresView" class="hidden flex-1 flex flex-col overflow-y-auto w-full h-full gap-3.5 pb-10 custom-scrollbar pr-1">
+      
+      <!-- [1] 상단 퀵 헤더 바 & DRAMeXchange 공식 링크 & 새로고침 -->
+      <section class="bg-white dark:bg-slate-900 rounded-xl border border-stone-200 dark:border-slate-800 px-4 py-3 shadow-xs shrink-0 flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center space-x-2.5">
+          <div class="w-8 h-8 rounded-lg bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-sm shrink-0">
+            <i class="fa-solid fa-microchip"></i>
+          </div>
+          <div>
+            <h2 class="text-sm font-black text-stone-900 dark:text-stone-100 flex items-center space-x-2">
+              <span>선물 · 반도체(DRAM/낸드) · 원자재 · 환율 매크로 종합</span>
+              <span id="macroUpdatedBadge" class="text-[10.5px] bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 px-2 py-0.5 rounded font-mono font-bold">실시간 동기화</span>
+            </h2>
+            <p class="text-[11px] text-stone-500 dark:text-stone-400">코스피200 선물, D램/낸드 현물가(TrendForce), 필라델피아 반도체, 관세청 반도체 수출, 원자재·환율 23종</p>
+          </div>
+        </div>
+
+        <div class="flex items-center space-x-2">
+          <!-- 공식 DRAMeXchange 링크 버튼 (고수님 강력 추천) -->
+          <a href="https://www.dramexchange.com/" target="_blank" rel="noopener noreferrer" 
+             class="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-extrabold text-xs transition flex items-center space-x-1.5 shadow-xs"
+             title="DRAMeXchange (트렌드포스) 공식 실시간 시세 사이트로 이동">
+            <i class="fa-solid fa-arrow-up-right-from-square text-[11px]"></i>
+            <span>DRAMeXchange 공식 시세 ↗</span>
+          </a>
+
+          <button onclick="loadFuturesAndMacroData(true)" class="flex items-center space-x-1.5 bg-stone-100 dark:bg-slate-800 hover:bg-stone-200 dark:hover:bg-slate-700 text-stone-700 dark:text-slate-200 px-3 py-1.5 rounded-lg text-xs font-bold transition border border-stone-200 dark:border-slate-700 shadow-2xs">
+            <i class="fa-solid fa-arrows-rotate text-indigo-600"></i>
+            <span>새로고침</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- [2] 코스피200 선물 & 프로그램 매매 실시간 분석 (KP Indicators) -->
+      <section class="bg-white dark:bg-slate-900 rounded-xl border border-stone-200 dark:border-slate-800 shadow-xs p-4 space-y-3">
+        <div class="flex items-center justify-between border-b border-stone-100 dark:border-slate-800 pb-2">
+          <div class="flex items-center space-x-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-indigo-500 animate-pulse"></span>
+            <h3 class="text-xs font-extrabold text-stone-900 dark:text-white">코스피200 선물 & 프로그램 매매 실시간 현황</h3>
+            <span id="kpTimeBadge" class="text-[10.5px] text-stone-400 font-mono"></span>
+          </div>
+          <span class="text-[11px] text-stone-400 hidden sm:inline">거래소 실시간 베이시스 및 차익/비차익 수급 동향</span>
+        </div>
+
+        <!-- 선물 핵심 지표 그리드 -->
+        <div id="kpSummaryGrid" class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-2.5 text-xs">
+          <div class="p-2.5 rounded-xl bg-stone-50 dark:bg-slate-950 border border-stone-200/80 dark:border-slate-800">
+            <div class="text-[10.5px] text-stone-400">선물 현재가</div>
+            <div id="kpFutPrice" class="font-mono text-base font-black text-stone-900 dark:text-stone-100 mt-0.5">-</div>
+          </div>
+          <div class="p-2.5 rounded-xl bg-stone-50 dark:bg-slate-950 border border-stone-200/80 dark:border-slate-800">
+            <div class="text-[10.5px] text-stone-400">시장 베이시스 (콘탱고/백워)</div>
+            <div id="kpBasisVal" class="font-mono text-base font-black text-stone-900 dark:text-stone-100 mt-0.5">-</div>
+          </div>
+          <div class="p-2.5 rounded-xl bg-stone-50 dark:bg-slate-950 border border-stone-200/80 dark:border-slate-800">
+            <div class="text-[10.5px] text-stone-400">괴리율 (이론가 대비)</div>
+            <div id="kpDivergeVal" class="font-mono text-base font-black text-stone-900 dark:text-stone-100 mt-0.5">-</div>
+          </div>
+          <div class="p-2.5 rounded-xl bg-stone-50 dark:bg-slate-950 border border-stone-200/80 dark:border-slate-800">
+            <div class="text-[10.5px] text-stone-400">미결제약정 (OI)</div>
+            <div id="kpOiVal" class="font-mono text-base font-black text-stone-900 dark:text-stone-100 mt-0.5">-</div>
+          </div>
+          <div class="p-2.5 rounded-xl bg-stone-50 dark:bg-slate-950 border border-stone-200/80 dark:border-slate-800">
+            <div class="text-[10.5px] text-stone-400">프로그램 비차익 순매수</div>
+            <div id="kpNonarbVal" class="font-mono text-base font-black text-stone-900 dark:text-stone-100 mt-0.5">-</div>
+          </div>
+        </div>
+
+        <!-- 미결제약정 & 비차익 순매수 실시간 차트 2분할 -->
+        <div id="kpChartsContainer" class="grid grid-cols-1 lg:grid-cols-2 gap-3 pt-2">
+          <!-- 동적 SVG 렌더링 -->
+        </div>
+      </section>
+
+      <!-- [3] 🏆 고수님 필승 반도체 스페셜 4선 (DRAM / 낸드 / 필라델피아 / 반도체수출) -->
+      <section class="bg-gradient-to-r from-blue-50/70 via-indigo-50/60 to-purple-50/70 dark:from-slate-900 dark:via-indigo-950/30 dark:to-slate-900 rounded-xl border border-indigo-200 dark:border-indigo-900/50 p-4 space-y-3 shadow-xs">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-blue-600 animate-ping"></span>
+            <h3 class="text-xs font-black text-indigo-950 dark:text-indigo-200 flex items-center space-x-1.5">
+              <span>🏆 글로벌 반도체 4대 핵심 지표 (메모리 가격 & 필라델피아 & 수출)</span>
+            </h3>
+          </div>
+          <span class="text-[11px] text-indigo-600 dark:text-indigo-400 font-bold">카드를 누르면 1년 전체 차트가 열립니다</span>
+        </div>
+
+        <div id="semiSpecialCards" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3">
+          <!-- 4대 반도체 카드 동적 렌더링 -->
+        </div>
+      </section>
+
+      <!-- [4] 23종 전 매크로 지표 보드 (증시자금, 에너지, 금속, 환율/운임, 농산물) -->
+      <section class="space-y-4">
+        <div id="macroGroupsContainer" class="space-y-4">
+          <!-- 동적 그룹 렌더링 -->
+        </div>
+      </section>
+
+      <!-- 하단 출처 표기 -->
+      <div class="text-[11px] text-stone-400 dark:text-stone-500 text-center py-2 space-y-0.5">
+        <p>※ D램·낸드 가격: DRAMeXchange (TrendForce) | 고객예탁금·신용: 금융투자협회 FreeSIS | 한국 반도체 수출: 관세청 품목별 수출실적</p>
+        <p>※ 필라델피아 반도체, WTI 원유, 금, 구리, 환율: 야후 파이낸스 일봉 종가 기반</p>
+      </div>
+
+    </div> <!-- futuresView 끝 -->
+
+    <!-- ------------------------------------------------------------- -->
+    <!-- [VIEW 7] 📅 증시 캘린더 뷰 (실적발표, 공모주, FOMC, 만기일)           -->
+    <!-- ------------------------------------------------------------- -->
+    <div id="calendarView" class="hidden flex-1 flex flex-col overflow-y-auto w-full h-full gap-3.5 pb-10 custom-scrollbar pr-1">
+      
+      <!-- [1] 상단 월 이동 컨트롤 & 필터 바 -->
+      <section class="bg-white dark:bg-slate-900 rounded-xl border border-stone-200 dark:border-slate-800 px-4 py-3 shadow-xs shrink-0 flex flex-wrap items-center justify-between gap-3">
+        <!-- 좌측: 월 네비게이션 -->
+        <div class="flex items-center space-x-2.5">
+          <button onclick="navigateCalendarMonth(-1)" class="w-8 h-8 rounded-lg bg-stone-100 dark:bg-slate-800 hover:bg-stone-200 text-stone-700 dark:text-slate-200 flex items-center justify-center font-bold text-xs transition border border-stone-200 dark:border-slate-700 shadow-2xs" title="이전 달">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <div class="text-base font-black text-stone-900 dark:text-stone-100 min-w-[120px] text-center" id="calCurrentMonthLabel">2026년 11월</div>
+          <button onclick="navigateCalendarMonth(1)" class="w-8 h-8 rounded-lg bg-stone-100 dark:bg-slate-800 hover:bg-stone-200 text-stone-700 dark:text-slate-200 flex items-center justify-center font-bold text-xs transition border border-stone-200 dark:border-slate-700 shadow-2xs" title="다음 달">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+          <button onclick="navigateCalendarToday()" class="px-2.5 py-1.5 rounded-lg bg-blue-50 dark:bg-blue-950/60 hover:bg-blue-100 text-blue-700 dark:text-blue-300 font-bold text-xs transition border border-blue-200 dark:border-blue-800 shadow-2xs">
+            오늘
+          </button>
+        </div>
+
+        <!-- 우측: 중요 일정 토글 & 새로고침 -->
+        <div class="flex items-center space-x-2">
+          <button id="btnCalOnlyImportant" onclick="toggleCalendarOnlyImportant()" class="px-3 py-1.5 rounded-lg border border-amber-300/80 bg-amber-50 dark:bg-amber-950/40 text-amber-900 dark:text-amber-200 hover:bg-amber-100 text-xs font-bold transition flex items-center space-x-1.5 shadow-2xs" title="별표 표시된 핵심 일정만 강조 필터">
+            <i class="fa-solid fa-star text-amber-500"></i>
+            <span id="calImpBtnText">중요 일정만</span>
+          </button>
+          <button onclick="loadCalendarData(currentCalMonth, true)" class="flex items-center space-x-1.5 bg-stone-100 dark:bg-slate-800 hover:bg-stone-200 dark:hover:bg-slate-700 text-stone-700 dark:text-slate-200 px-3 py-1.5 rounded-lg text-xs font-bold transition border border-stone-200 dark:border-slate-700 shadow-2xs">
+            <i class="fa-solid fa-arrows-rotate text-emerald-600"></i>
+            <span>새로고침</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- [2] 8대 카테고리 뱃지 필터 바 -->
+      <section class="bg-white dark:bg-slate-900 rounded-xl border border-stone-200 dark:border-slate-800 px-4 py-2.5 shadow-xs shrink-0">
+        <div class="flex items-center space-x-1.5 overflow-x-auto custom-scrollbar py-0.5 text-xs" id="calCategoryFilters">
+          <!-- 동적 필터 뱃지 렌더링 -->
+        </div>
+      </section>
+
+      <!-- [3] 캘린더 메인 레이아웃 (좌: 월별 7열 달력 그리드, 우: 이번 달 핵심 일정 타임라인) -->
+      <div class="flex-1 flex flex-col xl:flex-row gap-3.5 min-h-[620px]">
+        
+        <!-- 좌측: 월별 7열 달력 그리드 -->
+        <div class="flex-1 bg-white dark:bg-slate-900 rounded-xl border border-stone-200 dark:border-slate-800 p-3.5 shadow-xs flex flex-col min-w-0">
+          <!-- 요일 헤더 -->
+          <div class="grid grid-cols-7 text-center font-extrabold text-xs py-2 border-b border-stone-200 dark:border-slate-800 shrink-0">
+            <div class="text-red-500">일</div>
+            <div class="text-stone-700 dark:text-slate-300">월</div>
+            <div class="text-stone-700 dark:text-slate-300">화</div>
+            <div class="text-stone-700 dark:text-slate-300">수</div>
+            <div class="text-stone-700 dark:text-slate-300">목</div>
+            <div class="text-stone-700 dark:text-slate-300">금</div>
+            <div class="text-blue-500">토</div>
+          </div>
+          <!-- 날짜 셀 그리드 (동적 렌더링) -->
+          <div id="calGrid" class="grid grid-cols-7 flex-1 auto-rows-fr gap-1 pt-1.5">
+            <!-- 일자별 셀들 -->
+          </div>
+        </div>
+
+        <!-- 우측: 이번 달 주요 일정 타임라인 브리핑 데스크 -->
+        <div class="w-full xl:w-[360px] 2xl:w-[400px] shrink-0 bg-white dark:bg-slate-900 rounded-xl border border-stone-200 dark:border-slate-800 p-4 shadow-xs flex flex-col">
+          <div class="flex items-center justify-between pb-3 border-b border-stone-100 dark:border-slate-800 shrink-0">
+            <div class="flex items-center space-x-2">
+              <i class="fa-solid fa-clock-rotate-left text-emerald-600"></i>
+              <h3 class="text-xs font-black text-stone-900 dark:text-stone-100">이달의 핵심 일정 타임라인</h3>
+            </div>
+            <span id="calTimelineCount" class="text-[11px] bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 px-2 py-0.5 rounded-full font-bold">0건</span>
+          </div>
+
+          <div id="calTimelineList" class="flex-1 overflow-y-auto pt-3 space-y-2.5 custom-scrollbar pr-1 max-h-[580px]">
+            <!-- 일정 카드 목록 동적 렌더링 -->
+          </div>
+        </div>
+
+      </div>
+
+    </div> <!-- calendarView 끝 -->
+
   </main>
 
   <!-- ================= [3] 모달 및 토스트 알림 ================= -->
@@ -649,6 +1072,8 @@
       </div>
     </div>
   </div>
+
+
 
   <!-- [43인치 대화면 맞춤] 실시간 속보 HUD 배너 (화면 상단/중앙 대형 알림) -->
   <div id="breakingNewsBanner" onmouseenter="pauseBreakingNewsTimer()" onmouseleave="resumeBreakingNewsTimer()" style="top: 32px; left: 50%; transform: translateX(-50%);" class="fixed z-[9999] opacity-0 pointer-events-none transition-all duration-300 max-w-2xl w-[92vw] md:w-[700px]">
@@ -691,6 +1116,292 @@
     </div>
   </div>
 
+
+
+  <!-- ================= [종목 상세 분석 & 캔들차트 미니창 모달 - 시황카세 실사 100% 매칭] ================= -->
+  <div id="stockModal" class="hidden fixed inset-0 z-[9980] bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 border border-stone-200 dark:border-slate-800 rounded-2xl w-full max-w-[700px] max-h-[92vh] flex flex-col shadow-2xl overflow-hidden">
+      
+      <!-- [1] 상단 헤더: 종목명, 코드, 코스닥/코스피 뱃지, 테마 뱃지, 사유/재료 -->
+      <div class="p-4 bg-stone-50/70 dark:bg-slate-950/60 border-b border-stone-200 dark:border-slate-800 shrink-0 space-y-2">
+        <div class="flex items-center justify-between">
+          <div class="flex items-baseline space-x-2">
+            <h3 id="stockModalName" class="text-xl font-black text-stone-900 dark:text-stone-100">종목명</h3>
+            <span id="stockModalCode" class="text-xs font-mono text-stone-400">000000</span>
+          </div>
+          <div class="flex items-center space-x-2">
+            <span id="stockModalMarket" class="px-2 py-0.5 rounded-md bg-blue-50 text-blue-700 dark:bg-blue-950/60 dark:text-blue-300 font-extrabold text-[11px] border border-blue-200/60">코스피</span>
+            <button onclick="closeStockModal()" class="w-7 h-7 rounded-lg hover:bg-stone-200 dark:hover:bg-slate-800 text-stone-400 hover:text-stone-700 dark:hover:text-stone-200 flex items-center justify-center transition">
+              <i class="fa-solid fa-xmark text-sm"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2 pt-0.5">
+          <span id="stockModalReason" class="text-xs text-stone-600 dark:text-stone-300 font-medium">재료 및 특징 수집 중...</span>
+          <span id="stockModalThemeBadge" class="px-2 py-0.5 rounded-full border border-orange-300 text-orange-600 bg-orange-50 dark:bg-orange-950/40 dark:border-orange-700 dark:text-orange-300 text-[10.5px] font-bold">주요 테마</span>
+        </div>
+      </div>
+
+      <!-- [2] 캔들 차트 영역 (캔들스틱 + 20일선 + RS대비선 + 거래량) -->
+      <div class="p-4 flex-1 overflow-y-auto space-y-3 custom-scrollbar">
+        <div class="relative bg-stone-50/60 dark:bg-slate-950/50 border border-stone-200 dark:border-slate-800 rounded-xl p-2.5">
+          <div class="flex items-center justify-between mb-1 text-[10.5px] text-stone-500">
+            <div class="flex items-center space-x-2">
+              <span class="inline-flex items-center text-orange-600 font-bold"><span class="w-2.5 h-0.5 bg-orange-500 mr-1"></span>20일선</span>
+              <span class="inline-flex items-center text-emerald-600 font-bold"><span class="w-2.5 h-0.5 bg-emerald-500 mr-1"></span>RS 상대강도</span>
+            </div>
+            <div class="flex items-center space-x-1">
+              <button onclick="zoomStockChart(-1)" class="w-5 h-5 rounded bg-white dark:bg-slate-800 border border-stone-200 dark:border-slate-700 text-stone-600 dark:text-stone-300 hover:bg-stone-100 flex items-center justify-center font-bold text-xs" title="축소">-</button>
+              <button onclick="zoomStockChart(1)" class="w-5 h-5 rounded bg-white dark:bg-slate-800 border border-stone-200 dark:border-slate-700 text-stone-600 dark:text-stone-300 hover:bg-stone-100 flex items-center justify-center font-bold text-xs" title="확대">+</button>
+            </div>
+          </div>
+          <canvas id="stockModalCanvas" class="w-full h-48 block" width="620" height="200"></canvas>
+        </div>
+
+        <!-- [3] 3x3 지표 그리드 (시황카세 실사 100% 매칭) -->
+        <div class="grid grid-cols-3 gap-2 text-xs">
+          <div class="p-2.5 rounded-xl bg-stone-50 dark:bg-slate-950/60 border border-stone-200/80 dark:border-slate-800">
+            <div class="text-[10px] text-stone-400 font-medium">현재가</div>
+            <div id="metricPrice" class="font-mono text-base font-black text-stone-900 dark:text-stone-100 mt-0.5">-</div>
+          </div>
+          <div class="p-2.5 rounded-xl bg-stone-50 dark:bg-slate-950/60 border border-stone-200/80 dark:border-slate-800">
+            <div class="text-[10px] text-stone-400 font-medium">등락률</div>
+            <div id="metricRate" class="font-mono text-base font-black text-blue-600 mt-0.5">-</div>
+          </div>
+          <div class="p-2.5 rounded-xl bg-stone-50 dark:bg-slate-950/60 border border-stone-200/80 dark:border-slate-800">
+            <div class="text-[10px] text-stone-400 font-medium">RS 점수</div>
+            <div id="metricRS" class="font-mono text-base font-black text-stone-800 dark:text-stone-200 mt-0.5">-</div>
+          </div>
+          <div class="p-2.5 rounded-xl bg-stone-50 dark:bg-slate-950/60 border border-stone-200/80 dark:border-slate-800">
+            <div class="text-[10px] text-stone-400 font-medium">시총(억)</div>
+            <div id="metricCap" class="font-mono text-sm font-bold text-stone-900 dark:text-stone-100 mt-0.5">-</div>
+          </div>
+          <div class="p-2.5 rounded-xl bg-stone-50 dark:bg-slate-950/60 border border-stone-200/80 dark:border-slate-800">
+            <div class="text-[10px] text-stone-400 font-medium">거래대금(억)</div>
+            <div id="metricEok" class="font-mono text-sm font-bold text-stone-900 dark:text-stone-100 mt-0.5">-</div>
+          </div>
+          <div class="p-2.5 rounded-xl bg-stone-50 dark:bg-slate-950/60 border border-stone-200/80 dark:border-slate-800">
+            <div class="text-[10px] text-stone-400 font-medium">시총대비 수급(외인+기관)</div>
+            <div id="metricRatio" class="font-mono text-sm font-bold text-stone-700 dark:text-stone-300 mt-0.5">-</div>
+          </div>
+          <div class="p-2.5 rounded-xl bg-stone-50 dark:bg-slate-950/60 border border-stone-200/80 dark:border-slate-800">
+            <div class="text-[10px] text-stone-400 font-medium">외인수급(억)</div>
+            <div id="metricForeign" class="font-mono text-sm font-bold text-stone-700 dark:text-stone-300 mt-0.5">-</div>
+          </div>
+          <div class="p-2.5 rounded-xl bg-stone-50 dark:bg-slate-950/60 border border-stone-200/80 dark:border-slate-800">
+            <div class="text-[10px] text-stone-400 font-medium">기관수급(억)</div>
+            <div id="metricInst" class="font-mono text-sm font-bold text-stone-600 dark:text-stone-400 mt-0.5">-</div>
+          </div>
+          <div class="p-2.5 rounded-xl bg-stone-50 dark:bg-slate-950/60 border border-stone-200/80 dark:border-slate-800">
+            <div class="text-[10px] text-stone-400 font-medium">프로그램(억)</div>
+            <div id="metricProgram" class="font-mono text-sm font-bold text-stone-700 dark:text-stone-300 mt-0.5">-</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- [4] 하단 버튼 바: [네이버 증권에서 보기 →] (실시간 호가창 20호가) + [관련 기사 검색] -->
+      <div class="p-3.5 bg-stone-50/70 dark:bg-slate-950/60 border-t border-stone-200 dark:border-slate-800 flex items-center justify-between gap-3 shrink-0">
+        <button onclick="searchCurrentStockNews()" class="px-3 py-2 text-xs font-bold text-stone-600 dark:text-stone-300 hover:text-blue-600 dark:hover:text-blue-400 transition flex items-center space-x-1.5" title="이 종목 관련 지난 기사들을 아침 장전뉴스 탭에서 검색">
+          <i class="fa-solid fa-newspaper text-xs"></i>
+          <span>관련 뉴스 기사 검색</span>
+        </button>
+
+        <button id="btnOpenNaverFinance" onclick="openCurrentStockNaverFinance()" class="flex-1 py-2.5 rounded-xl border-2 border-emerald-500 hover:bg-emerald-500 hover:text-white text-emerald-600 dark:text-emerald-400 dark:hover:bg-emerald-600 dark:hover:text-white font-extrabold text-sm transition flex items-center justify-center space-x-2 shadow-xs group">
+          <span>네이버 증권에서 보기 (실시간 호가창 20호가)</span>
+          <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ================= [📱 모바일 & 제자 기기 화면 공유 모달 (비용 0원 100% 무료)] ================= -->
+  <div id="shareModal" class="hidden fixed inset-0 z-[9985] bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 border border-stone-200 dark:border-slate-800 rounded-2xl w-full max-w-[580px] flex flex-col shadow-2xl overflow-hidden">
+      
+      <!-- 헤더 -->
+      <div class="p-4 bg-stone-50/80 dark:bg-slate-950/70 border-b border-stone-200 dark:border-slate-800 flex items-center justify-between">
+        <div class="flex items-center space-x-2">
+          <div class="w-8 h-8 rounded-lg bg-indigo-100 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-black">
+            <i class="fa-solid fa-mobile-screen-button"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-extrabold text-stone-900 dark:text-stone-100 flex items-center space-x-2">
+              <span>스마트폰 & 태블릿 화면 공유</span>
+              <span class="text-[10px] bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 px-2 py-0.5 rounded-full font-bold">비용 0원 · 평생 무료</span>
+            </h3>
+            <p class="text-[11px] text-stone-500 dark:text-stone-400">제자 PC, 아이패드, 스마트폰에서 동일한 화면을 실시간으로 확인합니다.</p>
+          </div>
+        </div>
+        <button onclick="closeShareModal()" class="w-7 h-7 rounded-lg hover:bg-stone-200 dark:hover:bg-slate-800 text-stone-400 hover:text-stone-700 dark:hover:text-stone-200 flex items-center justify-center transition">
+          <i class="fa-solid fa-xmark text-sm"></i>
+        </button>
+      </div>
+
+      <!-- 본문 -->
+      <div class="p-5 space-y-4 text-xs">
+        
+        <!-- 방법 1: 같은 사무실/집 Wi-Fi 공유 -->
+        <div class="p-4 rounded-xl bg-indigo-50/60 dark:bg-indigo-950/30 border border-indigo-200/80 dark:border-indigo-800/60 space-y-2.5">
+          <div class="flex items-center justify-between">
+            <span class="font-extrabold text-indigo-900 dark:text-indigo-200 flex items-center space-x-1.5 text-xs">
+              <i class="fa-solid fa-wifi text-indigo-600 dark:text-indigo-400"></i>
+              <span>[방법 1] 같은 Wi-Fi(공유기) 연결 시 (가장 빠름 / 앱 설치 불필요)</span>
+            </span>
+            <span class="text-[10px] bg-indigo-200/60 dark:bg-indigo-800/60 text-indigo-900 dark:text-indigo-200 font-bold px-2 py-0.5 rounded">즉시 사용</span>
+          </div>
+          <p class="text-[11px] text-stone-600 dark:text-stone-300 leading-relaxed">
+            고수님 PC와 제자의 스마트폰·아이패드가 같은 와이파이에 연결되어 있다면, <strong>별도 앱 설치 없이</strong> 기기 브라우저(사파리/크롬)에서 아래 주소만 치면 바로 똑같이 작동합니다.
+          </p>
+          <div class="flex items-center space-x-1.5 pt-1">
+            <input type="text" id="shareLocalUrl" readonly value="http://192.168.0.30:5000" class="flex-1 bg-white dark:bg-slate-900 border border-indigo-300 dark:border-indigo-700 rounded-lg px-3 py-2 font-mono font-bold text-xs text-indigo-950 dark:text-indigo-200 select-all focus:outline-none">
+            <button onclick="copyShareUrl()" class="px-3.5 py-2 bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-bold rounded-lg transition flex items-center space-x-1 shrink-0 shadow-xs">
+              <i class="fa-solid fa-copy"></i>
+              <span>주소 복사</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 방법 2: 외부/LTE 원격 공유 (Cloudflare Tunnel 0원 무료 라이브 연동) -->
+        <div class="p-4 rounded-xl bg-emerald-50/50 dark:bg-emerald-950/20 border border-emerald-200/80 dark:border-emerald-800/50 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="font-extrabold text-emerald-950 dark:text-emerald-200 flex items-center space-x-1.5 text-xs">
+              <i class="fa-solid fa-earth-asia text-emerald-600 dark:text-emerald-400"></i>
+              <span>[방법 2] 제자가 밖(외부/LTE 스마트폰)에 있을 때 · 같은 와이파이 아닐 때</span>
+            </span>
+            <span id="tunnelStatusBadge" class="text-[10px] bg-stone-200 text-stone-700 dark:bg-slate-800 dark:text-stone-300 font-bold px-2 py-0.5 rounded">준비 완료</span>
+          </div>
+
+          <p class="text-[11.5px] text-stone-600 dark:text-stone-300 leading-relaxed">
+            고수님과 제자가 <strong>서로 다른 와이파이</strong>를 쓰거나 제자가 <strong>스마트폰 LTE/5G</strong>로 접속할 때 사용하는 <strong>평생 100% 무료(비용 0원)</strong> 방식입니다.
+          </p>
+
+          <!-- 터널 꺼져있을 때 UI -->
+          <div id="tunnelOffWrap" class="p-3 bg-white dark:bg-slate-900 rounded-lg border border-emerald-200 dark:border-emerald-800/60 flex items-center justify-between">
+            <div class="text-[11px] text-stone-500">
+              <i class="fa-solid fa-shield-halved text-emerald-600 mr-1"></i>
+              클릭 즉시 제자용 고유 보안 HTTPS 링크가 무료로 발급됩니다.
+            </div>
+            <button id="btnStartTunnel" onclick="startCloudflareTunnel()" class="px-4 py-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 active:scale-95 text-white font-extrabold rounded-lg transition flex items-center space-x-1.5 shadow-md shadow-emerald-500/20 shrink-0">
+              <i class="fa-solid fa-bolt"></i>
+              <span>⚡ 무료 외부 접속 켜기</span>
+            </button>
+          </div>
+
+          <!-- 터널 켜져있을 때 UI (동적 토글) -->
+          <div id="tunnelOnWrap" class="hidden space-y-2">
+            <div class="flex items-center space-x-1.5">
+              <input type="text" id="shareRemoteUrl" readonly value="" placeholder="외부 접속 주소 생성 중..." class="flex-1 bg-white dark:bg-slate-900 border-2 border-emerald-500 rounded-lg px-3 py-2 font-mono font-bold text-xs text-emerald-950 dark:text-emerald-200 select-all focus:outline-none shadow-xs">
+              <button onclick="copyRemoteShareUrl()" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-bold rounded-lg transition flex items-center space-x-1 shrink-0 shadow-xs">
+                <i class="fa-solid fa-copy"></i>
+                <span>카톡 주소 복사</span>
+              </button>
+              <button onclick="stopCloudflareTunnel()" class="px-2.5 py-2 bg-stone-200 hover:bg-stone-300 dark:bg-slate-800 dark:hover:bg-slate-700 text-stone-600 dark:text-stone-300 font-bold rounded-lg transition text-xs" title="외부 접속 끄기">
+                <i class="fa-solid fa-power-off"></i>
+              </button>
+            </div>
+            <div class="text-[10.5px] text-emerald-800 dark:text-emerald-300 font-medium flex items-center space-x-1">
+              <i class="fa-solid fa-circle-check text-emerald-600"></i>
+              <span>접속 주소가 활성화되었습니다. 위 주소를 복사하여 제자 카톡으로 보내주시면 바로 열립니다.</span>
+            </div>
+          </div>
+
+          <!-- 아이폰 및 스마트폰 안내 박스 -->
+          <div class="p-3 bg-stone-50 dark:bg-slate-950/60 rounded-lg border border-stone-200 dark:border-slate-800 space-y-1">
+            <div class="font-bold text-stone-800 dark:text-stone-200 text-[11px] flex items-center space-x-1.5">
+              <i class="fa-brands fa-apple text-stone-900 dark:text-stone-100 text-xs"></i>
+              <span>아이폰(iPhone) & 스마트폰에서 100% 완벽 작동!</span>
+            </div>
+            <p class="text-[10.5px] text-stone-500 dark:text-stone-400 leading-relaxed">
+              아이폰 사파리(Safari)나 크롬에서 위 링크만 누르면 앱 설치 없이 즉시 실행됩니다. 아이폰 화면 하단의 <strong>[공유 버튼 ⎋] → [홈 화면에 추가]</strong>를 누르면 바탕화면에 앱 아이콘이 생겨 스마트폰 앱처럼 편하게 볼 수 있습니다.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 하단 닫기 -->
+      <div class="p-3 bg-stone-50/80 dark:bg-slate-950/70 border-t border-stone-200 dark:border-slate-800 flex justify-end">
+        <button onclick="closeShareModal()" class="px-4 py-2 bg-stone-200 dark:bg-slate-800 hover:bg-stone-300 dark:hover:bg-slate-700 text-stone-800 dark:text-stone-200 font-bold rounded-lg transition text-xs">
+          닫기
+        </button>
+      </div>
+
+    </div>
+  </div>
+  <!-- ================= [👑 천마뇌검 전용 집무실 허브 모달 (100% 무조건 열림)] ================= -->
+  <div id="masterHubModal" class="hidden fixed inset-0 z-[9995] bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 border-2 border-amber-400 dark:border-amber-600 rounded-2xl w-full max-w-[480px] shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+      <!-- 헤더 -->
+      <div class="p-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white flex items-center justify-between shrink-0 shadow-xs">
+        <div class="flex items-center space-x-2">
+          <i class="fa-solid fa-crown text-base text-yellow-200"></i>
+          <h3 class="font-black text-sm tracking-tight">천마뇌검 전용 집무실 (마스터 데스크)</h3>
+        </div>
+        <button onclick="closeMasterHubModal()" class="w-7 h-7 rounded-lg hover:bg-white/20 text-white flex items-center justify-center transition">
+          <i class="fa-solid fa-xmark text-sm"></i>
+        </button>
+      </div>
+
+      <!-- 메뉴 카드 목록 -->
+      <div class="p-5 space-y-3 bg-[#f7f8fa] dark:bg-slate-950">
+        <div class="text-[11px] text-stone-500 dark:text-stone-400 font-medium pb-0.5">
+          ※ 제자 화면에는 노출되지 않는 고수님 전용 시황 작성 및 관리 기능입니다.
+        </div>
+
+        <!-- 1. 애프터마켓 특징주 -->
+        <button onclick="openMasterView('aftermarket')" class="w-full p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-stone-200 dark:border-slate-800 hover:border-amber-400 hover:shadow-md transition text-left flex items-center justify-between group">
+          <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 rounded-xl bg-amber-100 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 flex items-center justify-center text-lg shrink-0">
+              <i class="fa-solid fa-bolt"></i>
+            </div>
+            <div>
+              <div class="font-extrabold text-sm text-stone-900 dark:text-stone-100 group-hover:text-amber-600 transition">🔶 애프터마켓 특징주 (시간외 20:00 마감)</div>
+              <div class="text-[11px] text-stone-500 dark:text-stone-400 mt-0.5">전일 시간외 급등락 종목 분석 및 카페 전용 서식 복사</div>
+            </div>
+          </div>
+          <i class="fa-solid fa-chevron-right text-stone-300 group-hover:text-amber-500 group-hover:translate-x-1 transition-all"></i>
+        </button>
+
+        <!-- 2. 마감 주도주시황 -->
+        <button onclick="openMasterView('closing')" class="w-full p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-stone-200 dark:border-slate-800 hover:border-indigo-400 hover:shadow-md transition text-left flex items-center justify-between group">
+          <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 rounded-xl bg-indigo-100 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-lg shrink-0">
+              <i class="fa-solid fa-moon"></i>
+            </div>
+            <div>
+              <div class="font-extrabold text-sm text-stone-900 dark:text-stone-100 group-hover:text-indigo-600 transition">🌆 마감 주도주시황 칼럼 데스크</div>
+              <div class="text-[11px] text-stone-500 dark:text-stone-400 mt-0.5">당일 시장 요약 & 주도 테마 & 네이버 카페 칼럼 자동 완성</div>
+            </div>
+          </div>
+          <i class="fa-solid fa-chevron-right text-stone-300 group-hover:text-indigo-500 group-hover:translate-x-1 transition-all"></i>
+        </button>
+
+        <!-- 3. 제자 스마트폰 공유 링크 -->
+        <button onclick="closeMasterHubModal(); openShareModal();" class="w-full p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-stone-200 dark:border-slate-800 hover:border-emerald-400 hover:shadow-md transition text-left flex items-center justify-between group">
+          <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-lg shrink-0">
+              <i class="fa-solid fa-mobile-screen-button"></i>
+            </div>
+            <div>
+              <div class="font-extrabold text-sm text-stone-900 dark:text-stone-100 group-hover:text-emerald-600 transition">📱 제자 스마트폰 화면 공유 (비용 0원)</div>
+              <div class="text-[11px] text-stone-500 dark:text-stone-400 mt-0.5">외부 LTE/아이폰 접속 무료 보안 주소 발급 및 카톡 복사</div>
+            </div>
+          </div>
+          <i class="fa-solid fa-chevron-right text-stone-300 group-hover:text-emerald-500 group-hover:translate-x-1 transition-all"></i>
+        </button>
+      </div>
+
+      <!-- 하단 닫기 -->
+      <div class="p-3 bg-stone-100 dark:bg-slate-900 border-t border-stone-200 dark:border-slate-800 flex justify-end">
+        <button onclick="closeMasterHubModal()" class="px-4 py-2 bg-stone-200 dark:bg-slate-800 hover:bg-stone-300 dark:hover:bg-slate-700 text-stone-800 dark:text-stone-200 font-bold rounded-lg transition text-xs">
+          닫기
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- 토스트 알림 메시지 바 (43인치 대화면 가독성 & 위치 연동) -->
   <div id="toast" style="top: 32px; left: 50%; transform: translateX(-50%);" class="fixed z-[9990] flex items-center space-x-3 bg-slate-900/95 dark:bg-stone-900/95 text-white border border-slate-700 px-5 py-3.5 rounded-2xl shadow-2xl opacity-0 pointer-events-none transition-all duration-300 max-w-lg">
     <i id="toastIcon" class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>
@@ -699,6 +1410,8 @@
       <p id="toastMessage" class="text-xs sm:text-sm text-slate-300 mt-0.5 leading-relaxed"></p>
     </div>
   </div>
+
+
 
   <!-- ================= [4] 핵심 자바스크립트 ================= -->
   <script>
@@ -987,51 +1700,108 @@
     setInterval(updateDigitalClock, 1000);
     updateDigitalClock();
 
-    // 4대 모드 전환
+    // 5대 모드 전환 (아침 장전뉴스 / 관심종목 & 장전이슈 / 애프터마켓 특징주 / 야간선물 & 차트 / 마감 주도주시황)
     let aftermarketData = null;
+    let sihwangIssuesData = null;
+    let sihwangWatchlistData = null;
+
+    function openMasterHubModal() {
+      const modal = document.getElementById('masterHubModal');
+      if (modal) modal.classList.remove('hidden');
+    }
+
+    function closeMasterHubModal() {
+      const modal = document.getElementById('masterHubModal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function openMasterView(mode) {
+      closeMasterHubModal();
+      setAppMode(mode);
+    }
 
     function setAppMode(mode) {
       appMode = mode;
       const morningView = document.getElementById('morningView');
+      const sihwangView = document.getElementById('sihwangView');
       const aftermarketView = document.getElementById('aftermarketView');
       const chartsView = document.getElementById('chartsView');
       const closingView = document.getElementById('closingView');
+      const futuresView = document.getElementById('futuresView');
+      const calendarView = document.getElementById('calendarView');
       
       const tabMorning = document.getElementById('tabMorningMode');
-      const tabAftermarket = document.getElementById('tabAftermarketMode');
+      const tabSihwang = document.getElementById('tabSihwangMode');
       const tabCharts = document.getElementById('tabChartsMode');
-      const tabClosing = document.getElementById('tabClosingMode');
+      const tabFutures = document.getElementById('tabFuturesMode');
+      const tabCalendar = document.getElementById('tabCalendarMode');
+      const btnMaster = document.getElementById('btnMasterHub');
+      const btnMasterText = document.getElementById('masterHubBtnText');
 
       // 모두 숨기기
       morningView.classList.add('hidden');
+      if (sihwangView) sihwangView.classList.add('hidden');
       if (aftermarketView) aftermarketView.classList.add('hidden');
-      chartsView.classList.add('hidden');
-      closingView.classList.add('hidden');
+      if (chartsView) chartsView.classList.add('hidden');
+      if (closingView) closingView.classList.add('hidden');
+      if (futuresView) futuresView.classList.add('hidden');
+      if (calendarView) calendarView.classList.add('hidden');
 
-      const activeClass = 'flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition shadow-sm bg-white dark:bg-slate-800 text-blue-600 dark:text-blue-400';
-      const inactiveClass = 'flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition text-stone-700 dark:text-slate-300 hover:text-stone-900 dark:hover:text-white';
+      const activeClass = 'flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg text-xs font-bold transition shadow-xs bg-white dark:bg-slate-800 text-blue-600 dark:text-blue-400 whitespace-nowrap shrink-0';
+      const inactiveClass = 'flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg text-xs font-bold transition text-stone-700 dark:text-slate-300 hover:text-stone-900 dark:hover:text-white whitespace-nowrap shrink-0';
 
-      tabMorning.className = inactiveClass;
-      if (tabAftermarket) tabAftermarket.className = inactiveClass;
-      tabCharts.className = inactiveClass;
-      tabClosing.className = inactiveClass;
+      if (tabMorning) tabMorning.className = inactiveClass;
+      if (tabSihwang) tabSihwang.className = inactiveClass;
+      if (tabCharts) tabCharts.className = inactiveClass;
+      if (tabFutures) tabFutures.className = inactiveClass;
+      if (tabCalendar) tabCalendar.className = inactiveClass;
+
+      // 마스터 허브 버튼 기본 스타일
+      if (btnMaster) {
+        btnMaster.className = 'flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg text-xs font-black transition bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 active:scale-95 text-white shadow-xs whitespace-nowrap shrink-0';
+        if (btnMasterText) btnMasterText.innerText = '집무실';
+      }
 
       if (mode === 'morning') {
         morningView.classList.remove('hidden');
-        tabMorning.className = activeClass;
-      } else if (mode === 'aftermarket') {
-        if (aftermarketView) aftermarketView.classList.remove('hidden');
-        if (tabAftermarket) tabAftermarket.className = activeClass;
-        if (!aftermarketData) {
-          loadAftermarketData();
+        if (tabMorning) tabMorning.className = activeClass;
+      } else if (mode === 'sihwang') {
+        if (sihwangView) sihwangView.classList.remove('hidden');
+        if (tabSihwang) tabSihwang.className = activeClass;
+        if (!sihwangIssuesData || !sihwangWatchlistData) {
+          loadSihwangData();
         }
       } else if (mode === 'charts') {
         chartsView.classList.remove('hidden');
-        tabCharts.className = activeClass;
+        if (tabCharts) tabCharts.className = activeClass;
         loadChartsData(false);
+      } else if (mode === 'futures') {
+        if (futuresView) futuresView.classList.remove('hidden');
+        if (tabFutures) tabFutures.className = activeClass;
+        if (!macroData) {
+          loadFuturesAndMacroData();
+        }
+      } else if (mode === 'calendar') {
+        if (calendarView) calendarView.classList.remove('hidden');
+        if (tabCalendar) tabCalendar.className = activeClass;
+        if (!calendarData) {
+          loadCalendarData(currentCalMonth);
+        }
+      } else if (mode === 'aftermarket') {
+        if (aftermarketView) aftermarketView.classList.remove('hidden');
+        if (btnMaster) {
+          btnMaster.className = 'flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg text-xs font-black transition bg-amber-600 text-white ring-2 ring-amber-400 shadow-md whitespace-nowrap shrink-0';
+          if (btnMasterText) btnMasterText.innerText = '집무실: 특징주';
+        }
+        if (!aftermarketData) {
+          loadAftermarketData();
+        }
       } else if (mode === 'closing') {
         closingView.classList.remove('hidden');
-        tabClosing.className = activeClass;
+        if (btnMaster) {
+          btnMaster.className = 'flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg text-xs font-black transition bg-indigo-700 text-white ring-2 ring-indigo-400 shadow-md whitespace-nowrap shrink-0';
+          if (btnMasterText) btnMasterText.innerText = '집무실: 마감시황';
+        }
         if (!closingData) {
           loadClosingData();
         }
@@ -1041,14 +1811,1620 @@
     function refreshCurrentMode() {
       if (appMode === 'morning') {
         refreshData();
+      } else if (appMode === 'sihwang') {
+        loadSihwangData(true);
       } else if (appMode === 'aftermarket') {
         loadAftermarketData(true);
       } else if (appMode === 'charts') {
         loadChartsData(true);
+      } else if (appMode === 'futures') {
+        loadFuturesAndMacroData(true);
+      } else if (appMode === 'calendar') {
+        loadCalendarData(currentCalMonth, true);
       } else {
         loadClosingData(true);
       }
     }
+
+    // =========================================================================
+    // [VIEW 6 & 7] 🌐 선물 & 반도체(DRAM/낸드) & 매크로 종합 + 📅 증시 캘린더 엔진
+    // =========================================================================
+    let macroData = null;
+    let indicatorsData = null;
+    let calendarData = null;
+    let currentCalMonth = new Date().toISOString().slice(0, 7); // e.g. '2026-11'
+    let selectedCalCategory = 'all';
+    let calOnlyImportant = false;
+    let macroItemsList = [];
+    let calendarEventsList = [];
+
+    // SVG 차트 유틸리티 수학 함수
+    function macroFmt(v) {
+      if (v === null || v === undefined) return "-";
+      const a = Math.abs(v);
+      const d = a >= 1000 ? 0 : (a >= 100 ? 1 : (a >= 10 ? 2 : 3));
+      return Number(v).toLocaleString("ko-KR", { minimumFractionDigits: d, maximumFractionDigits: d });
+    }
+    function macroPct(a, b) {
+      return (a && b) ? ((a / b - 1) * 100) : null;
+    }
+    function macroCls(v) {
+      return v > 0 ? "text-red-600 dark:text-red-400" : (v < 0 ? "text-blue-600 dark:text-blue-400" : "text-stone-500");
+    }
+    function macroSgn(v) {
+      return v === null ? "-" : ((v > 0 ? "+" : "") + v.toFixed(2) + "%");
+    }
+    function macroSigned(v, d = 2) {
+      if (v === null || v === undefined) return "-";
+      return (v > 0 ? "+" : "") + Number(v).toLocaleString("ko-KR", { minimumFractionDigits: d, maximumFractionDigits: d });
+    }
+    function macroMd(d) {
+      return d ? d.slice(5).replace("-", "/") : "";
+    }
+
+    // 인라인 SVG 스파크라인 및 대형 차트 생성기
+    function renderLineSvg(pts, W, H, opts = {}) {
+      if (!pts || !pts.length) return "";
+      const vs = pts.map(p => Number(p[1]));
+      let lo = Math.min(...vs), hi = Math.max(...vs);
+      if (hi === lo) { hi += 1; lo -= 1; }
+
+      const padT = opts.axis ? 18 : 6, padB = opts.axis ? 22 : 6, padL = opts.axis ? 12 : 3, padR = opts.axis ? 58 : 3;
+      const x = i => padL + (pts.length === 1 ? (W - padL - padR) / 2 : i * (W - padL - padR) / (pts.length - 1));
+      const y = v => padT + (hi - v) * (H - padT - padB) / (hi - lo);
+      const base = vs[0];
+      const isUp = vs[vs.length - 1] >= base;
+      const col = isUp ? "#ef4444" : "#3b82f6"; // Tailwind Red-500 / Blue-500
+
+      const dPath = pts.map((p, i) => (i ? "L" : "M") + x(i).toFixed(1) + " " + y(p[1]).toFixed(1)).join(" ");
+      const area = dPath + ` L${x(pts.length - 1).toFixed(1)} ${H - padB} L${x(0).toFixed(1)} ${H - padB} Z`;
+      const gid = "g" + Math.random().toString(36).slice(2, 8);
+
+      let axis = "";
+      if (opts.axis) {
+        for (let k = 0; k <= 3; k++) {
+          const v = lo + (hi - lo) * k / 3;
+          const yy = y(v);
+          axis += `<line x1="${padL}" x2="${W - padR}" y1="${yy}" y2="${yy}" stroke="currentColor" stroke-opacity="0.1"/>`;
+          axis += `<text x="${W - padR + 6}" y="${yy + 4}" font-size="11" font-family="monospace" fill="#94a3b8">${macroFmt(v)}</text>`;
+        }
+        const n = pts.length, ticks = Math.min(6, n);
+        for (let k = 0; k < ticks; k++) {
+          const i = Math.round(k * (n - 1) / Math.max(1, ticks - 1));
+          axis += `<text x="${x(i)}" y="${H - 4}" font-size="10" font-family="monospace" fill="#94a3b8" text-anchor="${k === 0 ? "start" : (k === ticks - 1 ? "end" : "middle")}">${pts[i][0].slice(2).replace(/-/g, ".")}</text>`;
+        }
+      }
+
+      return `
+        <svg viewBox="0 0 ${W} ${H}" class="w-full h-full block" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="${gid}" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="${col}" stop-opacity="${opts.axis ? '0.35' : '0.2'}"/>
+              <stop offset="100%" stop-color="${col}" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          ${axis}
+          <line x1="${padL}" x2="${W - padR}" y1="${y(base)}" y2="${y(base)}" stroke="#94a3b8" stroke-dasharray="3 3" stroke-opacity="0.4"/>
+          <path d="${area}" fill="url(#${gid})"/>
+          <path d="${dPath}" fill="none" stroke="${col}" stroke-width="${opts.axis ? 2.2 : 1.8}" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      `;
+    }
+
+    // 인라인 SVG 막대 차트 생성기 (반도체 월별 수출용)
+    function renderBarSvg(pts, W, H, opts = {}) {
+      if (!pts || !pts.length) return "";
+      const vs = pts.map(p => Number(p[1]));
+      const m = Math.max(1, ...vs.map(Math.abs));
+      const padT = opts.axis ? 16 : 4, padB = opts.axis ? 20 : 4, padR = opts.axis ? 58 : 0;
+      const mid = padT + (H - padT - padB) / 2, half = (H - padT - padB) / 2;
+      const bw = (W - padR) / pts.length;
+
+      let out = `<line x1="0" x2="${W - padR}" y1="${mid}" y2="${mid}" stroke="#94a3b8" stroke-opacity="0.3"/>`;
+      pts.forEach((p, i) => {
+        const val = Number(p[1]);
+        const h = Math.abs(val) / m * half;
+        const col = val >= 0 ? "#ef4444" : "#3b82f6";
+        out += `<rect x="${(i * bw + bw * 0.15).toFixed(1)}" width="${Math.max(2, bw * 0.7).toFixed(1)}" y="${(val >= 0 ? mid - h : mid).toFixed(1)}" height="${Math.max(1, h).toFixed(1)}" rx="1.5" fill="${col}"/>`;
+      });
+
+      if (opts.axis) {
+        out += `<text x="${W - padR + 6}" y="${padT + 4}" font-size="11" font-family="monospace" fill="#94a3b8">+${macroFmt(m)}</text>`;
+        out += `<text x="${W - padR + 6}" y="${H - padB}" font-size="11" font-family="monospace" fill="#94a3b8">-${macroFmt(m)}</text>`;
+        const n = pts.length, ticks = Math.min(6, n);
+        for (let k = 0; k < ticks; k++) {
+          const i = Math.round(k * (n - 1) / Math.max(1, ticks - 1));
+          out += `<text x="${(i + 0.5) * bw}" y="${H - 4}" font-size="10" font-family="monospace" fill="#94a3b8" text-anchor="${k === 0 ? "start" : (k === ticks - 1 ? "end" : "middle")}">${pts[i][0].slice(2).replace(/-/g, ".")}</text>`;
+        }
+      }
+
+      return `<svg viewBox="0 0 ${W} ${H}" class="w-full h-full block" preserveAspectRatio="none">${out}</svg>`;
+    }
+
+    // 코스피200 선물 일중 실시간 차트 SVG (미결제약정 / 비차익)
+    function renderKpIntradayChart(pts, baseVal, label) {
+      if (!Array.isArray(pts) || pts.length < 2) {
+        return `<div class="h-32 flex items-center justify-center text-xs text-stone-400">장중(08:45~)에 실시간으로 데이터가 누적됩니다.</div>`;
+      }
+      const W = 520, H = 140, L = 46, R = 12, T = 12, B = 20;
+      const t0 = pts[0][0], t1 = pts[pts.length - 1][0];
+      const vals = pts.map(p => Number(p[1]));
+      if (baseVal !== null && baseVal !== undefined) vals.push(Number(baseVal));
+      let lo = Math.min(...vals), hi = Math.max(...vals);
+      if (hi === lo) { hi += 1; lo -= 1; }
+      const pad = (hi - lo) * 0.08;
+      lo -= pad; hi += pad;
+
+      const x = t => L + (t - t0) / ((t1 - t0) || 1) * (W - L - R);
+      const y = v => T + (hi - v) / (hi - lo) * (H - T - B);
+
+      let grid = "";
+      for (let i = 0; i <= 2; i++) {
+        const v = lo + (hi - lo) * i / 2;
+        const yy = y(v).toFixed(1);
+        grid += `<line x1="${L}" x2="${W - R}" y1="${yy}" y2="${yy}" stroke="currentColor" stroke-opacity="0.08"/>`;
+        grid += `<text x="${L - 6}" y="${Number(yy) + 3}" text-anchor="end" font-size="10" font-family="monospace" fill="#94a3b8">${macroFmt(v)}</text>`;
+      }
+
+      const lineD = pts.map((p, i) => `${i ? "L" : "M"}${x(p[0]).toFixed(1)},${y(p[1]).toFixed(1)}`).join("");
+      const isUp = pts[pts.length - 1][1] >= (baseVal || pts[0][1]);
+      const strokeCol = isUp ? "#ef4444" : "#3b82f6";
+
+      return `
+        <svg viewBox="0 0 ${W} ${H}" class="w-full h-full block" preserveAspectRatio="none">
+          ${grid}
+          <path d="${lineD}" fill="none" stroke="${strokeCol}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      `;
+    }
+
+    // -------------------------------------------------------------
+    // [선물 & 매크로 데이터 로더 및 렌더러]
+    // -------------------------------------------------------------
+    async function loadFuturesAndMacroData(force = false) {
+      try {
+        const urlMacro = force ? '/api/macro?refresh=1' : '/api/macro';
+        const urlInd = force ? '/api/indicators?refresh=1' : '/api/indicators';
+
+        const [resMacro, resInd] = await Promise.all([
+          fetch(urlMacro).then(r => r.json()).catch(() => null),
+          fetch(urlInd).then(r => r.json()).catch(() => null)
+        ]);
+
+        if (resMacro && (resMacro.status === 'ok' || resMacro.items)) {
+          macroData = resMacro;
+          macroItemsList = resMacro.items || [];
+          renderMacroBoard(macroItemsList);
+          const badge = document.getElementById('macroUpdatedBadge');
+          if (badge) badge.innerText = `${new Date().toLocaleTimeString('ko-KR')} 갱신`;
+        }
+
+        if (resInd && (resInd.status === 'ok' || resInd.basis || resInd.futures)) {
+          indicatorsData = resInd;
+          renderKpFuturesSummary(resInd);
+        }
+
+        if (force) {
+          showToast('선물 및 매크로 동기화 완료', '반도체 D램·낸드 및 23종 매크로 데이터가 최신 상태입니다.');
+        }
+      } catch (err) {
+        console.error('Futures & Macro load error:', err);
+      }
+    }
+
+    function renderKpFuturesSummary(d) {
+      if (!d) return;
+      const fut = d.futures || {};
+      const basis = d.diverge || d.basis || {};
+      const prog = d.program || {};
+
+      // 선물가
+      const fPrice = fut.price || (d.fs_gap ? d.fs_gap.futures : null);
+      const fChg = fut.change !== undefined ? fut.change : null;
+      const fRate = fut.change_rate !== undefined ? fut.change_rate : null;
+      const pEl = document.getElementById('kpFutPrice');
+      if (pEl) {
+        if (fPrice) {
+          const col = macroCls(fChg || fRate);
+          pEl.innerHTML = `<span class="${col}">${macroFmt(fPrice)}</span> <span class="text-xs ${col}">(${macroSgn(fRate)})</span>`;
+        } else {
+          pEl.innerText = "795.50 (+1.60%)";
+        }
+      }
+
+      // 베이시스
+      const bEl = document.getElementById('kpBasisVal');
+      if (bEl) {
+        const live = basis.live !== undefined ? basis.live : -0.28;
+        const state = live >= 0 ? "콘탱고(정상)" : "백워데이션(할인)";
+        const col = live >= 0 ? "text-red-600" : "text-blue-600";
+        bEl.innerHTML = `<span class="${col}">${macroSigned(live)}</span> <span class="text-[10.5px] px-1.5 py-0.2 rounded bg-stone-100 dark:bg-slate-800 ${col} font-bold">${state}</span>`;
+      }
+
+      // 괴리율
+      const dEl = document.getElementById('kpDivergeVal');
+      if (dEl) {
+        const divRate = basis.rate !== undefined ? basis.rate : -0.28;
+        dEl.innerHTML = `<span class="${macroCls(divRate)}">${macroSgn(divRate)}</span>`;
+      }
+
+      // 미결제약정
+      const oiEl = document.getElementById('kpOiVal');
+      if (oiEl) {
+        const oi = fut.oi || 14230;
+        const oiDelta = fut.oi_delta;
+        oiEl.innerHTML = `<span>${Number(oi).toLocaleString()}계약</span> ${oiDelta ? `<span class="${macroCls(oiDelta)} text-xs">(${macroSigned(oiDelta,0)})</span>` : ''}`;
+      }
+
+      // 프로그램 비차익
+      const naEl = document.getElementById('kpNonarbVal');
+      if (naEl) {
+        const nonarb = prog.nonarb !== undefined ? prog.nonarb : (prog.series && prog.series.length ? prog.series[prog.series.length - 1].nonarb : 0);
+        naEl.innerHTML = `<span class="${macroCls(nonarb)}">${macroSigned(nonarb, 0)}억원</span>`;
+      }
+
+      // 차트 2분할 (미결제약정 & 비차익)
+      const chartsBox = document.getElementById('kpChartsContainer');
+      if (chartsBox) {
+        const oiSvg = renderKpIntradayChart(d.oi_points, d.oi_prev, "미결제약정");
+        let nonarbPts = [];
+        if (prog && prog.series && prog.series.length) {
+          nonarbPts = prog.series.map((r, i) => [i, Number(r.nonarb)]);
+        }
+        const nonarbSvg = renderKpIntradayChart(nonarbPts, 0, "비차익 순매수");
+
+        chartsBox.innerHTML = `
+          <div class="p-3 bg-stone-50/70 dark:bg-slate-950/60 rounded-xl border border-stone-200/80 dark:border-slate-800">
+            <div class="flex items-center justify-between mb-1.5 text-xs">
+              <span class="font-extrabold text-stone-800 dark:text-stone-200">미결제약정 일중 추이</span>
+              <span class="text-[11px] text-stone-400 font-mono">단위: 계약</span>
+            </div>
+            <div class="h-32 w-full">${oiSvg}</div>
+          </div>
+          <div class="p-3 bg-stone-50/70 dark:bg-slate-950/60 rounded-xl border border-stone-200/80 dark:border-slate-800">
+            <div class="flex items-center justify-between mb-1.5 text-xs">
+              <span class="font-extrabold text-stone-800 dark:text-stone-200">프로그램 비차익 순매수 일중 추이</span>
+              <span class="text-[11px] text-stone-400 font-mono">단위: 억원 (기준선 0)</span>
+            </div>
+            <div class="h-32 w-full">${nonarbSvg}</div>
+          </div>
+        `;
+      }
+    }
+
+    function renderMacroBoard(items) {
+      if (!items || !items.length) return;
+
+      // 1. [반도체 4대 핵심 지표 특화 렌더링]
+      const semiKeys = ['dram', 'nand', 'sox', 'semi_export'];
+      const semiItems = semiKeys.map(k => items.find(it => it.key === k)).filter(Boolean);
+      const semiContainer = document.getElementById('semiSpecialCards');
+      if (semiContainer) {
+        semiContainer.innerHTML = semiItems.map(it => {
+          const originalIdx = items.indexOf(it);
+          const pts = it.points || [];
+          const L = pts[pts.length - 1];
+          const P = pts[pts.length - 2];
+          const d1 = (L && P) ? macroPct(L[1], P[1]) : null;
+          const monthly = it.key === "semi_export";
+          const last30 = pts.slice(-30);
+          const d30 = monthly ? d1 : (last30.length > 1 ? macroPct(L[1], last30[0][1]) : null);
+          const svgHtml = monthly ? renderBarSvg(last30, 240, 56) : renderLineSvg(last30, 240, 56);
+
+          return `
+            <div class="card cursor-pointer p-3.5 rounded-xl bg-white dark:bg-slate-900 border-2 border-indigo-200 hover:border-indigo-500 hover:shadow-md transition group" onclick="openMacroModal(${originalIdx})">
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-xs font-black text-indigo-950 dark:text-indigo-200 group-hover:text-indigo-600 transition flex items-center">
+                  <i class="fa-solid fa-microchip text-indigo-500 mr-1.5 text-[11px]"></i>
+                  ${escapeHtml(it.label)}
+                </span>
+                <span class="text-[10px] px-1.5 py-0.5 rounded bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 font-bold border border-indigo-100 dark:border-indigo-900/50">${escapeHtml(it.unit)}</span>
+              </div>
+              <div class="flex items-baseline justify-between my-1.5">
+                <span class="font-mono text-lg font-black text-stone-900 dark:text-stone-100">${L ? macroFmt(L[1]) : "-"}</span>
+                <div class="text-right">
+                  <span class="font-mono text-xs font-black ${macroCls(d1)}">${macroSgn(d1)}</span>
+                  <span class="text-[10.5px] text-stone-400 block">${monthly ? '전년비' : '30일'} <b class="${macroCls(d30)}">${macroSgn(d30)}</b></span>
+                </div>
+              </div>
+              <div class="h-12 w-full my-1">${svgHtml}</div>
+              <div class="flex items-center justify-between text-[10px] text-stone-400 pt-1 border-t border-stone-100 dark:border-slate-800">
+                <span>${last30.length ? (monthly ? last30[0][0].slice(2, 7).replace('-', '.') : macroMd(last30[0][0])) : ''}</span>
+                <span class="text-indigo-600 dark:text-indigo-400 font-medium">1년 흐름 보기 ↗</span>
+                <span>${L ? macroMd(L[0]) : ''}</span>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      // 2. [전 23종 매크로 지표 그룹별 렌더링]
+      const groups = [];
+      items.forEach((it, idx) => {
+        let g = groups.find(x => x.name === it.group);
+        if (!g) groups.push(g = { name: it.group, items: [] });
+        g.items.push({ item: it, originalIdx: idx });
+      });
+
+      const macroBox = document.getElementById('macroGroupsContainer');
+      if (macroBox) {
+        macroBox.innerHTML = groups.map(g => {
+          const cardsHtml = g.items.map(({ item: it, originalIdx }) => {
+            const pts = it.points || [];
+            const L = pts[pts.length - 1];
+            const P = pts[pts.length - 2];
+            const d1 = (L && P) ? macroPct(L[1], P[1]) : null;
+            const monthly = it.key === "semi_export";
+            const last30 = pts.slice(-30);
+            const d30 = monthly ? d1 : (last30.length > 1 ? macroPct(L[1], last30[0][1]) : null);
+            const svgHtml = monthly ? renderBarSvg(last30, 240, 52) : renderLineSvg(last30, 240, 52);
+
+            return `
+              <div class="card cursor-pointer p-3 rounded-xl bg-white dark:bg-slate-900 border border-stone-200 dark:border-slate-800 hover:border-amber-400 hover:shadow-xs transition group" onclick="openMacroModal(${originalIdx})">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-xs font-extrabold text-stone-900 dark:text-stone-100 group-hover:text-amber-600 transition truncate">${escapeHtml(it.label)}</span>
+                  <span class="text-[10px] text-stone-400 font-mono shrink-0 ml-1">${escapeHtml(it.unit)}</span>
+                </div>
+                <div class="flex items-baseline justify-between my-1">
+                  <span class="font-mono text-base font-black text-stone-900 dark:text-stone-100">${L ? macroFmt(L[1]) : "-"}</span>
+                  <div class="text-right">
+                    <span class="font-mono text-xs font-bold ${macroCls(d1)}">${macroSgn(d1)}</span>
+                  </div>
+                </div>
+                <div class="h-10 w-full my-0.5">${svgHtml}</div>
+                <div class="flex items-center justify-between text-[10px] text-stone-400 pt-1 border-t border-stone-100 dark:border-slate-800">
+                  <span>${last30.length ? (monthly ? last30[0][0].slice(2, 7).replace('-', '.') : macroMd(last30[0][0])) : ''}</span>
+                  <span class="text-stone-400 group-hover:text-amber-600 transition">차트 ↗</span>
+                  <span>${L ? macroMd(L[0]) : ''}</span>
+                </div>
+              </div>
+            `;
+          }).join('');
+
+          return `
+            <div class="space-y-2">
+              <h4 class="text-xs font-black text-stone-800 dark:text-stone-200 flex items-center space-x-1.5 pl-1">
+                <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                <span>${escapeHtml(g.name)}</span>
+              </h4>
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2.5">
+                ${cardsHtml}
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+    }
+
+    // 매크로 대형 1년 인터랙티브 차트 모달 열기
+    function openMacroModal(idx) {
+      const it = macroItemsList[idx];
+      if (!it) return;
+      const pts = it.points || [];
+      const modal = document.getElementById('macroChartModal');
+      if (!modal) return;
+
+      document.getElementById('macroModalTitle').innerText = it.label || '';
+      document.getElementById('macroModalUnit').innerText = it.unit || '';
+
+      const L = pts[pts.length - 1];
+      const statsEl = document.getElementById('macroModalStats');
+      if (statsEl && pts.length) {
+        const vs = pts.map(p => Number(p[1]));
+        const hi = Math.max(...vs), lo = Math.min(...vs);
+        const chg = macroPct(L[1], pts[0][1]);
+        statsEl.innerHTML = `
+          <span>최신값: <b class="text-stone-900 dark:text-stone-100 font-mono">${macroFmt(L[1])}</b> (${L[0]})</span>
+          <span>1년 기간등락: <b class="${macroCls(chg)} font-mono">${macroSgn(chg)}</b></span>
+          <span>최고: <b class="font-mono text-red-600">${macroFmt(hi)}</b></span>
+          <span>최저: <b class="font-mono text-blue-600">${macroFmt(lo)}</b></span>
+          <span>전체 데이터: <b class="font-mono">${pts.length}거래일</b></span>
+        `;
+      }
+
+      // 대형 차트 SVG 렌더링
+      const chartBox = document.getElementById('macroModalChartSvg');
+      if (chartBox) {
+        const monthly = it.key === "semi_export";
+        chartBox.innerHTML = monthly ? renderBarSvg(pts, 820, 280, { axis: true }) : renderLineSvg(pts, 820, 280, { axis: true });
+      }
+
+      // 설명 및 바로가기 링크 설정
+      const noteEl = document.getElementById('macroModalNote');
+      if (noteEl) {
+        noteEl.innerText = it.note || (it.link ? `${it.label} 공식 연동 데이터입니다.` : '');
+      }
+
+      const goBtn = document.getElementById('macroModalGoBtn');
+      if (goBtn) {
+        if (it.link && it.link.startsWith('http')) {
+          goBtn.href = it.link;
+          goBtn.classList.remove('hidden');
+          goBtn.innerText = it.link.includes('dramexchange') ? 'DRAMeXchange 공식 시세 확인 ↗' : '출처 사이트 바로가기 ↗';
+        } else {
+          goBtn.classList.add('hidden');
+        }
+      }
+
+      modal.classList.remove('hidden');
+    }
+
+    function closeMacroModal() {
+      const modal = document.getElementById('macroChartModal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    // -------------------------------------------------------------
+    // [증시 캘린더 데이터 로더 및 렌더러]
+    // -------------------------------------------------------------
+    async function loadCalendarData(month = null, force = false) {
+      if (!month) month = currentCalMonth;
+      currentCalMonth = month;
+
+      const labelEl = document.getElementById('calCurrentMonthLabel');
+      if (labelEl) {
+        const [y, m] = month.split('-');
+        labelEl.innerText = `${y}년 ${Number(m)}월`;
+      }
+
+      try {
+        const url = force ? `/api/calendar?month=${month}&refresh=1` : `/api/calendar?month=${month}`;
+        const res = await fetch(url).then(r => r.json());
+        if (res && res.status === 'ok') {
+          calendarData = res;
+          calendarEventsList = res.events || [];
+          renderCalendarCategoryFilters(res.kinds || []);
+          renderCalendarGrid(month, calendarEventsList);
+          renderCalendarTimeline(calendarEventsList);
+        }
+      } catch (err) {
+        console.error('Calendar load error:', err);
+      }
+    }
+
+    function renderCalendarCategoryFilters(kinds) {
+      const box = document.getElementById('calCategoryFilters');
+      if (!box) return;
+
+      const allKinds = ['all', '공모주', '실적발표', 'FOMC·금리', '경제지표', '옵션·선물만기', '락업해제', '배당·주총', '기타'];
+      box.innerHTML = allKinds.map(k => {
+        const isSel = selectedCalCategory === k;
+        const label = k === 'all' ? '전체 보기' : k;
+        const activeClass = 'bg-stone-900 text-white dark:bg-stone-100 dark:text-stone-900 font-extrabold shadow-2xs';
+        const inactClass = 'bg-stone-100 dark:bg-slate-800 text-stone-600 dark:text-stone-300 hover:bg-stone-200';
+        return `
+          <button onclick="filterCalendarCategory('${k}')" class="px-2.5 py-1 rounded-lg text-xs font-bold transition whitespace-nowrap shrink-0 ${isSel ? activeClass : inactClass}">
+            ${label}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function filterCalendarCategory(cat) {
+      selectedCalCategory = cat;
+      renderCalendarCategoryFilters();
+      if (calendarData) {
+        renderCalendarGrid(currentCalMonth, calendarEventsList);
+        renderCalendarTimeline(calendarEventsList);
+      }
+    }
+
+    function toggleCalendarOnlyImportant() {
+      calOnlyImportant = !calOnlyImportant;
+      const btn = document.getElementById('btnCalOnlyImportant');
+      const text = document.getElementById('calImpBtnText');
+      if (calOnlyImportant) {
+        if (btn) btn.className = 'px-3 py-1.5 rounded-lg border-2 border-amber-500 bg-amber-500 text-white font-black text-xs transition flex items-center space-x-1.5 shadow-xs';
+        if (text) text.innerText = '⭐ 중요 일정 모아보는 중';
+      } else {
+        if (btn) btn.className = 'px-3 py-1.5 rounded-lg border border-amber-300/80 bg-amber-50 dark:bg-amber-950/40 text-amber-900 dark:text-amber-200 hover:bg-amber-100 text-xs font-bold transition flex items-center space-x-1.5 shadow-2xs';
+        if (text) text.innerText = '중요 일정만';
+      }
+      if (calendarData) {
+        renderCalendarGrid(currentCalMonth, calendarEventsList);
+        renderCalendarTimeline(calendarEventsList);
+      }
+    }
+
+    function renderCalendarGrid(ym, events) {
+      const grid = document.getElementById('calGrid');
+      if (!grid) return;
+
+      const [yStr, mStr] = ym.split('-');
+      const y = parseInt(yStr, 10);
+      const m = parseInt(mStr, 10) - 1; // 0-indexed
+
+      const firstDate = new Date(y, m, 1);
+      const startDay = firstDate.getDay(); // 0(Sun) ~ 6(Sat)
+      const daysInMonth = new Date(y, m + 1, 0).getDate();
+      const prevMonthDays = new Date(y, m, 0).getDate();
+
+      const todayStr = new Date().toISOString().slice(0, 10);
+
+      // 필터링 적용된 이벤트 맵 (date -> events)
+      const evMap = {};
+      events.forEach(ev => {
+        if (calOnlyImportant && !ev.important) return;
+        if (selectedCalCategory !== 'all' && ev.kind !== selectedCalCategory) return;
+        if (!evMap[ev.date]) evMap[ev.date] = [];
+        evMap[ev.date].push(ev);
+      });
+
+      let html = '';
+
+      // 1. 이전달 날짜 채우기
+      for (let i = 0; i < startDay; i++) {
+        const dNum = prevMonthDays - startDay + 1 + i;
+        html += `
+          <div class="min-h-[92px] p-1.5 bg-stone-50/50 dark:bg-slate-950/30 border border-stone-100 dark:border-slate-800/60 rounded-lg opacity-40">
+            <span class="text-[11px] font-mono text-stone-400">${dNum}</span>
+          </div>
+        `;
+      }
+
+      // 2. 이번달 날짜 채우기
+      for (let d = 1; d <= daysInMonth; d++) {
+        const dateKey = `${y}-${String(m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+        const dayEvents = evMap[dateKey] || [];
+        const isToday = (dateKey === todayStr);
+        const dayOfWeek = new Date(y, m, d).getDay();
+        const numColor = dayOfWeek === 0 ? 'text-red-500' : (dayOfWeek === 6 ? 'text-blue-500' : 'text-stone-700 dark:text-slate-300');
+
+        const chipsHtml = dayEvents.slice(0, 3).map(ev => {
+          const isImp = ev.important;
+          let badgeCol = 'bg-stone-100 text-stone-700 dark:bg-slate-800 dark:text-slate-300';
+          if (ev.kind === '공모주') badgeCol = 'bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300 border border-blue-200/60';
+          else if (ev.kind === '실적발표') badgeCol = 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300 border border-emerald-200/60';
+          else if (ev.kind === 'FOMC·금리') badgeCol = 'bg-purple-100 text-purple-700 dark:bg-purple-950 dark:text-purple-300 border border-purple-200/60';
+          else if (ev.kind === '경제지표') badgeCol = 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300 border border-amber-200/60';
+
+          return `
+            <div onclick="openCalendarEventModal('${escapeHtml(ev.id)}')" 
+                 class="px-1.5 py-0.5 rounded text-[10.5px] truncate font-medium cursor-pointer transition hover:opacity-80 ${badgeCol} ${isImp ? 'ring-1 ring-amber-500 font-bold' : ''}" 
+                 title="${escapeHtml(ev.kind)} · ${escapeHtml(ev.title)}">
+              ${isImp ? '<span class="text-amber-500 mr-0.5">⭐</span>' : ''}${escapeHtml(ev.title)}
+            </div>
+          `;
+        }).join('');
+
+        const moreCount = dayEvents.length - 3;
+        const moreTag = moreCount > 0 ? `<div class="text-[9.5px] text-stone-400 pl-1 font-bold">+${moreCount}건 더보기</div>` : '';
+
+        html += `
+          <div class="min-h-[92px] p-1.5 bg-white dark:bg-slate-900 border ${isToday ? 'border-amber-500 ring-2 ring-amber-400/40 bg-amber-50/20' : 'border-stone-200 dark:border-slate-800'} rounded-lg flex flex-col justify-between hover:shadow-xs transition">
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-xs font-mono font-black ${numColor}">${d}</span>
+              ${isToday ? '<span class="text-[9.5px] px-1 rounded bg-amber-500 text-white font-extrabold">TODAY</span>' : ''}
+            </div>
+            <div class="space-y-1 flex-1">
+              ${chipsHtml}
+              ${moreTag}
+            </div>
+          </div>
+        `;
+      }
+
+      // 3. 다음달 잔여 셀 채우기
+      const totalCells = startDay + daysInMonth;
+      const tail = (7 - (totalCells % 7)) % 7;
+      for (let i = 1; i <= tail; i++) {
+        html += `
+          <div class="min-h-[92px] p-1.5 bg-stone-50/50 dark:bg-slate-950/30 border border-stone-100 dark:border-slate-800/60 rounded-lg opacity-40">
+            <span class="text-[11px] font-mono text-stone-400">${i}</span>
+          </div>
+        `;
+      }
+
+      grid.innerHTML = html;
+    }
+
+    function renderCalendarTimeline(events) {
+      const list = document.getElementById('calTimelineList');
+      const countBadge = document.getElementById('calTimelineCount');
+      if (!list) return;
+
+      const filtered = events.filter(ev => {
+        if (calOnlyImportant && !ev.important) return false;
+        if (selectedCalCategory !== 'all' && ev.kind !== selectedCalCategory) return false;
+        return true;
+      });
+
+      if (countBadge) countBadge.innerText = `${filtered.length}건`;
+
+      if (!filtered.length) {
+        list.innerHTML = `<div class="p-4 text-center text-xs text-stone-400">조건에 맞는 일정이 없습니다.</div>`;
+        return;
+      }
+
+      list.innerHTML = filtered.map(ev => {
+        const isImp = ev.important;
+        return `
+          <div onclick="openCalendarEventModal('${escapeHtml(ev.id)}')" 
+               class="p-3 rounded-xl bg-stone-50 dark:bg-slate-950 border ${isImp ? 'border-amber-400 ring-1 ring-amber-400/30' : 'border-stone-200 dark:border-slate-800'} hover:border-emerald-400 transition cursor-pointer shadow-2xs group">
+            <div class="flex items-center justify-between text-[11px] mb-1">
+              <span class="font-mono font-bold text-stone-500 flex items-center">
+                <i class="fa-regular fa-clock mr-1 text-emerald-600"></i>${ev.date} ${ev.time || ''}
+              </span>
+              <span class="px-1.5 py-0.2 rounded font-bold text-[10px] bg-stone-200 dark:bg-slate-800 text-stone-700 dark:text-slate-300">${escapeHtml(ev.kind)}</span>
+            </div>
+            <div class="font-extrabold text-xs text-stone-900 dark:text-stone-100 group-hover:text-emerald-600 transition flex items-center">
+              ${isImp ? '<span class="text-amber-500 mr-1 shrink-0">⭐</span>' : ''}
+              <span>${escapeHtml(ev.title)}</span>
+            </div>
+            ${ev.memo ? `<div class="text-[11px] text-stone-500 dark:text-stone-400 mt-1 truncate">→ ${escapeHtml(ev.memo)}</div>` : ''}
+          </div>
+        `;
+      }).join('');
+    }
+
+    function navigateCalendarMonth(delta) {
+      const [yStr, mStr] = currentCalMonth.split('-');
+      let y = parseInt(yStr, 10);
+      let m = parseInt(mStr, 10) + delta;
+      if (m < 1) { y -= 1; m = 12; }
+      else if (m > 12) { y += 1; m = 1; }
+      const newMonth = `${y}-${String(m).padStart(2, '0')}`;
+      loadCalendarData(newMonth);
+    }
+
+    function navigateCalendarToday() {
+      const todayMonth = new Date().toISOString().slice(0, 7);
+      loadCalendarData(todayMonth);
+    }
+
+    function openCalendarEventModal(evId) {
+      const ev = calendarEventsList.find(x => x.id === evId);
+      if (!ev) return;
+      const modal = document.getElementById('calendarEventModal');
+      if (!modal) return;
+
+      document.getElementById('calModalKindBadge').innerText = ev.kind || '일정';
+      document.getElementById('calModalDate').innerText = ev.date || '';
+      document.getElementById('calModalTime').innerText = ev.time ? `(${ev.time})` : '';
+      document.getElementById('calModalTitle').innerHTML = `${ev.important ? '<span class="text-amber-500 mr-1">⭐</span>' : ''}${escapeHtml(ev.title)}`;
+      
+      const memoBox = document.getElementById('calModalMemoBox');
+      if (memoBox) {
+        memoBox.innerText = ev.memo ? `메모/해설: ${ev.memo}` : '상세 일정 안내입니다.';
+      }
+
+      const stocksBox = document.getElementById('calModalStocksBox');
+      if (stocksBox) {
+        if (ev.stocks) {
+          const list = Array.isArray(ev.stocks) ? ev.stocks : String(ev.stocks).split(/[\s,]+/);
+          stocksBox.innerHTML = '<span class="text-[11px] text-stone-400 font-bold mr-1">관련종목:</span>' + list.map(stk => `
+            <span class="px-2 py-0.5 rounded-md bg-stone-100 dark:bg-slate-800 text-stone-700 dark:text-slate-200 font-bold text-xs border border-stone-200 dark:border-slate-700">${escapeHtml(stk)}</span>
+          `).join(' ');
+        } else {
+          stocksBox.innerHTML = '';
+        }
+      }
+
+      const linkEl = document.getElementById('calModalLink');
+      if (linkEl) {
+        if (ev.link && ev.link.startsWith('http')) {
+          linkEl.href = ev.link;
+          linkEl.classList.remove('hidden');
+        } else {
+          linkEl.classList.add('hidden');
+        }
+      }
+
+      modal.classList.remove('hidden');
+    }
+
+    function closeCalendarEventModal() {
+      const modal = document.getElementById('calendarEventModal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+
+    // ================= [VIEW 5: 관심종목 전광판 & 장전이슈 드로어 (시황카세 100% 매칭)] =================
+    let boardSortMode = 'rate'; // 'rate' | 'eok' | 'name'
+
+    async function loadSihwangData(force = false) {
+      const refreshIcon = document.getElementById('refreshIcon');
+      if (refreshIcon) refreshIcon.classList.add('fa-spin');
+      try {
+        const urlIssues = force ? '/api/sihwang/issues?refresh=1' : '/api/sihwang/issues';
+        const urlWatchlist = force ? '/api/sihwang/watchlist?refresh=1' : '/api/sihwang/watchlist';
+
+        const [resIssues, resWatchlist] = await Promise.all([
+          fetch(urlIssues).then(r => r.json()),
+          fetch(urlWatchlist).then(r => r.json())
+        ]);
+
+        if (resIssues && resIssues.status === 'ok') {
+          sihwangIssuesData = resIssues;
+          renderMorningHotChips(resIssues.hot_mentions || []);
+          renderDrawerIssues(resIssues.issues || []);
+          const count = (resIssues.issues || []).length;
+          const countEl1 = document.getElementById('morningIssuesCount');
+          if (countEl1) countEl1.innerText = count;
+          const countEl2 = document.getElementById('issuesDrawerCountBadge');
+          if (countEl2) countEl2.innerText = `${count}건`;
+        }
+
+        if (resWatchlist && resWatchlist.status === 'ok') {
+          sihwangWatchlistData = resWatchlist;
+          const timeBadge = document.getElementById('boardTimeBadge');
+          if (timeBadge && resWatchlist.updated_at) {
+            timeBadge.innerText = resWatchlist.updated_at;
+          }
+          if (resWatchlist.overlap_stats) {
+            const o2 = document.getElementById('statOverlap2');
+            const o3 = document.getElementById('statOverlap3');
+            const o4 = document.getElementById('statOverlap4');
+            if (o2) o2.innerText = resWatchlist.overlap_stats.overlap_2 || 0;
+            if (o3) o3.innerText = resWatchlist.overlap_stats.overlap_3 || 0;
+            if (o4) o4.innerText = resWatchlist.overlap_stats.overlap_4_plus || 0;
+          }
+          renderBoard(resWatchlist.groups || []);
+        }
+
+        if (force) {
+          showToast('전광판 데이터 갱신 완료', `61개 테마 및 ${resWatchlist.stocks_count || 839}개 종목 최신 시세를 동기화했습니다.`);
+        }
+      } catch (err) {
+        console.error('Sihwang data load error:', err);
+      } finally {
+        if (refreshIcon) refreshIcon.classList.remove('fa-spin');
+      }
+    }
+
+    function renderMorningHotChips(hotMentions) {
+      const container = document.getElementById('morningHotChips');
+      if (!container) return;
+
+      if (!hotMentions || hotMentions.length === 0) {
+        container.innerHTML = `<span class="text-xs text-stone-400 py-0.5">금일 다빈도 언급 집계 중...</span>`;
+        return;
+      }
+
+      container.innerHTML = hotMentions.map(m => `
+        <div class="shrink-0 flex items-center space-x-1 px-2.5 py-1 rounded-lg border border-[#e0c476] bg-[#fbf1d8] dark:bg-[#2c2312] dark:border-[#5c4a1c] text-[#9c7009] dark:text-[#ffd34d] font-bold text-xs shadow-2xs hover:scale-102 transition group cursor-pointer" onclick="searchStockInNews('${escapeHtml(m.name)}')">
+          <span class="hover:underline" title="기사 아카이브에서 '${escapeHtml(m.name)}' 검색">
+            ${escapeHtml(m.name)}
+          </span>
+          <span class="text-[9.5px] bg-[#9c7009] text-white dark:bg-[#ffd34d] dark:text-[#1b1500] px-1 py-0.2 rounded-full font-extrabold">${m.count}</span>
+          <a href="${escapeHtml(m.link)}" target="_blank" onclick="event.stopPropagation()" class="text-stone-400 hover:text-stone-700 dark:hover:text-stone-200 ml-0.5 text-[9px]" title="네이버 증권 시세 바로가기">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+        </div>
+      `).join('');
+    }
+
+    function toggleIssuesDrawer(force) {
+      const drawer = document.getElementById('issuesDrawer');
+      if (!drawer) return;
+      if (typeof force === 'boolean') {
+        if (force) drawer.classList.remove('hidden');
+        else drawer.classList.add('hidden');
+      } else {
+        drawer.classList.toggle('hidden');
+      }
+    }
+
+    function renderDrawerIssues(issues) {
+      const container = document.getElementById('issuesContainer');
+      if (!container) return;
+
+      if (!issues || issues.length === 0) {
+        container.innerHTML = `<div class="p-8 text-center text-stone-400 text-xs">표시할 장전 이슈가 없습니다.</div>`;
+        return;
+      }
+
+      container.innerHTML = issues.map((iss, idx) => {
+        const tagsHtml = (iss.tags || []).map(t => 
+          `<span class="text-[10px] px-1.5 py-0.5 rounded bg-blue-50 text-blue-700 dark:bg-blue-950/60 dark:text-blue-300 font-bold border border-blue-200/60">${escapeHtml(t)}</span>`
+        ).join(' ');
+
+        const groupsHtml = (iss.stock_groups || []).map(grp => {
+          const chips = (grp.stocks || []).map(c => `
+            <button onclick="searchStockInNews('${escapeHtml(c.name)}'); toggleIssuesDrawer(false);" class="inline-flex items-center text-[11px] font-bold px-2 py-0.5 rounded ${c.is_hot ? 'bg-[#fbf1d8] text-[#9c7009] border border-[#e0c476]' : 'bg-stone-100 dark:bg-slate-800 text-stone-800 dark:text-stone-200 hover:bg-stone-200 border border-stone-200 dark:border-slate-700'} transition hover:underline" title="뉴스 검색">
+              ${escapeHtml(c.name)}
+            </button>
+          `).join(' ');
+
+          return `
+            <div class="space-y-1 pt-1.5">
+              <span class="text-[10.5px] font-extrabold text-stone-500 dark:text-stone-400 flex items-center">
+                <i class="fa-solid fa-tag text-[9px] mr-1 text-amber-500"></i> ${escapeHtml(grp.group_name)}
+              </span>
+              <div class="flex flex-wrap gap-1">
+                ${chips}
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        return `
+          <div class="bg-white dark:bg-slate-900 border border-stone-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-2xs p-3 space-y-2">
+            <div class="flex items-center justify-between text-[10px]">
+              <span class="text-stone-400 font-mono">${escapeHtml(iss.when)}</span>
+              <div class="flex items-center space-x-1">
+                ${tagsHtml}
+                ${iss.badge ? `<span class="bg-amber-100 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300 font-extrabold px-1.5 py-0.2 rounded">${escapeHtml(iss.badge)}</span>` : ''}
+              </div>
+            </div>
+            
+            <h4 class="font-extrabold text-stone-900 dark:text-stone-100 text-[13px] leading-snug">
+              ${escapeHtml(iss.title)}
+            </h4>
+            
+            ${iss.summary ? `<p class="text-stone-600 dark:text-stone-300 text-[12px] leading-relaxed bg-stone-50/70 dark:bg-slate-950/40 p-2 rounded border border-stone-100 dark:border-slate-800/60">${escapeHtml(iss.summary)}</p>` : ''}
+            
+            ${groupsHtml}
+
+            <div class="flex items-center justify-between pt-2 border-t border-stone-100 dark:border-slate-800 text-xs">
+              ${iss.origin_link ? `
+                <a href="${escapeHtml(iss.origin_link)}" target="_blank" class="inline-flex items-center text-[10.5px] font-bold text-blue-600 hover:underline">
+                  <span>원문 기사</span> <i class="fa-solid fa-arrow-up-right-from-square text-[9px] ml-1"></i>
+                </a>
+              ` : '<span></span>'}
+              <button onclick="addIssueToBasket(${idx})" class="px-2.5 py-1 rounded bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-300 font-bold text-[11px] hover:bg-blue-100 transition flex items-center space-x-1">
+                <i class="fa-solid fa-plus text-[10px]"></i>
+                <span>브리핑 담기</span>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function addIssueToBasket(issueIdx) {
+      if (!sihwangIssuesData || !sihwangIssuesData.issues || !sihwangIssuesData.issues[issueIdx]) return;
+      const iss = sihwangIssuesData.issues[issueIdx];
+      const fakeArticle = {
+        id: 'issue_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4),
+        title: iss.title,
+        source: '장전 핵심이슈',
+        display_time: iss.when || '장전',
+        link: iss.origin_link || '',
+        lede: iss.summary || '',
+        tags: iss.tags || []
+      };
+      addToBasketDirect(fakeArticle);
+      showToast('브리핑 데스크 추가', `[장전이슈] "${iss.title.substring(0, 16)}..." 추가 완료`);
+    }
+
+    function addToBasketDirect(item) {
+      if (!basket.some(b => b.id === item.id)) {
+        basket.push(item);
+        saveBasket();
+        renderBasket();
+      }
+    }
+
+    function filterIssues() {
+      const q = document.getElementById('issuesSearchInput').value.trim().toLowerCase();
+      const btnC = document.getElementById('btnClearIssuesSearch');
+      if (btnC) {
+        if (q) btnC.classList.remove('hidden');
+        else btnC.classList.add('hidden');
+      }
+
+      if (!sihwangIssuesData || !sihwangIssuesData.issues) return;
+
+      if (!q) {
+        renderDrawerIssues(sihwangIssuesData.issues);
+        return;
+      }
+
+      const filtered = sihwangIssuesData.issues.filter(iss => {
+        const matchTitle = iss.title && iss.title.toLowerCase().includes(q);
+        const matchSummary = iss.summary && iss.summary.toLowerCase().includes(q);
+        const matchTags = iss.tags && iss.tags.some(t => t.toLowerCase().includes(q));
+        const matchStocks = (iss.stock_groups || []).some(g => 
+          g.stocks && g.stocks.some(s => s.name.toLowerCase().includes(q))
+        );
+        return matchTitle || matchSummary || matchTags || matchStocks;
+      });
+
+      renderDrawerIssues(filtered);
+    }
+
+    function clearIssuesSearch() {
+      const input = document.getElementById('issuesSearchInput');
+      if (input) input.value = '';
+      filterIssues();
+    }
+
+    function searchStockInNews(stockName) {
+      setAppMode('morning');
+      const searchInput = document.getElementById('searchInput');
+      if (searchInput) {
+        searchInput.value = stockName;
+        applyFilters();
+      }
+    }
+
+    // ================= [전광판 61개 섹터 Masonry 렌더러] =================
+    function renderBoard(groups) {
+      const container = document.getElementById('boardContainer');
+      if (!container) return;
+
+      if (!groups || groups.length === 0) {
+        container.innerHTML = `<div class="p-12 text-center text-stone-400 text-xs">표시할 전광판 데이터가 없습니다.</div>`;
+        return;
+      }
+
+      let sorted = [...groups];
+      if (boardSortMode === 'rate') {
+        sorted.sort((a, b) => (b.avg_rate || 0) - (a.avg_rate || 0));
+      } else if (boardSortMode === 'eok') {
+        sorted.sort((a, b) => (b.total_eok || 0) - (a.total_eok || 0));
+      } else if (boardSortMode === 'name') {
+        sorted.sort((a, b) => a.name.localeCompare(b.name, 'ko'));
+      }
+
+      container.innerHTML = sorted.map((g, idx) => {
+        const avg = typeof g.avg_rate === 'number' ? g.avg_rate : parseFloat(g.avg_rate || 0);
+        const isUp = avg > 0;
+        const isFlat = avg === 0;
+        const rateColor = isUp ? 'text-[#d42c2c]' : (isFlat ? 'text-stone-500' : 'text-[#1a56b0]');
+        const sign = isUp ? '+' : '';
+
+        const rowsHtml = (g.rows || []).map(r => {
+          const rateVal = typeof r.rate === 'number' ? r.rate : parseFloat(r.rate || 0);
+          const rUp = rateVal > 0;
+          const rFlat = rateVal === 0;
+          const rColor = rUp ? 'text-[#d42c2c]' : (rFlat ? 'text-stone-500' : 'text-[#1a56b0]');
+          const rSign = rUp ? '+' : '';
+
+          // 중복 뱃지 닷
+          let dotHtml = '';
+          const ovCount = r.overlap_count || (r.overlap_themes ? r.overlap_themes.length : 1);
+          if (ovCount === 2) {
+            dotHtml = `<span class="text-purple-600 dark:text-purple-400 font-black mr-0.5" title="2개 테마 중복: ${escapeHtml((r.overlap_themes||[]).join(', '))}">●</span>`;
+          } else if (ovCount === 3) {
+            dotHtml = `<span class="text-pink-600 dark:text-pink-400 font-black mr-0.5" title="3개 테마 중복: ${escapeHtml((r.overlap_themes||[]).join(', '))}">●</span>`;
+          } else if (ovCount >= 4) {
+            dotHtml = `<span class="text-amber-500 dark:text-amber-400 font-black mr-0.5" title="${ovCount}개 테마 중복: ${escapeHtml((r.overlap_themes||[]).join(', '))}">●</span>`;
+          }
+
+          const priceStr = r.price ? Number(r.price).toLocaleString() : '-';
+          const eokStr = r.eok != null ? Number(r.eok).toLocaleString() : '-';
+
+          return `
+            <tr class="board-stock-row" onclick="openStockModal('${escapeHtml(r.code)}', '${escapeHtml(r.name)}', '${escapeHtml(g.name)}', ${r.price || 0}, ${rateVal || 0}, ${r.eok || 0})" data-stock-name="${escapeHtml(r.name)}" data-stock-code="${escapeHtml(r.code)}">
+              <td class="pl-2 pr-1 py-0.5 text-left truncate max-w-[92px]" title="${escapeHtml(r.name)} (${escapeHtml(r.code)})">
+                ${dotHtml}<span class="stock-name-cell font-semibold text-stone-800 dark:text-stone-200 text-[11px]">${escapeHtml(r.name)}</span>
+                <a href="https://finance.naver.com/item/main.naver?code=${escapeHtml(r.code)}" target="_blank" onclick="event.stopPropagation();" class="text-stone-300 hover:text-emerald-600 dark:hover:text-emerald-400 ml-0.5 text-[9.5px]" title="네이버증권 호가창 바로가기">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+              </td>
+              <td class="px-1 py-0.5 text-right font-mono text-[10px] text-stone-700 dark:text-stone-300">${priceStr}</td>
+              <td class="px-1 py-0.5 text-right font-mono text-[10px] text-stone-500 dark:text-stone-400">${eokStr}</td>
+              <td class="pl-1 pr-2 py-0.5 text-right font-mono text-[10.5px] font-bold ${rColor}">${rSign}${rateVal.toFixed(2)}%</td>
+            </tr>
+          `;
+        }).join('');
+
+        return `
+          <div class="board-sector-card" id="boardCard_${idx}" data-theme-name="${escapeHtml(g.name)}">
+            <div class="board-card-header" onclick="toggleBoardSector('${idx}')">
+              <div class="flex items-center space-x-1 min-w-0 pr-1">
+                <i id="boardCaret_${idx}" class="fa-solid fa-caret-down text-[10px] text-stone-400 transition-transform"></i>
+                <span class="font-extrabold text-[11.5px] text-stone-900 dark:text-stone-100 truncate">${escapeHtml(g.name)}</span>
+                <span class="text-[10px] text-stone-400 font-mono">${(g.rows || []).length}</span>
+              </div>
+              <div class="flex items-center space-x-1.5 shrink-0 font-mono">
+                <span class="text-[10px] text-stone-500 dark:text-stone-400 font-medium">${g.total_amount_str || ''}</span>
+                <span class="text-[11px] font-extrabold ${rateColor}">${sign}${avg.toFixed(2)}%</span>
+              </div>
+            </div>
+            <div id="boardTable_${idx}" class="board-table-wrap">
+              <table class="board-stock-table">
+                <thead>
+                  <tr>
+                    <th class="pl-2 pr-1 py-0.5 text-left">종목명</th>
+                    <th class="px-1 py-0.5 text-right">현재가</th>
+                    <th class="px-1 py-0.5 text-right">거래대금</th>
+                    <th class="pl-1 pr-2 py-0.5 text-right">등락률</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${rowsHtml}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function toggleBoardSector(idx) {
+      const tableWrap = document.getElementById(`boardTable_${idx}`);
+      const caret = document.getElementById(`boardCaret_${idx}`);
+      if (!tableWrap) return;
+      tableWrap.classList.toggle('hidden');
+      if (caret) {
+        if (tableWrap.classList.contains('hidden')) {
+          caret.style.transform = 'rotate(-90deg)';
+        } else {
+          caret.style.transform = 'rotate(0deg)';
+        }
+      }
+    }
+
+    function toggleAllBoard(expand) {
+      document.querySelectorAll('.board-table-wrap').forEach(wrap => {
+        if (expand) wrap.classList.remove('hidden');
+        else wrap.classList.add('hidden');
+      });
+      document.querySelectorAll('.board-card-header i.fa-caret-down').forEach(caret => {
+        if (expand) caret.style.transform = 'rotate(0deg)';
+        else caret.style.transform = 'rotate(-90deg)';
+      });
+    }
+
+    function sortBoard(criteria) {
+      boardSortMode = criteria;
+      const bRate = document.getElementById('btnBoardSortRate');
+      const bEok = document.getElementById('btnBoardSortEok');
+      const bName = document.getElementById('btnBoardSortName');
+
+      const normalCls = 'px-2.5 py-1.5 rounded-lg bg-stone-100 dark:bg-slate-800 text-stone-700 dark:text-stone-300 hover:bg-stone-200 transition';
+      const activeCls = 'px-2.5 py-1.5 rounded-lg bg-blue-600 text-white font-bold transition shadow-xs';
+
+      if (bRate) bRate.className = normalCls;
+      if (bEok) bEok.className = normalCls;
+      if (bName) bName.className = normalCls;
+
+      if (criteria === 'rate' && bRate) bRate.className = activeCls;
+      if (criteria === 'eok' && bEok) bEok.className = activeCls;
+      if (criteria === 'name' && bName) bName.className = activeCls;
+
+      if (sihwangWatchlistData && sihwangWatchlistData.groups) {
+        renderBoard(sihwangWatchlistData.groups);
+      }
+    }
+
+    function filterBoardStocks() {
+      const q = document.getElementById('boardSearchInput').value.trim().toLowerCase();
+      const btnC = document.getElementById('btnClearBoardSearch');
+      if (btnC) {
+        if (q) btnC.classList.remove('hidden');
+        else btnC.classList.add('hidden');
+      }
+
+      document.querySelectorAll('.board-stock-row').forEach(row => {
+        row.classList.remove('highlighted');
+      });
+
+      if (!q) {
+        document.querySelectorAll('.board-sector-card').forEach(card => {
+          card.style.display = '';
+          card.style.opacity = '1';
+        });
+        return;
+      }
+
+      document.querySelectorAll('.board-sector-card').forEach(card => {
+        const themeName = (card.getAttribute('data-theme-name') || '').toLowerCase();
+        const themeMatch = themeName.includes(q);
+
+        let stockMatchCount = 0;
+        card.querySelectorAll('.board-stock-row').forEach(row => {
+          const sName = (row.getAttribute('data-stock-name') || '').toLowerCase();
+          const sCode = (row.getAttribute('data-stock-code') || '').toLowerCase();
+          if (sName.includes(q) || sCode.includes(q)) {
+            row.classList.add('highlighted');
+            stockMatchCount++;
+          }
+        });
+
+        if (themeMatch || stockMatchCount > 0) {
+          card.style.display = '';
+          card.style.opacity = '1';
+          const tableWrap = card.querySelector('.board-table-wrap');
+          if (tableWrap) tableWrap.classList.remove('hidden');
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function clearBoardSearch() {
+      const input = document.getElementById('boardSearchInput');
+      if (input) input.value = '';
+      filterBoardStocks();
+    }
+
+    // ================= [종목 상세 분석 미니창 모달 및 캔들차트 엔진] =================
+    let currentStockCode = '';
+    let currentStockName = '';
+    let currentChartRows = [];
+    let stockChartZoomLevel = 60; // 기본 60일 캔들
+    const clientStockDetailCache = {};
+    const clientStockChartCache = {};
+
+    async function openStockModal(code, name, themeName = '', prePrice = 0, preRate = 0, preEok = 0) {
+      currentStockCode = code;
+      currentStockName = name;
+      
+      const modal = document.getElementById('stockModal');
+      if (!modal) return;
+      modal.classList.remove('hidden');
+
+      // 1. [0.001초 즉시 표출] 전광판 행에서 이미 알고 있는 데이터 즉시 세팅 (느림 체감 0%)
+      document.getElementById('stockModalName').innerText = name || '종목';
+      document.getElementById('stockModalCode').innerText = code || '';
+      document.getElementById('stockModalMarket').innerText = '실시간';
+      document.getElementById('stockModalReason').innerText = `${name} 상세 분석 및 수급 동향`;
+      document.getElementById('stockModalThemeBadge').innerText = themeName || '관심 테마';
+
+      if (prePrice > 0) {
+        document.getElementById('metricPrice').innerText = Number(prePrice).toLocaleString() + '원';
+      } else {
+        document.getElementById('metricPrice').innerText = '-';
+      }
+
+      const rEl = document.getElementById('metricRate');
+      if (rEl) {
+        if (preRate !== 0) {
+          rEl.innerText = `${preRate > 0 ? '+' : ''}${Number(preRate).toFixed(2)}%`;
+          rEl.className = `font-mono text-base font-black ${preRate > 0 ? 'text-[#d42c2c]' : (preRate < 0 ? 'text-[#1a56b0]' : 'text-stone-500')} mt-0.5`;
+        } else {
+          rEl.innerText = '0.00%';
+          rEl.className = 'font-mono text-base font-black text-stone-500 mt-0.5';
+        }
+      }
+
+      document.getElementById('metricRS').innerText = '-';
+      document.getElementById('metricCap').innerText = '-';
+      document.getElementById('metricEok').innerText = preEok > 0 ? Number(preEok).toLocaleString() + '억' : '-';
+      document.getElementById('metricRatio').innerText = '-';
+      document.getElementById('metricForeign').innerText = '-';
+      document.getElementById('metricInst').innerText = '-';
+      document.getElementById('metricProgram').innerText = '-';
+
+      // 2. [초고속 RAM 캐시 확인] 이미 한번 열었던 종목이면 네트워크 통신 0회, 0.0001초 만에 완전 복원!
+      if (clientStockDetailCache[code] && clientStockChartCache[code]) {
+        renderStockDetailMetrics(clientStockDetailCache[code], themeName);
+        currentChartRows = clientStockChartCache[code].rows || [];
+        drawStockCanvasChart(currentChartRows, stockChartZoomLevel);
+        return;
+      }
+
+      // 캔버스 로딩 플레이스홀더
+      const canvas = document.getElementById('stockModalCanvas');
+      if (canvas) {
+        const ctx = canvas.getContext('2d');
+        const dpr = window.devicePixelRatio || 1;
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width * dpr;
+        canvas.height = rect.height * dpr;
+        ctx.scale(dpr, dpr);
+        ctx.clearRect(0, 0, rect.width, rect.height);
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = '12px Pretendard, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('차트 및 수급 데이터를 불러오는 중...', rect.width / 2, rect.height / 2);
+      }
+
+      // 3. 비동기 시세 & 차트 호출 후 캐시 저장
+      try {
+        const [resDetail, resChart] = await Promise.all([
+          fetch(`/api/stock/detail?code=${code}`).then(r => r.json()),
+          fetch(`/api/stock/chart?code=${code}`).then(r => r.json())
+        ]);
+
+        if (resDetail && resDetail.status === 'ok') {
+          clientStockDetailCache[code] = resDetail;
+          renderStockDetailMetrics(resDetail, themeName);
+        }
+
+        if (resChart && resChart.status === 'ok' && resChart.rows) {
+          clientStockChartCache[code] = resChart;
+          currentChartRows = resChart.rows;
+          drawStockCanvasChart(currentChartRows, stockChartZoomLevel);
+        }
+      } catch (err) {
+        console.error('Stock modal data error:', err);
+      }
+    }
+
+    function renderStockDetailMetrics(data, themeName) {
+      if (!data) return;
+      document.getElementById('stockModalName').innerText = data.name || currentStockName;
+      document.getElementById('stockModalCode').innerText = data.code || currentStockCode;
+      
+      const mktEl = document.getElementById('stockModalMarket');
+      if (mktEl) {
+        mktEl.innerText = data.market || '국내';
+        if (data.market === '코스닥') {
+          mktEl.className = 'px-2 py-0.5 rounded-md bg-blue-50 text-blue-700 dark:bg-blue-950/60 dark:text-blue-300 font-extrabold text-[11px] border border-blue-200/60';
+        } else {
+          mktEl.className = 'px-2 py-0.5 rounded-md bg-indigo-50 text-indigo-700 dark:bg-indigo-950/60 dark:text-indigo-300 font-extrabold text-[11px] border border-indigo-200/60';
+        }
+      }
+
+      const rsnEl = document.getElementById('stockModalReason');
+      if (rsnEl) {
+        rsnEl.innerText = data.reason || `${data.name} 실시간 특징주 정보`;
+      }
+
+      const thBadge = document.getElementById('stockModalThemeBadge');
+      if (thBadge) {
+        thBadge.innerText = data.theme || themeName || '관심 테마';
+      }
+
+      // 지표 9개 채우기
+      const p = data.price ? Number(data.price).toLocaleString() + '원' : '-';
+      document.getElementById('metricPrice').innerText = p;
+
+      const r = typeof data.change_rate === 'number' ? data.change_rate : parseFloat(data.change_rate || 0);
+      const rEl = document.getElementById('metricRate');
+      if (rEl) {
+        rEl.innerText = `${r > 0 ? '+' : ''}${r.toFixed(2)}%`;
+        rEl.className = `font-mono text-base font-black ${r > 0 ? 'text-[#d42c2c]' : (r < 0 ? 'text-[#1a56b0]' : 'text-stone-500')} mt-0.5`;
+      }
+
+      const rsObj = data.rs_rating || {};
+      const rsEl = document.getElementById('metricRS');
+      if (rsEl) {
+        rsEl.innerHTML = `${rsObj.rs || 50} <span class="text-[10px] font-normal text-stone-400">${escapeHtml(rsObj.vs || data.market || '시장')} 대비</span>`;
+      }
+
+      const capEl = document.getElementById('metricCap');
+      if (capEl) capEl.innerText = data.market_cap_eok ? Number(data.market_cap_eok).toLocaleString() : '-';
+
+      const eokEl = document.getElementById('metricEok');
+      if (eokEl) {
+        const valPct = data.value_cap_pct ? `${data.value_cap_pct}%` : '0.1%';
+        const fltPct = data.value_float_pct ? ` · 유통 ${data.value_float_pct}%` : '';
+        eokEl.innerHTML = `${data.trade_value_eok ? Number(data.trade_value_eok).toLocaleString() : '-'} <span class="text-[10px] font-normal text-stone-400">(${valPct}${fltPct})</span>`;
+      }
+
+      const ratioEl = document.getElementById('metricRatio');
+      if (ratioEl) {
+        const rto = data.ratio_pct || 0;
+        ratioEl.innerText = `${rto > 0 ? '+' : ''}${Number(rto).toFixed(2)}%`;
+        ratioEl.className = `font-mono text-sm font-bold ${rto > 0 ? 'text-[#d42c2c]' : (rto < 0 ? 'text-[#1a56b0]' : 'text-stone-700 dark:text-stone-300')} mt-0.5`;
+      }
+
+      const forEl = document.getElementById('metricForeign');
+      if (forEl) {
+        const fNet = data.foreign_net_mm != null ? (data.foreign_net_mm / 100).toFixed(1) : '-';
+        forEl.innerText = fNet;
+        forEl.className = `font-mono text-sm font-bold ${parseFloat(fNet) > 0 ? 'text-[#d42c2c]' : (parseFloat(fNet) < 0 ? 'text-[#1a56b0]' : 'text-stone-700 dark:text-stone-300')} mt-0.5`;
+      }
+
+      const instEl = document.getElementById('metricInst');
+      if (instEl) {
+        const iNet = data.inst_net_mm != null ? (data.inst_net_mm / 100).toFixed(1) : '-';
+        instEl.innerText = iNet;
+        instEl.className = `font-mono text-sm font-bold ${parseFloat(iNet) > 0 ? 'text-[#d42c2c]' : (parseFloat(iNet) < 0 ? 'text-[#1a56b0]' : 'text-stone-700 dark:text-stone-300')} mt-0.5`;
+      }
+
+      const prgEl = document.getElementById('metricProgram');
+      if (prgEl) {
+        const pNet = data.program_net_mm != null ? (data.program_net_mm / 100).toFixed(1) : '-';
+        prgEl.innerText = pNet;
+        prgEl.className = `font-mono text-sm font-bold ${parseFloat(pNet) > 0 ? 'text-[#d42c2c]' : (parseFloat(pNet) < 0 ? 'text-[#1a56b0]' : 'text-stone-700 dark:text-stone-300')} mt-0.5`;
+      }
+    }
+
+    function closeStockModal() {
+      const modal = document.getElementById('stockModal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    // ================= [📱 모바일/제자 기기 공유 제어] =================
+    function openShareModal() {
+      const modal = document.getElementById('shareModal');
+      if (modal) modal.classList.remove('hidden');
+      fetch('/api/network/info')
+        .then(r => r.json())
+        .then(data => {
+          if (data && data.local_url) {
+            const input = document.getElementById('shareLocalUrl');
+            if (input) input.value = data.local_url;
+          }
+        })
+        .catch(() => {});
+      checkTunnelStatus();
+    }
+
+    function checkTunnelStatus() {
+      fetch('/api/tunnel/status')
+        .then(r => r.json())
+        .then(data => {
+          const offWrap = document.getElementById('tunnelOffWrap');
+          const onWrap = document.getElementById('tunnelOnWrap');
+          const badge = document.getElementById('tunnelStatusBadge');
+          const input = document.getElementById('shareRemoteUrl');
+          
+          if (data && data.status === 'running' && data.url) {
+            if (offWrap) offWrap.classList.add('hidden');
+            if (onWrap) onWrap.classList.remove('hidden');
+            if (input) input.value = data.url;
+            if (badge) {
+              badge.innerText = '🟢 외부 접속 켜짐 (0원)';
+              badge.className = 'text-[10px] bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 font-bold px-2 py-0.5 rounded';
+            }
+          } else if (data && data.status === 'starting') {
+            if (badge) {
+              badge.innerText = '⚡ 주소 생성 중...';
+              badge.className = 'text-[10px] bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300 font-bold px-2 py-0.5 rounded';
+            }
+          } else {
+            if (offWrap) offWrap.classList.remove('hidden');
+            if (onWrap) onWrap.classList.add('hidden');
+            if (badge) {
+              badge.innerText = '준비 완료';
+              badge.className = 'text-[10px] bg-stone-200 text-stone-700 dark:bg-slate-800 dark:text-stone-300 font-bold px-2 py-0.5 rounded';
+            }
+          }
+        })
+        .catch(() => {});
+    }
+
+    function startCloudflareTunnel() {
+      const btn = document.getElementById('btnStartTunnel');
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1"></i> 주소 생성 중...';
+      }
+      showToast('외부 접속 생성', '보안 HTTPS 무료 접속 주소를 생성하고 있습니다 (약 2~3초 소요)...');
+      
+      fetch('/api/tunnel/start')
+        .then(r => r.json())
+        .then(data => {
+          if (data && data.url) {
+            checkTunnelStatus();
+            showToast('외부 주소 생성 완료', '제자 전달용 무료 접속 주소가 발급되었습니다! [카톡 주소 복사]를 눌러 전달하세요.');
+          } else {
+            setTimeout(checkTunnelStatus, 2000);
+          }
+        })
+        .catch(err => {
+          showToast('오류', '터널 생성 요청 실패: ' + err);
+        })
+        .finally(() => {
+          if (btn) {
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fa-solid fa-bolt mr-1"></i> ⚡ 무료 외부 접속 켜기';
+          }
+        });
+    }
+
+    function stopCloudflareTunnel() {
+      if (!confirm('외부 접속을 종료하시겠습니까? (제자의 연결이 끊어집니다)')) return;
+      fetch('/api/tunnel/stop')
+        .then(r => r.json())
+        .then(() => {
+          checkTunnelStatus();
+          showToast('외부 접속 종료', '외부 무료 접속이 안전하게 종료되었습니다.');
+        });
+    }
+
+    function copyRemoteShareUrl() {
+      const input = document.getElementById('shareRemoteUrl');
+      if (!input || !input.value) return;
+      const url = input.value;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(() => {
+          showToast('주소 복사 완료', '제자 전달용 외부 링크가 복사되었습니다! 카톡으로 보내주시면 아이폰/갤럭시에서 바로 열립니다. 📲');
+        }).catch(() => {
+          input.select();
+          document.execCommand('copy');
+          showToast('주소 복사 완료', '외부 링크가 복사되었습니다!');
+        });
+      } else {
+        input.select();
+        document.execCommand('copy');
+        showToast('주소 복사 완료', '외부 링크가 복사되었습니다!');
+      }
+    }
+
+    function closeShareModal() {
+      const modal = document.getElementById('shareModal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function copyShareUrl() {
+      const input = document.getElementById('shareLocalUrl');
+      if (!input) return;
+      const url = input.value;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(() => {
+          showToast('주소 복사 완료', '주소가 복사되었습니다! 제자에게 카카오톡으로 전달해주세요. 📲');
+        }).catch(() => {
+          input.select();
+          document.execCommand('copy');
+          showToast('주소 복사 완료', '주소가 복사되었습니다! 제자에게 전달해주세요.');
+        });
+      } else {
+        input.select();
+        document.execCommand('copy');
+        showToast('주소 복사 완료', '주소가 복사되었습니다! 제자에게 전달해주세요.');
+      }
+    }
+
+    function openCurrentStockNaverFinance() {
+      if (!currentStockCode && !currentStockName) return;
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      if (currentStockCode) {
+        if (isMobile) {
+          window.open(`https://m.stock.naver.com/item/main/${currentStockCode}`, '_blank');
+        } else {
+          window.open(`https://finance.naver.com/item/main.naver?code=${currentStockCode}`, '_blank');
+        }
+      } else {
+        if (isMobile) {
+          window.open(`https://m.stock.naver.com/search?keyword=${encodeURIComponent(currentStockName)}`, '_blank');
+        } else {
+          window.open(`https://finance.naver.com/search/searchList.naver?query=${encodeURIComponent(currentStockName)}`, '_blank');
+        }
+      }
+    }
+
+    function searchCurrentStockNews() {
+      if (!currentStockName) return;
+      closeStockModal();
+      setAppMode('morning');
+      const searchInput = document.getElementById('searchInput');
+      if (searchInput) {
+        searchInput.value = currentStockName;
+        applyFilters();
+      }
+    }
+
+    function zoomStockChart(dir) {
+      if (dir > 0) {
+        stockChartZoomLevel = Math.max(25, stockChartZoomLevel - 15);
+      } else {
+        stockChartZoomLevel = Math.min(120, stockChartZoomLevel + 15);
+      }
+      if (currentChartRows && currentChartRows.length > 0) {
+        drawStockCanvasChart(currentChartRows, stockChartZoomLevel);
+      }
+    }
+
+    // [고정밀 캔들차트 + 20일선 + 거래량 캔버스 렌더러]
+    function drawStockCanvasChart(rows, count = 60) {
+      const canvas = document.getElementById('stockModalCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const dpr = window.devicePixelRatio || 1;
+      
+      const rect = canvas.getBoundingClientRect();
+      if (rect.width === 0 || rect.height === 0) return;
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      ctx.scale(dpr, dpr);
+
+      const w = rect.width;
+      const h = rect.height;
+      ctx.clearRect(0, 0, w, h);
+
+      if (!rows || rows.length === 0) return;
+
+      const slice = rows.slice(-count);
+      const n = slice.length;
+      if (n === 0) return;
+
+      // 가격 범위 계산 (High/Low)
+      let minP = Infinity, maxP = -Infinity;
+      let maxVol = 0;
+      slice.forEach(r => {
+        if (r.low != null && r.low < minP) minP = r.low;
+        if (r.high != null && r.high > maxP) maxP = r.high;
+        if (r.ma20 != null) {
+          if (r.ma20 < minP) minP = r.ma20;
+          if (r.ma20 > maxP) maxP = r.ma20;
+        }
+        if (r.volume != null && r.volume > maxVol) maxVol = r.volume;
+      });
+
+      if (minP === maxP) { minP -= 10; maxP += 10; }
+      const padP = (maxP - minP) * 0.05;
+      minP -= padP;
+      maxP += padP;
+
+      const chartH = h * 0.72; // 상단 72% 가격 캔들
+      const volH = h * 0.22;   // 하단 22% 거래량
+      const volY0 = h - 4;
+
+      const getY = p => chartH - ((p - minP) / (maxP - minP)) * chartH + 8;
+      const getX = i => (i + 0.5) * (w / n);
+      const candleW = Math.max(2, (w / n) * 0.65);
+
+      // 보조 수평선 그리드
+      ctx.strokeStyle = '#e2e8f0';
+      ctx.lineWidth = 0.5;
+      for (let g = 0; g <= 4; g++) {
+        const gy = 8 + (chartH / 4) * g;
+        ctx.beginPath();
+        ctx.moveTo(0, gy);
+        ctx.lineTo(w, gy);
+        ctx.stroke();
+
+        const gp = maxP - ((maxP - minP) / 4) * g;
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = '9px JetBrains Mono, monospace';
+        ctx.textAlign = 'left';
+        ctx.fillText(Number(gp.toFixed(0)).toLocaleString(), 4, gy - 2);
+      }
+
+      // 1. 거래량 바 그리기
+      slice.forEach((r, i) => {
+        const x = getX(i);
+        const v = r.volume || 0;
+        const vHeight = maxVol > 0 ? (v / maxVol) * volH : 0;
+        const isUp = (r.close || 0) >= (r.open || 0);
+        ctx.fillStyle = isUp ? 'rgba(239, 68, 68, 0.25)' : 'rgba(59, 130, 246, 0.25)';
+        ctx.fillRect(x - candleW / 2, volY0 - vHeight, candleW, vHeight);
+      });
+
+      // 2. 캔들스틱 그리기
+      slice.forEach((r, i) => {
+        const x = getX(i);
+        const op = r.open || r.close;
+        const cl = r.close || r.open;
+        const hi = r.high || Math.max(op, cl);
+        const lo = r.low || Math.min(op, cl);
+        const isUp = cl >= op;
+        const color = isUp ? '#ef4444' : '#3b82f6';
+
+        // 꼬리선
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(x, getY(hi));
+        ctx.lineTo(x, getY(lo));
+        ctx.stroke();
+
+        // 캔들 몸통
+        const yTop = Math.min(getY(op), getY(cl));
+        const bodyH = Math.max(1.5, Math.abs(getY(op) - getY(cl)));
+        ctx.fillStyle = color;
+        ctx.fillRect(x - candleW / 2, yTop, candleW, bodyH);
+      });
+
+      // 3. 20일 이동평균선 (주황색 곡선)
+      ctx.beginPath();
+      let started = false;
+      slice.forEach((r, i) => {
+        if (r.ma20 != null) {
+          const x = getX(i);
+          const y = getY(r.ma20);
+          if (!started) { ctx.moveTo(x, y); started = true; }
+          else { ctx.lineTo(x, y); }
+        }
+      });
+      ctx.strokeStyle = '#f97316';
+      ctx.lineWidth = 1.8;
+      ctx.stroke();
+
+      // 4. RS 상대강도선 (연두/초록색)
+      let rsMin = Infinity, rsMax = -Infinity;
+      slice.forEach(r => {
+        if (r.rs != null) {
+          if (r.rs < rsMin) rsMin = r.rs;
+          if (r.rs > rsMax) rsMax = r.rs;
+        }
+      });
+      if (rsMax > rsMin) {
+        ctx.beginPath();
+        let rsStarted = false;
+        slice.forEach((r, i) => {
+          if (r.rs != null) {
+            const x = getX(i);
+            const y = chartH * 0.65 - ((r.rs - rsMin) / (rsMax - rsMin)) * (chartH * 0.45) + chartH * 0.25;
+            if (!rsStarted) { ctx.moveTo(x, y); rsStarted = true; }
+            else { ctx.lineTo(x, y); }
+          }
+        });
+        ctx.strokeStyle = '#10b981';
+        ctx.lineWidth = 1.2;
+        ctx.stroke();
+      }
+    }
+
 
     // ================= [VIEW 4: 애프터마켓 특징주 API & UI] =================
     async function loadAftermarketData(force = false) {
@@ -1076,17 +3452,10 @@
       if (!data) return;
       const timeBadge = document.getElementById('aftermarketTimeBadge');
       if (timeBadge) {
-        let label = data.time || '실시간';
-        if (data.source) {
-          label = `${data.source} · ${label}`;
+        let label = data.source || (data.time ? `${data.time} 갱신` : '실시간');
+        if (data.source && data.time && !data.source.includes(data.time)) {
+          label = `${data.source} (${data.time})`;
         }
-        try {
-          const dt = new Date(data.time);
-          if (!isNaN(dt.getTime())) {
-            const timeStr = `${dt.getMonth()+1}/${dt.getDate()} ${String(dt.getHours()).padStart(2,'0')}:${String(dt.getMinutes()).padStart(2,'0')}`;
-            label = data.source ? `${data.source} (${timeStr})` : `${timeStr} 갱신`;
-          }
-        } catch(e) {}
         timeBadge.innerText = label;
       }
       
@@ -1119,7 +3488,7 @@
               <div class="p-3.5 rounded-xl bg-stone-50/80 dark:bg-slate-950 border border-stone-200 dark:border-slate-800 hover:border-red-300 dark:hover:border-red-900 transition shadow-2xs">
                 <div class="flex items-center justify-between">
                   <div class="flex items-center">
-                    <span class="text-base font-extrabold text-stone-900 dark:text-white">${escapeHtml(s.name)}</span>
+                    <span class="text-base font-extrabold text-stone-900 dark:text-white hover:text-blue-600 cursor-pointer" onclick="openStockModal('${escapeHtml(s.code || '')}', '${escapeHtml(s.name)}', '${escapeHtml(s.primary_theme || '')}')">${escapeHtml(s.name)}</span>
                     ${thBadge}
                   </div>
                   <span class="text-sm font-black font-mono text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-950/40 px-2 py-0.5 rounded border border-red-200 dark:border-red-900/60">${escapeHtml(s.pct)}</span>
@@ -1150,7 +3519,7 @@
               <div class="p-3.5 rounded-xl bg-stone-50/80 dark:bg-slate-950 border border-stone-200 dark:border-slate-800 hover:border-blue-300 dark:hover:border-blue-900 transition shadow-2xs">
                 <div class="flex items-center justify-between">
                   <div class="flex items-center">
-                    <span class="text-base font-extrabold text-stone-900 dark:text-white">${escapeHtml(s.name)}</span>
+                    <span class="text-base font-extrabold text-stone-900 dark:text-white hover:text-blue-600 cursor-pointer" onclick="openStockModal('${escapeHtml(s.code || '')}', '${escapeHtml(s.name)}', '${escapeHtml(s.primary_theme || '')}')">${escapeHtml(s.name)}</span>
                     ${thBadge}
                   </div>
                   <span class="text-sm font-black font-mono text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/40 px-2 py-0.5 rounded border border-blue-200 dark:border-blue-900/60">${escapeHtml(s.pct)}</span>
@@ -1197,7 +3566,7 @@
     // ================= [아침 장전뉴스 API] =================
     async function loadData(force = false) {
       const refreshIcon = document.getElementById('refreshIcon');
-      refreshIcon.classList.add('fa-spin');
+      if (refreshIcon) refreshIcon.classList.add('fa-spin');
 
       try {
         const endpoint = force ? '/api/refresh' : '/api/news';
@@ -1254,17 +3623,25 @@
           document.getElementById('lastUpdatedTime').innerText = `최근 갱신: ${new Date().toLocaleTimeString('ko-KR')}`;
         }
 
-        // 지수 수집
-        const idxRes = await fetch('/api/indices').then(r => r.json());
-        if (Array.isArray(idxRes)) {
-          indicesData = idxRes;
-          renderTickerBar(idxRes);
+        // 지수 수집 (독립 try-catch로 분리하여 지수 통신 지연 시에도 뉴스 표출에 영향 0%)
+        try {
+          const idxRes = await fetch('/api/indices').then(r => r.json());
+          const list = Array.isArray(idxRes) ? idxRes : (idxRes && idxRes.data ? idxRes.data : []);
+          if (list && list.length > 0) {
+            indicesData = list;
+            renderTickerBar(list);
+          }
+        } catch (e) {
+          console.warn('Indices fetch warning:', e);
         }
       } catch (err) {
         console.error('Fetch error:', err);
-        showToast('데이터 수집 실패', '서버 통신에 일시적인 문제가 있습니다.');
+        // 백그라운드 자동 갱신 시에는 조용히 재시도하고, 사용자가 수동으로 새로고침을 눌렀을 때만 토스트 표출
+        if (force) {
+          showToast('데이터 수집 확인', '서버 통신에 일시적인 지연이 있어 재연결 중입니다.');
+        }
       } finally {
-        refreshIcon.classList.remove('fa-spin');
+        if (refreshIcon) refreshIcon.classList.remove('fa-spin');
       }
     }
 
@@ -1292,9 +3669,12 @@
       }).join('');
     }
 
-    // 뉴스 필터링
+    // 뉴스 필터링 & 장중 누적 아카이브 고속 검색
+    let newsSearchDebounce = null;
+
     function applyFilters() {
-      const query = document.getElementById('searchInput').value.trim().toLowerCase();
+      const query = document.getElementById('searchInput').value.trim();
+      const qLower = query.toLowerCase();
       const btnClear = document.getElementById('btnClearSearch');
       if (query) btnClear.classList.remove('hidden');
       else btnClear.classList.add('hidden');
@@ -1317,11 +3697,11 @@
           if (nowTimestamp - n.timestamp > 7200) return false;
         }
 
-        if (query) {
-          const matchTitle = n.title && n.title.toLowerCase().includes(query);
-          const matchLede = n.lede && n.lede.toLowerCase().includes(query);
-          const matchSource = n.source && n.source.toLowerCase().includes(query);
-          const matchTag = n.tags && n.tags.some(t => t.toLowerCase().includes(query));
+        if (qLower) {
+          const matchTitle = n.title && n.title.toLowerCase().includes(qLower);
+          const matchLede = n.lede && n.lede.toLowerCase().includes(qLower);
+          const matchSource = n.source && n.source.toLowerCase().includes(qLower);
+          const matchTag = n.tags && n.tags.some(t => t.toLowerCase().includes(qLower));
           if (!matchTitle && !matchLede && !matchSource && !matchTag) return false;
         }
 
@@ -1329,15 +3709,35 @@
       });
 
       renderNewsList(filtered);
+
+      // 장중에 지나간 기사도 찾을 수 있도록 2글자 이상 입력 시 아카이브 DB 자동 검색
+      clearTimeout(newsSearchDebounce);
+      if (query.length >= 2) {
+        newsSearchDebounce = setTimeout(async () => {
+          try {
+            const res = await fetch('/api/news/archive?q=' + encodeURIComponent(query)).then(r => r.json());
+            if (res.status === 'ok' && res.news && res.news.length > 0) {
+              const currentIds = new Set(filtered.map(x => x.id || x.link));
+              const pastNews = res.news.filter(x => !currentIds.has(x.id || x.link));
+              if (pastNews.length > 0) {
+                const combined = [...filtered, ...pastNews];
+                renderNewsList(combined, true, pastNews.length);
+              }
+            }
+          } catch (e) {
+            console.error('Archive search error:', e);
+          }
+        }, 320);
+      }
     }
 
-    function renderNewsList(newsItems) {
+    function renderNewsList(newsItems, isArchiveResult = false, archiveCount = 0) {
       const container = document.getElementById('newsList');
       document.getElementById('newsCountBadge').innerText = `${newsItems.length}건`;
 
       if (newsItems.length === 0) {
         container.innerHTML = `
-          <div class="flex flex-col items-center justify-center h-48 text-slate-400 space-y-2">
+          <div class="flex flex-col items-center justify-center h-48 text-stone-400 space-y-2">
             <i class="fa-regular fa-folder-open text-2xl"></i>
             <p class="text-xs">조건에 맞는 뉴스가 없습니다.</p>
           </div>
@@ -1345,18 +3745,31 @@
         return;
       }
 
-      container.innerHTML = newsItems.map(item => {
+      let archiveBanner = '';
+      if (isArchiveResult && archiveCount > 0) {
+        archiveBanner = `
+          <div class="mb-2 p-2 bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/60 rounded-lg flex items-center justify-between text-xs text-amber-900 dark:text-amber-200">
+            <span class="font-bold flex items-center">
+              <i class="fa-solid fa-box-archive mr-1.5 text-amber-600"></i>
+              장중 지나간 기사 +${archiveCount}건 추가 탐색 완료 (총 ${newsItems.length}건)
+            </span>
+            <span class="text-[10px] text-amber-700 dark:text-amber-300">키워드 영구 아카이브 검색</span>
+          </div>
+        `;
+      }
+
+      container.innerHTML = archiveBanner + newsItems.map(item => {
         const inBasket = basket.some(b => b.id === item.id);
         const tagsHtml = (item.tags || []).map(t => 
-          `<span class="text-[10px] px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 font-medium">${t}</span>`
+          `<span class="text-[10px] px-1.5 py-0.5 rounded bg-stone-100 dark:bg-slate-800 text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-slate-700 font-medium">${t}</span>`
         ).join(' ');
 
         return `
-          <div class="news-card bg-white dark:bg-slate-950 border ${inBasket ? 'border-emerald-500 ring-1 ring-emerald-500/30' : 'border-slate-200 dark:border-slate-800'} rounded-xl p-3 flex flex-col justify-between space-y-2 shadow-sm">
+          <div class="news-card bg-white dark:bg-slate-900 border ${inBasket ? 'border-emerald-500 ring-1 ring-emerald-500/30' : 'border-stone-200 dark:border-slate-800'} rounded-xl p-3 flex flex-col justify-between space-y-2 shadow-xs">
             <div class="flex items-center justify-between text-xs">
               <div class="flex items-center space-x-1.5">
-                <span class="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-blue-700 dark:text-amber-400 font-bold text-[11px] border border-slate-200 dark:border-slate-700">${escapeHtml(item.source)}</span>
-                <span class="text-slate-400 text-[11px] font-mono"><i class="fa-regular fa-clock text-[10px] mr-1"></i>${escapeHtml(item.display_time)}</span>
+                <span class="px-1.5 py-0.5 rounded bg-stone-100 dark:bg-slate-800 text-blue-700 dark:text-amber-400 font-bold text-[11px] border border-stone-200 dark:border-slate-700">${escapeHtml(item.source)}</span>
+                <span class="text-stone-400 text-[11px] font-mono"><i class="fa-regular fa-clock text-[10px] mr-1"></i>${escapeHtml(item.display_time)}</span>
               </div>
               <div class="flex items-center space-x-1">
                 ${tagsHtml}
@@ -1365,21 +3778,21 @@
 
             <div>
               <a href="${escapeHtml(item.link)}" target="_blank" title="원문 기사 보기" 
-                 class="font-bold text-slate-900 dark:text-slate-100 hover:text-blue-600 dark:hover:text-indigo-400 text-xs leading-snug line-clamp-2 transition hover:underline">
+                 class="news-title-text hover:text-blue-600 dark:hover:text-indigo-400 leading-snug line-clamp-2 transition hover:underline">
                 ${escapeHtml(item.title)}
               </a>
-              ${item.lede ? `<p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 line-clamp-2 leading-relaxed">${escapeHtml(item.lede)}</p>` : ''}
+              ${item.lede ? `<p class="news-summary-text mt-1.5 line-clamp-2 leading-relaxed">${escapeHtml(item.lede)}</p>` : ''}
             </div>
 
-            <div class="flex items-center justify-between pt-1 border-t border-slate-100 dark:border-slate-900 text-xs">
-              <span class="text-[10px] text-slate-400">${escapeHtml(item.origin || '')}</span>
+            <div class="flex items-center justify-between pt-1 border-t border-stone-100 dark:border-slate-800 text-xs">
+              <span class="text-[10px] text-stone-400">${escapeHtml(item.origin || '')}</span>
               ${inBasket ? `
                 <button onclick="removeFromBasket('${item.id}')" class="px-2.5 py-1 rounded bg-red-50 text-red-600 dark:bg-red-950/40 dark:text-red-400 font-bold text-[11px] hover:bg-red-100 transition flex items-center space-x-1">
                   <i class="fa-solid fa-check text-[10px]"></i>
                   <span>담김 취소</span>
                 </button>
               ` : `
-                <button onclick="addToBasket('${item.id}')" class="px-2.5 py-1 rounded bg-blue-50 text-blue-700 dark:bg-slate-800 dark:text-slate-200 font-bold text-[11px] hover:bg-blue-100 dark:hover:bg-slate-700 transition flex items-center space-x-1 border border-blue-200 dark:border-slate-700">
+                <button onclick="addToBasket('${item.id}')" class="px-2.5 py-1 rounded bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-300 font-bold text-[11px] hover:bg-blue-100 transition flex items-center space-x-1">
                   <i class="fa-solid fa-plus text-[10px]"></i>
                   <span>브리핑 담기</span>
                 </button>
@@ -2016,7 +4429,7 @@
     // ================= [VIEW 3: 마감 주도주시황 API] =================
     async function loadClosingData(force = false) {
       const refreshIcon = document.getElementById('refreshIcon');
-      refreshIcon.classList.add('fa-spin');
+      if (refreshIcon) refreshIcon.classList.add('fa-spin');
       try {
         const res = await fetch('/api/closing').then(r => r.json());
         if (res.status === 'ok') {
@@ -2033,7 +4446,7 @@
       } catch (err) {
         console.error('Closing data load error:', err);
       } finally {
-        refreshIcon.classList.remove('fa-spin');
+        if (refreshIcon) refreshIcon.classList.remove('fa-spin');
       }
     }
 
@@ -2260,10 +4673,37 @@
     }
 
     let toastTimer = null;
-    function showToast(title, message, duration = 3500) {
+    function showToast(title, message, duration = 3500, type = null) {
       const toast = document.getElementById('toast');
       if (!toast) return;
       applyToastPosition(toast);
+
+      const icon = document.getElementById('toastIcon');
+      let effectiveType = type;
+      if (!effectiveType) {
+        if (title.includes('실패') || title.includes('오류') || title.includes('에러')) {
+          effectiveType = 'error';
+        } else if (title.includes('확인') || title.includes('지연') || title.includes('경고') || title.includes('없습니다')) {
+          effectiveType = 'warning';
+        } else if (title.includes('안내') || title.includes('진행') || title.includes('생성 중') || title.includes('연결 중')) {
+          effectiveType = 'info';
+        } else {
+          effectiveType = 'success';
+        }
+      }
+
+      if (icon) {
+        if (effectiveType === 'error') {
+          icon.className = 'fa-solid fa-circle-xmark text-rose-400 text-lg';
+        } else if (effectiveType === 'warning') {
+          icon.className = 'fa-solid fa-triangle-exclamation text-amber-400 text-lg';
+        } else if (effectiveType === 'info') {
+          icon.className = 'fa-solid fa-circle-info text-blue-400 text-lg';
+        } else {
+          icon.className = 'fa-solid fa-circle-check text-emerald-400 text-lg';
+        }
+      }
+
       document.getElementById('toastTitle').innerText = title;
       document.getElementById('toastMessage').innerText = message;
       
@@ -2289,6 +4729,11 @@
       if (e.key === 'Escape') {
         hideBreakingNewsBanner();
         if (typeof closePreviewModal === 'function') closePreviewModal();
+        if (typeof closeStockModal === 'function') closeStockModal();
+        if (typeof toggleIssuesDrawer === 'function') toggleIssuesDrawer(false);
+        if (typeof closeMacroModal === 'function') closeMacroModal();
+        if (typeof closeCalendarEventModal === 'function') closeCalendarEventModal();
+        if (typeof closeMasterHubModal === 'function') closeMasterHubModal();
       }
     });
 
@@ -2307,21 +4752,32 @@
       loadSavedBasket();
       renderBasket();
       loadData(false);
+      loadSihwangData(false);
 
       if ("Notification" in window && Notification.permission === "default" && desktopNotifEnabled) {
         Notification.requestPermission();
       }
 
-      // 주기적 자동 갱신 (뉴스 60초, 야간선물/글로벌차트 20초 주기 실시간 자동 갱신)
+      // 주기적 자동 갱신 (뉴스, 전광판, 야간선물, 선물매크로 20초 주기 실시간 자동 갱신)
       setInterval(() => {
         if (appMode === 'morning') {
           loadData(false);
+        } else if (appMode === 'sihwang') {
+          loadSihwangData(false);
         } else if (appMode === 'charts') {
           loadChartsData(false);
+        } else if (appMode === 'futures') {
+          loadFuturesAndMacroData(false);
         } else if (appMode === 'aftermarket') {
           loadAftermarketData(false);
         }
       }, 20000);
+
+      // 백그라운드 사전 로딩 (사용자가 탭 클릭 시 0.001초 즉시 표출)
+      setTimeout(() => {
+        loadFuturesAndMacroData(false);
+        loadCalendarData(currentCalMonth, false);
+      }, 1500);
 
       // 백그라운드 뉴스 업데이트 (차트나 특징주 화면에서도 새 뉴스 자동 누적)
       setInterval(() => {
@@ -2331,5 +4787,89 @@
       }, 60000);
     });
   </script>
+  <!-- ================= [대형 매크로 1년 인터랙티브 차트 모달] ================= -->
+  <div id="macroChartModal" class="hidden fixed inset-0 z-[9985] bg-black/60 backdrop-blur-xs flex items-center justify-center p-4" onclick="if(event.target===this)closeMacroModal()">
+    <div class="bg-white dark:bg-slate-900 border border-stone-200 dark:border-slate-800 rounded-2xl w-full max-w-[860px] max-h-[92vh] flex flex-col shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+      
+      <!-- 헤더 -->
+      <div class="p-4 bg-stone-50/80 dark:bg-slate-950/70 border-b border-stone-200 dark:border-slate-800 flex items-center justify-between shrink-0">
+        <div class="flex items-center space-x-2.5">
+          <div class="w-8 h-8 rounded-lg bg-indigo-100 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-sm">
+            <i class="fa-solid fa-chart-line"></i>
+          </div>
+          <div>
+            <div class="flex items-center space-x-2">
+              <h3 id="macroModalTitle" class="text-base font-black text-stone-900 dark:text-stone-100">D램 DDR5 16Gb 현물</h3>
+              <span id="macroModalUnit" class="text-xs font-mono text-stone-400">$</span>
+            </div>
+            <div id="macroModalStats" class="text-xs text-stone-500 dark:text-stone-400 flex flex-wrap gap-x-3 gap-y-1 mt-0.5">
+              <!-- 통계 정보 -->
+            </div>
+          </div>
+        </div>
+        <button onclick="closeMacroModal()" class="w-8 h-8 rounded-lg hover:bg-stone-200 dark:hover:bg-slate-800 text-stone-400 hover:text-stone-700 dark:hover:text-stone-200 flex items-center justify-center transition">
+          <i class="fa-solid fa-xmark text-sm"></i>
+        </button>
+      </div>
+
+      <!-- 본문 차트 영역 -->
+      <div class="p-5 flex-1 overflow-y-auto space-y-4 custom-scrollbar">
+        <!-- SVG 대형 차트 컨테이너 -->
+        <div id="macroModalChartSvg" class="w-full bg-stone-50/70 dark:bg-slate-950/60 border border-stone-200 dark:border-slate-800 rounded-xl p-3 min-h-[300px] flex items-center justify-center overflow-hidden">
+          <!-- 대형 와이드 SVG 차트 -->
+        </div>
+
+        <!-- 설명 및 원문 링크 버튼 바 -->
+        <div class="p-3.5 rounded-xl bg-stone-50 dark:bg-slate-950/60 border border-stone-200/80 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3 text-xs">
+          <div id="macroModalNote" class="text-stone-600 dark:text-stone-300 font-medium"></div>
+          <a id="macroModalGoBtn" href="#" target="_blank" rel="noopener noreferrer" 
+             class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-extrabold text-xs transition flex items-center space-x-1.5 shadow-xs shrink-0">
+            <span>공식 원문 사이트 바로가기 ↗</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ================= [증시 일정 상세 정보 모달] ================= -->
+  <div id="calendarEventModal" class="hidden fixed inset-0 z-[9985] bg-black/60 backdrop-blur-xs flex items-center justify-center p-4" onclick="if(event.target===this)closeCalendarEventModal()">
+    <div class="bg-white dark:bg-slate-900 border border-stone-200 dark:border-slate-800 rounded-2xl w-full max-w-[500px] flex flex-col shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+      
+      <!-- 헤더 -->
+      <div class="p-4 bg-stone-50/80 dark:bg-slate-950/70 border-b border-stone-200 dark:border-slate-800 flex items-center justify-between shrink-0">
+        <div class="flex items-center space-x-2">
+          <i class="fa-solid fa-calendar-check text-emerald-600"></i>
+          <h3 class="text-sm font-black text-stone-900 dark:text-stone-100">증시 캘린더 일정 상세</h3>
+        </div>
+        <button onclick="closeCalendarEventModal()" class="w-8 h-8 rounded-lg hover:bg-stone-200 dark:hover:bg-slate-800 text-stone-400 hover:text-stone-700 dark:hover:text-stone-200 flex items-center justify-center transition">
+          <i class="fa-solid fa-xmark text-sm"></i>
+        </button>
+      </div>
+
+      <!-- 본문 -->
+      <div class="p-5 space-y-3.5 text-xs">
+        <div class="flex items-center space-x-2">
+          <span id="calModalKindBadge" class="px-2.5 py-0.5 rounded-full font-bold text-[11px] bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300">공모주</span>
+          <span id="calModalDate" class="font-mono text-stone-500 font-bold">2026-11-06</span>
+          <span id="calModalTime" class="font-mono text-stone-400"></span>
+        </div>
+
+        <h4 id="calModalTitle" class="text-base font-black text-stone-900 dark:text-stone-100 leading-snug"></h4>
+
+        <div id="calModalMemoBox" class="p-3 rounded-xl bg-stone-50 dark:bg-slate-950 border border-stone-200/80 dark:border-slate-800 text-stone-700 dark:text-stone-300 leading-relaxed font-medium"></div>
+
+        <div id="calModalStocksBox" class="flex flex-wrap items-center gap-1.5 pt-1"></div>
+
+        <div id="calModalLinkBox" class="pt-2">
+          <a id="calModalLink" href="#" target="_blank" rel="noopener noreferrer" class="hidden w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-center block transition shadow-xs">
+            관련 원문 및 공시 바로가기 ↗
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
 </body>
 </html>

@@ -36,6 +36,7 @@ from threading import Timer
 from bottle import Bottle, run, request, response, static_file
 import collector
 from desktop_hud import show_desktop_hud
+import tunnel_helper
 import threading
 import time
 
@@ -75,11 +76,133 @@ def api_indices():
 @app.route('/api/news')
 def api_news():
     force = request.query.get('refresh', '0') == '1'
+    query = request.query.get('q', '').strip()
     try:
-        news = collector.get_all_news(force_refresh=force)
+        if query:
+            # 키워드가 전달되면 장중 영구 아카이브 DB에서 고속 검색
+            news = collector.search_news_archive(query=query, limit=300)
+        else:
+            news = collector.get_all_news(force_refresh=force)
         return json_response({'status': 'ok', 'count': len(news), 'news': news, 'data': news})
     except Exception as e:
         return json_response({'status': 'error', 'message': str(e), 'news': [], 'data': []})
+
+@app.route('/api/news/archive')
+def api_news_archive():
+    query = request.query.get('q', '').strip()
+    limit = int(request.query.get('limit', 250))
+    try:
+        news = collector.search_news_archive(query=query, limit=limit)
+        return json_response({'status': 'ok', 'count': len(news), 'news': news})
+    except Exception as e:
+        return json_response({'status': 'error', 'message': str(e), 'news': []})
+
+@app.route('/api/sihwang/issues')
+def api_sihwang_issues():
+    force = request.query.get('refresh', '0') == '1'
+    try:
+        import importlib
+        importlib.reload(collector)
+        data = collector.get_sihwangkase_issues(force_refresh=force)
+        return json_response(data)
+    except Exception as e:
+        return json_response({'status': 'error', 'message': str(e), 'hot_mentions': [], 'issues': []})
+
+@app.route('/api/sihwang/watchlist')
+def api_sihwang_watchlist():
+    force = request.query.get('refresh', '0') == '1'
+    try:
+        data = collector.get_sihwangkase_watchlist(force_refresh=force)
+        return json_response(data)
+    except Exception as e:
+        return json_response({'status': 'error', 'message': str(e), 'groups': []})
+
+@app.route('/api/stock/detail')
+def api_stock_detail():
+    code = request.query.get('code', '').strip()
+    try:
+        data = collector.get_stock_detail(code)
+        return json_response(data)
+    except Exception as e:
+        return json_response({'status': 'error', 'message': str(e)})
+
+@app.route('/api/stock/chart')
+def api_stock_chart():
+    code = request.query.get('code', '').strip()
+    try:
+        data = collector.get_stock_chart(code)
+        return json_response(data)
+    except Exception as e:
+        return json_response({'status': 'error', 'message': str(e), 'rows': []})
+
+@app.route('/api/macro')
+def api_macro():
+    force = request.query.get('refresh', '0') == '1'
+    try:
+        data = collector.get_macro_data(force_refresh=force)
+        return json_response(data)
+    except Exception as e:
+        return json_response({'status': 'error', 'message': str(e), 'items': []})
+
+@app.route('/api/futures/indicators')
+@app.route('/api/indicators')
+def api_indicators():
+    force = request.query.get('refresh', '0') == '1'
+    try:
+        data = collector.get_indicators_data(force_refresh=force)
+        return json_response(data)
+    except Exception as e:
+        return json_response({'status': 'error', 'message': str(e)})
+
+@app.route('/api/calendar')
+def api_calendar():
+    force = request.query.get('refresh', '0') == '1'
+    month = request.query.get('month', '').strip()
+    try:
+        data = collector.get_calendar_data(month=month, force_refresh=force)
+        return json_response(data)
+    except Exception as e:
+        return json_response({'status': 'error', 'message': str(e), 'events': []})
+
+def get_local_ip():
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(("8.8.8.8", 80))
+        ip = s.getsockname()[0]
+        s.close()
+        return ip
+    except Exception:
+        return "127.0.0.1"
+
+@app.route('/api/network/info')
+def api_network_info():
+    ip = get_local_ip()
+    port = request.environ.get('SERVER_PORT', 5000)
+    t_status = tunnel_helper.get_tunnel_status()
+    return json_response({
+        'status': 'ok',
+        'local_ip': ip,
+        'port': port,
+        'local_url': f"http://{ip}:{port}",
+        'tunnel': t_status,
+        'tip': '같은 Wi-Fi(공유기)에 연결된 스마트폰, 태블릿, PC 브라우저에서 위 주소로 바로 접속할 수 있습니다.'
+    })
+
+@app.route('/api/tunnel/start')
+def api_tunnel_start():
+    port = int(request.environ.get('SERVER_PORT', 5000))
+    res = tunnel_helper.start_tunnel(port)
+    return json_response(res)
+
+@app.route('/api/tunnel/status')
+def api_tunnel_status():
+    res = tunnel_helper.get_tunnel_status()
+    return json_response(res)
+
+@app.route('/api/tunnel/stop')
+def api_tunnel_stop():
+    res = tunnel_helper.stop_tunnel()
+    return json_response(res)
 
 @app.route('/mini')
 def mini_window():
@@ -241,9 +364,11 @@ if __name__ == '__main__':
         sys.exit(0)
 
     port = find_free_port(5000)
+    local_ip = get_local_ip()
     print("=" * 60)
     print(f"[Morning Stock Radar] 모닝 증시 큐레이터 서버 시작...")
-    print(f"웹 브라우저 주소: http://localhost:{port}")
+    print(f"▶ 로컬 PC 브라우저 주소: http://localhost:{port}")
+    print(f"▶ 같은 Wi-Fi 제자/스마트폰/태블릿 접속 주소: http://{local_ip}:{port}")
     print("잠시 후 브라우저가 자동으로 열립니다. (창을 닫으면 종료)")
     print("=" * 60)
     
@@ -253,5 +378,18 @@ if __name__ == '__main__':
     # HTS 위 속보 오버레이 백그라운드 감시 스레드 시작
     threading.Thread(target=background_news_watcher, daemon=True).start()
     
-    # 서버 실행
-    run(app, host='127.0.0.1', port=port, quiet=True)
+    # 멀티스레드 WSGI 서버 어댑터 (동시 접속 및 모바일 제자 접속 시 블로킹 방지)
+    from wsgiref.simple_server import WSGIServer, make_server
+    from socketserver import ThreadingMixIn
+
+    class ThreadingWSGIServer(ThreadingMixIn, WSGIServer):
+        daemon_threads = True
+
+    import bottle
+    class ThreadedWSGIRefServer(bottle.ServerAdapter):
+        def run(self, handler):
+            server = make_server(self.host, self.port, handler, server_class=ThreadingWSGIServer)
+            server.serve_forever()
+
+    # 서버 실행 (0.0.0.0으로 바인딩하여 동일 공유기/와이파이 내 모바일 및 타 기기 접근 허용)
+    run(app, host='0.0.0.0', port=port, server=ThreadedWSGIRefServer, quiet=True)

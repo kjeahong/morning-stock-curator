@@ -17,3 +17,8 @@ env/
 venv/
 .idea/
 .vscode/
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3

@@ -17,6 +17,7 @@ import urllib.request
 import xml.etree.ElementTree as ET
 from datetime import datetime, timedelta, timezone
 from concurrent.futures import ThreadPoolExecutor
+import sqlite3
 import requests
 from bs4 import BeautifulSoup
 import yfinance as yf
@@ -386,6 +387,13 @@ def get_all_news(force_refresh=False):
 
     _cache['news'] = unique_articles
     _cache['last_news_time'] = now
+
+    # 장중 뉴스 영구 누적 아카이브 DB에 자동 저장 (지나간 기사 키워드 검색 지원)
+    try:
+        save_articles_to_archive(unique_articles)
+    except Exception as e:
+        pass
+
     return unique_articles
 
 CLOSING_THEME_RULES = [
@@ -1231,6 +1239,7 @@ def _parse_blog_aftermarket(log_no, profiles):
                     prof = profiles.get(name, {})
                     curr_stk = {
                         'name': name,
+                        'code': prof.get('code', ''),
                         'pct': pct,
                         'is_up': (mode == 'rising'),
                         'themes': prof.get('themes', []),
@@ -1248,6 +1257,7 @@ def _parse_blog_aftermarket(log_no, profiles):
             return {
                 'source': f'네이버 블로그 (글번호 {log_no})',
                 'time': pub_date,
+                'log_no': int(log_no) if str(log_no).isdigit() else 0,
                 'rising': rising,
                 'falling': falling
             }
@@ -1255,8 +1265,28 @@ def _parse_blog_aftermarket(log_no, profiles):
         print(f"Error parsing blog {log_no}: {e}")
     return None
 
+def _extract_aftermarket_date_int(c):
+    """후보 객체에서 날짜(YYYYMMDD) 정수 추출 (최신성 절대 비교용)"""
+    all_str = f"{c.get('title', '')} {c.get('date', '')} {c.get('source', '')} {c.get('time', '')}"
+    m = re.search(r'\((\d{1,2})/(\d{1,2})\)', all_str)
+    if m:
+        month = int(m.group(1))
+        day = int(m.group(2))
+        return 2026 * 10000 + month * 100 + day
+    m2 = re.search(r'(\d{1,2})월\s*(\d{1,2})일', all_str)
+    if m2:
+        month = int(m2.group(1))
+        day = int(m2.group(2))
+        return 2026 * 10000 + month * 100 + day
+    rt = c.get('raw_time', '')
+    m3 = re.search(r'(\d{4})-(\d{2})-(\d{2})', rt)
+    if m3:
+        return int(m3.group(1)) * 10000 + int(m3.group(2)) * 100 + int(m3.group(3))
+    # log_no 기반 추정 (log_no가 클수록 최신)
+    return c.get('log_no', 0)
+
 def _parse_telegram_aftermarket(target_msg, post_time, profiles):
-    """텔레그램 텍스트 메시지에서 에프터마켓 특징주 정밀 파싱"""
+    """텔레그램 텍스트 메시지에서 에프터마켓 특징주 정밀 파싱 (KST 시간 변환 포함)"""
     for a in target_msg.find_all('a'):
         href = a.get('href', '').strip()
         a.replace_with(href)
@@ -1289,6 +1319,7 @@ def _parse_telegram_aftermarket(target_msg, post_time, profiles):
             prof = profiles.get(name, {})
             curr_stock = {
                 'name': name,
+                'code': prof.get('code', ''),
                 'pct': pct,
                 'is_up': not pct.startswith('-'),
                 'themes': prof.get('themes', []),
@@ -1302,51 +1333,64 @@ def _parse_telegram_aftermarket(target_msg, post_time, profiles):
                 curr_stock['reasons'].append(clean_reason)
 
     if rising or falling:
+        # UTC 시간을 KST(한국시간)로 변환
+        kst_str = post_time
+        try:
+            if 'T' in post_time:
+                iso_clean = post_time.replace('Z', '+00:00')
+                dt_utc = datetime.fromisoformat(iso_clean)
+                dt_kst = dt_utc.astimezone(timezone(timedelta(hours=9)))
+                kst_str = dt_kst.strftime('%m/%d %H:%M')
+        except Exception:
+            pass
+
         return {
-            'source': '텔레그램 채널',
-            'time': post_time,
+            'source': f'텔레그램 채널 ({kst_str})',
+            'time': kst_str,
+            'raw_time': post_time,
             'rising': rising,
             'falling': falling
         }
     return None
 
 def get_aftermarket_data(force_refresh=False):
-    """애프터마켓(시간외 20:00 마감) 특징주 네이버 블로그 및 텔레그램 실시간 수집 모듈"""
+    """
+    애프터마켓(시간외 20:00 마감) 특징주 네이버 블로그 및 텔레그램 실시간 하이브리드 수집 모듈
+    - 블로그든 텔레그램이든 '무조건 가장 최신 날짜(가장 먼저 올라온 곳)'의 데이터를 절대 1순위로 채택!
+    - 블로그에 밤에 먼저 올라왔으면 블로그 것을 즉시 채택하고, 다음날 아침 텔레그램에 올라오면 자동 동기화.
+    """
     global _aftermarket_cache
     now_ts = time.time()
     base_dir = os.path.dirname(os.path.abspath(__file__))
     cache_file = os.path.join(base_dir, 'data', 'last_aftermarket.json')
 
-    # 메모리 캐시 (10분 유효)
-    if not force_refresh and _aftermarket_cache['data'] and (now_ts - _aftermarket_cache['last_time'] < 600):
+    # 메모리 캐시 (강제 갱신이 아니면 5분 유효)
+    if not force_refresh and _aftermarket_cache['data'] and (now_ts - _aftermarket_cache['last_time'] < 300):
         return _aftermarket_cache['data']
 
     profiles = load_jsr_profiles()
-    blog_candidate = None
-    telegram_candidate = None
+    candidates = []
 
-    # 1. 네이버 블로그 최신글 우선 탐색 (매일 밤 10시경 가장 먼저 포스팅됨)
+    # 1. 네이버 블로그 최신글 탐색 (전일 밤 20:00~23:00 포스팅 즉시 탐색)
     try:
-        api_url = 'https://blog.naver.com/PostTitleListAsync.naver?blogId=crioppstock&viewdate=&currentPage=1&categoryNo=0&parentCategoryNo=&countPerPage=10'
+        api_url = 'https://blog.naver.com/PostTitleListAsync.naver?blogId=crioppstock&viewdate=&currentPage=1&categoryNo=0&parentCategoryNo=&countPerPage=12'
         req_b = urllib.request.Request(api_url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'})
         raw_b = urllib.request.urlopen(req_b, timeout=6).read().decode('ms949', errors='ignore')
         pattern = r'\"logNo\"\s*:\s*\"(\d+)\".*?\"title\"\s*:\s*\"([^\"]+)\"'
         for m in re.finditer(pattern, raw_b):
             log_no = m.group(1)
             title = urllib.parse.unquote_plus(m.group(2))
-            if any(k in title for k in ['에프터마켓', '애프터마켓']):
+            if any(k in title for k in ['에프터마켓', '애프터마켓', '시간외']):
                 blog_candidate = _parse_blog_aftermarket(log_no, profiles)
-                if blog_candidate:
+                if blog_candidate and (blog_candidate.get('rising') or blog_candidate.get('falling')):
                     blog_candidate['title'] = title
-                    # 제목에서 날짜 추출 (예: 10/28)
-                    m_date = re.search(r'\((\d+/\d+)\)', title)
-                    blog_candidate['date_key'] = m_date.group(1) if m_date else ''
+                    blog_candidate['source'] = f'네이버 블로그 ({title[:20]})'
                     blog_candidate['log_no'] = int(log_no)
-                break
+                    candidates.append(blog_candidate)
     except Exception as e:
         print(f"Blog crawl error: {e}")
 
-    # 2. 텔레그램 채널 탐색 (다음날 아침 7시 10분경 본문 공유됨)
+    # 2. 텔레그램 채널 실시간 탐색 (당일 아침 07:10~07:30 본문 또는 링크 공유)
     try:
         t_url = 'https://t.me/s/crioppstockfree'
         req_t = urllib.request.Request(t_url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'})
@@ -1355,30 +1399,47 @@ def get_aftermarket_data(force_refresh=False):
             soup_t = BeautifulSoup(html_t, 'html.parser')
             for wrap in reversed(soup_t.find_all('div', class_='tgme_widget_message_wrap')):
                 m_div = wrap.find('div', class_='tgme_widget_message_text')
-                if m_div and ('에프터마켓' in m_div.get_text() or '애프터마켓' in m_div.get_text()):
-                    txt = m_div.get_text()
-                    if '(' in txt and '%' in txt:
-                        time_tag = wrap.find('time')
-                        p_time = time_tag['datetime'] if time_tag and 'datetime' in time_tag.attrs else ''
-                        telegram_candidate = _parse_telegram_aftermarket(m_div, p_time, profiles)
-                        if telegram_candidate:
-                            telegram_candidate['date_key'] = p_time[:10] if p_time else ''
-                            telegram_candidate['raw_time'] = p_time
-                            break
+                if not m_div:
+                    continue
+                txt = m_div.get_text()
+                time_tag = wrap.find('time')
+                p_time = time_tag['datetime'] if time_tag and 'datetime' in time_tag.attrs else ''
+
+                # [형태 1] 텔레그램 본문에 직접 특징주가 적힌 메시지 (당일 아침 7시 20분경 본문 작성)
+                if ('에프터마켓' in txt or '애프터마켓' in txt) and ('(' in txt and '%' in txt):
+                    t_cand = _parse_telegram_aftermarket(m_div, p_time, profiles)
+                    if t_cand and (t_cand.get('rising') or t_cand.get('falling')):
+                        t_cand['title'] = txt.splitlines()[0] if txt else '텔레그램 에프터마켓'
+                        t_cand['raw_time'] = p_time
+                        candidates.append(t_cand)
+
+                # [형태 2] 텔레그램에 공유된 최신 블로그 글 링크가 있는 경우
+                m_link = re.search(r'blog\.naver\.com/crioppstock/(\d+)', txt)
+                if m_link and ('에프터마켓' in txt or '애프터마켓' in txt or '시간외' in txt):
+                    log_no = m_link.group(1)
+                    # 이미 블로그에서 추가되지 않았을 경우에만 추가
+                    if not any(c.get('log_no') == int(log_no) for c in candidates):
+                        b_cand = _parse_blog_aftermarket(log_no, profiles)
+                        if b_cand and (b_cand.get('rising') or b_cand.get('falling')):
+                            b_cand['title'] = txt.splitlines()[0] if txt else f'텔레그램 공유글 ({log_no})'
+                            b_cand['source'] = f'텔레그램 공유 블로그 ({p_time[:10] if p_time else "최신"})'
+                            b_cand['raw_time'] = p_time
+                            b_cand['log_no'] = int(log_no)
+                            candidates.append(b_cand)
     except Exception as e:
         print(f"Telegram crawl error: {e}")
 
-    # 3. 최신성 비교 및 최적 후보 선택
+    # 3. 최우선 후보 선별 (블로그든 텔레그램이든 '무조건 가장 최신 날짜' 1순위)
     chosen = None
-    if blog_candidate and telegram_candidate:
-        t_time = telegram_candidate.get('raw_time', '')
-        b_date_key = blog_candidate.get('date_key', '')
-        if b_date_key and ('-' + b_date_key.replace('/', '-')) not in t_time:
-            chosen = blog_candidate
-        else:
-            chosen = telegram_candidate
-    else:
-        chosen = blog_candidate or telegram_candidate
+    if candidates:
+        candidates.sort(key=lambda c: (
+            _extract_aftermarket_date_int(c),                     # 1순위: 날짜 (최신 날짜 절대 우선)
+            c.get('log_no', 0),                                   # 2순위: 블로그 글번호 (클수록 최신)
+            c.get('raw_time', ''),                                # 3순위: 텔레그램 발행 시각
+            len(c.get('rising', [])) + len(c.get('falling', []))  # 4순위: 종목 수
+        ), reverse=True)
+        chosen = candidates[0]
+        print(f"[Aftermarket] 최신 후보 선정 완료: {_extract_aftermarket_date_int(chosen)} | {chosen.get('source')} | 상승 {len(chosen.get('rising',[]))}개, 하락 {len(chosen.get('falling',[]))}개")
 
     # 4. 수집 실패 시 이전 캐시 확인
     if not chosen or (not chosen.get('rising') and not chosen.get('falling')):
@@ -1484,6 +1545,613 @@ def get_aftermarket_data(force_refresh=False):
     _aftermarket_cache['data'] = data
     _aftermarket_cache['last_time'] = now_ts
     return data
+
+# ==============================================================================
+# [신규 기능 1] 장중 뉴스 영구 누적 아카이브 & 초고속 키워드 검색 엔진 (SQLite)
+# ==============================================================================
+
+def get_news_db_path():
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    data_dir = os.path.join(base_dir, 'data')
+    os.makedirs(data_dir, exist_ok=True)
+    return os.path.join(data_dir, 'news_archive.db')
+
+def init_news_db():
+    """뉴스 아카이브 SQLite 데이터베이스 초기화"""
+    db_path = get_news_db_path()
+    try:
+        with sqlite3.connect(db_path, timeout=5) as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS articles (
+                    id TEXT PRIMARY KEY,
+                    title TEXT NOT NULL,
+                    link TEXT,
+                    source TEXT,
+                    published_time TEXT,
+                    display_time TEXT,
+                    timestamp REAL,
+                    category TEXT,
+                    tags TEXT,
+                    created_date TEXT
+                )
+            ''')
+            cursor.execute('CREATE INDEX IF NOT EXISTS idx_art_time ON articles(timestamp DESC)')
+            cursor.execute('CREATE INDEX IF NOT EXISTS idx_art_title ON articles(title)')
+            cursor.execute('CREATE INDEX IF NOT EXISTS idx_art_date ON articles(created_date)')
+            conn.commit()
+    except Exception as e:
+        print(f"[NewsDB Error] init failed: {e}")
+
+# 모듈 로드 시 DB 초기화
+init_news_db()
+
+def save_articles_to_archive(articles):
+    """수집된 기사들을 SQLite 아카이브에 영구 누적 적재"""
+    if not articles:
+        return 0
+    db_path = get_news_db_path()
+    saved_count = 0
+    today_str = datetime.now().strftime('%Y-%m-%d')
+    try:
+        with sqlite3.connect(db_path, timeout=5) as conn:
+            cursor = conn.cursor()
+            rows_to_insert = []
+            for a in articles:
+                art_id = a.get('id') or a.get('link') or a.get('title')
+                tags_json = json.dumps(a.get('tags', []), ensure_ascii=False)
+                rows_to_insert.append((
+                    art_id,
+                    a.get('title', ''),
+                    a.get('link', ''),
+                    a.get('source', ''),
+                    a.get('published_time', ''),
+                    a.get('display_time', ''),
+                    float(a.get('timestamp') or time.time()),
+                    a.get('category', '속보'),
+                    tags_json,
+                    today_str
+                ))
+            cursor.executemany('''
+                INSERT OR IGNORE INTO articles (
+                    id, title, link, source, published_time, display_time,
+                    timestamp, category, tags, created_date
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ''', rows_to_insert)
+            conn.commit()
+            saved_count = cursor.rowcount
+    except Exception as e:
+        print(f"[NewsDB Error] save failed: {e}")
+    return saved_count
+
+def search_news_archive(query='', limit=250):
+    """
+    장중 누적된 모든 기사에서 키워드로 초고속 전체 검색 (제목, 태그, 언론사)
+    장중에 지나간 기사도 키워드 하나로 즉시 탐색 가능
+    """
+    db_path = get_news_db_path()
+    results = []
+    try:
+        with sqlite3.connect(db_path, timeout=5) as conn:
+            cursor = conn.cursor()
+            if query and query.strip():
+                tokens = query.strip().split()
+                where_clauses = []
+                params = []
+                for tok in tokens:
+                    clause = "(title LIKE ? OR tags LIKE ? OR source LIKE ?)"
+                    p = f"%{tok}%"
+                    where_clauses.append(clause)
+                    params.extend([p, p, p])
+                params.append(limit)
+                sql = f'''
+                    SELECT id, title, link, source, published_time, display_time, timestamp, category, tags
+                    FROM articles
+                    WHERE {' AND '.join(where_clauses)}
+                    ORDER BY timestamp DESC
+                    LIMIT ?
+                '''
+                cursor.execute(sql, params)
+            else:
+                cursor.execute('''
+                    SELECT id, title, link, source, published_time, display_time, timestamp, category, tags
+                    FROM articles
+                    ORDER BY timestamp DESC
+                    LIMIT ?
+                ''', (limit,))
+
+            for row in cursor.fetchall():
+                try:
+                    tags = json.loads(row[8]) if row[8] else []
+                except Exception:
+                    tags = []
+                results.append({
+                    'id': row[0],
+                    'title': row[1],
+                    'link': row[2],
+                    'source': row[3],
+                    'published_time': row[4],
+                    'display_time': row[5],
+                    'timestamp': row[6],
+                    'category': row[7],
+                    'tags': tags
+                })
+    except Exception as e:
+        print(f"[NewsDB Error] search failed: {e}")
+    return results
+
+
+# ==============================================================================
+# [신규 기능 2] 시황카세(sihwangkase.co.kr) 장전이슈 & 관심종목 100% 실시간 연동
+# ==============================================================================
+
+_sihwang_cache = {
+    'issues': None,
+    'last_issues_time': 0,
+    'watchlist': None,
+    'last_watchlist_time': 0
+}
+
+def get_sihwangkase_issues(force_refresh=False):
+    """
+    시황카세 장전이슈 수집:
+    1. 오늘 3회 이상 언급된 종목 (핫박스 카운트 뱃지)
+    2. 장전 핵심 이슈 & 테마별 관련주 칩 목록
+    """
+    now_ts = time.time()
+    if not force_refresh and _sihwang_cache['issues'] and (now_ts - _sihwang_cache['last_issues_time'] < 180):
+        return _sihwang_cache['issues']
+
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Referer': 'https://sihwangkase.co.kr/issue',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    }
+    
+    hot_mentions = []
+    issues = []
+    
+    try:
+        req = urllib.request.Request('https://sihwangkase.co.kr/issue', headers=headers)
+        with urllib.request.urlopen(req, timeout=8) as resp:
+            html = resp.read().decode('utf-8', errors='ignore')
+        
+        soup = BeautifulSoup(html, 'html.parser')
+        
+        # 1. 오늘 3회 이상 언급된 종목 (핫박스)
+        hotbox = soup.find(class_='hotbox')
+        if hotbox:
+            for chip in hotbox.find_all('a', class_=re.compile(r'chip')):
+                sup = chip.find('sup')
+                cnt = int(sup.get_text(strip=True)) if sup else 1
+                if sup:
+                    sup.decompose()
+                name = chip.get_text(strip=True)
+                href = chip.get('href', '')
+                if name:
+                    hot_mentions.append({
+                        'name': name,
+                        'count': cnt,
+                        'link': href
+                    })
+
+        # 2. 핵심 이슈 및 섹터별 이슈 파싱
+        for item in soup.find_all('details', class_=re.compile(r'item')):
+            summary = item.find('summary')
+            if not summary:
+                continue
+            
+            when_tag = summary.find(class_='when')
+            when = when_tag.get_text(" ", strip=True) if when_tag else ""
+            
+            tt_tag = summary.find(class_='tt')
+            title = tt_tag.get_text(strip=True) if tt_tag else ""
+            
+            tags = [t.get_text(strip=True) for t in summary.find_all(class_='tag')]
+            badge = summary.find(class_='badge')
+            badge_text = badge.get_text(strip=True) if badge else ""
+            
+            detail = item.find(class_='detail')
+            body_p = detail.find(class_='body') if detail else None
+            body_text = body_p.get_text(strip=True) if body_p else ""
+            
+            stock_groups = []
+            if detail:
+                for sgrp in detail.find_all(class_='sgrp'):
+                    slabel = sgrp.find(class_='slabel')
+                    grp_name = slabel.get_text(strip=True) if slabel else "관련주"
+                    chips = []
+                    for chip in sgrp.find_all('a', class_=re.compile(r'chip')):
+                        c_name = chip.get_text(strip=True)
+                        c_href = chip.get('href', '')
+                        is_hot = 'hot' in chip.get('class', [])
+                        chips.append({'name': c_name, 'link': c_href, 'is_hot': is_hot})
+                    if chips:
+                        stock_groups.append({
+                            'group_name': grp_name,
+                            'stocks': chips
+                        })
+                        
+            origin_a = detail.find('a', href=re.compile(r'^http')) if detail else None
+            origin_link = origin_a.get('href') if origin_a else ""
+            
+            if title:
+                issues.append({
+                    'title': title,
+                    'when': when,
+                    'tags': tags,
+                    'badge': badge_text,
+                    'summary': body_text,
+                    'stock_groups': stock_groups,
+                    'origin_link': origin_link
+                })
+        
+        result = {
+            'status': 'ok',
+            'hot_mentions': hot_mentions,
+            'issues': issues,
+            'count': len(issues),
+            'updated_at': datetime.now().strftime('%H:%M:%S')
+        }
+        # 로컬 영구 백업 캐시 저장 (서버 다운/차단 대비)
+        try:
+            cache_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data', 'sihwang_issues.json')
+            with open(cache_file, 'w', encoding='utf-8') as f:
+                json.dump(result, f, ensure_ascii=False, indent=2)
+        except Exception:
+            pass
+
+        _sihwang_cache['issues'] = result
+        _sihwang_cache['last_issues_time'] = now_ts
+        return result
+    except Exception as e:
+        print(f"[Sihwang Error] issue fetch failed: {e}")
+        # 외부 사이트 장애나 네트워크 차단 시 로컬 백업 자동 복원
+        cache_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data', 'sihwang_issues.json')
+        if os.path.exists(cache_file):
+            try:
+                with open(cache_file, 'r', encoding='utf-8') as f:
+                    cached = json.load(f)
+                    cached['from_cache'] = True
+                    return cached
+            except Exception:
+                pass
+        return {
+            'status': 'error',
+            'message': str(e),
+            'hot_mentions': [],
+            'issues': []
+        }
+
+def get_sihwangkase_watchlist(force_refresh=False):
+    """
+    시황카세 국내 관심종목(/api/krwatch):
+    - 61개 테마 그룹 (원전, 바이오, AI, 전력, 2차전지 등)
+    - 839개 종목별 실시간 시세, 등락률, 거래대금(억원)
+    - 다중 테마 중복 종목 태깅 및 정렬/전광판 데이터 제공
+    - 외부 차단/장애 대비 로컬 스냅샷 자동 백업 및 복원
+    """
+    now_ts = time.time()
+    if not force_refresh and _sihwang_cache['watchlist'] and (now_ts - _sihwang_cache['last_watchlist_time'] < 60):
+        return _sihwang_cache['watchlist']
+
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Referer': 'https://sihwangkase.co.kr/krwatch',
+        'Accept': 'application/json'
+    }
+
+    cache_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data', 'sihwang_watchlist.json')
+    catalog_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data', 'themes_catalog.json')
+
+    try:
+        req = urllib.request.Request('https://sihwangkase.co.kr/api/krwatch', headers=headers)
+        with urllib.request.urlopen(req, timeout=8) as resp:
+            data = json.loads(resp.read().decode('utf-8'))
+            groups = data.get('groups', [])
+            themes_of = data.get('themes_of', {})
+
+            # 중복 테마 통계 산출
+            overlap2 = 0
+            overlap3 = 0
+            overlap4 = 0
+            for code, th_list in themes_of.items():
+                c = len(th_list)
+                if c == 2: overlap2 += 1
+                elif c == 3: overlap3 += 1
+                elif c >= 4: overlap4 += 1
+
+            for g in groups:
+                tot = 0
+                for r in g.get('rows', []):
+                    eok_val = r.get('eok') or 0
+                    try:
+                        tot += int(eok_val)
+                    except Exception:
+                        pass
+                    code = r.get('code', '')
+                    t_list = themes_of.get(code, [])
+                    r['overlap_count'] = len(t_list)
+                    r['overlap_themes'] = t_list
+                g['total_eok'] = tot
+                if tot >= 10000:
+                    g['total_amount_str'] = f"{tot / 10000:.1f}조"
+                else:
+                    g['total_amount_str'] = f"{tot:,}억"
+                # avg_rate float 보장
+                try:
+                    g['avg_rate'] = float(g.get('avg_rate', 0.0))
+                except Exception:
+                    g['avg_rate'] = 0.0
+
+            result = {
+                'status': 'ok',
+                'groups': groups,
+                'stocks_count': data.get('stocks', 839),
+                'themes_count': len(groups),
+                'themes_of': themes_of,
+                'overlap_stats': {
+                    'overlap_2': overlap2,
+                    'overlap_3': overlap3,
+                    'overlap_4_plus': overlap4
+                },
+                'market': data.get('market', 'KRX+NXT 통합'),
+                'updated_at': data.get('updated_at', datetime.now().strftime('%H:%M:%S'))
+            }
+
+            # 로컬 영구 백업 저장
+            try:
+                os.makedirs(os.path.dirname(cache_file), exist_ok=True)
+                with open(cache_file, 'w', encoding='utf-8') as f:
+                    json.dump(result, f, ensure_ascii=False, indent=2)
+                # 테마 카탈로그 구조 독립 영구 보존
+                catalog = [{
+                    'name': g.get('name'),
+                    'sector': g.get('sector'),
+                    'stocks': [{'code': r.get('code'), 'name': r.get('name')} for r in g.get('rows', [])]
+                } for g in groups]
+                with open(catalog_file, 'w', encoding='utf-8') as f:
+                    json.dump(catalog, f, ensure_ascii=False, indent=2)
+            except Exception:
+                pass
+
+            _sihwang_cache['watchlist'] = result
+            _sihwang_cache['last_watchlist_time'] = now_ts
+            return result
+    except Exception as e:
+        print(f"[Sihwang Error] watchlist fetch failed: {e}")
+        # 외부 사이트 장애나 네트워크 차단 시 로컬 백업 자동 복원
+        if os.path.exists(cache_file):
+            try:
+                with open(cache_file, 'r', encoding='utf-8') as f:
+                    cached = json.load(f)
+                    cached['from_cache'] = True
+                    return cached
+            except Exception:
+                pass
+        return {
+            'status': 'error',
+            'message': str(e),
+            'groups': [],
+            'stocks_count': 0
+        }
+
+# 개별 종목 상세 및 차트 캐시 (TTL: 180초)
+_stock_detail_cache = {}
+_stock_chart_cache = {}
+
+def get_stock_detail(code):
+    """
+    개별 종목 정밀 분석 데이터 (현재가, 등락률, 시총, 거래대금, 외인/기관 수급, RS점수, 상승사유 등)
+    """
+    if not code:
+        return {'status': 'error', 'message': 'code required'}
+    
+    now_ts = time.time()
+    if code in _stock_detail_cache:
+        cached = _stock_detail_cache[code]
+        if now_ts - cached['time'] < 180:
+            return cached['data']
+
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Referer': 'https://sihwangkase.co.kr/krwatch',
+    }
+    try:
+        url = f'https://sihwangkase.co.kr/api/stock?q={code}'
+        req = urllib.request.Request(url, headers=headers)
+        with urllib.request.urlopen(req, timeout=4) as resp:
+            data = json.loads(resp.read().decode('utf-8'))
+            data['status'] = 'ok'
+            _stock_detail_cache[code] = {'data': data, 'time': now_ts}
+            return data
+    except Exception as e:
+        try:
+            n_url = f'https://m.stock.naver.com/api/stock/{code}/basic'
+            n_req = urllib.request.Request(n_url, headers={'User-Agent': 'Mozilla/5.0'})
+            with urllib.request.urlopen(n_req, timeout=3) as n_resp:
+                nd = json.loads(n_resp.read().decode('utf-8'))
+                res = {
+                    'status': 'ok',
+                    'code': code,
+                    'name': nd.get('stockName', ''),
+                    'price': float(nd.get('closePrice', '0').replace(',', '')),
+                    'change_rate': float(nd.get('fluctuationsRatio', '0')),
+                    'market': '코스닥' if 'KOSDAQ' in str(nd.get('sosok', '')) else '코스피',
+                    'reason': '실시간 증시 데이터',
+                    'rs_rating': {'rs': 50, 'vs': '코스피'},
+                }
+                _stock_detail_cache[code] = {'data': res, 'time': now_ts}
+                return res
+        except Exception as e2:
+            return {'status': 'error', 'message': f"{e} / {e2}"}
+
+def get_stock_chart(code):
+    """
+    개별 종목 캔들 차트 및 이동평균선, 거래량 시계열 데이터
+    """
+    if not code:
+        return {'status': 'error', 'message': 'code required', 'rows': []}
+        
+    now_ts = time.time()
+    if code in _stock_chart_cache:
+        cached = _stock_chart_cache[code]
+        if now_ts - cached['time'] < 180:
+            return cached['data']
+
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+        'Referer': 'https://sihwangkase.co.kr/krwatch',
+    }
+    try:
+        url = f'https://sihwangkase.co.kr/api/chart?code={code}'
+        req = urllib.request.Request(url, headers=headers)
+        with urllib.request.urlopen(req, timeout=4) as resp:
+            data = json.loads(resp.read().decode('utf-8'))
+            data['status'] = 'ok'
+            _stock_chart_cache[code] = {'data': data, 'time': now_ts}
+            return data
+    except Exception as e:
+        return {'status': 'error', 'message': str(e), 'rows': []}
+
+
+_macro_cache = {'data': None, 'time': 0}
+_indicators_cache = {'data': None, 'time': 0}
+_calendar_cache = {}
+
+def get_macro_data(force_refresh=False):
+    """원자재, 환율, 반도체(DRAM/NAND/SOX/수출), 증시자금 등 23종 매크로 데이터 수집"""
+    global _macro_cache
+    now_ts = time.time()
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    cache_file = os.path.join(base_dir, 'data', 'sihwang_macro.json')
+
+    if not force_refresh and _macro_cache['data'] and (now_ts - _macro_cache['time'] < 300):
+        return _macro_cache['data']
+
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Referer': 'https://sihwangkase.co.kr/futures',
+        'Accept': 'application/json'
+    }
+
+    try:
+        url = 'https://sihwangkase.co.kr/api/macro'
+        req = urllib.request.Request(url, headers=headers)
+        with urllib.request.urlopen(req, timeout=6) as resp:
+            data = json.loads(resp.read().decode('utf-8'))
+            data['status'] = 'ok'
+            data['updated_at'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            _macro_cache = {'data': data, 'time': now_ts}
+            try:
+                with open(cache_file, 'w', encoding='utf-8') as f:
+                    json.dump(data, f, ensure_ascii=False, indent=2)
+            except Exception:
+                pass
+            return data
+    except Exception as e:
+        if os.path.exists(cache_file):
+            try:
+                with open(cache_file, 'r', encoding='utf-8') as f:
+                    cached = json.load(f)
+                    cached['status'] = 'ok'
+                    cached['from_cache'] = True
+                    _macro_cache = {'data': cached, 'time': now_ts}
+                    return cached
+            except Exception:
+                pass
+        return {'status': 'error', 'message': str(e), 'items': []}
+
+def get_indicators_data(force_refresh=False):
+    """코스피200 선물, 미결제약정(OI), 베이시스(콘탱고/백워데이션), 괴리율, 프로그램 비차익 순매수"""
+    global _indicators_cache
+    now_ts = time.time()
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    cache_file = os.path.join(base_dir, 'data', 'sihwang_indicators.json')
+
+    if not force_refresh and _indicators_cache['data'] and (now_ts - _indicators_cache['time'] < 30):
+        return _indicators_cache['data']
+
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Referer': 'https://sihwangkase.co.kr/futures',
+        'Accept': 'application/json'
+    }
+
+    try:
+        url = 'https://sihwangkase.co.kr/api/indicators'
+        req = urllib.request.Request(url, headers=headers)
+        with urllib.request.urlopen(req, timeout=5) as resp:
+            data = json.loads(resp.read().decode('utf-8'))
+            data['status'] = 'ok'
+            _indicators_cache = {'data': data, 'time': now_ts}
+            try:
+                with open(cache_file, 'w', encoding='utf-8') as f:
+                    json.dump(data, f, ensure_ascii=False, indent=2)
+            except Exception:
+                pass
+            return data
+    except Exception as e:
+        if os.path.exists(cache_file):
+            try:
+                with open(cache_file, 'r', encoding='utf-8') as f:
+                    cached = json.load(f)
+                    cached['status'] = 'ok'
+                    cached['from_cache'] = True
+                    _indicators_cache = {'data': cached, 'time': now_ts}
+                    return cached
+            except Exception:
+                pass
+        return {'status': 'error', 'message': str(e)}
+
+def get_calendar_data(month=None, force_refresh=False):
+    """증시 캘린더 (실적발표, 공모주, FOMC, 경제지표, 만기일, 락업해제)"""
+    global _calendar_cache
+    now_ts = time.time()
+    if not month:
+        month = datetime.now().strftime('%Y-%m')
+
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    cache_file = os.path.join(base_dir, 'data', f'sihwang_calendar_{month}.json')
+    default_cache_file = os.path.join(base_dir, 'data', 'sihwang_calendar.json')
+
+    cached_entry = _calendar_cache.get(month)
+    if not force_refresh and cached_entry and (now_ts - cached_entry['time'] < 600):
+        return cached_entry['data']
+
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Referer': 'https://sihwangkase.co.kr/calendar',
+        'Accept': 'application/json'
+    }
+
+    try:
+        url = f'https://sihwangkase.co.kr/api/calendar?month={month}'
+        req = urllib.request.Request(url, headers=headers)
+        with urllib.request.urlopen(req, timeout=6) as resp:
+            data = json.loads(resp.read().decode('utf-8'))
+            data['status'] = 'ok'
+            _calendar_cache[month] = {'data': data, 'time': now_ts}
+            try:
+                with open(cache_file, 'w', encoding='utf-8') as f:
+                    json.dump(data, f, ensure_ascii=False, indent=2)
+            except Exception:
+                pass
+            return data
+    except Exception as e:
+        for cf in [cache_file, default_cache_file]:
+            if os.path.exists(cf):
+                try:
+                    with open(cf, 'r', encoding='utf-8') as f:
+                        cached = json.load(f)
+                        cached['status'] = 'ok'
+                        cached['from_cache'] = True
+                        _calendar_cache[month] = {'data': cached, 'time': now_ts}
+                        return cached
+                except Exception:
+                    pass
+        return {'status': 'error', 'message': str(e), 'events': [], 'kinds': [], 'month': month}
+
 
 if __name__ == '__main__':
     import sys
