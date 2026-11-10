@@ -1,464 +1,426 @@
 {
   "status": "ok",
-  "time": "4시간 전",
-  "source": "네이버 블로그 ((11/6) 특징 상한가 및 급등 종)",
+  "time": "7시간 전",
+  "source": "네이버 블로그 ((11/10) 특징 상한가 및 급등 종목 /)",
   "rising": [
     {
-      "name": "KTcs",
-      "code": "",
-      "pct": "+12.01%",
-      "is_up": true,
-      "themes": [],
-      "primary_theme": "",
-      "reasons": [
-        "장 마감 후 보통주 3,465,721주 소각 결정(소각예정일:2026-12-21) 공시. 중기 주주환원 정책(환원재원: 별도 기준 조정 당기순이익의 40% 등) 공시"
-      ]
-    },
-    {
-      "name": "한화머시너리앤서비스홀딩스",
-      "code": "",
-      "pct": "+3.29%",
-      "is_up": true,
-      "themes": [],
-      "primary_theme": "",
-      "reasons": [
-        "[김동선, 한화M&S 최대주주 올랐다…공개매수 1838억원] 기사"
-      ]
-    },
-    {
-      "name": "피노",
-      "code": "033790",
-      "pct": "+3.25%",
+      "name": "한진",
+      "code": "002320",
+      "pct": "+18.61%",
       "is_up": true,
       "themes": [
+        "종합 물류"
+      ],
+      "primary_theme": "종합 물류",
+      "reasons": [
+        "장 마감 후 보통주 478,401주(199.88억원) 규모 주식 소각 결정(소각예정일:2026-11-30) 공시. 주식등의 대량보유자 소유주식수 변동 전자공시(장금상선 장내매수)"
+      ]
+    },
+    {
+      "name": "보로노이",
+      "code": "310210",
+      "pct": "+5.60%",
+      "is_up": true,
+      "themes": [
+        "치매"
+      ],
+      "primary_theme": "치매",
+      "reasons": [
+        "장 마감 후 투자판단 관련 주요경영사항(임상시험계획 변경승인신청) (VRN110755의 제 1/2상 임상시험) 정정공시(해외(호주) 임상시험 프로토콜 업데이트에 따른임상시험계획 변경승인신청). [보로노이, 'VRN110755' 호주 비소세포폐암 임상1/2상 IND 변경승인 신청] 기사"
+      ]
+    },
+    {
+      "name": "모두투어",
+      "code": "080160",
+      "pct": "+4.78%",
+      "is_up": true,
+      "themes": [
+        "여행",
+        "환율하락 수혜"
+      ],
+      "primary_theme": "여행",
+      "reasons": [
+        "장중 주식등의 대량보유자 소유주식수 변동 전장공시(화우디앤씨(주) 장내매수). [화우디앤씨도 지분 기습 매집 … 모두투어 적대적 M&A 불붙나] 기사"
+      ]
+    },
+    {
+      "name": "애드바이오텍",
+      "code": "179530",
+      "pct": "+3.99%",
+      "is_up": true,
+      "themes": [
+        "사료"
+      ],
+      "primary_theme": "사료",
+      "reasons": []
+    },
+    {
+      "name": "LS에코에너지",
+      "code": "229640",
+      "pct": "+3.75%",
+      "is_up": true,
+      "themes": [
+        "전선",
+        "지주사",
+        "풍력에너지",
+        "희귀금속(희토류 등)",
+        "전력설비",
+        "5G(5세대 이동통신)"
+      ],
+      "primary_theme": "전선",
+      "reasons": [
+        "애프터마켓 일부 전력설비/ 전선, 풍력에너지 테마 상승. 장중 [美 희토류 규제에 LS ‘반사익’…내달 非중국산 사마륨 최초 양산] 기사ㅇ"
+      ]
+    },
+    {
+      "name": "JW신약",
+      "code": "067290",
+      "pct": "+2.44%",
+      "is_up": true,
+      "themes": [
+        "제약업체",
+        "탈모 치료"
+      ],
+      "primary_theme": "제약업체",
+      "reasons": [
+        "바리시티닙, 중증 원형탈모 4년 이상 치료효과 확인 소식 등에 탈모 치료 테마 상승 속 정규장 급등"
+      ]
+    },
+    {
+      "name": "파라다이스",
+      "code": "034230",
+      "pct": "+2.42%",
+      "is_up": true,
+      "themes": [
+        "카지노",
+        "호텔/리조트",
+        "밸류업(25년 기업가치 제고계획 발표)"
+      ],
+      "primary_theme": "카지노",
+      "reasons": [
+        "장 마감 후 3분기 실적 발표, 연결기준 매출액 3,516.55억원(전년동기대비 +22.0%), 영업이익 641.21억원(전년동기대비 +62.3%)"
+      ]
+    },
+    {
+      "name": "LS머트리얼즈",
+      "code": "417200",
+      "pct": "+2.18%",
+      "is_up": true,
+      "themes": [
+        "고체산화물 연료전지(SOFC)",
+        "풍력에너지",
+        "전기차"
+      ],
+      "primary_theme": "고체산화물 연료전지(SOFC)",
+      "reasons": [
+        "애프터마켓 일부 풍력에너지, 고체산화물 연료전지(SOFC) 테마 상승"
+      ]
+    },
+    {
+      "name": "브릴스",
+      "code": "468670",
+      "pct": "+1.81%",
+      "is_up": true,
+      "themes": [
+        "2026 하반기 신규상장",
+        "로봇(산업용/협동로봇 등)"
+      ],
+      "primary_theme": "2026 하반기 신규상장",
+      "reasons": [
+        "장중 [브릴스, 현대차·기아 행사서 '피지컬 AI 안전관제 로봇' 선봬] 기사"
+      ]
+    },
+    {
+      "name": "가온전선",
+      "code": "000500",
+      "pct": "+1.71%",
+      "is_up": true,
+      "themes": [
+        "전선",
+        "전력설비"
+      ],
+      "primary_theme": "전선",
+      "reasons": [
+        "애프터마켓 일부 전력설비/ 전선 테마 상승"
+      ]
+    },
+    {
+      "name": "빛샘전자",
+      "code": "072950",
+      "pct": "+1.60%",
+      "is_up": true,
+      "themes": [
+        "철도",
         "통신장비",
-        "2차전지",
-        "2차전지(소재/부품)"
+        "LED",
+        "광통신(광케이블/광섬유 등)"
       ],
-      "primary_theme": "통신장비",
-      "reasons": []
-    },
-    {
-      "name": "유니퀘스트",
-      "code": "077500",
-      "pct": "+2.26%",
-      "is_up": true,
-      "themes": [
-        "바이오인식(생체인식)",
-        "자율주행차",
-        "온디바이스 AI"
-      ],
-      "primary_theme": "바이오인식(생체인식)",
+      "primary_theme": "철도",
       "reasons": [
-        "장중 [방산으로 넓어지는 반도체 유통의 역할] 기사"
+        "애프터마켓 일부 광통신(광케이블/광섬유 등)/ 통신장비 테마 상승"
       ]
     },
     {
-      "name": "영화테크",
-      "code": "265560",
-      "pct": "+2.23%",
+      "name": "올릭스",
+      "code": "226950",
+      "pct": "+1.59%",
       "is_up": true,
       "themes": [
-        "자동차부품",
-        "수소에너지(수소차/연료전지 등)",
-        "전기차",
-        "폐배터리",
-        "2차전지",
-        "2차전지(소재/부품)"
+        "비만치료제",
+        "mRNA(메신저 리보핵산)",
+        "탈모 치료"
       ],
-      "primary_theme": "자동차부품",
+      "primary_theme": "비만치료제",
       "reasons": [
-        "장 마감 후 현대자동차(주)와 815.81억원(최근 매출액대비 75.1%) 규모 공급계약(현대차 컨버터 수주) 체결(계약기간:2026-11-06~2036-12-31) 공시"
+        "장 마감 후 투자판단 관련 주요경영사항 (임상시험계획승인 신청 반려) 정정공시(Northern B 뉴질랜드 보건장애윤리위원회 재심의 승인에 따른 내용 추가). [올릭스, 황반변성 치료제 뉴질랜드 임상 2a상 윤리심의 승인] 기사"
       ]
     },
     {
-      "name": "SK하이닉스",
-      "code": "000660",
-      "pct": "+1.94%",
+      "name": "대한광통신",
+      "code": "010170",
+      "pct": "+1.44%",
       "is_up": true,
       "themes": [
-        "자율주행차",
-        "밸류업(24년 기업가치 제고계획 발표)",
-        "코리아 밸류업 지수(Korea Value-up Index)",
-        "S7(삼성전자/SK하이닉스 등)",
-        "온디바이스 AI",
-        "IT 대표주",
-        "CXL(컴퓨트익스프레스링크)",
-        "전력반도체",
-        "아이폰",
-        "시스템반도체",
-        "소캠(SOCAMM)",
-        "반도체 대표주(생산)",
-        "HBM(고대역폭메모리)"
+        "방위산업/전쟁 및 테러",
+        "5G(5세대 이동통신)",
+        "광통신(광케이블/광섬유 등)"
       ],
-      "primary_theme": "자율주행차",
-      "reasons": []
+      "primary_theme": "방위산업/전쟁 및 테러",
+      "reasons": [
+        "애프터마켓 일부 광통신(광케이블/광섬유 등)/ 5G(5세대 이동통신) 테마 상승"
+      ]
+    },
+    {
+      "name": "TYM",
+      "code": "002900",
+      "pct": "+1.38%",
+      "is_up": true,
+      "themes": [
+        "전후 재건(우크라/중동 전쟁 등)",
+        "농업"
+      ],
+      "primary_theme": "전후 재건(우크라/중동 전쟁 등)",
+      "reasons": [
+        "애프터마켓 일부 전후 재건(우크라/중동 전쟁 등) 테마 상승. 장중 [토종 농기계 업체 TYM, 북미 시장서 질주하는 이유] 기사"
+      ]
     }
   ],
   "falling": [
     {
-      "name": "아로마티카",
-      "code": "0015N0",
-      "pct": "-8.08%",
+      "name": "넥슨게임즈",
+      "code": "225570",
+      "pct": "-8.09%",
       "is_up": false,
       "themes": [
-        "화장품"
+        "모바일게임(스마트폰)",
+        "게임"
       ],
-      "primary_theme": "화장품",
+      "primary_theme": "모바일게임(스마트폰)",
       "reasons": [
-        "장 마감 후 3분기 실적발표, 연결기준 매출액 171.29억원(전년동기대비 +31.98%), 영업이익 20.55억원(전년동기대비 +7.70%), 순이익 16.33억원(전년동기대비 +2.83%)"
+        "애프터마켓 일부 게임/ 모바일게임(스마트폰) 테마 하락. 장 마감 후 분기보고서를 통해 3분기 실적 발표, 연결기준 매출액 386.46억원(전년동기대비 -22.94%), 영업손실 220.75억원(전년동기대비 적자폭 확대)"
       ]
     },
     {
-      "name": "씨젠",
-      "code": "096530",
-      "pct": "-7.10%",
+      "name": "시프트업",
+      "code": "462870",
+      "pct": "-5.58%",
       "is_up": false,
       "themes": [
-        "코로나19(진단키트)",
-        "백신/진단시약/방역(신종플루, AI 등)",
-        "코로나19(진단/치료제/백신 개발 등)",
-        "유전자 치료제/분석"
+        "모바일게임(스마트폰)",
+        "게임"
       ],
-      "primary_theme": "코로나19(진단키트)",
+      "primary_theme": "모바일게임(스마트폰)",
       "reasons": [
-        "장 마감 후 3분기 실적 발표, 연결기준 매출액 1,231.18억원(전년동기대비 +8.43%), 영업이익 116.43억원(전년동기대비 +21.15%), 순손실 188.06억원(전년동기대비 적자전환)"
+        "애프터마켓 일부 게임/ 모바일게임(스마트폰) 테마 하락. 장 마감 후 3분기 실적 발표, 연결기준 매출액 462.05억원(전년동기대비 -38.80%), 영업이익 207.01억원(전년동기대비 -58.22%). 보통주 320,000주 소각 결정(소각예정일:2026-11-27) 공시"
       ]
     },
     {
-      "name": "아바코",
-      "code": "083930",
-      "pct": "-4.99%",
+      "name": "크래프톤",
+      "code": "259960",
+      "pct": "-5.31%",
       "is_up": false,
       "themes": [
-        "OLED(유기 발광 다이오드)",
-        "태양광에너지",
-        "2차전지(장비)",
-        "2차전지",
-        "2차전지(전고체)"
+        "모바일게임(스마트폰)",
+        "게임",
+        "코리아 밸류업 지수(Korea Value-up Index)"
       ],
-      "primary_theme": "OLED(유기 발광 다이오드)",
+      "primary_theme": "모바일게임(스마트폰)",
       "reasons": [
-        "장 마감 후 3분기 실적 발표, 별도기준 매출액 473.24억원(전년동기대비 -5.96%), 영업손실 46.07억원(전년동기대비 적자전환)"
+        "애프터마켓 일부 게임/ 모바일게임(스마트폰) 테마 하락. 장 마감 후 3분기 실적 발표, 연결기준 매출액 9,714.00억원(전년동기대비 +11.57%), 영업이익 2,250.00억원(전년동기대비 -35.45%)"
       ]
     },
     {
-      "name": "깨끗한나라",
-      "code": "004540",
-      "pct": "-4.92%",
+      "name": "경동나비엔",
+      "code": "009450",
+      "pct": "-4.79%",
       "is_up": false,
       "themes": [
-        "제지",
-        "출산장려정책",
-        "日제품 불매운동(수혜)",
-        "마스크"
+        "겨울",
+        "스마트홈(홈네트워크)",
+        "코리아 밸류업 지수(Korea Value-up Index)"
       ],
-      "primary_theme": "제지",
-      "reasons": []
-    },
-    {
-      "name": "코스메카코리아",
-      "code": "241710",
-      "pct": "-4.34%",
-      "is_up": false,
-      "themes": [
-        "화장품"
-      ],
-      "primary_theme": "화장품",
+      "primary_theme": "겨울",
       "reasons": [
-        "장 마감 후 3분기 실적 발표, 연결기준 매출액 2,475.44억원(전년동기대비 +35.73%), 영업이익 272.23억원(전년동기대비 +0.11%), 순이익 103.78억원(전년동기대비 -53.54%)"
+        "장 마감 후 3분기 실적 발표, 연결기준 매출액 3,823.76억원(전년동기대비 +24.94%), 영업이익 378.03억원(전년동기대비 +372.95%), 순손실 24.13억원(전년동기대비 적자전환)"
       ]
     },
     {
-      "name": "삼양식품",
-      "code": "003230",
-      "pct": "-3.69%",
+      "name": "동원산업",
+      "code": "006040",
+      "pct": "-4.38%",
       "is_up": false,
       "themes": [
-        "음식료업종",
+        "구제역/광우병 수혜",
+        "수산",
+        "지주사",
+        "서울고속버스터미널 재개발 수혜",
+        "부동산 보유 자산주",
+        "밸류업(24년 기업가치 제고계획 발표)"
+      ],
+      "primary_theme": "구제역/광우병 수혜",
+      "reasons": [
+        "장 마감 후 3분기 실적 발표, 연결기준 매출액 2.75조원(전년동기대비 +6.55%), 영업이익 1,496.82억원(전년동기대비 +1.06%), 순이익 626.60억원(전년동기대비 -38.25%)"
+      ]
+    },
+    {
+      "name": "F&F",
+      "code": "383220",
+      "pct": "-3.83%",
+      "is_up": false,
+      "themes": [
+        "패션/의류",
         "밸류업(25년 기업가치 제고계획 발표)",
         "코리아 밸류업 지수(Korea Value-up Index)"
       ],
-      "primary_theme": "음식료업종",
+      "primary_theme": "패션/의류",
       "reasons": [
-        "장 마감 후 3분기 실적 발표, 연결기준 매출액 7,918.00억원(전년동기대비 +25.28%), 영업이익 1,962.00억원(전년동기대비 +49.88%), 순이익 892.00억원(전년동기대비 -18.90%)"
+        "장 마감 후 3분기 실적 발표, 연결기준 매출액 4,521.15억원(전년동기대비 -4.66%), 영업이익 1,084.32억원(전년동기대비 -15.30%). 보통주 825,501주 소각 결정(소각예정일:2026-11-30) 공시"
       ]
     },
     {
-      "name": "래블업",
+      "name": "동원파츠",
       "code": "",
-      "pct": "-3.64%",
+      "pct": "-2.72%",
       "is_up": false,
       "themes": [],
       "primary_theme": "",
       "reasons": []
     },
     {
-      "name": "아리바이오랩",
-      "code": "261780",
-      "pct": "-3.49%",
+      "name": "한국공항",
+      "code": "",
+      "pct": "-2.16%",
       "is_up": false,
-      "themes": [
-        "백신/진단시약/방역(신종플루, AI 등)",
-        "코로나19(진단/치료제/백신 개발 등)",
-        "코로나19(치료제/백신 개발 등)"
-      ],
-      "primary_theme": "백신/진단시약/방역(신종플루, AI 등)",
-      "reasons": []
-    },
-    {
-      "name": "혜인",
-      "code": "003010",
-      "pct": "-3.44%",
-      "is_up": false,
-      "themes": [
-        "전후 재건(우크라/중동 전쟁 등)",
-        "건설기계",
-        "환율하락 수혜",
-        "방위산업/전쟁 및 테러",
-        "태양광에너지"
-      ],
-      "primary_theme": "전후 재건(우크라/중동 전쟁 등)",
+      "themes": [],
+      "primary_theme": "",
       "reasons": [
-        "美 AI 데이터센터 규제 우려 지속 속 애프터마켓 일부 데이터센터 테마 하락"
+        "장 마감 후 3분기 실적 발표, 연결기준 매출액 1,835.92억원(전년동기대비 +9.95%), 영업이익 150.18억원(전년동기대비 +3.80%)"
       ]
     },
     {
-      "name": "LIG디펜스앤에어로스페이스",
-      "code": "079550",
-      "pct": "-3.07%",
+      "name": "한진칼",
+      "code": "180640",
+      "pct": "-1.88%",
       "is_up": false,
       "themes": [
-        "방위산업/전쟁 및 테러",
-        "드론(Drone)",
-        "UAM(도심항공모빌리티)",
-        "항공기부품",
-        "코리아 밸류업 지수(Korea Value-up Index)",
-        "로봇(산업용/협동로봇 등)",
-        "우주항공산업(누리호/인공위성 등)"
-      ],
-      "primary_theme": "방위산업/전쟁 및 테러",
-      "reasons": [
-        "장 마감 직전 3분기 실적 발표, 연결기준 매출액 1.07조원(전년동기대비 +2.10%), 영업이익 676.00억원(전년동기대비 -24.55%). 장 마감 후 유상증자결정(사유: 납입일정 변경, 정정대상 공시서류 제출일: 2026-06-25) 정정공시"
-      ]
-    },
-    {
-      "name": "우진",
-      "code": "105840",
-      "pct": "-2.31%",
-      "is_up": false,
-      "themes": [
-        "원자력발전",
-        "원자력발전소 해체"
-      ],
-      "primary_theme": "원자력발전",
-      "reasons": [
-        "美 AI 데이터센터 규제 우려 지속 속 애프터마켓 일부 원자력발전 테마 하락"
-      ]
-    },
-    {
-      "name": "제룡전기",
-      "code": "033100",
-      "pct": "-2.00%",
-      "is_up": false,
-      "themes": [
-        "철도",
-        "전력설비",
+        "항공/저가 항공사(LCC)",
+        "지주사",
+        "밸류업(25년 기업가치 제고계획 발표)",
         "코리아 밸류업 지수(Korea Value-up Index)"
       ],
-      "primary_theme": "철도",
-      "reasons": [
-        "美 AI 데이터센터 규제 우려 지속 속 애프터마켓 일부 전력설비 테마 하락"
-      ]
+      "primary_theme": "항공/저가 항공사(LCC)",
+      "reasons": []
     },
     {
-      "name": "SK네트웍스",
-      "code": "001740",
-      "pct": "-1.95%",
-      "is_up": false,
-      "themes": [
-        "호텔/리조트",
-        "종합상사",
-        "마켓컬리(kurly)",
-        "밸류업(24년 기업가치 제고계획 발표)",
-        "전기차(충전소/충전기)"
-      ],
-      "primary_theme": "호텔/리조트",
-      "reasons": [
-        "장 마감 후 3분기 실적 발표, 연결기준 매출액 1.93조원(전년동기대비 -1.87%), 영업이익 201.42억원(전년동기대비 -9.87%)"
-      ]
-    },
-    {
-      "name": "LG유플러스",
-      "code": "032640",
-      "pct": "-1.85%",
-      "is_up": false,
-      "themes": [
-        "메타버스(Metaverse)",
-        "스마트홈(홈네트워크)",
-        "UAM(도심항공모빌리티)",
-        "밸류업(24년 기업가치 제고계획 발표)",
-        "전기차(충전소/충전기)",
-        "통신",
-        "5G(5세대 이동통신)",
-        "양자암호/양자컴퓨팅"
-      ],
-      "primary_theme": "메타버스(Metaverse)",
-      "reasons": [
-        "美 AI 데이터센터 규제 우려 지속 속 애프터마켓 일부 데이터센터 테마 하락"
-      ]
-    },
-    {
-      "name": "이에스티",
-      "code": "",
-      "pct": "-1.83%",
-      "is_up": false,
-      "themes": [],
-      "primary_theme": "",
-      "reasons": [
-        "美 AI 데이터센터 규제 우려 지속 속 애프터마켓 일부 반도체 관련주 하락. 11월4일(수) 신규 상장"
-      ]
-    },
-    {
-      "name": "AP시스템",
-      "code": "265520",
-      "pct": "-1.78%",
-      "is_up": false,
-      "themes": [
-        "플렉서블 디스플레이",
-        "OLED(유기 발광 다이오드)",
-        "반도체 장비"
-      ],
-      "primary_theme": "플렉서블 디스플레이",
-      "reasons": [
-        "장 마감 후 3분기 실적 발표, 연결기준 매출액 1,292.50억원(전년동기대비 +34.19%), 영업이익 40.39억원(전년동기대비 -69.77%)"
-      ]
-    },
-    {
-      "name": "금양그린파워",
-      "code": "282720",
-      "pct": "-1.78%",
-      "is_up": false,
-      "themes": [
-        "고체산화물 연료전지(SOFC)",
-        "풍력에너지",
-        "원자력발전",
-        "태양광에너지",
-        "전력저장장치(ESS)"
-      ],
-      "primary_theme": "고체산화물 연료전지(SOFC)",
-      "reasons": [
-        "美 AI 데이터센터 규제 우려 지속 속 애프터마켓 일부 원자력발전 테마 하락"
-      ]
-    },
-    {
-      "name": "코웨이",
-      "code": "021240",
+      "name": "덴티움",
+      "code": "145720",
       "pct": "-1.77%",
       "is_up": false,
       "themes": [
-        "여름",
-        "황사/미세먼지",
-        "제습기",
-        "화장품",
-        "수자원(양적/질적 개선)",
-        "공기청정기",
+        "의료기기",
+        "코리아 밸류업 지수(Korea Value-up Index)",
+        "치아 치료(임플란트 등)"
+      ],
+      "primary_theme": "의료기기",
+      "reasons": [
+        "장 마감 후 3분기 실적 발표, 연결기준 매출액 782.79억원(전년동기대비 +0.07%), 영업이익 159.14억원(전년동기대비 +27.60%), 순손실 79.58억원(전년동기대비 적자전환)"
+      ]
+    },
+    {
+      "name": "아시아나IDT",
+      "code": "267850",
+      "pct": "-1.40%",
+      "is_up": false,
+      "themes": [
+        "SI(시스템통합)"
+      ],
+      "primary_theme": "SI(시스템통합)",
+      "reasons": []
+    },
+    {
+      "name": "효성티앤씨",
+      "code": "298020",
+      "pct": "-1.25%",
+      "is_up": false,
+      "themes": [
+        "종합상사",
+        "타이어",
         "밸류업(25년 기업가치 제고계획 발표)",
+        "화학섬유",
         "코리아 밸류업 지수(Korea Value-up Index)"
       ],
-      "primary_theme": "여름",
-      "reasons": [
-        "장중 3분기 실적 발표, 연결기준 매출액 1.42조원(전년동기대비 +13.68%), 영업이익 2,608.40억원(전년동기대비 +7.31%), 순이익 1,115.00억원(전년동기대비 -36.63%)"
-      ]
+      "primary_theme": "종합상사",
+      "reasons": []
     },
     {
-      "name": "한미반도체",
-      "code": "042700",
-      "pct": "-1.73%",
+      "name": "HT로보틱스",
+      "code": "396300",
+      "pct": "-1.18%",
       "is_up": false,
       "themes": [
-        "밸류업(25년 기업가치 제고계획 발표)",
-        "코리아 밸류업 지수(Korea Value-up Index)",
-        "전자파",
-        "반도체 장비",
-        "시스템반도체",
-        "HBM(고대역폭메모리)",
-        "스페이스X(SpaceX)"
+        "자동차부품",
+        "전기차",
+        "전력저장장치(ESS)",
+        "2차전지"
       ],
-      "primary_theme": "밸류업(25년 기업가치 제고계획 발표)",
+      "primary_theme": "자동차부품",
       "reasons": [
-        "美 AI 데이터센터 규제 우려 지속 속 애프터마켓 일부 반도체 관련주 하락"
+        "애프터마켓 일부 전력저장장치(ESS)/ 전기차 테마 하락"
       ]
     },
     {
-      "name": "KT",
-      "code": "030200",
-      "pct": "-1.69%",
+      "name": "엘앤에프",
+      "code": "066970",
+      "pct": "-1.16%",
       "is_up": false,
       "themes": [
-        "클라우드 컴퓨팅",
-        "메타버스(Metaverse)",
-        "인터넷은행",
-        "블록체인",
-        "모바일콘텐츠(스마트폰/태블릿PC)",
-        "핀테크(FinTech)",
-        "드론(Drone)",
-        "스마트홈(홈네트워크)",
-        "자율주행차",
-        "UAM(도심항공모빌리티)",
-        "밸류업(25년 기업가치 제고계획 발표)",
-        "밸류업(24년 기업가치 제고계획 발표)",
-        "통신",
-        "코리아 밸류업 지수(Korea Value-up Index)",
-        "5G(5세대 이동통신)",
-        "양자암호/양자컴퓨팅"
+        "전기차",
+        "2차전지",
+        "2차전지(소재/부품)",
+        "2차전지(LFP/리튬인산철)"
       ],
-      "primary_theme": "클라우드 컴퓨팅",
+      "primary_theme": "전기차",
       "reasons": [
-        "美 AI 데이터센터 규제 우려 지속 속 애프터마켓 일부 데이터센터 테마 하락"
+        "애프터마켓 일부 2차전지/ 전기차 테마 하락"
       ]
     },
     {
-      "name": "자이에스앤디",
-      "code": "317400",
-      "pct": "-1.65%",
+      "name": "롯데에너지머티리얼즈",
+      "code": "020150",
+      "pct": "-1.11%",
       "is_up": false,
       "themes": [
-        "스마트홈(홈네트워크)"
+        "PCB(FPCB 등)",
+        "2차전지",
+        "2차전지(소재/부품)",
+        "2차전지(전고체)"
       ],
-      "primary_theme": "스마트홈(홈네트워크)",
+      "primary_theme": "PCB(FPCB 등)",
       "reasons": [
-        "美 AI 데이터센터 규제 우려 지속 속 애프터마켓 일부 데이터센터 테마 하락"
-      ]
-    },
-    {
-      "name": "강원랜드",
-      "code": "035250",
-      "pct": "-1.59%",
-      "is_up": false,
-      "themes": [
-        "카지노",
-        "호텔/리조트",
-        "밸류업(24년 기업가치 제고계획 발표)",
-        "코리아 밸류업 지수(Korea Value-up Index)"
-      ],
-      "primary_theme": "카지노",
-      "reasons": [
-        "장 마감 후 3분기 실적 발표, 연결기준 매출액 3,694.54억원(전년동기대비 -3.82%), 영업이익 596.66억원(전년동기대비 -17.93%)"
-      ]
-    },
-    {
-      "name": "티앤이코리아",
-      "code": "",
-      "pct": "-1.52%",
-      "is_up": false,
-      "themes": [],
-      "primary_theme": "",
-      "reasons": [
-        "수소에너지(수소차/연료전지 등), 우주항공산업(누리호/인공위성 등) 테마 하락 속 정규장 급락"
+        "애프터마켓 일부 2차전지 테마 하락"
       ]
     }
   ],
-  "cafe_text": "◆ 애프터마켓 상승 특징주\n\n▶ KTcs (+12.01%)\n→ 장 마감 후 보통주 3,465,721주 소각 결정(소각예정일:2026-12-21) 공시. 중기 주주환원 정책(환원재원: 별도 기준 조정 당기순이익의 40% 등) 공시\n\n▶ 한화머시너리앤서비스홀딩스 (+3.29%)\n→ [김동선, 한화M&S 최대주주 올랐다…공개매수 1838억원] 기사\n\n▶ 피노 (+3.25%) [통신장비]\n\n▶ 유니퀘스트 (+2.26%) [바이오인식(생체인식)]\n→ 장중 [방산으로 넓어지는 반도체 유통의 역할] 기사\n\n▶ 영화테크 (+2.23%) [자동차부품]\n→ 장 마감 후 현대자동차(주)와 815.81억원(최근 매출액대비 75.1%) 규모 공급계약(현대차 컨버터 수주) 체결(계약기간:2026-11-06~2036-12-31) 공시\n\n▶ SK하이닉스 (+1.94%) [자율주행차]\n\n◆ 애프터마켓 하락 특징주\n\n▶ 아로마티카 (-8.08%) [화장품]\n→ 장 마감 후 3분기 실적발표, 연결기준 매출액 171.29억원(전년동기대비 +31.98%), 영업이익 20.55억원(전년동기대비 +7.70%), 순이익 16.33억원(전년동기대비 +2.83%)\n\n▶ 씨젠 (-7.10%) [코로나19(진단키트)]\n→ 장 마감 후 3분기 실적 발표, 연결기준 매출액 1,231.18억원(전년동기대비 +8.43%), 영업이익 116.43억원(전년동기대비 +21.15%), 순손실 188.06억원(전년동기대비 적자전환)\n\n▶ 아바코 (-4.99%) [OLED(유기 발광 다이오드)]\n→ 장 마감 후 3분기 실적 발표, 별도기준 매출액 473.24억원(전년동기대비 -5.96%), 영업손실 46.07억원(전년동기대비 적자전환)\n\n▶ 깨끗한나라 (-4.92%) [제지]\n\n▶ 코스메카코리아 (-4.34%) [화장품]\n→ 장 마감 후 3분기 실적 발표, 연결기준 매출액 2,475.44억원(전년동기대비 +35.73%), 영업이익 272.23억원(전년동기대비 +0.11%), 순이익 103.78억원(전년동기대비 -53.54%)\n\n▶ 삼양식품 (-3.69%) [음식료업종]\n→ 장 마감 후 3분기 실적 발표, 연결기준 매출액 7,918.00억원(전년동기대비 +25.28%), 영업이익 1,962.00억원(전년동기대비 +49.88%), 순이익 892.00억원(전년동기대비 -18.90%)\n\n▶ 래블업 (-3.64%)\n\n▶ 아리바이오랩 (-3.49%) [백신/진단시약/방역(신종플루, AI 등)]\n\n▶ 혜인 (-3.44%) [전후 재건(우크라/중동 전쟁 등)]\n→ 美 AI 데이터센터 규제 우려 지속 속 애프터마켓 일부 데이터센터 테마 하락\n\n▶ LIG디펜스앤에어로스페이스 (-3.07%) [방위산업/전쟁 및 테러]\n→ 장 마감 직전 3분기 실적 발표, 연결기준 매출액 1.07조원(전년동기대비 +2.10%), 영업이익 676.00억원(전년동기대비 -24.55%). 장 마감 후 유상증자결정(사유: 납입일정 변경, 정정대상 공시서류 제출일: 2026-06-25) 정정공시\n\n▶ 우진 (-2.31%) [원자력발전]\n→ 美 AI 데이터센터 규제 우려 지속 속 애프터마켓 일부 원자력발전 테마 하락\n\n▶ 제룡전기 (-2.00%) [철도]\n→ 美 AI 데이터센터 규제 우려 지속 속 애프터마켓 일부 전력설비 테마 하락\n\n▶ SK네트웍스 (-1.95%) [호텔/리조트]\n→ 장 마감 후 3분기 실적 발표, 연결기준 매출액 1.93조원(전년동기대비 -1.87%), 영업이익 201.42억원(전년동기대비 -9.87%)\n\n▶ LG유플러스 (-1.85%) [메타버스(Metaverse)]\n→ 美 AI 데이터센터 규제 우려 지속 속 애프터마켓 일부 데이터센터 테마 하락\n\n▶ 이에스티 (-1.83%)\n→ 美 AI 데이터센터 규제 우려 지속 속 애프터마켓 일부 반도체 관련주 하락. 11월4일(수) 신규 상장\n\n▶ AP시스템 (-1.78%) [플렉서블 디스플레이]\n→ 장 마감 후 3분기 실적 발표, 연결기준 매출액 1,292.50억원(전년동기대비 +34.19%), 영업이익 40.39억원(전년동기대비 -69.77%)\n\n▶ 금양그린파워 (-1.78%) [고체산화물 연료전지(SOFC)]\n→ 美 AI 데이터센터 규제 우려 지속 속 애프터마켓 일부 원자력발전 테마 하락\n\n▶ 코웨이 (-1.77%) [여름]\n→ 장중 3분기 실적 발표, 연결기준 매출액 1.42조원(전년동기대비 +13.68%), 영업이익 2,608.40억원(전년동기대비 +7.31%), 순이익 1,115.00억원(전년동기대비 -36.63%)\n\n▶ 한미반도체 (-1.73%) [밸류업(25년 기업가치 제고계획 발표)]\n→ 美 AI 데이터센터 규제 우려 지속 속 애프터마켓 일부 반도체 관련주 하락\n\n▶ KT (-1.69%) [클라우드 컴퓨팅]\n→ 美 AI 데이터센터 규제 우려 지속 속 애프터마켓 일부 데이터센터 테마 하락\n\n▶ 자이에스앤디 (-1.65%) [스마트홈(홈네트워크)]\n→ 美 AI 데이터센터 규제 우려 지속 속 애프터마켓 일부 데이터센터 테마 하락\n\n▶ 강원랜드 (-1.59%) [카지노]\n→ 장 마감 후 3분기 실적 발표, 연결기준 매출액 3,694.54억원(전년동기대비 -3.82%), 영업이익 596.66억원(전년동기대비 -17.93%)\n\n▶ 티앤이코리아 (-1.52%)\n→ 수소에너지(수소차/연료전지 등), 우주항공산업(누리호/인공위성 등) 테마 하락 속 정규장 급락",
-  "cafe_html": "<div style=\"font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 14.5px; color: #1f2937; line-height: 1.7; max-width: 740px;\">\n  <div style=\"background-color: #fef2f2; padding: 10px 14px; border-radius: 4px; margin-bottom: 16px;\">\n    <span style=\"font-size: 16px; font-weight: 800; color: #dc2626;\">◆ 애프터마켓 상승 특징주</span>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #dc2626;\">KTcs</span> <span style=\"color: #dc2626; margin-left: 3px;\">+12.01%</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 장 마감 후 보통주 3,465,721주 소각 결정(소각예정일:2026-12-21) 공시. 중기 주주환원 정책(환원재원: 별도 기준 조정 당기순이익의 40% 등) 공시</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #dc2626;\">한화머시너리앤서비스홀딩스</span> <span style=\"color: #dc2626; margin-left: 3px;\">+3.29%</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ [김동선, 한화M&S 최대주주 올랐다…공개매수 1838억원] 기사</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #dc2626;\">피노</span> <span style=\"color: #dc2626; margin-left: 3px;\">+3.25%</span><span style=\"background-color: #fef3c7; color: #b45309; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">통신장비</span></div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #dc2626;\">유니퀘스트</span> <span style=\"color: #dc2626; margin-left: 3px;\">+2.26%</span><span style=\"background-color: #fef3c7; color: #b45309; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">바이오인식(생체인식)</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 장중 [방산으로 넓어지는 반도체 유통의 역할] 기사</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #dc2626;\">영화테크</span> <span style=\"color: #dc2626; margin-left: 3px;\">+2.23%</span><span style=\"background-color: #fef3c7; color: #b45309; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">자동차부품</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 장 마감 후 현대자동차(주)와 815.81억원(최근 매출액대비 75.1%) 규모 공급계약(현대차 컨버터 수주) 체결(계약기간:2026-11-06~2036-12-31) 공시</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #dc2626;\">SK하이닉스</span> <span style=\"color: #dc2626; margin-left: 3px;\">+1.94%</span><span style=\"background-color: #fef3c7; color: #b45309; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">자율주행차</span></div>\n  </div>\n  <div style=\"background-color: #eff6ff; padding: 10px 14px; border-radius: 4px; margin: 26px 0 16px 0;\">\n    <span style=\"font-size: 16px; font-weight: 800; color: #2563eb;\">◆ 애프터마켓 하락 특징주</span>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">아로마티카</span> <span style=\"color: #2563eb; margin-left: 3px;\">-8.08%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">화장품</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 장 마감 후 3분기 실적발표, 연결기준 매출액 171.29억원(전년동기대비 +31.98%), 영업이익 20.55억원(전년동기대비 +7.70%), 순이익 16.33억원(전년동기대비 +2.83%)</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">씨젠</span> <span style=\"color: #2563eb; margin-left: 3px;\">-7.10%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">코로나19(진단키트)</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 장 마감 후 3분기 실적 발표, 연결기준 매출액 1,231.18억원(전년동기대비 +8.43%), 영업이익 116.43억원(전년동기대비 +21.15%), 순손실 188.06억원(전년동기대비 적자전환)</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">아바코</span> <span style=\"color: #2563eb; margin-left: 3px;\">-4.99%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">OLED(유기 발광 다이오드)</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 장 마감 후 3분기 실적 발표, 별도기준 매출액 473.24억원(전년동기대비 -5.96%), 영업손실 46.07억원(전년동기대비 적자전환)</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">깨끗한나라</span> <span style=\"color: #2563eb; margin-left: 3px;\">-4.92%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">제지</span></div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">코스메카코리아</span> <span style=\"color: #2563eb; margin-left: 3px;\">-4.34%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">화장품</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 장 마감 후 3분기 실적 발표, 연결기준 매출액 2,475.44억원(전년동기대비 +35.73%), 영업이익 272.23억원(전년동기대비 +0.11%), 순이익 103.78억원(전년동기대비 -53.54%)</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">삼양식품</span> <span style=\"color: #2563eb; margin-left: 3px;\">-3.69%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">음식료업종</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 장 마감 후 3분기 실적 발표, 연결기준 매출액 7,918.00억원(전년동기대비 +25.28%), 영업이익 1,962.00억원(전년동기대비 +49.88%), 순이익 892.00억원(전년동기대비 -18.90%)</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">래블업</span> <span style=\"color: #2563eb; margin-left: 3px;\">-3.64%</span></div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">아리바이오랩</span> <span style=\"color: #2563eb; margin-left: 3px;\">-3.49%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">백신/진단시약/방역(신종플루, AI 등)</span></div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">혜인</span> <span style=\"color: #2563eb; margin-left: 3px;\">-3.44%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">전후 재건(우크라/중동 전쟁 등)</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 美 AI 데이터센터 규제 우려 지속 속 애프터마켓 일부 데이터센터 테마 하락</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">LIG디펜스앤에어로스페이스</span> <span style=\"color: #2563eb; margin-left: 3px;\">-3.07%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">방위산업/전쟁 및 테러</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 장 마감 직전 3분기 실적 발표, 연결기준 매출액 1.07조원(전년동기대비 +2.10%), 영업이익 676.00억원(전년동기대비 -24.55%). 장 마감 후 유상증자결정(사유: 납입일정 변경, 정정대상 공시서류 제출일: 2026-06-25) 정정공시</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">우진</span> <span style=\"color: #2563eb; margin-left: 3px;\">-2.31%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">원자력발전</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 美 AI 데이터센터 규제 우려 지속 속 애프터마켓 일부 원자력발전 테마 하락</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">제룡전기</span> <span style=\"color: #2563eb; margin-left: 3px;\">-2.00%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">철도</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 美 AI 데이터센터 규제 우려 지속 속 애프터마켓 일부 전력설비 테마 하락</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">SK네트웍스</span> <span style=\"color: #2563eb; margin-left: 3px;\">-1.95%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">호텔/리조트</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 장 마감 후 3분기 실적 발표, 연결기준 매출액 1.93조원(전년동기대비 -1.87%), 영업이익 201.42억원(전년동기대비 -9.87%)</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">LG유플러스</span> <span style=\"color: #2563eb; margin-left: 3px;\">-1.85%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">메타버스(Metaverse)</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 美 AI 데이터센터 규제 우려 지속 속 애프터마켓 일부 데이터센터 테마 하락</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">이에스티</span> <span style=\"color: #2563eb; margin-left: 3px;\">-1.83%</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 美 AI 데이터센터 규제 우려 지속 속 애프터마켓 일부 반도체 관련주 하락. 11월4일(수) 신규 상장</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">AP시스템</span> <span style=\"color: #2563eb; margin-left: 3px;\">-1.78%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">플렉서블 디스플레이</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 장 마감 후 3분기 실적 발표, 연결기준 매출액 1,292.50억원(전년동기대비 +34.19%), 영업이익 40.39억원(전년동기대비 -69.77%)</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">금양그린파워</span> <span style=\"color: #2563eb; margin-left: 3px;\">-1.78%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">고체산화물 연료전지(SOFC)</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 美 AI 데이터센터 규제 우려 지속 속 애프터마켓 일부 원자력발전 테마 하락</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">코웨이</span> <span style=\"color: #2563eb; margin-left: 3px;\">-1.77%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">여름</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 장중 3분기 실적 발표, 연결기준 매출액 1.42조원(전년동기대비 +13.68%), 영업이익 2,608.40억원(전년동기대비 +7.31%), 순이익 1,115.00억원(전년동기대비 -36.63%)</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">한미반도체</span> <span style=\"color: #2563eb; margin-left: 3px;\">-1.73%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">밸류업(25년 기업가치 제고계획 발표)</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 美 AI 데이터센터 규제 우려 지속 속 애프터마켓 일부 반도체 관련주 하락</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">KT</span> <span style=\"color: #2563eb; margin-left: 3px;\">-1.69%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">클라우드 컴퓨팅</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 美 AI 데이터센터 규제 우려 지속 속 애프터마켓 일부 데이터센터 테마 하락</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">자이에스앤디</span> <span style=\"color: #2563eb; margin-left: 3px;\">-1.65%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">스마트홈(홈네트워크)</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 美 AI 데이터센터 규제 우려 지속 속 애프터마켓 일부 데이터센터 테마 하락</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">강원랜드</span> <span style=\"color: #2563eb; margin-left: 3px;\">-1.59%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">카지노</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 장 마감 후 3분기 실적 발표, 연결기준 매출액 3,694.54억원(전년동기대비 -3.82%), 영업이익 596.66억원(전년동기대비 -17.93%)</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">티앤이코리아</span> <span style=\"color: #2563eb; margin-left: 3px;\">-1.52%</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 수소에너지(수소차/연료전지 등), 우주항공산업(누리호/인공위성 등) 테마 하락 속 정규장 급락</div>\n  </div>\n</div>"
+  "cafe_text": "◆ 애프터마켓 상승 특징주\n\n▶ 한진 (+18.61%) [종합 물류]\n→ 장 마감 후 보통주 478,401주(199.88억원) 규모 주식 소각 결정(소각예정일:2026-11-30) 공시. 주식등의 대량보유자 소유주식수 변동 전자공시(장금상선 장내매수)\n\n▶ 보로노이 (+5.60%) [치매]\n→ 장 마감 후 투자판단 관련 주요경영사항(임상시험계획 변경승인신청) (VRN110755의 제 1/2상 임상시험) 정정공시(해외(호주) 임상시험 프로토콜 업데이트에 따른임상시험계획 변경승인신청). [보로노이, 'VRN110755' 호주 비소세포폐암 임상1/2상 IND 변경승인 신청] 기사\n\n▶ 모두투어 (+4.78%) [여행]\n→ 장중 주식등의 대량보유자 소유주식수 변동 전장공시(화우디앤씨(주) 장내매수). [화우디앤씨도 지분 기습 매집 … 모두투어 적대적 M&A 불붙나] 기사\n\n▶ 애드바이오텍 (+3.99%) [사료]\n\n▶ LS에코에너지 (+3.75%) [전선]\n→ 애프터마켓 일부 전력설비/ 전선, 풍력에너지 테마 상승. 장중 [美 희토류 규제에 LS ‘반사익’…내달 非중국산 사마륨 최초 양산] 기사ㅇ\n\n▶ JW신약 (+2.44%) [제약업체]\n→ 바리시티닙, 중증 원형탈모 4년 이상 치료효과 확인 소식 등에 탈모 치료 테마 상승 속 정규장 급등\n\n▶ 파라다이스 (+2.42%) [카지노]\n→ 장 마감 후 3분기 실적 발표, 연결기준 매출액 3,516.55억원(전년동기대비 +22.0%), 영업이익 641.21억원(전년동기대비 +62.3%)\n\n▶ LS머트리얼즈 (+2.18%) [고체산화물 연료전지(SOFC)]\n→ 애프터마켓 일부 풍력에너지, 고체산화물 연료전지(SOFC) 테마 상승\n\n▶ 브릴스 (+1.81%) [2026 하반기 신규상장]\n→ 장중 [브릴스, 현대차·기아 행사서 '피지컬 AI 안전관제 로봇' 선봬] 기사\n\n▶ 가온전선 (+1.71%) [전선]\n→ 애프터마켓 일부 전력설비/ 전선 테마 상승\n\n▶ 빛샘전자 (+1.60%) [철도]\n→ 애프터마켓 일부 광통신(광케이블/광섬유 등)/ 통신장비 테마 상승\n\n▶ 올릭스 (+1.59%) [비만치료제]\n→ 장 마감 후 투자판단 관련 주요경영사항 (임상시험계획승인 신청 반려) 정정공시(Northern B 뉴질랜드 보건장애윤리위원회 재심의 승인에 따른 내용 추가). [올릭스, 황반변성 치료제 뉴질랜드 임상 2a상 윤리심의 승인] 기사\n\n▶ 대한광통신 (+1.44%) [방위산업/전쟁 및 테러]\n→ 애프터마켓 일부 광통신(광케이블/광섬유 등)/ 5G(5세대 이동통신) 테마 상승\n\n▶ TYM (+1.38%) [전후 재건(우크라/중동 전쟁 등)]\n→ 애프터마켓 일부 전후 재건(우크라/중동 전쟁 등) 테마 상승. 장중 [토종 농기계 업체 TYM, 북미 시장서 질주하는 이유] 기사\n\n◆ 애프터마켓 하락 특징주\n\n▶ 넥슨게임즈 (-8.09%) [모바일게임(스마트폰)]\n→ 애프터마켓 일부 게임/ 모바일게임(스마트폰) 테마 하락. 장 마감 후 분기보고서를 통해 3분기 실적 발표, 연결기준 매출액 386.46억원(전년동기대비 -22.94%), 영업손실 220.75억원(전년동기대비 적자폭 확대)\n\n▶ 시프트업 (-5.58%) [모바일게임(스마트폰)]\n→ 애프터마켓 일부 게임/ 모바일게임(스마트폰) 테마 하락. 장 마감 후 3분기 실적 발표, 연결기준 매출액 462.05억원(전년동기대비 -38.80%), 영업이익 207.01억원(전년동기대비 -58.22%). 보통주 320,000주 소각 결정(소각예정일:2026-11-27) 공시\n\n▶ 크래프톤 (-5.31%) [모바일게임(스마트폰)]\n→ 애프터마켓 일부 게임/ 모바일게임(스마트폰) 테마 하락. 장 마감 후 3분기 실적 발표, 연결기준 매출액 9,714.00억원(전년동기대비 +11.57%), 영업이익 2,250.00억원(전년동기대비 -35.45%)\n\n▶ 경동나비엔 (-4.79%) [겨울]\n→ 장 마감 후 3분기 실적 발표, 연결기준 매출액 3,823.76억원(전년동기대비 +24.94%), 영업이익 378.03억원(전년동기대비 +372.95%), 순손실 24.13억원(전년동기대비 적자전환)\n\n▶ 동원산업 (-4.38%) [구제역/광우병 수혜]\n→ 장 마감 후 3분기 실적 발표, 연결기준 매출액 2.75조원(전년동기대비 +6.55%), 영업이익 1,496.82억원(전년동기대비 +1.06%), 순이익 626.60억원(전년동기대비 -38.25%)\n\n▶ F&F (-3.83%) [패션/의류]\n→ 장 마감 후 3분기 실적 발표, 연결기준 매출액 4,521.15억원(전년동기대비 -4.66%), 영업이익 1,084.32억원(전년동기대비 -15.30%). 보통주 825,501주 소각 결정(소각예정일:2026-11-30) 공시\n\n▶ 동원파츠 (-2.72%)\n\n▶ 한국공항 (-2.16%)\n→ 장 마감 후 3분기 실적 발표, 연결기준 매출액 1,835.92억원(전년동기대비 +9.95%), 영업이익 150.18억원(전년동기대비 +3.80%)\n\n▶ 한진칼 (-1.88%) [항공/저가 항공사(LCC)]\n\n▶ 덴티움 (-1.77%) [의료기기]\n→ 장 마감 후 3분기 실적 발표, 연결기준 매출액 782.79억원(전년동기대비 +0.07%), 영업이익 159.14억원(전년동기대비 +27.60%), 순손실 79.58억원(전년동기대비 적자전환)\n\n▶ 아시아나IDT (-1.40%) [SI(시스템통합)]\n\n▶ 효성티앤씨 (-1.25%) [종합상사]\n\n▶ HT로보틱스 (-1.18%) [자동차부품]\n→ 애프터마켓 일부 전력저장장치(ESS)/ 전기차 테마 하락\n\n▶ 엘앤에프 (-1.16%) [전기차]\n→ 애프터마켓 일부 2차전지/ 전기차 테마 하락\n\n▶ 롯데에너지머티리얼즈 (-1.11%) [PCB(FPCB 등)]\n→ 애프터마켓 일부 2차전지 테마 하락",
+  "cafe_html": "<div style=\"font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 14.5px; color: #1f2937; line-height: 1.7; max-width: 740px;\">\n  <div style=\"background-color: #fef2f2; padding: 10px 14px; border-radius: 4px; margin-bottom: 16px;\">\n    <span style=\"font-size: 16px; font-weight: 800; color: #dc2626;\">◆ 애프터마켓 상승 특징주</span>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #dc2626;\">한진</span> <span style=\"color: #dc2626; margin-left: 3px;\">+18.61%</span><span style=\"background-color: #fef3c7; color: #b45309; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">종합 물류</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 장 마감 후 보통주 478,401주(199.88억원) 규모 주식 소각 결정(소각예정일:2026-11-30) 공시. 주식등의 대량보유자 소유주식수 변동 전자공시(장금상선 장내매수)</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #dc2626;\">보로노이</span> <span style=\"color: #dc2626; margin-left: 3px;\">+5.60%</span><span style=\"background-color: #fef3c7; color: #b45309; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">치매</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 장 마감 후 투자판단 관련 주요경영사항(임상시험계획 변경승인신청) (VRN110755의 제 1/2상 임상시험) 정정공시(해외(호주) 임상시험 프로토콜 업데이트에 따른임상시험계획 변경승인신청). [보로노이, 'VRN110755' 호주 비소세포폐암 임상1/2상 IND 변경승인 신청] 기사</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #dc2626;\">모두투어</span> <span style=\"color: #dc2626; margin-left: 3px;\">+4.78%</span><span style=\"background-color: #fef3c7; color: #b45309; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">여행</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 장중 주식등의 대량보유자 소유주식수 변동 전장공시(화우디앤씨(주) 장내매수). [화우디앤씨도 지분 기습 매집 … 모두투어 적대적 M&A 불붙나] 기사</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #dc2626;\">애드바이오텍</span> <span style=\"color: #dc2626; margin-left: 3px;\">+3.99%</span><span style=\"background-color: #fef3c7; color: #b45309; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">사료</span></div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #dc2626;\">LS에코에너지</span> <span style=\"color: #dc2626; margin-left: 3px;\">+3.75%</span><span style=\"background-color: #fef3c7; color: #b45309; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">전선</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 애프터마켓 일부 전력설비/ 전선, 풍력에너지 테마 상승. 장중 [美 희토류 규제에 LS ‘반사익’…내달 非중국산 사마륨 최초 양산] 기사ㅇ</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #dc2626;\">JW신약</span> <span style=\"color: #dc2626; margin-left: 3px;\">+2.44%</span><span style=\"background-color: #fef3c7; color: #b45309; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">제약업체</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 바리시티닙, 중증 원형탈모 4년 이상 치료효과 확인 소식 등에 탈모 치료 테마 상승 속 정규장 급등</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #dc2626;\">파라다이스</span> <span style=\"color: #dc2626; margin-left: 3px;\">+2.42%</span><span style=\"background-color: #fef3c7; color: #b45309; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">카지노</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 장 마감 후 3분기 실적 발표, 연결기준 매출액 3,516.55억원(전년동기대비 +22.0%), 영업이익 641.21억원(전년동기대비 +62.3%)</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #dc2626;\">LS머트리얼즈</span> <span style=\"color: #dc2626; margin-left: 3px;\">+2.18%</span><span style=\"background-color: #fef3c7; color: #b45309; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">고체산화물 연료전지(SOFC)</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 애프터마켓 일부 풍력에너지, 고체산화물 연료전지(SOFC) 테마 상승</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #dc2626;\">브릴스</span> <span style=\"color: #dc2626; margin-left: 3px;\">+1.81%</span><span style=\"background-color: #fef3c7; color: #b45309; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">2026 하반기 신규상장</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 장중 [브릴스, 현대차·기아 행사서 '피지컬 AI 안전관제 로봇' 선봬] 기사</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #dc2626;\">가온전선</span> <span style=\"color: #dc2626; margin-left: 3px;\">+1.71%</span><span style=\"background-color: #fef3c7; color: #b45309; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">전선</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 애프터마켓 일부 전력설비/ 전선 테마 상승</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #dc2626;\">빛샘전자</span> <span style=\"color: #dc2626; margin-left: 3px;\">+1.60%</span><span style=\"background-color: #fef3c7; color: #b45309; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">철도</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 애프터마켓 일부 광통신(광케이블/광섬유 등)/ 통신장비 테마 상승</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #dc2626;\">올릭스</span> <span style=\"color: #dc2626; margin-left: 3px;\">+1.59%</span><span style=\"background-color: #fef3c7; color: #b45309; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">비만치료제</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 장 마감 후 투자판단 관련 주요경영사항 (임상시험계획승인 신청 반려) 정정공시(Northern B 뉴질랜드 보건장애윤리위원회 재심의 승인에 따른 내용 추가). [올릭스, 황반변성 치료제 뉴질랜드 임상 2a상 윤리심의 승인] 기사</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #dc2626;\">대한광통신</span> <span style=\"color: #dc2626; margin-left: 3px;\">+1.44%</span><span style=\"background-color: #fef3c7; color: #b45309; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">방위산업/전쟁 및 테러</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 애프터마켓 일부 광통신(광케이블/광섬유 등)/ 5G(5세대 이동통신) 테마 상승</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #dc2626;\">TYM</span> <span style=\"color: #dc2626; margin-left: 3px;\">+1.38%</span><span style=\"background-color: #fef3c7; color: #b45309; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">전후 재건(우크라/중동 전쟁 등)</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 애프터마켓 일부 전후 재건(우크라/중동 전쟁 등) 테마 상승. 장중 [토종 농기계 업체 TYM, 북미 시장서 질주하는 이유] 기사</div>\n  </div>\n  <div style=\"background-color: #eff6ff; padding: 10px 14px; border-radius: 4px; margin: 26px 0 16px 0;\">\n    <span style=\"font-size: 16px; font-weight: 800; color: #2563eb;\">◆ 애프터마켓 하락 특징주</span>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">넥슨게임즈</span> <span style=\"color: #2563eb; margin-left: 3px;\">-8.09%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">모바일게임(스마트폰)</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 애프터마켓 일부 게임/ 모바일게임(스마트폰) 테마 하락. 장 마감 후 분기보고서를 통해 3분기 실적 발표, 연결기준 매출액 386.46억원(전년동기대비 -22.94%), 영업손실 220.75억원(전년동기대비 적자폭 확대)</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">시프트업</span> <span style=\"color: #2563eb; margin-left: 3px;\">-5.58%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">모바일게임(스마트폰)</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 애프터마켓 일부 게임/ 모바일게임(스마트폰) 테마 하락. 장 마감 후 3분기 실적 발표, 연결기준 매출액 462.05억원(전년동기대비 -38.80%), 영업이익 207.01억원(전년동기대비 -58.22%). 보통주 320,000주 소각 결정(소각예정일:2026-11-27) 공시</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">크래프톤</span> <span style=\"color: #2563eb; margin-left: 3px;\">-5.31%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">모바일게임(스마트폰)</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 애프터마켓 일부 게임/ 모바일게임(스마트폰) 테마 하락. 장 마감 후 3분기 실적 발표, 연결기준 매출액 9,714.00억원(전년동기대비 +11.57%), 영업이익 2,250.00억원(전년동기대비 -35.45%)</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">경동나비엔</span> <span style=\"color: #2563eb; margin-left: 3px;\">-4.79%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">겨울</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 장 마감 후 3분기 실적 발표, 연결기준 매출액 3,823.76억원(전년동기대비 +24.94%), 영업이익 378.03억원(전년동기대비 +372.95%), 순손실 24.13억원(전년동기대비 적자전환)</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">동원산업</span> <span style=\"color: #2563eb; margin-left: 3px;\">-4.38%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">구제역/광우병 수혜</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 장 마감 후 3분기 실적 발표, 연결기준 매출액 2.75조원(전년동기대비 +6.55%), 영업이익 1,496.82억원(전년동기대비 +1.06%), 순이익 626.60억원(전년동기대비 -38.25%)</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">F&F</span> <span style=\"color: #2563eb; margin-left: 3px;\">-3.83%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">패션/의류</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 장 마감 후 3분기 실적 발표, 연결기준 매출액 4,521.15억원(전년동기대비 -4.66%), 영업이익 1,084.32억원(전년동기대비 -15.30%). 보통주 825,501주 소각 결정(소각예정일:2026-11-30) 공시</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">동원파츠</span> <span style=\"color: #2563eb; margin-left: 3px;\">-2.72%</span></div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">한국공항</span> <span style=\"color: #2563eb; margin-left: 3px;\">-2.16%</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 장 마감 후 3분기 실적 발표, 연결기준 매출액 1,835.92억원(전년동기대비 +9.95%), 영업이익 150.18억원(전년동기대비 +3.80%)</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">한진칼</span> <span style=\"color: #2563eb; margin-left: 3px;\">-1.88%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">항공/저가 항공사(LCC)</span></div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">덴티움</span> <span style=\"color: #2563eb; margin-left: 3px;\">-1.77%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">의료기기</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 장 마감 후 3분기 실적 발표, 연결기준 매출액 782.79억원(전년동기대비 +0.07%), 영업이익 159.14억원(전년동기대비 +27.60%), 순손실 79.58억원(전년동기대비 적자전환)</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">아시아나IDT</span> <span style=\"color: #2563eb; margin-left: 3px;\">-1.40%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">SI(시스템통합)</span></div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">효성티앤씨</span> <span style=\"color: #2563eb; margin-left: 3px;\">-1.25%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">종합상사</span></div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">HT로보틱스</span> <span style=\"color: #2563eb; margin-left: 3px;\">-1.18%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">자동차부품</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 애프터마켓 일부 전력저장장치(ESS)/ 전기차 테마 하락</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">엘앤에프</span> <span style=\"color: #2563eb; margin-left: 3px;\">-1.16%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">전기차</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 애프터마켓 일부 2차전지/ 전기차 테마 하락</div>\n  </div>\n  <div style=\"margin-bottom: 16px;\">\n    <div style=\"font-size: 15px; font-weight: 800; color: #111827;\">▶ <span style=\"color: #2563eb;\">롯데에너지머티리얼즈</span> <span style=\"color: #2563eb; margin-left: 3px;\">-1.11%</span><span style=\"background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 5px; vertical-align: middle;\">PCB(FPCB 등)</span></div>\n    <div style=\"margin-top: 3px; color: #374151; font-size: 14px; word-break: keep-all;\">→ 애프터마켓 일부 2차전지 테마 하락</div>\n  </div>\n</div>"
 }

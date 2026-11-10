@@ -1186,11 +1186,11 @@ def _clean_invisible(s):
     """제로 너비 공백, NBSP 등 보이지 않는 특수문자 완벽 제거"""
     if not s:
         return ''
-    s = re.sub(r'[\u200b\u200c\u200d\ufeff\xa0\u3000]', '', s)
+    s = re.sub(r'[​‌‍﻿ 　]', '', s)
     return s.strip()
 
 def _parse_blog_aftermarket(log_no, profiles):
-    """네이버 블로그 게시글에서 에프터마켓 특징주 정밀 파싱"""
+    """네이버 블로그 게시글에서 에프터마켓 특징주 정밀 파싱 (괄호 공백 및 다양한 부호 완벽 지원)"""
     url = f"https://blog.naver.com/PostView.naver?blogId=crioppstock&logNo={log_no}"
     req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'})
     try:
@@ -1203,11 +1203,7 @@ def _parse_blog_aftermarket(log_no, profiles):
         date_elem = soup.find('span', class_='se_publishDate') or soup.find('span', class_='date')
         pub_date = _clean_invisible(date_elem.get_text()) if date_elem else ''
 
-        lines = []
-        for raw_line in main.get_text('\n').splitlines():
-            c_line = _clean_invisible(raw_line)
-            if c_line:
-                lines.append(c_line)
+        lines = [_clean_invisible(l) for l in main.get_text('\n').splitlines() if _clean_invisible(l)]
 
         rising = []
         falling = []
@@ -1215,32 +1211,32 @@ def _parse_blog_aftermarket(log_no, profiles):
         curr_stk = None
 
         for l in lines:
-            if any(k in l for k in ['에프터마켓 상승률 순위', '에프터마켓 급등주', '애프터마켓 상승']):
+            if any(k in l for k in ['에프터마켓 상승률 순위', '에프터마켓 급등주', '애프터마켓 상승', '에프터마켓 상승', '애프터마켓 급등주', '에프터마켓 상승률', '애프터마켓 상승률']):
                 mode = 'rising'
                 curr_stk = None
                 continue
-            elif any(k in l for k in ['에프터마켓 하락률 순위', '에프터마켓 하락', '애프터마켓 하락']):
+            elif any(k in l for k in ['에프터마켓 하락률 순위', '에프터마켓 하락', '애프터마켓 하락', '에프터마켓 급락주', '애프터마켓 급락주', '에프터마켓 하락률', '애프터마켓 하락률']):
                 mode = 'falling'
                 curr_stk = None
                 continue
-            elif mode and any(k in l for k in ['52주 신고가', '정규장 급등주', '정규장 급락주', '시장종합', '특징 상한가', '텔레그램 공개 채널에서 공유']):
+            elif mode and any(k in l for k in ['52주 신고가', '정규장 급등주', '정규장 급락주', '정규장 상승', '정규장 하락', '시장종합', '특징 상한가', '텔레그램 공개 채널', '20:00 기준 에프터마켓 마감']):
                 mode = None
                 curr_stk = None
                 continue
 
             if mode:
-                # & / . 등 영문/특수기호 포함 종목명(예: HL D&I) 완벽 매칭
-                m_stk = re.match(r'^(?:▶\s*)?([가-힣A-Za-z0-9\.\s&\-\/\+]+?)\s*\(([\+\-]?\d+\.?\d*%)\)', l)
+                # 종목명 및 등락률 정규식 (괄호 안팎 공백, +, -, ▲, ▼, ↑, ↓ 부호 완벽 포용)
+                m_stk = re.match(r'^(?:[▶•\-*]\s*)?([가-힣A-Za-z0-9\.\s&\-\/\+]+?)\s*[\(\[]\s*([+\-▲▼↑↓]?\s*\d+(?:\.\d+)?\s*%)\s*[\)\]]', l)
                 if m_stk:
                     name = _clean_invisible(m_stk.group(1))
-                    pct = _clean_invisible(m_stk.group(2))
-                    if not pct.startswith('+') and not pct.startswith('-'):
-                        pct = ('-' if mode == 'falling' else '+') + pct
+                    pct_raw = re.sub(r'[\s▲↑]', '', m_stk.group(2)).replace('▼', '-').replace('↓', '-')
+                    if not pct_raw.startswith('+') and not pct_raw.startswith('-'):
+                        pct_raw = ('-' if mode == 'falling' else '+') + pct_raw
                     prof = profiles.get(name, {})
                     curr_stk = {
                         'name': name,
                         'code': prof.get('code', ''),
-                        'pct': pct,
+                        'pct': pct_raw,
                         'is_up': (mode == 'rising'),
                         'themes': prof.get('themes', []),
                         'primary_theme': prof.get('primary_theme', ''),
@@ -1249,7 +1245,6 @@ def _parse_blog_aftermarket(log_no, profiles):
                     (rising if mode == 'rising' else falling).append(curr_stk)
                 elif curr_stk:
                     r = _clean_invisible(l.lstrip('→-•* '))
-                    # 의미 있는 사유(2글자 이상, 구분선/헤더 제외)만 추가
                     if len(r) >= 2 and not r.startswith('───') and not r.startswith('<') and not r.startswith('('):
                         curr_stk['reasons'].append(r)
 
@@ -1266,24 +1261,44 @@ def _parse_blog_aftermarket(log_no, profiles):
     return None
 
 def _extract_aftermarket_date_int(c):
-    """후보 객체에서 날짜(YYYYMMDD) 정수 추출 (최신성 절대 비교용)"""
-    all_str = f"{c.get('title', '')} {c.get('date', '')} {c.get('source', '')} {c.get('time', '')}"
-    m = re.search(r'\((\d{1,2})/(\d{1,2})\)', all_str)
-    if m:
-        month = int(m.group(1))
-        day = int(m.group(2))
-        return 2026 * 10000 + month * 100 + day
-    m2 = re.search(r'(\d{1,2})월\s*(\d{1,2})일', all_str)
-    if m2:
-        month = int(m2.group(1))
-        day = int(m2.group(2))
-        return 2026 * 10000 + month * 100 + day
+    """후보 객체에서 실제 거래일(YYYYMMDD) 정수 추출 (최신 거래일 절대 우선 비교용)"""
+    # 1. 제목에 명시된 날짜 확인 (예: '(11/10) 특징 상한가... / 에프터마켓 급등주') -> 절대 1순위
+    title = c.get('title', '')
+    m_title = re.search(r'\((\d{1,2})/(\d{1,2})\)', title)
+    if m_title:
+        return 2026 * 10000 + int(m_title.group(1)) * 100 + int(m_title.group(2))
+    m_title_ko = re.search(r'(\d{1,2})월\s*(\d{1,2})일', title)
+    if m_title_ko:
+        return 2026 * 10000 + int(m_title_ko.group(1)) * 100 + int(m_title_ko.group(2))
+
+    # 2. 블로그 본문/시간 또는 발행 시간
+    pub_time = c.get('time', '')
+    m_pub = re.search(r'(\d{4})[\.\-](\d{1,2})[\.\-](\d{1,2})', pub_time)
+    if m_pub:
+        return int(m_pub.group(1)) * 10000 + int(m_pub.group(2)) * 100 + int(m_pub.group(3))
+
+    # 3. 텔레그램 메시지 발행 시각 분석
     rt = c.get('raw_time', '')
-    m3 = re.search(r'(\d{4})-(\d{2})-(\d{2})', rt)
-    if m3:
-        return int(m3.group(1)) * 10000 + int(m3.group(2)) * 100 + int(m3.group(3))
-    # log_no 기반 추정 (log_no가 클수록 최신)
-    return c.get('log_no', 0)
+    m_rt = re.search(r'(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})', rt)
+    if m_rt:
+        y, m, d = int(m_rt.group(1)), int(m_rt.group(2)), int(m_rt.group(3))
+        hour = int(m_rt.group(4))
+        # 한국시간(KST) = UTC + 9
+        kst_hour = (hour + 9) % 24
+        # 장전(한국시간 오전 9시 이전)에 올라온 텔레그램 에프터마켓은 '전일' 거래일 데이터임!
+        from datetime import date as dt_date, timedelta as dt_timedelta
+        dt = dt_date(y, m, d)
+        if kst_hour < 9:
+            # 월요일 아침이면 금요일(-3일), 그 외는 전일(-1일)
+            dt = dt - dt_timedelta(days=3 if dt.weekday() == 0 else 1)
+        return dt.year * 10000 + dt.month * 100 + dt.day
+
+    # 4. log_no 기반 추정 (블로그 글 번호가 크면 최신)
+    log_no = c.get('log_no', 0)
+    if log_no:
+        return log_no
+
+    return 0
 
 def _parse_telegram_aftermarket(target_msg, post_time, profiles):
     """텔레그램 텍스트 메시지에서 에프터마켓 특징주 정밀 파싱 (KST 시간 변환 포함)"""
@@ -1309,19 +1324,19 @@ def _parse_telegram_aftermarket(target_msg, post_time, profiles):
             curr_stock = None
             continue
 
-        m_stk = re.match(r'^(?:▶\s*)?([가-힣A-Za-z0-9\.\s&\-\/\+]+?)\s*\(([\+\-]?\d+\.?\d*%)\)', l)
+        m_stk = re.match(r'^(?:[▶•\-*]\s*)?([가-힣A-Za-z0-9\.\s&\-\/\+]+?)\s*[\(\[]\s*([+\-▲▼↑↓]?\s*\d+(?:\.\d+)?\s*%)\s*[\)\]]', l)
         if m_stk:
             name = _clean_invisible(m_stk.group(1))
-            pct = _clean_invisible(m_stk.group(2))
-            if not pct.startswith('+') and not pct.startswith('-'):
-                pct = ('-' if is_falling else '+') + pct
+            pct_raw = re.sub(r'[\s▲↑]', '', m_stk.group(2)).replace('▼', '-').replace('↓', '-')
+            if not pct_raw.startswith('+') and not pct_raw.startswith('-'):
+                pct_raw = ('-' if is_falling else '+') + pct_raw
 
             prof = profiles.get(name, {})
             curr_stock = {
                 'name': name,
                 'code': prof.get('code', ''),
-                'pct': pct,
-                'is_up': not pct.startswith('-'),
+                'pct': pct_raw,
+                'is_up': not pct_raw.startswith('-'),
                 'themes': prof.get('themes', []),
                 'primary_theme': prof.get('primary_theme', ''),
                 'reasons': []
@@ -1333,7 +1348,6 @@ def _parse_telegram_aftermarket(target_msg, post_time, profiles):
                 curr_stock['reasons'].append(clean_reason)
 
     if rising or falling:
-        # UTC 시간을 KST(한국시간)로 변환
         kst_str = post_time
         try:
             if 'T' in post_time:
@@ -1356,7 +1370,7 @@ def _parse_telegram_aftermarket(target_msg, post_time, profiles):
 def get_aftermarket_data(force_refresh=False):
     """
     애프터마켓(시간외 20:00 마감) 특징주 네이버 블로그 및 텔레그램 실시간 하이브리드 수집 모듈
-    - 블로그든 텔레그램이든 '무조건 가장 최신 날짜(가장 먼저 올라온 곳)'의 데이터를 절대 1순위로 채택!
+    - 블로그든 텔레그램이든 '무조건 가장 최신 거래일(가장 먼저 올라온 곳)'의 데이터를 절대 1순위로 채택!
     - 블로그에 밤에 먼저 올라왔으면 블로그 것을 즉시 채택하고, 다음날 아침 텔레그램에 올라오면 자동 동기화.
     """
     global _aftermarket_cache
@@ -1371,12 +1385,12 @@ def get_aftermarket_data(force_refresh=False):
     profiles = load_jsr_profiles()
     candidates = []
 
-    # 1. 네이버 블로그 최신글 탐색 (전일 밤 20:00~23:00 포스팅 즉시 탐색)
+    # 1. 네이버 블로그 최신글 탐색 (최근 30개 글 대상 탐색으로 주말/연휴 글도 100% 포착)
     try:
-        api_url = 'https://blog.naver.com/PostTitleListAsync.naver?blogId=crioppstock&viewdate=&currentPage=1&categoryNo=0&parentCategoryNo=&countPerPage=12'
+        api_url = 'https://blog.naver.com/PostTitleListAsync.naver?blogId=crioppstock&viewdate=&currentPage=1&categoryNo=0&parentCategoryNo=&countPerPage=30'
         req_b = urllib.request.Request(api_url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'})
         raw_b = urllib.request.urlopen(req_b, timeout=6).read().decode('ms949', errors='ignore')
-        pattern = r'\"logNo\"\s*:\s*\"(\d+)\".*?\"title\"\s*:\s*\"([^\"]+)\"'
+        pattern = r'"logNo"\s*:\s*"(\d+)".*?"title"\s*:\s*"([^"]+)"'
         for m in re.finditer(pattern, raw_b):
             log_no = m.group(1)
             title = urllib.parse.unquote_plus(m.group(2))
@@ -1384,13 +1398,13 @@ def get_aftermarket_data(force_refresh=False):
                 blog_candidate = _parse_blog_aftermarket(log_no, profiles)
                 if blog_candidate and (blog_candidate.get('rising') or blog_candidate.get('falling')):
                     blog_candidate['title'] = title
-                    blog_candidate['source'] = f'네이버 블로그 ({title[:20]})'
+                    blog_candidate['source'] = f'네이버 블로그 ({title[:24]})'
                     blog_candidate['log_no'] = int(log_no)
                     candidates.append(blog_candidate)
     except Exception as e:
         print(f"Blog crawl error: {e}")
 
-    # 2. 텔레그램 채널 실시간 탐색 (당일 아침 07:10~07:30 본문 또는 링크 공유)
+    # 2. 텔레그램 채널 실시간 탐색 (당일 아침 본문 또는 링크 공유)
     try:
         t_url = 'https://t.me/s/crioppstockfree'
         req_t = urllib.request.Request(t_url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'})
@@ -1405,7 +1419,7 @@ def get_aftermarket_data(force_refresh=False):
                 time_tag = wrap.find('time')
                 p_time = time_tag['datetime'] if time_tag and 'datetime' in time_tag.attrs else ''
 
-                # [형태 1] 텔레그램 본문에 직접 특징주가 적힌 메시지 (당일 아침 7시 20분경 본문 작성)
+                # [형태 1] 텔레그램 본문에 직접 특징주가 적힌 메시지
                 if ('에프터마켓' in txt or '애프터마켓' in txt) and ('(' in txt and '%' in txt):
                     t_cand = _parse_telegram_aftermarket(m_div, p_time, profiles)
                     if t_cand and (t_cand.get('rising') or t_cand.get('falling')):
@@ -1417,7 +1431,6 @@ def get_aftermarket_data(force_refresh=False):
                 m_link = re.search(r'blog\.naver\.com/crioppstock/(\d+)', txt)
                 if m_link and ('에프터마켓' in txt or '애프터마켓' in txt or '시간외' in txt):
                     log_no = m_link.group(1)
-                    # 이미 블로그에서 추가되지 않았을 경우에만 추가
                     if not any(c.get('log_no') == int(log_no) for c in candidates):
                         b_cand = _parse_blog_aftermarket(log_no, profiles)
                         if b_cand and (b_cand.get('rising') or b_cand.get('falling')):
@@ -1429,11 +1442,11 @@ def get_aftermarket_data(force_refresh=False):
     except Exception as e:
         print(f"Telegram crawl error: {e}")
 
-    # 3. 최우선 후보 선별 (블로그든 텔레그램이든 '무조건 가장 최신 날짜' 1순위)
+    # 3. 최우선 후보 선별 (블로그든 텔레그램이든 '무조건 가장 최신 날짜' 1순위 절대 채택!)
     chosen = None
     if candidates:
         candidates.sort(key=lambda c: (
-            _extract_aftermarket_date_int(c),                     # 1순위: 날짜 (최신 날짜 절대 우선)
+            _extract_aftermarket_date_int(c),                     # 1순위: 실제 거래일자 (최신 우선)
             c.get('log_no', 0),                                   # 2순위: 블로그 글번호 (클수록 최신)
             c.get('raw_time', ''),                                # 3순위: 텔레그램 발행 시각
             len(c.get('rising', [])) + len(c.get('falling', []))  # 4순위: 종목 수
