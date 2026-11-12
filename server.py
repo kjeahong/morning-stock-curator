@@ -313,6 +313,15 @@ def background_news_watcher():
                     )
         except Exception:
             pass
+        try:
+            # 평일 장중(08:40~15:50)에는 미결제약정·프로그램 비차익 일중 추이를 백그라운드 자동 누적
+            from datetime import datetime as _dt
+            _now = _dt.now()
+            _hm = _now.hour * 100 + _now.minute
+            if _now.weekday() < 5 and 840 <= _hm <= 1550:
+                collector.get_indicators_data(force_refresh=True)
+        except Exception:
+            pass
         time.sleep(30)
 
 

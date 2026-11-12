@@ -2623,18 +2623,72 @@ def _build_intraday_points(fut_chart, kpi_chart):
     return spot_pts, basis_pts, diverge_pts, vol_pts
 
 
+_daum_front_master = {'date': '', 'symbol': '', 'name': ''}
+
+
+def _fetch_daum_futures_oi(today_str):
+    """다음 금융 코스피200 선물 실시간 미결제약정(unsettledVolume) 및 최근월물 정보 수집"""
+    global _daum_front_master
+    daum_hdr = {
+        'Referer': 'https://finance.daum.net/domestic/futures',
+        'Accept': 'application/json, text/plain, */*'
+    }
+    sym = _daum_front_master.get('symbol')
+    contract_name = _daum_front_master.get('name') or '코스피200 선물'
+
+    if _daum_front_master.get('date') != today_str or not sym:
+        masters = _fetch_json('https://finance.daum.net/api/futures/masters', timeout=5, headers=daum_hdr)
+        items = masters.get('data') or []
+        if items:
+            sym = items[0].get('symbolCode') or sym
+            contract_name = items[0].get('name') or contract_name
+            _daum_front_master = {'date': today_str, 'symbol': sym, 'name': contract_name}
+
+    if not sym:
+        return {}
+
+    days_res = _fetch_json(
+        f'https://finance.daum.net/api/future/{sym}/days?page=1&perPage=5&pagination=true',
+        timeout=5,
+        headers=daum_hdr
+    )
+    rows = days_res.get('data') or []
+    if not rows:
+        return {}
+
+    has_today = str(rows[0].get('date') or '')[:10] == today_str
+    top_oi = float(rows[0].get('unsettledVolume') or 0)
+    if has_today:
+        oi_val = top_oi
+        oi_prev = float(rows[1].get('unsettledVolume') or 0) if len(rows) > 1 else top_oi
+        oi_delta = int(round(oi_val - oi_prev)) if oi_prev > 0 else 0
+    else:
+        oi_prev = top_oi
+        oi_val = top_oi
+        oi_delta = 0
+
+    return {
+        'contract': contract_name,
+        'oi': oi_val,
+        'oi_prev': oi_prev,
+        'oi_delta': oi_delta,
+        'has_today': has_today,
+    }
+
+
 def get_indicators_data(force_refresh=False):
-    """코스피200 선물, 코스피200 현물, 실시간 베이시스, 프로그램 차익/비차익, 투자자 수급 독자 수집"""
+    """코스피200 선물, 미결제약정(OI), 현물, 실시간 베이시스, 프로그램 차익/비차익 독자 수집"""
     global _indicators_cache
     now_ts = time.time()
     cache_file = _data_path('sihwang_indicators.json')
 
-    if not force_refresh and _indicators_cache['data'] and (now_ts - _indicators_cache['time'] < 30):
+    if not force_refresh and _indicators_cache['data'] and (now_ts - _indicators_cache['time'] < 15):
         return _indicators_cache['data']
 
     prev_cached = _load_json_safe(cache_file, {})
-    today_str = datetime.now().strftime('%Y-%m-%d')
-    now_hhmm = datetime.now().strftime('%H:%M')
+    now_dt = datetime.now()
+    today_str = now_dt.strftime('%Y-%m-%d')
+    now_hhmm = now_dt.strftime('%H:%M')
 
     urls = {
         'rt': 'https://polling.finance.naver.com/api/realtime?query=SERVICE_INDEX:KPI200,FUT',
@@ -2644,9 +2698,11 @@ def get_indicators_data(force_refresh=False):
         'fut_chart': 'https://api.stock.naver.com/chart/domestic/index/FUT?periodType=day',
         'kpi_chart': 'https://api.stock.naver.com/chart/domestic/index/KPI200?periodType=day',
     }
-    with ThreadPoolExecutor(max_workers=6) as ex:
+    with ThreadPoolExecutor(max_workers=7) as ex:
         futs = {k: ex.submit(_try_call, _fetch_json, u, 5, default={}) for k, u in urls.items()}
+        f_daum_oi = ex.submit(_try_call, _fetch_daum_futures_oi, today_str, default={})
         res = {k: fut.result() or {} for k, fut in futs.items()}
+        daum_oi = f_daum_oi.result() or {}
 
     rt_items = {}
     for area in (res['rt'].get('result') or {}).get('areas', []):
@@ -2657,7 +2713,7 @@ def get_indicators_data(force_refresh=False):
     kpi_rt = rt_items.get('KPI200') or {}
     fut_rt = rt_items.get('FUT') or {}
 
-    if not kpi_rt and not fut_rt and not res['fut_integ']:
+    if not kpi_rt and not fut_rt and not res['fut_integ'] and not daum_oi:
         if prev_cached:
             prev_cached['status'] = 'ok'
             prev_cached['from_cache'] = True
@@ -2693,43 +2749,68 @@ def get_indicators_data(force_refresh=False):
     prog_kospi = _parse_naver_prog_dict(res['kospi_integ'])
     prog_kosdaq = _parse_naver_prog_dict(res['kosdaq_integ'])
 
-    # 일중 비차익 시리즈 누적 (당일자만 유지, 신규 일자면 초기화)
+    open_ts = int(datetime.strptime(f"{today_str} 08:45:00", "%Y-%m-%d %H:%M:%S").timestamp())
+    in_session_or_after = now_dt.weekday() < 5 and int(now_ts) >= open_ts
+    has_today_oi = bool(daum_oi.get('has_today'))
+    pre_open_hold = (not in_session_or_after) and (not has_today_oi) and bool(prev_cached.get('oi_points'))
+
     same_day = prev_cached.get('date') == today_str
-    prev_series = list(((prev_cached.get('program') or {}).get('series')) or []) if same_day else []
-    snap = {
-        'time': now_hhmm,
-        'arb': prog_kospi['arb'],
-        'nonarb': prog_kospi['nonarb'],
-        'total': prog_kospi['total']
-    }
-    if prev_series and prev_series[-1].get('time') == now_hhmm:
-        prev_series[-1] = snap
+
+    # 일중 비차익 시리즈 누적 (장전에는 직전 영업일 유지, 08:45 이후 당일 누적)
+    if pre_open_hold:
+        prev_series = list(((prev_cached.get('program') or {}).get('series')) or [])
     else:
-        prev_series.append(snap)
-        if len(prev_series) > 240:
-            prev_series = prev_series[-240:]
+        prev_series = list(((prev_cached.get('program') or {}).get('series')) or []) if same_day else []
+        if not prev_series and in_session_or_after:
+            prev_series.append({'time': '08:45', 'arb': 0, 'nonarb': 0, 'total': 0})
+        snap = {
+            'time': now_hhmm,
+            'arb': prog_kospi['arb'],
+            'nonarb': prog_kospi['nonarb'],
+            'total': prog_kospi['total']
+        }
+        if prev_series and prev_series[-1].get('time') == now_hhmm:
+            prev_series[-1] = snap
+        else:
+            prev_series.append(snap)
+            if len(prev_series) > 360:
+                prev_series = prev_series[-360:]
 
     spot_pts, basis_pts, diverge_pts, vol_pts = _build_intraday_points(res['fut_chart'], res['kpi_chart'])
 
     prev_fut = prev_cached.get('futures') or {}
-    oi_val = prev_fut.get('oi') or 0
-    oi_pts = prev_cached.get('oi_points') if same_day else []
-    oi_prev = prev_cached.get('oi_prev')
+    oi_val = daum_oi.get('oi') or prev_fut.get('oi') or 0
+    oi_prev = daum_oi.get('oi_prev') or prev_cached.get('oi_prev') or oi_val
+    oi_delta = daum_oi.get('oi_delta') if daum_oi else (prev_fut.get('oi_delta') or 0)
+    contract_name = daum_oi.get('contract') or prev_fut.get('contract') or '코스피200 선물'
+
+    # 미결제약정 일중 추이 실시간 누적 (당일 첫 진입 시 08:45 전일 종가 기준점 1회 시딩 후 20초~분 단위 누적)
+    if pre_open_hold:
+        oi_pts = list(prev_cached.get('oi_points') or [])
+    else:
+        oi_pts = list(prev_cached.get('oi_points') or []) if same_day else []
+        if oi_val > 0 and (in_session_or_after or has_today_oi):
+            if not oi_pts and oi_prev and int(now_ts) >= open_ts:
+                oi_pts.append([open_ts, oi_prev])
+            if not oi_pts or (int(now_ts) - int(oi_pts[-1][0]) >= 20) or (oi_pts[-1][1] != oi_val):
+                oi_pts.append([int(now_ts), oi_val])
+                if len(oi_pts) > 400:
+                    oi_pts = oi_pts[-400:]
 
     data = {
         'status': 'ok',
-        'date': today_str,
-        'updated_at': datetime.now().strftime('%H:%M:%S'),
+        'date': prev_cached.get('date', today_str) if pre_open_hold else today_str,
+        'updated_at': now_dt.strftime('%H:%M:%S'),
         'futures': {
             'price': f_price,
             'change': f_chg,
             'change_rate': f_rate,
             'volume': int(fut_rt.get('aq') or 0),
             'oi': oi_val,
-            'oi_delta': 0,
+            'oi_delta': oi_delta,
             'market_basis': live_basis,
             'diverge': basis_rate,
-            'contract': '코스피200 선물',
+            'contract': contract_name,
         },
         'spot': {
             'name': '코스피 200',
