@@ -1,25 +1,25 @@
 {
   "status": "ok",
-  "date_str": "11월 7일 토요일",
+  "date_str": "11월 11일 수요일",
   "market": {
     "kospi": {
       "name": "코스피",
-      "price": "5,059.69",
-      "change": "-324.11",
-      "change_pct": "-6.02%",
-      "status": "down"
+      "price": "5,375.36",
+      "change": "136.23",
+      "change_pct": "+2.60%",
+      "status": "up"
     },
     "kosdaq": {
       "name": "코스닥",
-      "price": "644.27",
-      "change": "-34.14",
-      "change_pct": "-5.03%",
-      "status": "down"
+      "price": "705.10",
+      "change": "37.49",
+      "change_pct": "+5.62%",
+      "status": "up"
     },
     "usd": {
       "name": "환율",
-      "price": "1,356.34원",
-      "change_pct": "+0.03%"
+      "price": "1,334.08원",
+      "change_pct": "-0.60%"
     },
     "investor": {
       "individual": "-",
@@ -27,62 +27,375 @@
       "institution": "-"
     }
   },
-  "header_line": "[코스피 -6.02%, 코스닥 -5.03%, 환율 1,356.34원(+0.03%)]",
-  "full_draft_text": "[코스피 -6.02%, 코스닥 -5.03%, 환율 1,356.34원(+0.03%)]\n\n1. 가짜내성' 항암제 美 임상 기대감에 바이오 / 제약 관련주 급등\n\n- 페니트리움바이오는 가짜내성' 항암제 美 임상 기대감에 급등(+14.92%)\n- 디티앤씨알오(+6.76%)\n\n2. 최대주주 매일방송 측 주식등 보유 비율 p 증가 영향에 영상콘텐츠 관련주 급등\n\n- 아티스트스튜디오는 최대주주 매일방송 측 주식등 보유 비율 p 증가 영향에 급등(+10.65%)\n- 코퍼스코리아(+6.60%)\n\n3. 골프존카운티 사려다 내 지분까지 팔 판…, MBK에 반발 영향에 지주사 관련주 급등\n\n- 골프존홀딩스는 골프존카운티 사려다 내 지분까지 팔 판…, MBK에 반발 영향에 급등(+7.85%)\n- 원익홀딩스(+6.86%)\n\n4. 음식료업종 테마 상승, 임신성 당뇨 검사제 '글루오렌지' 품절 소식 속 '글루오렌지'를 생산하는 맥널티제약 지분 66.97%를 보유한 사실이 부각되며 급등에 음식료업종 관련주 급등\n\n- 한국맥널티는 음식료업종 테마 상승, 임신성 당뇨 검사제 '글루오렌지' 품절 소식 속 '글루오렌지'를 생산하는 맥널티제약 지분 66.97%를 보유한 사실이 부각되며 급등에 급등(+7.50%)\n- 휴럼(+7.16%)\n\n5. 엘리스는 미 언론 \"젠슨 황 측근 ' 황'은 중국 간첩 영향에 급등(+20.95%)\n6. 덕성은 여대-서울여대-성신여대, AI 교육 협력 위해 네이버와 MOU 영향에 급등(+19.79%)\n7. 계양전기우(우)는 증안펀드’ 목소리 커지는데… 내년 코스피 ‘8천피’ 간다? 영향에 급등(+18.46%)\n8. 혜인은 용·기본소득당, 성폭력 부실 수사 바로잡을 것 안산성폭력사건 유가족·성폭력상담소 간담회 개최 영향에 급등(+15.18%)\n9. 홈캐스트는 소수계좌 거래집중으로 투자주의종목 지정 영향에 급등(+14.21%)\n10. 지엔씨에너지는 JP모건 시큐리티즈,   보유 보고 영향에 급등(+13.16%)\n11. NHN는 삼성에스디에스, ' 명예의 전당 갈 종목은? - 머니투데이 영향에 급등(+12.89%)\n12. KTcs는 자사주  전량 소각 영향에 급등(+12.87%)\n13. 아리바이오랩은 치매 예방부터 치료·관리까지”…아리바이오그룹, 통합 비전 선포 영향에 급등(+11.82%)\n14. 딜리셔스는 임시주총서 결손금 보전 등 6개 안건 다룬다 영향에 급등(+10.86%)\n15. 강원에너지는 평산파트너스,  지분 17만 2476주 담보계약 연장 영향에 급등(+8.90%)\n16. 신테카바이오는 AI 신약 개발 기대에 기대감에 급등(+8.49%)\n17. 엘엠에스는 바이오 싱글유스백 'BioCELVAS', 국내 최초로 美 FDA 등록 소식에 급등에 급등(+8.15%)\n18. 그린플러스는 29억원 규모 청년 스마트팜 신축 온실 수주 소식에 상승에 급등(+7.74%)\n19. 이렘은 STS 강관 제조 '', 3Q 별도 매출  감소 영향에 급등(+7.65%)\n20. 아티스트컴퍼니는 혁오, 27년 월드 투어 'HYUKOH  TOUR' 개최 영향에 급등(+7.07%)\n21. KS인더스트리는 최대주주 변경 모멘텀 지속 속 급등에 급등(+6.59%)\n\n오늘 하루도 시장 참여하시느라 정말 고생 많으셨습니다..\n편안한 저녁 시간 보내시기 바랍니다.",
-  "full_draft_html": "<div style=\"font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 15px; line-height: 1.9; color: #222222; max-width: 740px; margin: 0 auto;\">\n<div style=\"background-color: #f8fafc; border-left: 4px solid #2563eb; padding: 12px 18px; font-weight: bold; font-size: 15px; color: #1e293b; margin-bottom: 24px; border-radius: 4px; letter-spacing: -0.3px;\">[코스피 -6.02%, 코스닥 -5.03%, 환율 1,356.34원(+0.03%)]</div>\n<p style=\"font-size: 16px; font-weight: 700; color: #111827; margin: 16px 0 6px 0; letter-spacing: -0.4px;\">1. 가짜내성' 항암제 美 임상 기대감에 바이오 / 제약 관련주 급등</p>\n<p style=\"margin: 8px 0; min-height: 14px;\">&nbsp;</p>\n<p style=\"font-size: 15px; color: #374151; margin: 3px 0 3px 12px; line-height: 1.7;\">- 페니트리움바이오는 가짜내성' 항암제 美 임상 기대감에 급등(<span style=\"color: #dc2626; font-weight: 800;\">+14.92%</span>)</p>\n<p style=\"font-size: 15px; color: #374151; margin: 3px 0 3px 12px; line-height: 1.7;\">- 디티앤씨알오(<span style=\"color: #dc2626; font-weight: 800;\">+6.76%</span>)</p>\n<p style=\"margin: 8px 0; min-height: 14px;\">&nbsp;</p>\n<p style=\"font-size: 16px; font-weight: 700; color: #111827; margin: 16px 0 6px 0; letter-spacing: -0.4px;\">2. 최대주주 매일방송 측 주식등 보유 비율 p 증가 영향에 영상콘텐츠 관련주 급등</p>\n<p style=\"margin: 8px 0; min-height: 14px;\">&nbsp;</p>\n<p style=\"font-size: 15px; color: #374151; margin: 3px 0 3px 12px; line-height: 1.7;\">- 아티스트스튜디오는 최대주주 매일방송 측 주식등 보유 비율 p 증가 영향에 급등(<span style=\"color: #dc2626; font-weight: 800;\">+10.65%</span>)</p>\n<p style=\"font-size: 15px; color: #374151; margin: 3px 0 3px 12px; line-height: 1.7;\">- 코퍼스코리아(<span style=\"color: #dc2626; font-weight: 800;\">+6.60%</span>)</p>\n<p style=\"margin: 8px 0; min-height: 14px;\">&nbsp;</p>\n<p style=\"font-size: 16px; font-weight: 700; color: #111827; margin: 16px 0 6px 0; letter-spacing: -0.4px;\">3. 골프존카운티 사려다 내 지분까지 팔 판…, MBK에 반발 영향에 지주사 관련주 급등</p>\n<p style=\"margin: 8px 0; min-height: 14px;\">&nbsp;</p>\n<p style=\"font-size: 15px; color: #374151; margin: 3px 0 3px 12px; line-height: 1.7;\">- 골프존홀딩스는 골프존카운티 사려다 내 지분까지 팔 판…, MBK에 반발 영향에 급등(<span style=\"color: #dc2626; font-weight: 800;\">+7.85%</span>)</p>\n<p style=\"font-size: 15px; color: #374151; margin: 3px 0 3px 12px; line-height: 1.7;\">- 원익홀딩스(<span style=\"color: #dc2626; font-weight: 800;\">+6.86%</span>)</p>\n<p style=\"margin: 8px 0; min-height: 14px;\">&nbsp;</p>\n<p style=\"font-size: 16px; font-weight: 700; color: #111827; margin: 16px 0 6px 0; letter-spacing: -0.4px;\">4. 음식료업종 테마 상승, 임신성 당뇨 검사제 '글루오렌지' 품절 소식 속 '글루오렌지'를 생산하는 맥널티제약 지분 66.97%를 보유한 사실이 부각되며 급등에 음식료업종 관련주 급등</p>\n<p style=\"margin: 8px 0; min-height: 14px;\">&nbsp;</p>\n<p style=\"font-size: 15px; color: #374151; margin: 3px 0 3px 12px; line-height: 1.7;\">- 한국맥널티는 음식료업종 테마 상승, 임신성 당뇨 검사제 '글루오렌지' 품절 소식 속 '글루오렌지'를 생산하는 맥널티제약 지분 66.97%를 보유한 사실이 부각되며 급등에 급등(<span style=\"color: #dc2626; font-weight: 800;\">+7.50%</span>)</p>\n<p style=\"font-size: 15px; color: #374151; margin: 3px 0 3px 12px; line-height: 1.7;\">- 휴럼(<span style=\"color: #dc2626; font-weight: 800;\">+7.16%</span>)</p>\n<p style=\"margin: 8px 0; min-height: 14px;\">&nbsp;</p>\n<p style=\"font-size: 16px; font-weight: 700; color: #111827; margin: 16px 0 6px 0; letter-spacing: -0.4px;\">5. 엘리스는 미 언론 \"젠슨 황 측근 ' 황'은 중국 간첩 영향에 급등(<span style=\"color: #dc2626; font-weight: 800;\">+20.95%</span>)</p>\n<p style=\"font-size: 16px; font-weight: 700; color: #111827; margin: 16px 0 6px 0; letter-spacing: -0.4px;\">6. 덕성은 여대-서울여대-성신여대, AI 교육 협력 위해 네이버와 MOU 영향에 급등(<span style=\"color: #dc2626; font-weight: 800;\">+19.79%</span>)</p>\n<p style=\"font-size: 16px; font-weight: 700; color: #111827; margin: 16px 0 6px 0; letter-spacing: -0.4px;\">7. 계양전기우(우)는 증안펀드’ 목소리 커지는데… 내년 코스피 ‘8천피’ 간다? 영향에 급등(<span style=\"color: #dc2626; font-weight: 800;\">+18.46%</span>)</p>\n<p style=\"font-size: 16px; font-weight: 700; color: #111827; margin: 16px 0 6px 0; letter-spacing: -0.4px;\">8. 혜인은 용·기본소득당, 성폭력 부실 수사 바로잡을 것 안산성폭력사건 유가족·성폭력상담소 간담회 개최 영향에 급등(<span style=\"color: #dc2626; font-weight: 800;\">+15.18%</span>)</p>\n<p style=\"font-size: 16px; font-weight: 700; color: #111827; margin: 16px 0 6px 0; letter-spacing: -0.4px;\">9. 홈캐스트는 소수계좌 거래집중으로 투자주의종목 지정 영향에 급등(<span style=\"color: #dc2626; font-weight: 800;\">+14.21%</span>)</p>\n<p style=\"font-size: 16px; font-weight: 700; color: #111827; margin: 16px 0 6px 0; letter-spacing: -0.4px;\">10. 지엔씨에너지는 JP모건 시큐리티즈,   보유 보고 영향에 급등(<span style=\"color: #dc2626; font-weight: 800;\">+13.16%</span>)</p>\n<p style=\"font-size: 16px; font-weight: 700; color: #111827; margin: 16px 0 6px 0; letter-spacing: -0.4px;\">11. NHN는 삼성에스디에스, ' 명예의 전당 갈 종목은? - 머니투데이 영향에 급등(<span style=\"color: #dc2626; font-weight: 800;\">+12.89%</span>)</p>\n<p style=\"font-size: 16px; font-weight: 700; color: #111827; margin: 16px 0 6px 0; letter-spacing: -0.4px;\">12. KTcs는 자사주  전량 소각 영향에 급등(<span style=\"color: #dc2626; font-weight: 800;\">+12.87%</span>)</p>\n<p style=\"font-size: 16px; font-weight: 700; color: #111827; margin: 16px 0 6px 0; letter-spacing: -0.4px;\">13. 아리바이오랩은 치매 예방부터 치료·관리까지”…아리바이오그룹, 통합 비전 선포 영향에 급등(<span style=\"color: #dc2626; font-weight: 800;\">+11.82%</span>)</p>\n<p style=\"font-size: 16px; font-weight: 700; color: #111827; margin: 16px 0 6px 0; letter-spacing: -0.4px;\">14. 딜리셔스는 임시주총서 결손금 보전 등 6개 안건 다룬다 영향에 급등(<span style=\"color: #dc2626; font-weight: 800;\">+10.86%</span>)</p>\n<p style=\"font-size: 16px; font-weight: 700; color: #111827; margin: 16px 0 6px 0; letter-spacing: -0.4px;\">15. 강원에너지는 평산파트너스,  지분 17만 2476주 담보계약 연장 영향에 급등(<span style=\"color: #dc2626; font-weight: 800;\">+8.90%</span>)</p>\n<p style=\"font-size: 16px; font-weight: 700; color: #111827; margin: 16px 0 6px 0; letter-spacing: -0.4px;\">16. 신테카바이오는 AI 신약 개발 기대에 기대감에 급등(<span style=\"color: #dc2626; font-weight: 800;\">+8.49%</span>)</p>\n<p style=\"font-size: 16px; font-weight: 700; color: #111827; margin: 16px 0 6px 0; letter-spacing: -0.4px;\">17. 엘엠에스는 바이오 싱글유스백 'BioCELVAS', 국내 최초로 美 FDA 등록 소식에 급등에 급등(<span style=\"color: #dc2626; font-weight: 800;\">+8.15%</span>)</p>\n<p style=\"font-size: 16px; font-weight: 700; color: #111827; margin: 16px 0 6px 0; letter-spacing: -0.4px;\">18. 그린플러스는 29억원 규모 청년 스마트팜 신축 온실 수주 소식에 상승에 급등(<span style=\"color: #dc2626; font-weight: 800;\">+7.74%</span>)</p>\n<p style=\"font-size: 16px; font-weight: 700; color: #111827; margin: 16px 0 6px 0; letter-spacing: -0.4px;\">19. 이렘은 STS 강관 제조 '', 3Q 별도 매출  감소 영향에 급등(<span style=\"color: #dc2626; font-weight: 800;\">+7.65%</span>)</p>\n<p style=\"font-size: 16px; font-weight: 700; color: #111827; margin: 16px 0 6px 0; letter-spacing: -0.4px;\">20. 아티스트컴퍼니는 혁오, 27년 월드 투어 'HYUKOH  TOUR' 개최 영향에 급등(<span style=\"color: #dc2626; font-weight: 800;\">+7.07%</span>)</p>\n<p style=\"font-size: 16px; font-weight: 700; color: #111827; margin: 16px 0 6px 0; letter-spacing: -0.4px;\">21. KS인더스트리는 최대주주 변경 모멘텀 지속 속 급등에 급등(<span style=\"color: #dc2626; font-weight: 800;\">+6.59%</span>)</p>\n<p style=\"margin: 8px 0; min-height: 14px;\">&nbsp;</p>\n<p style=\"font-size: 15px; color: #475569; margin: 12px 0; font-weight: 500;\">오늘 하루도 시장 참여하시느라 정말 고생 많으셨습니다..</p>\n<p style=\"font-size: 15px; color: #475569; margin: 12px 0; font-weight: 500;\">편안한 저녁 시간 보내시기 바랍니다.</p>\n</div>",
+  "header_line": "[코스피 +2.60%, 코스닥 +5.62%, 환율 1,334.08원(-0.60%)]",
+  "full_draft_text": "[코스피 +2.60%, 코스닥 +5.62%, 환율 1,334.08원(-0.60%)]\n\n1. 반도체 후공정 장비주 동반 영향에 OLED(유기 발광 다이오드) 관련주 급등\n\n- 티에스이는 반도체 후공정 장비주 동반 영향에 급등(+23.24%)\n- 에프엔에스테크(+18.72%), 뉴파워프라즈마(+18.39%), 나노신소재(+17.39%)\n\n2. 오전 이슈  : 심텍홀딩스, , 샘씨엔에스, 테크윙, 이수페타시스 영향에 반도체 장비 관련주 급등\n\n- 아스플로는 오전 이슈  : 심텍홀딩스, , 샘씨엔에스, 테크윙, 이수페타시스 영향에 급등(+22.40%)\n- 테크윙(+20.87%), 디아이(+20.11%), 케이씨텍(+17.25%)\n\n3. 기관 및 외국인 수급 집중 속 바이오인식(생체인식) 관련주 급등\n\n- 에프에스티는 기관 및 외국인 수급 집중 속 급등(+18.81%)\n- 시선AI(+18.76%)\n\n4. 반도체 관련주 상승 속 삼성 파운드리 회복의 최대 수혜주 분석 모멘텀 지속 등에 급등에 밸류업(25년 기업가치 제고계획 발표) 관련주 급등\n\n- 코미코는 반도체 관련주 상승 속 삼성 파운드리 회복의 최대 수혜주 분석 모멘텀 지속 등에 급등에 급등(+18.32%)\n- 피에스케이홀딩스(+17.75%)\n\n5. 샘씨엔에스는 오전 이슈  : 심텍홀딩스, 아스플로, , 테크윙, 이수페타시스 영향에 급등(+26.11%)\n6. 코리아써키트는 반도체 기판주 동반 영향에 급등(+25.58%)\n7. 에스티아이는 특징주, -반도체 장비 테마 영향에 급등(+21.74%)\n8. 삼현은 기관 및 외국인 수급 집중 속 급등(+19.64%)\n9. 디케이티는 기관 및 외국인 수급 집중 속 급등(+19.44%)\n10. 이수페타시스는 美 로켓랩 역대 최대 분기 매출 영향에 급등(+19.36%)\n11. 래블업은 쿠버콘 북미 2026 참가 영향에 급등(+19.35%)\n12. 메가터치는 이은주 전무 2000주 장내매수 영향에 급등(+18.62%)\n13. 타이거일렉은 11월 11일 52주 신고가 종목 및 최근 동향 영향에 급등(+18.34%)\n14. 동부건설우(우)는 기술적 반등 및 개별 수급 유입에 급등(+18.18%)\n15. 지니너스는 앤트로픽도 뛰어든 'AI+실험실 영향에 급등(+17.44%)\n16. 오킨스전자는 특징주, -CXL 테마 영향에 급등(+17.41%)\n17. 주성엔지니어링은 기관 및 외국인 수급 집중 속 급등(+17.14%)\n\n오늘 하루도 시장 참여하시느라 정말 고생 많으셨습니다..\n편안한 저녁 시간 보내시기 바랍니다.",
+  "full_draft_html": "<div style=\"font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 15px; line-height: 1.9; color: #222222; max-width: 740px; margin: 0 auto;\">\n<div style=\"background-color: #f8fafc; border-left: 4px solid #2563eb; padding: 12px 18px; font-weight: bold; font-size: 15px; color: #1e293b; margin-bottom: 24px; border-radius: 4px; letter-spacing: -0.3px;\">[코스피 +2.60%, 코스닥 +5.62%, 환율 1,334.08원(-0.60%)]</div>\n<p style=\"font-size: 16px; font-weight: 700; color: #111827; margin: 16px 0 6px 0; letter-spacing: -0.4px;\">1. 반도체 후공정 장비주 동반 영향에 OLED(유기 발광 다이오드) 관련주 급등</p>\n<p style=\"margin: 8px 0; min-height: 14px;\">&nbsp;</p>\n<p style=\"font-size: 15px; color: #374151; margin: 3px 0 3px 12px; line-height: 1.7;\">- 티에스이는 반도체 후공정 장비주 동반 영향에 급등(<span style=\"color: #dc2626; font-weight: 800;\">+23.24%</span>)</p>\n<p style=\"font-size: 15px; color: #374151; margin: 3px 0 3px 12px; line-height: 1.7;\">- 에프엔에스테크(<span style=\"color: #dc2626; font-weight: 800;\">+18.72%</span>), 뉴파워프라즈마(<span style=\"color: #dc2626; font-weight: 800;\">+18.39%</span>), 나노신소재(<span style=\"color: #dc2626; font-weight: 800;\">+17.39%</span>)</p>\n<p style=\"margin: 8px 0; min-height: 14px;\">&nbsp;</p>\n<p style=\"font-size: 16px; font-weight: 700; color: #111827; margin: 16px 0 6px 0; letter-spacing: -0.4px;\">2. 오전 이슈  : 심텍홀딩스, , 샘씨엔에스, 테크윙, 이수페타시스 영향에 반도체 장비 관련주 급등</p>\n<p style=\"margin: 8px 0; min-height: 14px;\">&nbsp;</p>\n<p style=\"font-size: 15px; color: #374151; margin: 3px 0 3px 12px; line-height: 1.7;\">- 아스플로는 오전 이슈  : 심텍홀딩스, , 샘씨엔에스, 테크윙, 이수페타시스 영향에 급등(<span style=\"color: #dc2626; font-weight: 800;\">+22.40%</span>)</p>\n<p style=\"font-size: 15px; color: #374151; margin: 3px 0 3px 12px; line-height: 1.7;\">- 테크윙(<span style=\"color: #dc2626; font-weight: 800;\">+20.87%</span>), 디아이(<span style=\"color: #dc2626; font-weight: 800;\">+20.11%</span>), 케이씨텍(<span style=\"color: #dc2626; font-weight: 800;\">+17.25%</span>)</p>\n<p style=\"margin: 8px 0; min-height: 14px;\">&nbsp;</p>\n<p style=\"font-size: 16px; font-weight: 700; color: #111827; margin: 16px 0 6px 0; letter-spacing: -0.4px;\">3. 기관 및 외국인 수급 집중 속 바이오인식(생체인식) 관련주 급등</p>\n<p style=\"margin: 8px 0; min-height: 14px;\">&nbsp;</p>\n<p style=\"font-size: 15px; color: #374151; margin: 3px 0 3px 12px; line-height: 1.7;\">- 에프에스티는 기관 및 외국인 수급 집중 속 급등(<span style=\"color: #dc2626; font-weight: 800;\">+18.81%</span>)</p>\n<p style=\"font-size: 15px; color: #374151; margin: 3px 0 3px 12px; line-height: 1.7;\">- 시선AI(<span style=\"color: #dc2626; font-weight: 800;\">+18.76%</span>)</p>\n<p style=\"margin: 8px 0; min-height: 14px;\">&nbsp;</p>\n<p style=\"font-size: 16px; font-weight: 700; color: #111827; margin: 16px 0 6px 0; letter-spacing: -0.4px;\">4. 반도체 관련주 상승 속 삼성 파운드리 회복의 최대 수혜주 분석 모멘텀 지속 등에 급등에 밸류업(25년 기업가치 제고계획 발표) 관련주 급등</p>\n<p style=\"margin: 8px 0; min-height: 14px;\">&nbsp;</p>\n<p style=\"font-size: 15px; color: #374151; margin: 3px 0 3px 12px; line-height: 1.7;\">- 코미코는 반도체 관련주 상승 속 삼성 파운드리 회복의 최대 수혜주 분석 모멘텀 지속 등에 급등에 급등(<span style=\"color: #dc2626; font-weight: 800;\">+18.32%</span>)</p>\n<p style=\"font-size: 15px; color: #374151; margin: 3px 0 3px 12px; line-height: 1.7;\">- 피에스케이홀딩스(<span style=\"color: #dc2626; font-weight: 800;\">+17.75%</span>)</p>\n<p style=\"margin: 8px 0; min-height: 14px;\">&nbsp;</p>\n<p style=\"font-size: 16px; font-weight: 700; color: #111827; margin: 16px 0 6px 0; letter-spacing: -0.4px;\">5. 샘씨엔에스는 오전 이슈  : 심텍홀딩스, 아스플로, , 테크윙, 이수페타시스 영향에 급등(<span style=\"color: #dc2626; font-weight: 800;\">+26.11%</span>)</p>\n<p style=\"font-size: 16px; font-weight: 700; color: #111827; margin: 16px 0 6px 0; letter-spacing: -0.4px;\">6. 코리아써키트는 반도체 기판주 동반 영향에 급등(<span style=\"color: #dc2626; font-weight: 800;\">+25.58%</span>)</p>\n<p style=\"font-size: 16px; font-weight: 700; color: #111827; margin: 16px 0 6px 0; letter-spacing: -0.4px;\">7. 에스티아이는 특징주, -반도체 장비 테마 영향에 급등(<span style=\"color: #dc2626; font-weight: 800;\">+21.74%</span>)</p>\n<p style=\"font-size: 16px; font-weight: 700; color: #111827; margin: 16px 0 6px 0; letter-spacing: -0.4px;\">8. 삼현은 기관 및 외국인 수급 집중 속 급등(<span style=\"color: #dc2626; font-weight: 800;\">+19.64%</span>)</p>\n<p style=\"font-size: 16px; font-weight: 700; color: #111827; margin: 16px 0 6px 0; letter-spacing: -0.4px;\">9. 디케이티는 기관 및 외국인 수급 집중 속 급등(<span style=\"color: #dc2626; font-weight: 800;\">+19.44%</span>)</p>\n<p style=\"font-size: 16px; font-weight: 700; color: #111827; margin: 16px 0 6px 0; letter-spacing: -0.4px;\">10. 이수페타시스는 美 로켓랩 역대 최대 분기 매출 영향에 급등(<span style=\"color: #dc2626; font-weight: 800;\">+19.36%</span>)</p>\n<p style=\"font-size: 16px; font-weight: 700; color: #111827; margin: 16px 0 6px 0; letter-spacing: -0.4px;\">11. 래블업은 쿠버콘 북미 2026 참가 영향에 급등(<span style=\"color: #dc2626; font-weight: 800;\">+19.35%</span>)</p>\n<p style=\"font-size: 16px; font-weight: 700; color: #111827; margin: 16px 0 6px 0; letter-spacing: -0.4px;\">12. 메가터치는 이은주 전무 2000주 장내매수 영향에 급등(<span style=\"color: #dc2626; font-weight: 800;\">+18.62%</span>)</p>\n<p style=\"font-size: 16px; font-weight: 700; color: #111827; margin: 16px 0 6px 0; letter-spacing: -0.4px;\">13. 타이거일렉은 11월 11일 52주 신고가 종목 및 최근 동향 영향에 급등(<span style=\"color: #dc2626; font-weight: 800;\">+18.34%</span>)</p>\n<p style=\"font-size: 16px; font-weight: 700; color: #111827; margin: 16px 0 6px 0; letter-spacing: -0.4px;\">14. 동부건설우(우)는 기술적 반등 및 개별 수급 유입에 급등(<span style=\"color: #dc2626; font-weight: 800;\">+18.18%</span>)</p>\n<p style=\"font-size: 16px; font-weight: 700; color: #111827; margin: 16px 0 6px 0; letter-spacing: -0.4px;\">15. 지니너스는 앤트로픽도 뛰어든 'AI+실험실 영향에 급등(<span style=\"color: #dc2626; font-weight: 800;\">+17.44%</span>)</p>\n<p style=\"font-size: 16px; font-weight: 700; color: #111827; margin: 16px 0 6px 0; letter-spacing: -0.4px;\">16. 오킨스전자는 특징주, -CXL 테마 영향에 급등(<span style=\"color: #dc2626; font-weight: 800;\">+17.41%</span>)</p>\n<p style=\"font-size: 16px; font-weight: 700; color: #111827; margin: 16px 0 6px 0; letter-spacing: -0.4px;\">17. 주성엔지니어링은 기관 및 외국인 수급 집중 속 급등(<span style=\"color: #dc2626; font-weight: 800;\">+17.14%</span>)</p>\n<p style=\"margin: 8px 0; min-height: 14px;\">&nbsp;</p>\n<p style=\"font-size: 15px; color: #475569; margin: 12px 0; font-weight: 500;\">오늘 하루도 시장 참여하시느라 정말 고생 많으셨습니다..</p>\n<p style=\"font-size: 15px; color: #475569; margin: 12px 0; font-weight: 500;\">편안한 저녁 시간 보내시기 바랍니다.</p>\n</div>",
   "limit_ups": [],
   "themes": [
     {
-      "name": "클라우드 컴퓨팅",
+      "name": "반도체 재료/부품",
       "stocks": [
         {
-          "name": "엘리스",
-          "display_name": "엘리스",
-          "pct": 20.95,
-          "pct_val": 20.95,
-          "amt": 147712117,
-          "trading_val": "1477121억",
-          "price": "71,000",
-          "volume": "2,171,083",
-          "change_pct": "+20.95%",
+          "name": "샘씨엔에스",
+          "display_name": "샘씨엔에스",
+          "pct": 26.11,
+          "pct_val": 26.11,
+          "amt": 34405057,
+          "trading_val": "344050억",
+          "price": "15,890",
+          "volume": "2,276,056",
+          "change_pct": "+26.11%",
           "is_limit_up": false,
           "jsr_themes": [
-            "클라우드 컴퓨팅",
-            "2026 하반기 신규상장",
-            "지능형로봇/인공지능(AI)"
+            "반도체 재료/부품"
           ],
-          "primary_theme": "클라우드 컴퓨팅",
-          "jsr_spike": "",
-          "catalyst": "미 언론 \"젠슨 황 측근 ' 황'은 중국 간첩 영향에",
-          "raw_headline": "미 언론 \"젠슨 황 측근 '엘리스 황'은 중국 간첩\" - 동행미디어 시대",
-          "theme": "클라우드 컴퓨팅",
-          "reason": "미 언론 \"젠슨 황 측근 ' 황'은 중국 간첩 영향에"
+          "primary_theme": "반도체 재료/부품",
+          "jsr_spike": "1분기 최대 실적 달성 전망 등에 소폭 상승",
+          "catalyst": "오전 이슈  : 심텍홀딩스, 아스플로, , 테크윙, 이수페타시스 영향에",
+          "raw_headline": "오전 이슈 [반도체] : 심텍홀딩스, 아스플로, 샘씨엔에스, 테크윙, 이수페타시스 - 파이낸셜뉴스",
+          "theme": "반도체 재료/부품",
+          "reason": "오전 이슈  : 심텍홀딩스, 아스플로, , 테크윙, 이수페타시스 영향에"
         }
       ]
     },
     {
-      "name": "초전도체",
+      "name": "반도체 기판(FC-BGA/PCB/MLB 등)",
       "stocks": [
         {
-          "name": "덕성",
-          "display_name": "덕성",
-          "pct": 19.79,
-          "pct_val": 19.79,
-          "amt": 21977,
-          "trading_val": "219억",
-          "price": "3,420",
-          "volume": "6,210,534",
-          "change_pct": "+19.79%",
+          "name": "코리아써키트",
+          "display_name": "코리아써키트",
+          "pct": 25.58,
+          "pct_val": 25.58,
+          "amt": 118706,
+          "trading_val": "1187억",
+          "price": "86,400",
+          "volume": "1,466,222",
+          "change_pct": "+25.58%",
           "is_limit_up": false,
           "jsr_themes": [
-            "초전도체"
+            "반도체 기판(FC-BGA/PCB/MLB 등)",
+            "갤럭시 부품주",
+            "CXL(컴퓨트익스프레스링크)",
+            "PCB(FPCB 등)",
+            "소캠(SOCAMM)"
           ],
-          "primary_theme": "초전도체",
-          "jsr_spike": "헌법재판소, 오는 4일 오전 11시 尹 대통령 탄핵심판 선고 소식 등에 정치/인맥(한동훈) 및 정치/인맥(윤석열) 테마 상승 속 급등",
-          "catalyst": "여대-서울여대-성신여대, AI 교육 협력 위해 네이버와 MOU 영향에",
-          "raw_headline": "덕성여대-서울여대-성신여대, AI 교육 협력 위해 네이버와 MOU - 매일일보",
-          "theme": "초전도체",
-          "reason": "여대-서울여대-성신여대, AI 교육 협력 위해 네이버와 MOU 영향에"
+          "primary_theme": "반도체 기판(FC-BGA/PCB/MLB 등)",
+          "jsr_spike": "미·이란, 2차 대면협상 기대감 속 필라델피아 반도체지수(+1.68%) 강세 영향 등에 반도체 관련주 상승 속 급등",
+          "catalyst": "반도체 기판주 동반 영향에",
+          "raw_headline": "코리아써키트 10%대 급등…반도체 기판주 동반 상승 - 머니투데이 - 머니투데이",
+          "theme": "반도체 기판(FC-BGA/PCB/MLB 등)",
+          "reason": "반도체 기판주 동반 영향에"
+        }
+      ]
+    },
+    {
+      "name": "OLED(유기 발광 다이오드)",
+      "stocks": [
+        {
+          "name": "티에스이",
+          "display_name": "티에스이",
+          "pct": 23.24,
+          "pct_val": 23.24,
+          "amt": 50138932,
+          "trading_val": "501389억",
+          "price": "227,000",
+          "volume": "231,475",
+          "change_pct": "+23.24%",
+          "is_limit_up": false,
+          "jsr_themes": [
+            "OLED(유기 발광 다이오드)",
+            "반도체 장비",
+            "LED장비"
+          ],
+          "primary_theme": "OLED(유기 발광 다이오드)",
+          "jsr_spike": "미·이란, 2차 대면협상 기대감 속 필라델피아 반도체지수(+1.68%) 강세 영향 등에 반도체 관련주 상승 속 급등",
+          "catalyst": "반도체 후공정 장비주 동반 영향에",
+          "raw_headline": "[특징주]티에스이, 반도체 후공정 장비주 동반 강세에 20.24% 뛰어…프로브카드 성장 기대 - 남도일보",
+          "theme": "OLED(유기 발광 다이오드)",
+          "reason": "반도체 후공정 장비주 동반 영향에"
+        },
+        {
+          "name": "에프엔에스테크",
+          "display_name": "에프엔에스테크",
+          "pct": 18.72,
+          "pct_val": 18.72,
+          "amt": 4386510,
+          "trading_val": "43865억",
+          "price": "13,000",
+          "volume": "343,922",
+          "change_pct": "+18.72%",
+          "is_limit_up": false,
+          "jsr_themes": [
+            "OLED(유기 발광 다이오드)",
+            "유리 기판",
+            "반도체 재료/부품"
+          ],
+          "primary_theme": "OLED(유기 발광 다이오드)",
+          "jsr_spike": "일부 반도체 관련주 상승 속 수익성 개선 본격화 전망 등에 급등",
+          "catalyst": "기관 및 외국인 수급 집중 속",
+          "raw_headline": "[장중수급포착] 에프엔에스테크, 외국인/기관 동시 순매수… 주가 +20.00% - 뉴스핌",
+          "theme": "OLED(유기 발광 다이오드)",
+          "reason": "기관 및 외국인 수급 집중 속"
+        },
+        {
+          "name": "뉴파워프라즈마",
+          "display_name": "뉴파워프라즈마",
+          "pct": 18.39,
+          "pct_val": 18.39,
+          "amt": 27737470,
+          "trading_val": "277374억",
+          "price": "14,160",
+          "volume": "2,049,709",
+          "change_pct": "+18.39%",
+          "is_limit_up": false,
+          "jsr_themes": [
+            "OLED(유기 발광 다이오드)",
+            "반도체 재료/부품"
+          ],
+          "primary_theme": "OLED(유기 발광 다이오드)",
+          "jsr_spike": "지난해 반도체 수출 역대 최대치 기록 및 슈퍼사이클 기대감 지속 등에 반도체 관련주 상승 속 급등",
+          "catalyst": "반도체 소재·부품주 매수세 봇물…HBM 공정 고도화 기 영향에",
+          "raw_headline": "반도체 소재·부품주 매수세 봇물…HBM 공정 고도화 기대 커졌다 - 핀포인트뉴스",
+          "theme": "OLED(유기 발광 다이오드)",
+          "reason": "반도체 소재·부품주 매수세 봇물…HBM 공정 고도화 기 영향에"
+        },
+        {
+          "name": "나노신소재",
+          "display_name": "나노신소재",
+          "pct": 17.39,
+          "pct_val": 17.39,
+          "amt": 31819931,
+          "trading_val": "318199억",
+          "price": "75,600",
+          "volume": "428,108",
+          "change_pct": "+17.39%",
+          "is_limit_up": false,
+          "jsr_themes": [
+            "OLED(유기 발광 다이오드)",
+            "태양광에너지",
+            "LED",
+            "2차전지",
+            "2차전지(소재/부품)"
+          ],
+          "primary_theme": "OLED(유기 발광 다이오드)",
+          "jsr_spike": "머스크 우주 태양광 모멘텀 지속 및 머스크 실사팀 대만 태양광 기업 접촉 소식 등에 태양광에너지 테마 상승 속 급등",
+          "catalyst": "기관 및 외국인 수급 집중 속",
+          "raw_headline": "[장중수급포착] 나노신소재, 외국인/기관 동시 순매수… 주가 +18.32% - 뉴스핌",
+          "theme": "OLED(유기 발광 다이오드)",
+          "reason": "기관 및 외국인 수급 집중 속"
+        }
+      ]
+    },
+    {
+      "name": "반도체 장비",
+      "stocks": [
+        {
+          "name": "아스플로",
+          "display_name": "아스플로",
+          "pct": 22.4,
+          "pct_val": 22.4,
+          "amt": 10823844,
+          "trading_val": "108238억",
+          "price": "33,600",
+          "volume": "336,924",
+          "change_pct": "+22.40%",
+          "is_limit_up": false,
+          "jsr_themes": [
+            "반도체 장비"
+          ],
+          "primary_theme": "반도체 장비",
+          "jsr_spike": "삼성전자-SK하이닉스 설비투자 확대 기대감에 따른 국내 반도체 소부장 수혜 전망 등에 반도체 관련주 상승 속 급등",
+          "catalyst": "오전 이슈  : 심텍홀딩스, , 샘씨엔에스, 테크윙, 이수페타시스 영향에",
+          "raw_headline": "오전 이슈 [반도체] : 심텍홀딩스, 아스플로, 샘씨엔에스, 테크윙, 이수페타시스 - 파이낸셜뉴스",
+          "theme": "반도체 장비",
+          "reason": "오전 이슈  : 심텍홀딩스, , 샘씨엔에스, 테크윙, 이수페타시스 영향에"
+        },
+        {
+          "name": "테크윙",
+          "display_name": "테크윙",
+          "pct": 20.87,
+          "pct_val": 20.87,
+          "amt": 40396128,
+          "trading_val": "403961억",
+          "price": "38,800",
+          "volume": "1,079,794",
+          "change_pct": "+20.87%",
+          "is_limit_up": false,
+          "jsr_themes": [
+            "반도체 장비",
+            "시스템반도체",
+            "HBM(고대역폭메모리)"
+          ],
+          "primary_theme": "반도체 장비",
+          "jsr_spike": "삼성전자-SK하이닉스 설비투자 확대 기대감에 따른 국내 반도체 소부장 수혜 전망 등에 반도체 관련주 상승 속 급등",
+          "catalyst": "HBM 생산 경쟁 불붙었다… 한미반도체· 등 장비주 '환호성 영향에",
+          "raw_headline": "HBM 생산 경쟁 불붙었다… 한미반도체·테크윙 등 장비주 '환호성' - 핀포인트뉴스",
+          "theme": "반도체 장비",
+          "reason": "HBM 생산 경쟁 불붙었다… 한미반도체· 등 장비주 '환호성 영향에"
+        },
+        {
+          "name": "디아이",
+          "display_name": "디아이",
+          "pct": 20.11,
+          "pct_val": 20.11,
+          "amt": 45381,
+          "trading_val": "453억",
+          "price": "31,350",
+          "volume": "1,516,955",
+          "change_pct": "+20.11%",
+          "is_limit_up": false,
+          "jsr_themes": [
+            "반도체 장비",
+            "시스템반도체",
+            "HBM(고대역폭메모리)"
+          ],
+          "primary_theme": "반도체 장비",
+          "jsr_spike": "엔비디아 GTC 2026 기대감, 삼성전자·SK하이닉스 1분기 실적 컨센서스 상회 전망 등에 일부 반도체 관련주 상승 속 급등",
+          "catalyst": "건설, 분양 마친 시행사 3곳 흡수 영향에",
+          "raw_headline": "디아이건설, 분양 마친 시행사 3곳 흡수…자본잠식 계열사 채권도 떠안는다 - 위키리크스한국",
+          "theme": "반도체 장비",
+          "reason": "건설, 분양 마친 시행사 3곳 흡수 영향에"
+        },
+        {
+          "name": "케이씨텍",
+          "display_name": "케이씨텍",
+          "pct": 17.25,
+          "pct_val": 17.25,
+          "amt": 26785,
+          "trading_val": "267억",
+          "price": "73,400",
+          "volume": "382,208",
+          "change_pct": "+17.25%",
+          "is_limit_up": false,
+          "jsr_themes": [
+            "반도체 장비",
+            "반도체 재료/부품",
+            "HBM(고대역폭메모리)"
+          ],
+          "primary_theme": "반도체 장비",
+          "jsr_spike": "SK하이닉스와 698.43억원 규모 반도체 제조 장비 공급계약 체결에 급등",
+          "catalyst": "성호전자·JW신약! 내일장 고래 종목은?! - 머니투데이 기대감에",
+          "raw_headline": "[고래사냥] '케이씨텍·성호전자·JW신약! 내일장 고래 종목은?! - 머니투데이 - 머니투데이",
+          "theme": "반도체 장비",
+          "reason": "성호전자·JW신약! 내일장 고래 종목은?! - 머니투데이 기대감에"
+        }
+      ]
+    },
+    {
+      "name": "전력반도체",
+      "stocks": [
+        {
+          "name": "에스티아이",
+          "display_name": "에스티아이",
+          "pct": 21.74,
+          "pct_val": 21.74,
+          "amt": 6905112,
+          "trading_val": "69051억",
+          "price": "24,300",
+          "volume": "298,360",
+          "change_pct": "+21.74%",
+          "is_limit_up": false,
+          "jsr_themes": [
+            "전력반도체",
+            "반도체 장비",
+            "3D 프린터",
+            "HBM(고대역폭메모리)"
+          ],
+          "primary_theme": "전력반도체",
+          "jsr_spike": "엔비디아 호실적 및 SK하이닉스, 21.6조원 규모 용인 반도체 클러스터 1기 Fab 투자 소식 등에 반도체 관련주 상승 속 급등",
+          "catalyst": "특징주, -반도체 장비 테마 영향에",
+          "raw_headline": "특징주, 에스티아이-반도체 장비 테마 상승세에 10.97% ↑ - 매일경제 마켓",
+          "theme": "전력반도체",
+          "reason": "특징주, -반도체 장비 테마 영향에"
+        }
+      ]
+    },
+    {
+      "name": "방위산업/전쟁 및 테러",
+      "stocks": [
+        {
+          "name": "삼현",
+          "display_name": "삼현",
+          "pct": 19.64,
+          "pct_val": 19.64,
+          "amt": 52247221,
+          "trading_val": "522472억",
+          "price": "43,250",
+          "volume": "1,227,393",
+          "change_pct": "+19.64%",
+          "is_limit_up": false,
+          "jsr_themes": [
+            "방위산업/전쟁 및 테러",
+            "자동차부품",
+            "자율주행차",
+            "로봇(산업용/협동로봇 등)",
+            "피지컬 AI/휴머노이드 로봇"
+          ],
+          "primary_theme": "방위산업/전쟁 및 테러",
+          "jsr_spike": "글로벌 로봇기업 'AiTEN Robotics'와 MOU 체결에 상승",
+          "catalyst": "기관 및 외국인 수급 집중 속",
+          "raw_headline": "삼현, 피지컬 AI 핵심 액추에이터 국책과제 주관기관 선정 - 매일경제 마켓",
+          "theme": "방위산업/전쟁 및 테러",
+          "reason": "기관 및 외국인 수급 집중 속"
+        }
+      ]
+    },
+    {
+      "name": "폴더블폰",
+      "stocks": [
+        {
+          "name": "디케이티",
+          "display_name": "디케이티",
+          "pct": 19.44,
+          "pct_val": 19.44,
+          "amt": 21730016,
+          "trading_val": "217300억",
+          "price": "27,950",
+          "volume": "818,344",
+          "change_pct": "+19.44%",
+          "is_limit_up": false,
+          "jsr_themes": [
+            "폴더블폰",
+            "스마트폰",
+            "전력저장장치(ESS)"
+          ],
+          "primary_theme": "폴더블폰",
+          "jsr_spike": "배터리 3사, ESS 중심으로 사업구조 전환 하반기 실적반등 전망 등에 전력저장장치(ESS) 테마 상승 속 급등",
+          "catalyst": "기관 및 외국인 수급 집중 속",
+          "raw_headline": "[장중수급포착] 디케이티, 외국인/기관 동시 순매수… 주가 +10.68% - 뉴스핌",
+          "theme": "폴더블폰",
+          "reason": "기관 및 외국인 수급 집중 속"
+        }
+      ]
+    },
+    {
+      "name": "AI 챗봇(챗GPT 등)",
+      "stocks": [
+        {
+          "name": "이수페타시스",
+          "display_name": "이수페타시스",
+          "pct": 19.36,
+          "pct_val": 19.36,
+          "amt": 106153,
+          "trading_val": "1061억",
+          "price": "82,000",
+          "volume": "1,338,207",
+          "change_pct": "+19.36%",
+          "is_limit_up": false,
+          "jsr_themes": [
+            "AI 챗봇(챗GPT 등)",
+            "밸류업(25년 기업가치 제고계획 발표)",
+            "5G(5세대 이동통신)",
+            "반도체 기판(FC-BGA/PCB/MLB 등)",
+            "우주항공산업(누리호/인공위성 등)",
+            "PCB(FPCB 등)"
+          ],
+          "primary_theme": "AI 챗봇(챗GPT 등)",
+          "jsr_spike": "반도체 관련주 및 우주항공산업(누리호/인공위성 등) 테마 상승 속 급등",
+          "catalyst": "美 로켓랩 역대 최대 분기 매출 영향에",
+          "raw_headline": "[특징주] 이수페타시스, 美 로켓랩 역대 최대 분기 매출.. '급등' - 글로벌이코노믹",
+          "theme": "AI 챗봇(챗GPT 등)",
+          "reason": "美 로켓랩 역대 최대 분기 매출 영향에"
         }
       ]
     },
@@ -90,330 +403,204 @@
       "name": "개별 특징주",
       "stocks": [
         {
-          "name": "계양전기우",
-          "display_name": "계양전기우(우)",
-          "pct": 18.46,
-          "pct_val": 18.46,
-          "amt": 381,
-          "trading_val": "3억",
-          "price": "4,395",
-          "volume": "82,993",
-          "change_pct": "+18.46%",
+          "name": "래블업",
+          "display_name": "래블업",
+          "pct": 19.35,
+          "pct_val": 19.35,
+          "amt": 78165184,
+          "trading_val": "781651억",
+          "price": "15,110",
+          "volume": "5,447,102",
+          "change_pct": "+19.35%",
           "is_limit_up": false,
           "jsr_themes": [],
           "primary_theme": "",
           "jsr_spike": "",
-          "catalyst": "증안펀드’ 목소리 커지는데… 내년 코스피 ‘8천피’ 간다? 영향에",
-          "raw_headline": "‘증안펀드’ 목소리 커지는데… 내년 코스피 ‘8천피’ 간다? [뉴스톡 웰스톡] - 뉴스웰",
+          "catalyst": "쿠버콘 북미 2026 참가 영향에",
+          "raw_headline": "래블업, 쿠버콘 북미 2026 참가…백엔드닷에이아이·쿠버네티스 통합 소개 - 테크월드",
           "theme": "개별 특징주",
-          "reason": "증안펀드’ 목소리 커지는데… 내년 코스피 ‘8천피’ 간다? 영향에"
+          "reason": "쿠버콘 북미 2026 참가 영향에"
         },
         {
-          "name": "홈캐스트",
-          "display_name": "홈캐스트",
-          "pct": 14.21,
-          "pct_val": 14.21,
-          "amt": 454087,
-          "trading_val": "4540억",
-          "price": "1,768",
-          "volume": "269,525",
-          "change_pct": "+14.21%",
+          "name": "동부건설우",
+          "display_name": "동부건설우(우)",
+          "pct": 18.18,
+          "pct_val": 18.18,
+          "amt": 145,
+          "trading_val": "1억",
+          "price": "18,200",
+          "volume": "7,913",
+          "change_pct": "+18.18%",
           "is_limit_up": false,
           "jsr_themes": [],
           "primary_theme": "",
           "jsr_spike": "",
-          "catalyst": "소수계좌 거래집중으로 투자주의종목 지정 영향에",
-          "raw_headline": "홈캐스트, 소수계좌 거래집중으로 투자주의종목 지정 - 톱스타뉴스",
+          "catalyst": "",
+          "raw_headline": "",
           "theme": "개별 특징주",
-          "reason": "소수계좌 거래집중으로 투자주의종목 지정 영향에"
+          "reason": ""
         }
       ]
     },
     {
-      "name": "전후 재건(우크라/중동 전쟁 등)",
+      "name": "바이오인식(생체인식)",
       "stocks": [
         {
-          "name": "혜인",
-          "display_name": "혜인",
-          "pct": 15.18,
-          "pct_val": 15.18,
-          "amt": 14962,
-          "trading_val": "149억",
-          "price": "8,120",
-          "volume": "1,903,717",
-          "change_pct": "+15.18%",
+          "name": "에프에스티",
+          "display_name": "에프에스티",
+          "pct": 18.81,
+          "pct_val": 18.81,
+          "amt": 5258189,
+          "trading_val": "52581억",
+          "price": "25,900",
+          "volume": "206,799",
+          "change_pct": "+18.81%",
           "is_limit_up": false,
           "jsr_themes": [
-            "전후 재건(우크라/중동 전쟁 등)",
-            "건설기계",
-            "환율하락 수혜",
-            "방위산업/전쟁 및 테러",
-            "태양광에너지"
+            "바이오인식(생체인식)",
+            "반도체 장비",
+            "반도체 재료/부품"
           ],
-          "primary_theme": "전후 재건(우크라/중동 전쟁 등)",
-          "jsr_spike": "방위산업/전쟁 및 테러 테마 상승 및 캐터필러, 마이크로소프트-엔비디아 참여 대규모 AI 팩토리 프로젝트 관련 가스발전기 공급 계약 체결 소식 속 캐터필러 국내 공식 딜러로 부각되며 상한가",
-          "catalyst": "용·기본소득당, 성폭력 부실 수사 바로잡을 것 안산성폭력사건 유가족·성폭력상담소 간담회 개최 영향에",
-          "raw_headline": "용혜인·기본소득당, 성폭력 부실 수사 바로잡을 것 안산성폭력사건 유가족·성폭력상담소 간담회 개최 - 오토투데이",
-          "theme": "전후 재건(우크라/중동 전쟁 등)",
-          "reason": "용·기본소득당, 성폭력 부실 수사 바로잡을 것 안산성폭력사건 유가족·성폭력상담소 간담회 개최 영향에"
-        }
-      ]
-    },
-    {
-      "name": "바이오 / 제약",
-      "stocks": [
-        {
-          "name": "페니트리움바이오",
-          "display_name": "페니트리움바이오",
-          "pct": 14.92,
-          "pct_val": 14.92,
-          "amt": 9534191,
-          "trading_val": "95341억",
-          "price": "6,470",
-          "volume": "1,572,084",
-          "change_pct": "+14.92%",
-          "is_limit_up": false,
-          "jsr_themes": [],
-          "primary_theme": "",
-          "jsr_spike": "",
-          "catalyst": "가짜내성' 항암제 美 임상 기대감에",
-          "raw_headline": "'가짜내성' 항암제 美 임상 직행…유효성·자금 두고 시험대 - 바이오북미디어",
-          "theme": "바이오 / 제약",
-          "reason": "가짜내성' 항암제 美 임상 기대감에"
+          "primary_theme": "바이오인식(생체인식)",
+          "jsr_spike": "보통주 510,000주 소각 결정 모멘텀 지속에 급등",
+          "catalyst": "기관 및 외국인 수급 집중 속",
+          "raw_headline": "[장중수급포착] 에프에스티, 외국인/기관 동시 순매수… 주가 +20.64% - 뉴스핌",
+          "theme": "바이오인식(생체인식)",
+          "reason": "기관 및 외국인 수급 집중 속"
         },
         {
-          "name": "디티앤씨알오",
-          "display_name": "디티앤씨알오",
-          "pct": 6.76,
-          "pct_val": 6.76,
-          "amt": 147166,
-          "trading_val": "1471억",
-          "price": "1,957",
-          "volume": "77,979",
-          "change_pct": "+6.76%",
-          "is_limit_up": false,
-          "jsr_themes": [],
-          "primary_theme": "",
-          "jsr_spike": "",
-          "catalyst": "TK 시료 활용 대사체 분석으로 신약개발 기대감에",
-          "raw_headline": "디티앤씨알오, TK 시료 활용 대사체 분석으로 신약개발 지원 - 데일리팜",
-          "theme": "바이오 / 제약",
-          "reason": "TK 시료 활용 대사체 분석으로 신약개발 기대감에"
-        }
-      ]
-    },
-    {
-      "name": "남북경협",
-      "stocks": [
-        {
-          "name": "지엔씨에너지",
-          "display_name": "지엔씨에너지",
-          "pct": 13.16,
-          "pct_val": 13.16,
-          "amt": 48923721,
-          "trading_val": "489237억",
-          "price": "35,250",
-          "volume": "1,413,523",
-          "change_pct": "+13.16%",
+          "name": "시선AI",
+          "display_name": "시선AI",
+          "pct": 18.76,
+          "pct_val": 18.76,
+          "amt": 1007857,
+          "trading_val": "10078억",
+          "price": "2,595",
+          "volume": "407,670",
+          "change_pct": "+18.76%",
           "is_limit_up": false,
           "jsr_themes": [
-            "남북경협",
-            "전력설비"
+            "바이오인식(생체인식)",
+            "보안주(물리)",
+            "지능형로봇/인공지능(AI)",
+            "딥페이크(deepfake)",
+            "의료AI"
           ],
-          "primary_theme": "남북경협",
-          "jsr_spike": "AI 데이터센터 개발에 따른 수익성 개선 기대감 등에 급등",
-          "catalyst": "JP모건 시큐리티즈,   보유 보고 영향에",
-          "raw_headline": "JP모건 시큐리티즈, 지엔씨에너지 5.07% 보유 보고 - 비건뉴스",
-          "theme": "남북경협",
-          "reason": "JP모건 시큐리티즈,   보유 보고 영향에"
+          "primary_theme": "바이오인식(생체인식)",
+          "jsr_spike": "자회사 유온로보틱스, 초정밀 '로봇 그리퍼' 개발 소식에 상승",
+          "catalyst": "국방망 AI 수주 소식에",
+          "raw_headline": "\"시선AI, 국방망 AI 수주·피지컬 AI 상용계약으로 신사업 확대\" - CMIR - 뉴스핌",
+          "theme": "바이오인식(생체인식)",
+          "reason": "국방망 AI 수주 소식에"
         }
       ]
     },
     {
-      "name": "재택근무/스마트워크",
+      "name": "2차전지",
       "stocks": [
         {
-          "name": "NHN",
-          "display_name": "NHN",
-          "pct": 12.89,
-          "pct_val": 12.89,
-          "amt": 46900,
-          "trading_val": "469억",
-          "price": "57,800",
-          "volume": "781,709",
-          "change_pct": "+12.89%",
+          "name": "메가터치",
+          "display_name": "메가터치",
+          "pct": 18.62,
+          "pct_val": 18.62,
+          "amt": 3280736,
+          "trading_val": "32807억",
+          "price": "7,200",
+          "volume": "481,219",
+          "change_pct": "+18.62%",
           "is_limit_up": false,
           "jsr_themes": [
-            "재택근무/스마트워크",
-            "모바일게임(스마트폰)",
-            "게임",
-            "전자결제(전자화폐)",
-            "웹툰"
-          ],
-          "primary_theme": "재택근무/스마트워크",
-          "jsr_spike": "클라우드·게임 중심 성장 및 웹보드 규제 완화 수혜 기대감 지속에 급등",
-          "catalyst": "삼성에스디에스, ' 명예의 전당 갈 종목은? - 머니투데이 영향에",
-          "raw_headline": "[여의도 투자본부 1부] '삼성에스디에스, NHN' 명예의 전당 갈 종목은? - 머니투데이 - 머니투데이",
-          "theme": "재택근무/스마트워크",
-          "reason": "삼성에스디에스, ' 명예의 전당 갈 종목은? - 머니투데이 영향에"
-        }
-      ]
-    },
-    {
-      "name": "무상증자 / 주주환원",
-      "stocks": [
-        {
-          "name": "KTcs",
-          "display_name": "KTcs",
-          "pct": 12.87,
-          "pct_val": 12.87,
-          "amt": 15782,
-          "trading_val": "157억",
-          "price": "2,280",
-          "volume": "7,021,846",
-          "change_pct": "+12.87%",
-          "is_limit_up": false,
-          "jsr_themes": [],
-          "primary_theme": "",
-          "jsr_spike": "",
-          "catalyst": "자사주  전량 소각 영향에",
-          "raw_headline": "KTcs, 자사주 8.37% 전량 소각…순이익 40% 주주환원 - 뉴스핌",
-          "theme": "무상증자 / 주주환원",
-          "reason": "자사주  전량 소각 영향에"
-        }
-      ]
-    },
-    {
-      "name": "백신/진단시약/방역(신종플루, AI 등)",
-      "stocks": [
-        {
-          "name": "아리바이오랩",
-          "display_name": "아리바이오랩",
-          "pct": 11.82,
-          "pct_val": 11.82,
-          "amt": 16346717,
-          "trading_val": "163467억",
-          "price": "4,305",
-          "volume": "3,786,325",
-          "change_pct": "+11.82%",
-          "is_limit_up": false,
-          "jsr_themes": [
-            "백신/진단시약/방역(신종플루, AI 등)",
-            "코로나19(진단/치료제/백신 개발 등)",
-            "코로나19(치료제/백신 개발 등)"
-          ],
-          "primary_theme": "백신/진단시약/방역(신종플루, AI 등)",
-          "jsr_spike": "소룩스, 동사 인수로 조명·바이오 동반 성장 본격화 소식에 상한가",
-          "catalyst": "치매 예방부터 치료·관리까지”…아리바이오그룹, 통합 비전 선포 영향에",
-          "raw_headline": "“치매 예방부터 치료·관리까지”…아리바이오그룹, 통합 비전 선포 - 쿠키뉴스",
-          "theme": "백신/진단시약/방역(신종플루, AI 등)",
-          "reason": "치매 예방부터 치료·관리까지”…아리바이오그룹, 통합 비전 선포 영향에"
-        }
-      ]
-    },
-    {
-      "name": "2026 하반기 신규상장",
-      "stocks": [
-        {
-          "name": "딜리셔스",
-          "display_name": "딜리셔스",
-          "pct": 10.86,
-          "pct_val": 10.86,
-          "amt": 1247883,
-          "trading_val": "12478억",
-          "price": "1,980",
-          "volume": "650,709",
-          "change_pct": "+10.86%",
-          "is_limit_up": false,
-          "jsr_themes": [
-            "2026 하반기 신규상장",
-            "패션/의류"
-          ],
-          "primary_theme": "2026 하반기 신규상장",
-          "jsr_spike": "",
-          "catalyst": "임시주총서 결손금 보전 등 6개 안건 다룬다 영향에",
-          "raw_headline": "딜리셔스, 임시주총서 결손금 보전 등 6개 안건 다룬다 - 비건뉴스",
-          "theme": "2026 하반기 신규상장",
-          "reason": "임시주총서 결손금 보전 등 6개 안건 다룬다 영향에"
-        }
-      ]
-    },
-    {
-      "name": "영상콘텐츠",
-      "stocks": [
-        {
-          "name": "아티스트스튜디오",
-          "display_name": "아티스트스튜디오",
-          "pct": 10.65,
-          "pct_val": 10.65,
-          "amt": 253340,
-          "trading_val": "2533억",
-          "price": "3,430",
-          "volume": "77,495",
-          "change_pct": "+10.65%",
-          "is_limit_up": false,
-          "jsr_themes": [
-            "영상콘텐츠",
-            "엔터테인먼트"
-          ],
-          "primary_theme": "영상콘텐츠",
-          "jsr_spike": "아티스트그룹, '재벌집 막내아들' 시즌2 공동제작 기획·개발 착수 소식에 강세",
-          "catalyst": "최대주주 매일방송 측 주식등 보유 비율 p 증가 영향에",
-          "raw_headline": "아티스트스튜디오, 최대주주 매일방송 측 주식등 보유 비율 20.06%p 증가…공동보유 약정 종료 따른 신규보고 - 디지털투데이",
-          "theme": "영상콘텐츠",
-          "reason": "최대주주 매일방송 측 주식등 보유 비율 p 증가 영향에"
-        },
-        {
-          "name": "코퍼스코리아",
-          "display_name": "코퍼스코리아",
-          "pct": 6.6,
-          "pct_val": 6.6,
-          "amt": 24023,
-          "trading_val": "240억",
-          "price": "1,276",
-          "volume": "21,108",
-          "change_pct": "+6.60%",
-          "is_limit_up": false,
-          "jsr_themes": [
-            "영상콘텐츠"
-          ],
-          "primary_theme": "영상콘텐츠",
-          "jsr_spike": "불성실공시법인 지정예고에 급락",
-          "catalyst": "♥크러쉬 또 반하겠네‥레드벨벳 조이, 단발병 부르는 비주얼 영향에",
-          "raw_headline": "♥크러쉬 또 반하겠네‥레드벨벳 조이, 단발병 부르는 비주얼 - 뉴스엔",
-          "theme": "영상콘텐츠",
-          "reason": "♥크러쉬 또 반하겠네‥레드벨벳 조이, 단발병 부르는 비주얼 영향에"
-        }
-      ]
-    },
-    {
-      "name": "원자력발전",
-      "stocks": [
-        {
-          "name": "강원에너지",
-          "display_name": "강원에너지",
-          "pct": 8.9,
-          "pct_val": 8.9,
-          "amt": 22825637,
-          "trading_val": "228256억",
-          "price": "8,320",
-          "volume": "2,653,710",
-          "change_pct": "+8.90%",
-          "is_limit_up": false,
-          "jsr_themes": [
-            "원자력발전",
-            "전기차",
-            "2차전지(장비)",
             "2차전지",
             "2차전지(소재/부품)",
-            "리튬"
+            "반도체 재료/부품",
+            "2차전지(나트륨이온)"
           ],
-          "primary_theme": "원자력발전",
-          "jsr_spike": "일부 리튬 및 원자력발전 테마 상승 속 급등",
-          "catalyst": "평산파트너스,  지분 17만 2476주 담보계약 연장 영향에",
-          "raw_headline": "평산파트너스, 강원에너지 지분 17만 2476주 담보계약 연장 - 데이터투자",
-          "theme": "원자력발전",
-          "reason": "평산파트너스,  지분 17만 2476주 담보계약 연장 영향에"
+          "primary_theme": "2차전지",
+          "jsr_spike": "배터리 3사, ESS 중심으로 사업구조 전환 하반기 실적반등 전망 등에 2차전지 테마 상승 속 급등",
+          "catalyst": "이은주 전무 2000주 장내매수 영향에",
+          "raw_headline": "메가터치 이은주 전무 2000주 장내매수 - 비건뉴스",
+          "theme": "2차전지",
+          "reason": "이은주 전무 2000주 장내매수 영향에"
+        }
+      ]
+    },
+    {
+      "name": "PCB(FPCB 등)",
+      "stocks": [
+        {
+          "name": "타이거일렉",
+          "display_name": "타이거일렉",
+          "pct": 18.34,
+          "pct_val": 18.34,
+          "amt": 8140553,
+          "trading_val": "81405억",
+          "price": "107,100",
+          "volume": "80,325",
+          "change_pct": "+18.34%",
+          "is_limit_up": false,
+          "jsr_themes": [
+            "PCB(FPCB 등)",
+            "반도체 재료/부품"
+          ],
+          "primary_theme": "PCB(FPCB 등)",
+          "jsr_spike": "필라델피아 반도체지수 상승 영향 및 반도체 수출 호조세 지속 등에 반도체 관련주 상승 속 급등",
+          "catalyst": "11월 11일 52주 신고가 종목 및 최근 동향 영향에",
+          "raw_headline": "[표]11월 11일 52주 신고가 종목 및 최근 동향 - 뉴스핌",
+          "theme": "PCB(FPCB 등)",
+          "reason": "11월 11일 52주 신고가 종목 및 최근 동향 영향에"
+        }
+      ]
+    },
+    {
+      "name": "밸류업(25년 기업가치 제고계획 발표)",
+      "stocks": [
+        {
+          "name": "코미코",
+          "display_name": "코미코",
+          "pct": 18.32,
+          "pct_val": 18.32,
+          "amt": 8718828,
+          "trading_val": "87188억",
+          "price": "20,800",
+          "volume": "437,794",
+          "change_pct": "+18.32%",
+          "is_limit_up": false,
+          "jsr_themes": [
+            "밸류업(25년 기업가치 제고계획 발표)",
+            "코리아 밸류업 지수(Korea Value-up Index)",
+            "태양광에너지",
+            "반도체 장비"
+          ],
+          "primary_theme": "밸류업(25년 기업가치 제고계획 발표)",
+          "jsr_spike": "반도체 관련주 상승 속 삼성 파운드리 회복의 최대 수혜주 분석 모멘텀 지속 등에 급등",
+          "catalyst": "반도체 관련주 상승 속 삼성 파운드리 회복의 최대 수혜주 분석 모멘텀 지속 등에 급등에",
+          "raw_headline": "",
+          "theme": "밸류업(25년 기업가치 제고계획 발표)",
+          "reason": "반도체 관련주 상승 속 삼성 파운드리 회복의 최대 수혜주 분석 모멘텀 지속 등에 급등에"
+        },
+        {
+          "name": "피에스케이홀딩스",
+          "display_name": "피에스케이홀딩스",
+          "pct": 17.75,
+          "pct_val": 17.75,
+          "amt": 40362320,
+          "trading_val": "403623억",
+          "price": "151,900",
+          "volume": "279,071",
+          "change_pct": "+17.75%",
+          "is_limit_up": false,
+          "jsr_themes": [
+            "밸류업(25년 기업가치 제고계획 발표)",
+            "코리아 밸류업 지수(Korea Value-up Index)",
+            "반도체 장비",
+            "HBM(고대역폭메모리)"
+          ],
+          "primary_theme": "밸류업(25년 기업가치 제고계획 발표)",
+          "jsr_spike": "중동전쟁 종전 기대감 속 필라델피아 반도체지수(+6.24%) 폭등, 3월 반도체 수출 호조 등에 반도체 관련주 상승 속 급등",
+          "catalyst": "TSMC 설비투자 확대 수혜…  내년 5000억 매출 전망 영향에",
+          "raw_headline": "TSMC 설비투자 확대 수혜… 피에스케이홀딩스 내년 5000억 매출 전망 - 주간동아",
+          "theme": "밸류업(25년 기업가치 제고계획 발표)",
+          "reason": "TSMC 설비투자 확대 수혜…  내년 5000억 매출 전망 영향에"
         }
       ]
     },
@@ -421,810 +608,663 @@
       "name": "유전자 치료제/분석",
       "stocks": [
         {
-          "name": "신테카바이오",
-          "display_name": "신테카바이오",
-          "pct": 8.49,
-          "pct_val": 8.49,
-          "amt": 141032,
-          "trading_val": "1410억",
-          "price": "1,048",
-          "volume": "143,781",
-          "change_pct": "+8.49%",
+          "name": "지니너스",
+          "display_name": "지니너스",
+          "pct": 17.44,
+          "pct_val": 17.44,
+          "amt": 3366021,
+          "trading_val": "33660억",
+          "price": "1,562",
+          "volume": "2,207,141",
+          "change_pct": "+17.44%",
           "is_limit_up": false,
           "jsr_themes": [
-            "유전자 치료제/분석",
-            "의료AI"
+            "유전자 치료제/분석"
           ],
           "primary_theme": "유전자 치료제/분석",
-          "jsr_spike": "칸젠과 피부·모발 질환 치료제 기술이전 계약 체결에 강세",
-          "catalyst": "AI 신약 개발 기대에 기대감에",
-          "raw_headline": "AI 신약 개발 기대에 신테카바이오 급등…바이오주는 종목별 차별화 - 핀포인트뉴스",
+          "jsr_spike": "'AACR'서 자사 플랫폼 활용한 대장암 미세환경 규명 소식에 상한가",
+          "catalyst": "앤트로픽도 뛰어든 'AI+실험실 영향에",
+          "raw_headline": "앤트로픽도 뛰어든 'AI+실험실'…지니너스 도전 - 비즈워치",
           "theme": "유전자 치료제/분석",
-          "reason": "AI 신약 개발 기대에 기대감에"
+          "reason": "앤트로픽도 뛰어든 'AI+실험실 영향에"
         }
       ]
     },
     {
-      "name": "메타버스(Metaverse)",
+      "name": "CXL(컴퓨트익스프레스링크)",
       "stocks": [
         {
-          "name": "엘엠에스",
-          "display_name": "엘엠에스",
-          "pct": 8.15,
-          "pct_val": 8.15,
-          "amt": 12992,
-          "trading_val": "129억",
-          "price": "5,240",
-          "volume": "2,804",
-          "change_pct": "+8.15%",
+          "name": "오킨스전자",
+          "display_name": "오킨스전자",
+          "pct": 17.41,
+          "pct_val": 17.41,
+          "amt": 15303620,
+          "trading_val": "153036억",
+          "price": "22,250",
+          "volume": "715,701",
+          "change_pct": "+17.41%",
           "is_limit_up": false,
           "jsr_themes": [
-            "메타버스(Metaverse)",
-            "그래핀",
-            "스마트폰"
+            "CXL(컴퓨트익스프레스링크)",
+            "반도체 재료/부품"
           ],
-          "primary_theme": "메타버스(Metaverse)",
-          "jsr_spike": "바이오 싱글유스백 'BioCELVAS', 국내 최초로 美 FDA 등록 소식에 급등",
-          "catalyst": "바이오 싱글유스백 'BioCELVAS', 국내 최초로 美 FDA 등록 소식에 급등에",
-          "raw_headline": "",
-          "theme": "메타버스(Metaverse)",
-          "reason": "바이오 싱글유스백 'BioCELVAS', 국내 최초로 美 FDA 등록 소식에 급등에"
+          "primary_theme": "CXL(컴퓨트익스프레스링크)",
+          "jsr_spike": "美 필라델피아 반도체(+0.97%) 지수 상승 영향 및 일론 머스크 테라팹 팀, 세계 주요 반도체 장비 업체 장비 공급 가능성 타진 소식 등에 반도체 관련주 상승 속 급등",
+          "catalyst": "특징주, -CXL 테마 영향에",
+          "raw_headline": "특징주, 오킨스전자-CXL(컴퓨트익스프레스링크) 테마 상승세에 6.86% ↑ - 매일경제 마켓",
+          "theme": "CXL(컴퓨트익스프레스링크)",
+          "reason": "특징주, -CXL 테마 영향에"
         }
       ]
     },
     {
-      "name": "지주사",
+      "name": "플렉서블 디스플레이",
       "stocks": [
         {
-          "name": "골프존홀딩스",
-          "display_name": "골프존홀딩스",
-          "pct": 7.85,
-          "pct_val": 7.85,
-          "amt": 1019998,
-          "trading_val": "10199억",
-          "price": "8,790",
-          "volume": "117,883",
-          "change_pct": "+7.85%",
+          "name": "주성엔지니어링",
+          "display_name": "주성엔지니어링",
+          "pct": 17.14,
+          "pct_val": 17.14,
+          "amt": 359146738,
+          "trading_val": "3591467억",
+          "price": "178,400",
+          "volume": "2,120,870",
+          "change_pct": "+17.14%",
           "is_limit_up": false,
           "jsr_themes": [
-            "지주사",
-            "골프"
+            "플렉서블 디스플레이",
+            "코리아 밸류업 지수(Korea Value-up Index)",
+            "OLED(유기 발광 다이오드)",
+            "태양광에너지",
+            "반도체 장비",
+            "LED장비"
           ],
-          "primary_theme": "지주사",
-          "jsr_spike": "100억원 규모 자사주 취득 신탁계약 체결 및 현금배당(시가배당율 6.9%) 결정 등에 급등",
-          "catalyst": "골프존카운티 사려다 내 지분까지 팔 판…, MBK에 반발 영향에",
-          "raw_headline": "[쩐의흔적] 골프존카운티 사려다 내 지분까지 팔 판…골프존홀딩스, MBK에 반발 - 더퍼블릭",
-          "theme": "지주사",
-          "reason": "골프존카운티 사려다 내 지분까지 팔 판…, MBK에 반발 영향에"
-        },
-        {
-          "name": "원익홀딩스",
-          "display_name": "원익홀딩스",
-          "pct": 6.86,
-          "pct_val": 6.86,
-          "amt": 132123497,
-          "trading_val": "1321234억",
-          "price": "28,800",
-          "volume": "4,866,791",
-          "change_pct": "+6.86%",
-          "is_limit_up": false,
-          "jsr_themes": [
-            "지주사",
-            "로봇(산업용/협동로봇 등)",
-            "반도체 장비"
-          ],
-          "primary_theme": "지주사",
-          "jsr_spike": "반도체 관련주 및 로봇(산업용/협동로봇 등) 테마 상승 속 급등",
-          "catalyst": "코스닥 '요동'...엘리스··현대바이오·루닛은 영향에",
-          "raw_headline": "코스닥 '요동'...엘리스·원익홀딩스·현대바이오·루닛은 '급등' - 초이스경제",
-          "theme": "지주사",
-          "reason": "코스닥 '요동'...엘리스··현대바이오·루닛은 영향에"
-        }
-      ]
-    },
-    {
-      "name": "농업",
-      "stocks": [
-        {
-          "name": "그린플러스",
-          "display_name": "그린플러스",
-          "pct": 7.74,
-          "pct_val": 7.74,
-          "amt": 1261839,
-          "trading_val": "12618억",
-          "price": "3,965",
-          "volume": "322,560",
-          "change_pct": "+7.74%",
-          "is_limit_up": false,
-          "jsr_themes": [
-            "농업",
-            "비철금속"
-          ],
-          "primary_theme": "농업",
-          "jsr_spike": "29억원 규모 청년 스마트팜 신축 온실 수주 소식에 상승",
-          "catalyst": "29억원 규모 청년 스마트팜 신축 온실 수주 소식에 상승에",
-          "raw_headline": "",
-          "theme": "농업",
-          "reason": "29억원 규모 청년 스마트팜 신축 온실 수주 소식에 상승에"
-        }
-      ]
-    },
-    {
-      "name": "비철금속",
-      "stocks": [
-        {
-          "name": "이렘",
-          "display_name": "이렘",
-          "pct": 7.65,
-          "pct_val": 7.65,
-          "amt": 118844,
-          "trading_val": "1188억",
-          "price": "2,180",
-          "volume": "57,085",
-          "change_pct": "+7.65%",
-          "is_limit_up": false,
-          "jsr_themes": [
-            "비철금속",
-            "강관업체(Steel pipe)"
-          ],
-          "primary_theme": "비철금속",
-          "jsr_spike": "불성실공시법인 지정예고 속 하락",
-          "catalyst": "STS 강관 제조 '', 3Q 별도 매출  감소 영향에",
-          "raw_headline": "STS 강관 제조 '이렘', 3Q 별도 매출 26.6% 감소 - 스틸데일리",
-          "theme": "비철금속",
-          "reason": "STS 강관 제조 '', 3Q 별도 매출  감소 영향에"
-        }
-      ]
-    },
-    {
-      "name": "음식료업종",
-      "stocks": [
-        {
-          "name": "한국맥널티",
-          "display_name": "한국맥널티",
-          "pct": 7.5,
-          "pct_val": 7.5,
-          "amt": 102082,
-          "trading_val": "1020억",
-          "price": "1,978",
-          "volume": "54,550",
-          "change_pct": "+7.50%",
-          "is_limit_up": false,
-          "jsr_themes": [
-            "음식료업종"
-          ],
-          "primary_theme": "음식료업종",
-          "jsr_spike": "음식료업종 테마 상승, 임신성 당뇨 검사제 '글루오렌지' 품절 소식 속 '글루오렌지'를 생산하는 맥널티제약 지분 66.97%를 보유한 사실이 부각되며 급등",
-          "catalyst": "음식료업종 테마 상승, 임신성 당뇨 검사제 '글루오렌지' 품절 소식 속 '글루오렌지'를 생산하는 맥널티제약 지분 66.97%를 보유한 사실이 부각되며 급등에",
-          "raw_headline": "",
-          "theme": "음식료업종",
-          "reason": "음식료업종 테마 상승, 임신성 당뇨 검사제 '글루오렌지' 품절 소식 속 '글루오렌지'를 생산하는 맥널티제약 지분 66.97%를 보유한 사실이 부각되며 급등에"
-        },
-        {
-          "name": "휴럼",
-          "display_name": "휴럼",
-          "pct": 7.16,
-          "pct_val": 7.16,
-          "amt": 35983,
-          "trading_val": "359억",
-          "price": "2,245",
-          "volume": "16,767",
-          "change_pct": "+7.16%",
-          "is_limit_up": false,
-          "jsr_themes": [
-            "음식료업종",
-            "건강기능식품"
-          ],
-          "primary_theme": "음식료업종",
-          "jsr_spike": "금융당국, 동전주 상장폐지 요건 신설 이슈 지속 속 급등",
-          "catalyst": "금융당국, 동전주 상장폐지 요건 신설 이슈 지속 속 급등에",
-          "raw_headline": "",
-          "theme": "음식료업종",
-          "reason": "금융당국, 동전주 상장폐지 요건 신설 이슈 지속 속 급등에"
-        }
-      ]
-    },
-    {
-      "name": "광고",
-      "stocks": [
-        {
-          "name": "아티스트컴퍼니",
-          "display_name": "아티스트컴퍼니",
-          "pct": 7.07,
-          "pct_val": 7.07,
-          "amt": 357452,
-          "trading_val": "3574억",
-          "price": "3,255",
-          "volume": "112,113",
-          "change_pct": "+7.07%",
-          "is_limit_up": false,
-          "jsr_themes": [
-            "광고",
-            "지능형로봇/인공지능(AI)",
-            "쿠팡(coupang)"
-          ],
-          "primary_theme": "광고",
-          "jsr_spike": "한동훈 전 국민의힘 대표, 부산 북구갑 무소속 출마설에 정치/인맥(한동훈) 테마 상승 속 급등",
-          "catalyst": "혁오, 27년 월드 투어 'HYUKOH  TOUR' 개최 영향에",
-          "raw_headline": "혁오, 27년 월드 투어 'HYUKOH [33] TOUR' 개최 - 내외뉴스통신",
-          "theme": "광고",
-          "reason": "혁오, 27년 월드 투어 'HYUKOH  TOUR' 개최 영향에"
-        }
-      ]
-    },
-    {
-      "name": "조선기자재",
-      "stocks": [
-        {
-          "name": "KS인더스트리",
-          "display_name": "KS인더스트리",
-          "pct": 6.59,
-          "pct_val": 6.59,
-          "amt": 67071,
-          "trading_val": "670억",
-          "price": "954",
-          "volume": "68,780",
-          "change_pct": "+6.59%",
-          "is_limit_up": false,
-          "jsr_themes": [
-            "조선기자재"
-          ],
-          "primary_theme": "조선기자재",
-          "jsr_spike": "최대주주 변경 모멘텀 지속 속 급등",
-          "catalyst": "최대주주 변경 모멘텀 지속 속 급등에",
-          "raw_headline": "",
-          "theme": "조선기자재",
-          "reason": "최대주주 변경 모멘텀 지속 속 급등에"
+          "primary_theme": "플렉서블 디스플레이",
+          "jsr_spike": "반도체 관련주 상승 속 中 태양광 장비 기술 수출 제한 움직임에 따른 반사 수혜 기대감 등에 상한가",
+          "catalyst": "기관 및 외국인 수급 집중 속",
+          "raw_headline": "[장중수급포착] 주성엔지니어링, 외국인/기관 동시 순매수… 주가 +14.38% - 뉴스핌",
+          "theme": "플렉서블 디스플레이",
+          "reason": "기관 및 외국인 수급 집중 속"
         }
       ]
     }
   ],
   "all_top_stocks": [
     {
-      "name": "엘리스",
-      "display_name": "엘리스",
-      "pct": 20.95,
-      "pct_val": 20.95,
-      "amt": 147712117,
-      "trading_val": "1477121억",
-      "price": "71,000",
-      "volume": "2,171,083",
-      "change_pct": "+20.95%",
+      "name": "샘씨엔에스",
+      "display_name": "샘씨엔에스",
+      "pct": 26.11,
+      "pct_val": 26.11,
+      "amt": 34405057,
+      "trading_val": "344050억",
+      "price": "15,890",
+      "volume": "2,276,056",
+      "change_pct": "+26.11%",
       "is_limit_up": false,
       "jsr_themes": [
-        "클라우드 컴퓨팅",
-        "2026 하반기 신규상장",
-        "지능형로봇/인공지능(AI)"
+        "반도체 재료/부품"
       ],
-      "primary_theme": "클라우드 컴퓨팅",
-      "jsr_spike": "",
-      "catalyst": "미 언론 \"젠슨 황 측근 ' 황'은 중국 간첩 영향에",
-      "raw_headline": "미 언론 \"젠슨 황 측근 '엘리스 황'은 중국 간첩\" - 동행미디어 시대",
-      "theme": "클라우드 컴퓨팅",
-      "reason": "미 언론 \"젠슨 황 측근 ' 황'은 중국 간첩 영향에"
+      "primary_theme": "반도체 재료/부품",
+      "jsr_spike": "1분기 최대 실적 달성 전망 등에 소폭 상승",
+      "catalyst": "오전 이슈  : 심텍홀딩스, 아스플로, , 테크윙, 이수페타시스 영향에",
+      "raw_headline": "오전 이슈 [반도체] : 심텍홀딩스, 아스플로, 샘씨엔에스, 테크윙, 이수페타시스 - 파이낸셜뉴스",
+      "theme": "반도체 재료/부품",
+      "reason": "오전 이슈  : 심텍홀딩스, 아스플로, , 테크윙, 이수페타시스 영향에"
     },
     {
-      "name": "덕성",
-      "display_name": "덕성",
-      "pct": 19.79,
-      "pct_val": 19.79,
-      "amt": 21977,
-      "trading_val": "219억",
-      "price": "3,420",
-      "volume": "6,210,534",
-      "change_pct": "+19.79%",
+      "name": "코리아써키트",
+      "display_name": "코리아써키트",
+      "pct": 25.58,
+      "pct_val": 25.58,
+      "amt": 118706,
+      "trading_val": "1187억",
+      "price": "86,400",
+      "volume": "1,466,222",
+      "change_pct": "+25.58%",
       "is_limit_up": false,
       "jsr_themes": [
-        "초전도체"
+        "반도체 기판(FC-BGA/PCB/MLB 등)",
+        "갤럭시 부품주",
+        "CXL(컴퓨트익스프레스링크)",
+        "PCB(FPCB 등)",
+        "소캠(SOCAMM)"
       ],
-      "primary_theme": "초전도체",
-      "jsr_spike": "헌법재판소, 오는 4일 오전 11시 尹 대통령 탄핵심판 선고 소식 등에 정치/인맥(한동훈) 및 정치/인맥(윤석열) 테마 상승 속 급등",
-      "catalyst": "여대-서울여대-성신여대, AI 교육 협력 위해 네이버와 MOU 영향에",
-      "raw_headline": "덕성여대-서울여대-성신여대, AI 교육 협력 위해 네이버와 MOU - 매일일보",
-      "theme": "초전도체",
-      "reason": "여대-서울여대-성신여대, AI 교육 협력 위해 네이버와 MOU 영향에"
+      "primary_theme": "반도체 기판(FC-BGA/PCB/MLB 등)",
+      "jsr_spike": "미·이란, 2차 대면협상 기대감 속 필라델피아 반도체지수(+1.68%) 강세 영향 등에 반도체 관련주 상승 속 급등",
+      "catalyst": "반도체 기판주 동반 영향에",
+      "raw_headline": "코리아써키트 10%대 급등…반도체 기판주 동반 상승 - 머니투데이 - 머니투데이",
+      "theme": "반도체 기판(FC-BGA/PCB/MLB 등)",
+      "reason": "반도체 기판주 동반 영향에"
     },
     {
-      "name": "계양전기우",
-      "display_name": "계양전기우(우)",
-      "pct": 18.46,
-      "pct_val": 18.46,
-      "amt": 381,
-      "trading_val": "3억",
-      "price": "4,395",
-      "volume": "82,993",
-      "change_pct": "+18.46%",
-      "is_limit_up": false,
-      "jsr_themes": [],
-      "primary_theme": "",
-      "jsr_spike": "",
-      "catalyst": "증안펀드’ 목소리 커지는데… 내년 코스피 ‘8천피’ 간다? 영향에",
-      "raw_headline": "‘증안펀드’ 목소리 커지는데… 내년 코스피 ‘8천피’ 간다? [뉴스톡 웰스톡] - 뉴스웰",
-      "theme": "개별 특징주",
-      "reason": "증안펀드’ 목소리 커지는데… 내년 코스피 ‘8천피’ 간다? 영향에"
-    },
-    {
-      "name": "혜인",
-      "display_name": "혜인",
-      "pct": 15.18,
-      "pct_val": 15.18,
-      "amt": 14962,
-      "trading_val": "149억",
-      "price": "8,120",
-      "volume": "1,903,717",
-      "change_pct": "+15.18%",
+      "name": "티에스이",
+      "display_name": "티에스이",
+      "pct": 23.24,
+      "pct_val": 23.24,
+      "amt": 50138932,
+      "trading_val": "501389억",
+      "price": "227,000",
+      "volume": "231,475",
+      "change_pct": "+23.24%",
       "is_limit_up": false,
       "jsr_themes": [
-        "전후 재건(우크라/중동 전쟁 등)",
-        "건설기계",
-        "환율하락 수혜",
-        "방위산업/전쟁 및 테러",
-        "태양광에너지"
+        "OLED(유기 발광 다이오드)",
+        "반도체 장비",
+        "LED장비"
       ],
-      "primary_theme": "전후 재건(우크라/중동 전쟁 등)",
-      "jsr_spike": "방위산업/전쟁 및 테러 테마 상승 및 캐터필러, 마이크로소프트-엔비디아 참여 대규모 AI 팩토리 프로젝트 관련 가스발전기 공급 계약 체결 소식 속 캐터필러 국내 공식 딜러로 부각되며 상한가",
-      "catalyst": "용·기본소득당, 성폭력 부실 수사 바로잡을 것 안산성폭력사건 유가족·성폭력상담소 간담회 개최 영향에",
-      "raw_headline": "용혜인·기본소득당, 성폭력 부실 수사 바로잡을 것 안산성폭력사건 유가족·성폭력상담소 간담회 개최 - 오토투데이",
-      "theme": "전후 재건(우크라/중동 전쟁 등)",
-      "reason": "용·기본소득당, 성폭력 부실 수사 바로잡을 것 안산성폭력사건 유가족·성폭력상담소 간담회 개최 영향에"
+      "primary_theme": "OLED(유기 발광 다이오드)",
+      "jsr_spike": "미·이란, 2차 대면협상 기대감 속 필라델피아 반도체지수(+1.68%) 강세 영향 등에 반도체 관련주 상승 속 급등",
+      "catalyst": "반도체 후공정 장비주 동반 영향에",
+      "raw_headline": "[특징주]티에스이, 반도체 후공정 장비주 동반 강세에 20.24% 뛰어…프로브카드 성장 기대 - 남도일보",
+      "theme": "OLED(유기 발광 다이오드)",
+      "reason": "반도체 후공정 장비주 동반 영향에"
     },
     {
-      "name": "페니트리움바이오",
-      "display_name": "페니트리움바이오",
-      "pct": 14.92,
-      "pct_val": 14.92,
-      "amt": 9534191,
-      "trading_val": "95341억",
-      "price": "6,470",
-      "volume": "1,572,084",
-      "change_pct": "+14.92%",
-      "is_limit_up": false,
-      "jsr_themes": [],
-      "primary_theme": "",
-      "jsr_spike": "",
-      "catalyst": "가짜내성' 항암제 美 임상 기대감에",
-      "raw_headline": "'가짜내성' 항암제 美 임상 직행…유효성·자금 두고 시험대 - 바이오북미디어",
-      "theme": "바이오 / 제약",
-      "reason": "가짜내성' 항암제 美 임상 기대감에"
-    },
-    {
-      "name": "홈캐스트",
-      "display_name": "홈캐스트",
-      "pct": 14.21,
-      "pct_val": 14.21,
-      "amt": 454087,
-      "trading_val": "4540억",
-      "price": "1,768",
-      "volume": "269,525",
-      "change_pct": "+14.21%",
-      "is_limit_up": false,
-      "jsr_themes": [],
-      "primary_theme": "",
-      "jsr_spike": "",
-      "catalyst": "소수계좌 거래집중으로 투자주의종목 지정 영향에",
-      "raw_headline": "홈캐스트, 소수계좌 거래집중으로 투자주의종목 지정 - 톱스타뉴스",
-      "theme": "개별 특징주",
-      "reason": "소수계좌 거래집중으로 투자주의종목 지정 영향에"
-    },
-    {
-      "name": "지엔씨에너지",
-      "display_name": "지엔씨에너지",
-      "pct": 13.16,
-      "pct_val": 13.16,
-      "amt": 48923721,
-      "trading_val": "489237억",
-      "price": "35,250",
-      "volume": "1,413,523",
-      "change_pct": "+13.16%",
+      "name": "아스플로",
+      "display_name": "아스플로",
+      "pct": 22.4,
+      "pct_val": 22.4,
+      "amt": 10823844,
+      "trading_val": "108238억",
+      "price": "33,600",
+      "volume": "336,924",
+      "change_pct": "+22.40%",
       "is_limit_up": false,
       "jsr_themes": [
-        "남북경협",
-        "전력설비"
-      ],
-      "primary_theme": "남북경협",
-      "jsr_spike": "AI 데이터센터 개발에 따른 수익성 개선 기대감 등에 급등",
-      "catalyst": "JP모건 시큐리티즈,   보유 보고 영향에",
-      "raw_headline": "JP모건 시큐리티즈, 지엔씨에너지 5.07% 보유 보고 - 비건뉴스",
-      "theme": "남북경협",
-      "reason": "JP모건 시큐리티즈,   보유 보고 영향에"
-    },
-    {
-      "name": "NHN",
-      "display_name": "NHN",
-      "pct": 12.89,
-      "pct_val": 12.89,
-      "amt": 46900,
-      "trading_val": "469억",
-      "price": "57,800",
-      "volume": "781,709",
-      "change_pct": "+12.89%",
-      "is_limit_up": false,
-      "jsr_themes": [
-        "재택근무/스마트워크",
-        "모바일게임(스마트폰)",
-        "게임",
-        "전자결제(전자화폐)",
-        "웹툰"
-      ],
-      "primary_theme": "재택근무/스마트워크",
-      "jsr_spike": "클라우드·게임 중심 성장 및 웹보드 규제 완화 수혜 기대감 지속에 급등",
-      "catalyst": "삼성에스디에스, ' 명예의 전당 갈 종목은? - 머니투데이 영향에",
-      "raw_headline": "[여의도 투자본부 1부] '삼성에스디에스, NHN' 명예의 전당 갈 종목은? - 머니투데이 - 머니투데이",
-      "theme": "재택근무/스마트워크",
-      "reason": "삼성에스디에스, ' 명예의 전당 갈 종목은? - 머니투데이 영향에"
-    },
-    {
-      "name": "KTcs",
-      "display_name": "KTcs",
-      "pct": 12.87,
-      "pct_val": 12.87,
-      "amt": 15782,
-      "trading_val": "157억",
-      "price": "2,280",
-      "volume": "7,021,846",
-      "change_pct": "+12.87%",
-      "is_limit_up": false,
-      "jsr_themes": [],
-      "primary_theme": "",
-      "jsr_spike": "",
-      "catalyst": "자사주  전량 소각 영향에",
-      "raw_headline": "KTcs, 자사주 8.37% 전량 소각…순이익 40% 주주환원 - 뉴스핌",
-      "theme": "무상증자 / 주주환원",
-      "reason": "자사주  전량 소각 영향에"
-    },
-    {
-      "name": "아리바이오랩",
-      "display_name": "아리바이오랩",
-      "pct": 11.82,
-      "pct_val": 11.82,
-      "amt": 16346717,
-      "trading_val": "163467억",
-      "price": "4,305",
-      "volume": "3,786,325",
-      "change_pct": "+11.82%",
-      "is_limit_up": false,
-      "jsr_themes": [
-        "백신/진단시약/방역(신종플루, AI 등)",
-        "코로나19(진단/치료제/백신 개발 등)",
-        "코로나19(치료제/백신 개발 등)"
-      ],
-      "primary_theme": "백신/진단시약/방역(신종플루, AI 등)",
-      "jsr_spike": "소룩스, 동사 인수로 조명·바이오 동반 성장 본격화 소식에 상한가",
-      "catalyst": "치매 예방부터 치료·관리까지”…아리바이오그룹, 통합 비전 선포 영향에",
-      "raw_headline": "“치매 예방부터 치료·관리까지”…아리바이오그룹, 통합 비전 선포 - 쿠키뉴스",
-      "theme": "백신/진단시약/방역(신종플루, AI 등)",
-      "reason": "치매 예방부터 치료·관리까지”…아리바이오그룹, 통합 비전 선포 영향에"
-    },
-    {
-      "name": "딜리셔스",
-      "display_name": "딜리셔스",
-      "pct": 10.86,
-      "pct_val": 10.86,
-      "amt": 1247883,
-      "trading_val": "12478억",
-      "price": "1,980",
-      "volume": "650,709",
-      "change_pct": "+10.86%",
-      "is_limit_up": false,
-      "jsr_themes": [
-        "2026 하반기 신규상장",
-        "패션/의류"
-      ],
-      "primary_theme": "2026 하반기 신규상장",
-      "jsr_spike": "",
-      "catalyst": "임시주총서 결손금 보전 등 6개 안건 다룬다 영향에",
-      "raw_headline": "딜리셔스, 임시주총서 결손금 보전 등 6개 안건 다룬다 - 비건뉴스",
-      "theme": "2026 하반기 신규상장",
-      "reason": "임시주총서 결손금 보전 등 6개 안건 다룬다 영향에"
-    },
-    {
-      "name": "아티스트스튜디오",
-      "display_name": "아티스트스튜디오",
-      "pct": 10.65,
-      "pct_val": 10.65,
-      "amt": 253340,
-      "trading_val": "2533억",
-      "price": "3,430",
-      "volume": "77,495",
-      "change_pct": "+10.65%",
-      "is_limit_up": false,
-      "jsr_themes": [
-        "영상콘텐츠",
-        "엔터테인먼트"
-      ],
-      "primary_theme": "영상콘텐츠",
-      "jsr_spike": "아티스트그룹, '재벌집 막내아들' 시즌2 공동제작 기획·개발 착수 소식에 강세",
-      "catalyst": "최대주주 매일방송 측 주식등 보유 비율 p 증가 영향에",
-      "raw_headline": "아티스트스튜디오, 최대주주 매일방송 측 주식등 보유 비율 20.06%p 증가…공동보유 약정 종료 따른 신규보고 - 디지털투데이",
-      "theme": "영상콘텐츠",
-      "reason": "최대주주 매일방송 측 주식등 보유 비율 p 증가 영향에"
-    },
-    {
-      "name": "강원에너지",
-      "display_name": "강원에너지",
-      "pct": 8.9,
-      "pct_val": 8.9,
-      "amt": 22825637,
-      "trading_val": "228256억",
-      "price": "8,320",
-      "volume": "2,653,710",
-      "change_pct": "+8.90%",
-      "is_limit_up": false,
-      "jsr_themes": [
-        "원자력발전",
-        "전기차",
-        "2차전지(장비)",
-        "2차전지",
-        "2차전지(소재/부품)",
-        "리튬"
-      ],
-      "primary_theme": "원자력발전",
-      "jsr_spike": "일부 리튬 및 원자력발전 테마 상승 속 급등",
-      "catalyst": "평산파트너스,  지분 17만 2476주 담보계약 연장 영향에",
-      "raw_headline": "평산파트너스, 강원에너지 지분 17만 2476주 담보계약 연장 - 데이터투자",
-      "theme": "원자력발전",
-      "reason": "평산파트너스,  지분 17만 2476주 담보계약 연장 영향에"
-    },
-    {
-      "name": "신테카바이오",
-      "display_name": "신테카바이오",
-      "pct": 8.49,
-      "pct_val": 8.49,
-      "amt": 141032,
-      "trading_val": "1410억",
-      "price": "1,048",
-      "volume": "143,781",
-      "change_pct": "+8.49%",
-      "is_limit_up": false,
-      "jsr_themes": [
-        "유전자 치료제/분석",
-        "의료AI"
-      ],
-      "primary_theme": "유전자 치료제/분석",
-      "jsr_spike": "칸젠과 피부·모발 질환 치료제 기술이전 계약 체결에 강세",
-      "catalyst": "AI 신약 개발 기대에 기대감에",
-      "raw_headline": "AI 신약 개발 기대에 신테카바이오 급등…바이오주는 종목별 차별화 - 핀포인트뉴스",
-      "theme": "유전자 치료제/분석",
-      "reason": "AI 신약 개발 기대에 기대감에"
-    },
-    {
-      "name": "엘엠에스",
-      "display_name": "엘엠에스",
-      "pct": 8.15,
-      "pct_val": 8.15,
-      "amt": 12992,
-      "trading_val": "129억",
-      "price": "5,240",
-      "volume": "2,804",
-      "change_pct": "+8.15%",
-      "is_limit_up": false,
-      "jsr_themes": [
-        "메타버스(Metaverse)",
-        "그래핀",
-        "스마트폰"
-      ],
-      "primary_theme": "메타버스(Metaverse)",
-      "jsr_spike": "바이오 싱글유스백 'BioCELVAS', 국내 최초로 美 FDA 등록 소식에 급등",
-      "catalyst": "바이오 싱글유스백 'BioCELVAS', 국내 최초로 美 FDA 등록 소식에 급등에",
-      "raw_headline": "",
-      "theme": "메타버스(Metaverse)",
-      "reason": "바이오 싱글유스백 'BioCELVAS', 국내 최초로 美 FDA 등록 소식에 급등에"
-    },
-    {
-      "name": "골프존홀딩스",
-      "display_name": "골프존홀딩스",
-      "pct": 7.85,
-      "pct_val": 7.85,
-      "amt": 1019998,
-      "trading_val": "10199억",
-      "price": "8,790",
-      "volume": "117,883",
-      "change_pct": "+7.85%",
-      "is_limit_up": false,
-      "jsr_themes": [
-        "지주사",
-        "골프"
-      ],
-      "primary_theme": "지주사",
-      "jsr_spike": "100억원 규모 자사주 취득 신탁계약 체결 및 현금배당(시가배당율 6.9%) 결정 등에 급등",
-      "catalyst": "골프존카운티 사려다 내 지분까지 팔 판…, MBK에 반발 영향에",
-      "raw_headline": "[쩐의흔적] 골프존카운티 사려다 내 지분까지 팔 판…골프존홀딩스, MBK에 반발 - 더퍼블릭",
-      "theme": "지주사",
-      "reason": "골프존카운티 사려다 내 지분까지 팔 판…, MBK에 반발 영향에"
-    },
-    {
-      "name": "그린플러스",
-      "display_name": "그린플러스",
-      "pct": 7.74,
-      "pct_val": 7.74,
-      "amt": 1261839,
-      "trading_val": "12618억",
-      "price": "3,965",
-      "volume": "322,560",
-      "change_pct": "+7.74%",
-      "is_limit_up": false,
-      "jsr_themes": [
-        "농업",
-        "비철금속"
-      ],
-      "primary_theme": "농업",
-      "jsr_spike": "29억원 규모 청년 스마트팜 신축 온실 수주 소식에 상승",
-      "catalyst": "29억원 규모 청년 스마트팜 신축 온실 수주 소식에 상승에",
-      "raw_headline": "",
-      "theme": "농업",
-      "reason": "29억원 규모 청년 스마트팜 신축 온실 수주 소식에 상승에"
-    },
-    {
-      "name": "이렘",
-      "display_name": "이렘",
-      "pct": 7.65,
-      "pct_val": 7.65,
-      "amt": 118844,
-      "trading_val": "1188억",
-      "price": "2,180",
-      "volume": "57,085",
-      "change_pct": "+7.65%",
-      "is_limit_up": false,
-      "jsr_themes": [
-        "비철금속",
-        "강관업체(Steel pipe)"
-      ],
-      "primary_theme": "비철금속",
-      "jsr_spike": "불성실공시법인 지정예고 속 하락",
-      "catalyst": "STS 강관 제조 '', 3Q 별도 매출  감소 영향에",
-      "raw_headline": "STS 강관 제조 '이렘', 3Q 별도 매출 26.6% 감소 - 스틸데일리",
-      "theme": "비철금속",
-      "reason": "STS 강관 제조 '', 3Q 별도 매출  감소 영향에"
-    },
-    {
-      "name": "한국맥널티",
-      "display_name": "한국맥널티",
-      "pct": 7.5,
-      "pct_val": 7.5,
-      "amt": 102082,
-      "trading_val": "1020억",
-      "price": "1,978",
-      "volume": "54,550",
-      "change_pct": "+7.50%",
-      "is_limit_up": false,
-      "jsr_themes": [
-        "음식료업종"
-      ],
-      "primary_theme": "음식료업종",
-      "jsr_spike": "음식료업종 테마 상승, 임신성 당뇨 검사제 '글루오렌지' 품절 소식 속 '글루오렌지'를 생산하는 맥널티제약 지분 66.97%를 보유한 사실이 부각되며 급등",
-      "catalyst": "음식료업종 테마 상승, 임신성 당뇨 검사제 '글루오렌지' 품절 소식 속 '글루오렌지'를 생산하는 맥널티제약 지분 66.97%를 보유한 사실이 부각되며 급등에",
-      "raw_headline": "",
-      "theme": "음식료업종",
-      "reason": "음식료업종 테마 상승, 임신성 당뇨 검사제 '글루오렌지' 품절 소식 속 '글루오렌지'를 생산하는 맥널티제약 지분 66.97%를 보유한 사실이 부각되며 급등에"
-    },
-    {
-      "name": "휴럼",
-      "display_name": "휴럼",
-      "pct": 7.16,
-      "pct_val": 7.16,
-      "amt": 35983,
-      "trading_val": "359억",
-      "price": "2,245",
-      "volume": "16,767",
-      "change_pct": "+7.16%",
-      "is_limit_up": false,
-      "jsr_themes": [
-        "음식료업종",
-        "건강기능식품"
-      ],
-      "primary_theme": "음식료업종",
-      "jsr_spike": "금융당국, 동전주 상장폐지 요건 신설 이슈 지속 속 급등",
-      "catalyst": "금융당국, 동전주 상장폐지 요건 신설 이슈 지속 속 급등에",
-      "raw_headline": "",
-      "theme": "음식료업종",
-      "reason": "금융당국, 동전주 상장폐지 요건 신설 이슈 지속 속 급등에"
-    },
-    {
-      "name": "아티스트컴퍼니",
-      "display_name": "아티스트컴퍼니",
-      "pct": 7.07,
-      "pct_val": 7.07,
-      "amt": 357452,
-      "trading_val": "3574억",
-      "price": "3,255",
-      "volume": "112,113",
-      "change_pct": "+7.07%",
-      "is_limit_up": false,
-      "jsr_themes": [
-        "광고",
-        "지능형로봇/인공지능(AI)",
-        "쿠팡(coupang)"
-      ],
-      "primary_theme": "광고",
-      "jsr_spike": "한동훈 전 국민의힘 대표, 부산 북구갑 무소속 출마설에 정치/인맥(한동훈) 테마 상승 속 급등",
-      "catalyst": "혁오, 27년 월드 투어 'HYUKOH  TOUR' 개최 영향에",
-      "raw_headline": "혁오, 27년 월드 투어 'HYUKOH [33] TOUR' 개최 - 내외뉴스통신",
-      "theme": "광고",
-      "reason": "혁오, 27년 월드 투어 'HYUKOH  TOUR' 개최 영향에"
-    },
-    {
-      "name": "원익홀딩스",
-      "display_name": "원익홀딩스",
-      "pct": 6.86,
-      "pct_val": 6.86,
-      "amt": 132123497,
-      "trading_val": "1321234억",
-      "price": "28,800",
-      "volume": "4,866,791",
-      "change_pct": "+6.86%",
-      "is_limit_up": false,
-      "jsr_themes": [
-        "지주사",
-        "로봇(산업용/협동로봇 등)",
         "반도체 장비"
       ],
-      "primary_theme": "지주사",
-      "jsr_spike": "반도체 관련주 및 로봇(산업용/협동로봇 등) 테마 상승 속 급등",
-      "catalyst": "코스닥 '요동'...엘리스··현대바이오·루닛은 영향에",
-      "raw_headline": "코스닥 '요동'...엘리스·원익홀딩스·현대바이오·루닛은 '급등' - 초이스경제",
-      "theme": "지주사",
-      "reason": "코스닥 '요동'...엘리스··현대바이오·루닛은 영향에"
+      "primary_theme": "반도체 장비",
+      "jsr_spike": "삼성전자-SK하이닉스 설비투자 확대 기대감에 따른 국내 반도체 소부장 수혜 전망 등에 반도체 관련주 상승 속 급등",
+      "catalyst": "오전 이슈  : 심텍홀딩스, , 샘씨엔에스, 테크윙, 이수페타시스 영향에",
+      "raw_headline": "오전 이슈 [반도체] : 심텍홀딩스, 아스플로, 샘씨엔에스, 테크윙, 이수페타시스 - 파이낸셜뉴스",
+      "theme": "반도체 장비",
+      "reason": "오전 이슈  : 심텍홀딩스, , 샘씨엔에스, 테크윙, 이수페타시스 영향에"
     },
     {
-      "name": "디티앤씨알오",
-      "display_name": "디티앤씨알오",
-      "pct": 6.76,
-      "pct_val": 6.76,
-      "amt": 147166,
-      "trading_val": "1471억",
-      "price": "1,957",
-      "volume": "77,979",
-      "change_pct": "+6.76%",
+      "name": "에스티아이",
+      "display_name": "에스티아이",
+      "pct": 21.74,
+      "pct_val": 21.74,
+      "amt": 6905112,
+      "trading_val": "69051억",
+      "price": "24,300",
+      "volume": "298,360",
+      "change_pct": "+21.74%",
+      "is_limit_up": false,
+      "jsr_themes": [
+        "전력반도체",
+        "반도체 장비",
+        "3D 프린터",
+        "HBM(고대역폭메모리)"
+      ],
+      "primary_theme": "전력반도체",
+      "jsr_spike": "엔비디아 호실적 및 SK하이닉스, 21.6조원 규모 용인 반도체 클러스터 1기 Fab 투자 소식 등에 반도체 관련주 상승 속 급등",
+      "catalyst": "특징주, -반도체 장비 테마 영향에",
+      "raw_headline": "특징주, 에스티아이-반도체 장비 테마 상승세에 10.97% ↑ - 매일경제 마켓",
+      "theme": "전력반도체",
+      "reason": "특징주, -반도체 장비 테마 영향에"
+    },
+    {
+      "name": "테크윙",
+      "display_name": "테크윙",
+      "pct": 20.87,
+      "pct_val": 20.87,
+      "amt": 40396128,
+      "trading_val": "403961억",
+      "price": "38,800",
+      "volume": "1,079,794",
+      "change_pct": "+20.87%",
+      "is_limit_up": false,
+      "jsr_themes": [
+        "반도체 장비",
+        "시스템반도체",
+        "HBM(고대역폭메모리)"
+      ],
+      "primary_theme": "반도체 장비",
+      "jsr_spike": "삼성전자-SK하이닉스 설비투자 확대 기대감에 따른 국내 반도체 소부장 수혜 전망 등에 반도체 관련주 상승 속 급등",
+      "catalyst": "HBM 생산 경쟁 불붙었다… 한미반도체· 등 장비주 '환호성 영향에",
+      "raw_headline": "HBM 생산 경쟁 불붙었다… 한미반도체·테크윙 등 장비주 '환호성' - 핀포인트뉴스",
+      "theme": "반도체 장비",
+      "reason": "HBM 생산 경쟁 불붙었다… 한미반도체· 등 장비주 '환호성 영향에"
+    },
+    {
+      "name": "디아이",
+      "display_name": "디아이",
+      "pct": 20.11,
+      "pct_val": 20.11,
+      "amt": 45381,
+      "trading_val": "453억",
+      "price": "31,350",
+      "volume": "1,516,955",
+      "change_pct": "+20.11%",
+      "is_limit_up": false,
+      "jsr_themes": [
+        "반도체 장비",
+        "시스템반도체",
+        "HBM(고대역폭메모리)"
+      ],
+      "primary_theme": "반도체 장비",
+      "jsr_spike": "엔비디아 GTC 2026 기대감, 삼성전자·SK하이닉스 1분기 실적 컨센서스 상회 전망 등에 일부 반도체 관련주 상승 속 급등",
+      "catalyst": "건설, 분양 마친 시행사 3곳 흡수 영향에",
+      "raw_headline": "디아이건설, 분양 마친 시행사 3곳 흡수…자본잠식 계열사 채권도 떠안는다 - 위키리크스한국",
+      "theme": "반도체 장비",
+      "reason": "건설, 분양 마친 시행사 3곳 흡수 영향에"
+    },
+    {
+      "name": "삼현",
+      "display_name": "삼현",
+      "pct": 19.64,
+      "pct_val": 19.64,
+      "amt": 52247221,
+      "trading_val": "522472억",
+      "price": "43,250",
+      "volume": "1,227,393",
+      "change_pct": "+19.64%",
+      "is_limit_up": false,
+      "jsr_themes": [
+        "방위산업/전쟁 및 테러",
+        "자동차부품",
+        "자율주행차",
+        "로봇(산업용/협동로봇 등)",
+        "피지컬 AI/휴머노이드 로봇"
+      ],
+      "primary_theme": "방위산업/전쟁 및 테러",
+      "jsr_spike": "글로벌 로봇기업 'AiTEN Robotics'와 MOU 체결에 상승",
+      "catalyst": "기관 및 외국인 수급 집중 속",
+      "raw_headline": "삼현, 피지컬 AI 핵심 액추에이터 국책과제 주관기관 선정 - 매일경제 마켓",
+      "theme": "방위산업/전쟁 및 테러",
+      "reason": "기관 및 외국인 수급 집중 속"
+    },
+    {
+      "name": "디케이티",
+      "display_name": "디케이티",
+      "pct": 19.44,
+      "pct_val": 19.44,
+      "amt": 21730016,
+      "trading_val": "217300억",
+      "price": "27,950",
+      "volume": "818,344",
+      "change_pct": "+19.44%",
+      "is_limit_up": false,
+      "jsr_themes": [
+        "폴더블폰",
+        "스마트폰",
+        "전력저장장치(ESS)"
+      ],
+      "primary_theme": "폴더블폰",
+      "jsr_spike": "배터리 3사, ESS 중심으로 사업구조 전환 하반기 실적반등 전망 등에 전력저장장치(ESS) 테마 상승 속 급등",
+      "catalyst": "기관 및 외국인 수급 집중 속",
+      "raw_headline": "[장중수급포착] 디케이티, 외국인/기관 동시 순매수… 주가 +10.68% - 뉴스핌",
+      "theme": "폴더블폰",
+      "reason": "기관 및 외국인 수급 집중 속"
+    },
+    {
+      "name": "이수페타시스",
+      "display_name": "이수페타시스",
+      "pct": 19.36,
+      "pct_val": 19.36,
+      "amt": 106153,
+      "trading_val": "1061억",
+      "price": "82,000",
+      "volume": "1,338,207",
+      "change_pct": "+19.36%",
+      "is_limit_up": false,
+      "jsr_themes": [
+        "AI 챗봇(챗GPT 등)",
+        "밸류업(25년 기업가치 제고계획 발표)",
+        "5G(5세대 이동통신)",
+        "반도체 기판(FC-BGA/PCB/MLB 등)",
+        "우주항공산업(누리호/인공위성 등)",
+        "PCB(FPCB 등)"
+      ],
+      "primary_theme": "AI 챗봇(챗GPT 등)",
+      "jsr_spike": "반도체 관련주 및 우주항공산업(누리호/인공위성 등) 테마 상승 속 급등",
+      "catalyst": "美 로켓랩 역대 최대 분기 매출 영향에",
+      "raw_headline": "[특징주] 이수페타시스, 美 로켓랩 역대 최대 분기 매출.. '급등' - 글로벌이코노믹",
+      "theme": "AI 챗봇(챗GPT 등)",
+      "reason": "美 로켓랩 역대 최대 분기 매출 영향에"
+    },
+    {
+      "name": "래블업",
+      "display_name": "래블업",
+      "pct": 19.35,
+      "pct_val": 19.35,
+      "amt": 78165184,
+      "trading_val": "781651억",
+      "price": "15,110",
+      "volume": "5,447,102",
+      "change_pct": "+19.35%",
       "is_limit_up": false,
       "jsr_themes": [],
       "primary_theme": "",
       "jsr_spike": "",
-      "catalyst": "TK 시료 활용 대사체 분석으로 신약개발 기대감에",
-      "raw_headline": "디티앤씨알오, TK 시료 활용 대사체 분석으로 신약개발 지원 - 데일리팜",
-      "theme": "바이오 / 제약",
-      "reason": "TK 시료 활용 대사체 분석으로 신약개발 기대감에"
+      "catalyst": "쿠버콘 북미 2026 참가 영향에",
+      "raw_headline": "래블업, 쿠버콘 북미 2026 참가…백엔드닷에이아이·쿠버네티스 통합 소개 - 테크월드",
+      "theme": "개별 특징주",
+      "reason": "쿠버콘 북미 2026 참가 영향에"
     },
     {
-      "name": "코퍼스코리아",
-      "display_name": "코퍼스코리아",
-      "pct": 6.6,
-      "pct_val": 6.6,
-      "amt": 24023,
-      "trading_val": "240억",
-      "price": "1,276",
-      "volume": "21,108",
-      "change_pct": "+6.60%",
+      "name": "에프에스티",
+      "display_name": "에프에스티",
+      "pct": 18.81,
+      "pct_val": 18.81,
+      "amt": 5258189,
+      "trading_val": "52581억",
+      "price": "25,900",
+      "volume": "206,799",
+      "change_pct": "+18.81%",
       "is_limit_up": false,
       "jsr_themes": [
-        "영상콘텐츠"
+        "바이오인식(생체인식)",
+        "반도체 장비",
+        "반도체 재료/부품"
       ],
-      "primary_theme": "영상콘텐츠",
-      "jsr_spike": "불성실공시법인 지정예고에 급락",
-      "catalyst": "♥크러쉬 또 반하겠네‥레드벨벳 조이, 단발병 부르는 비주얼 영향에",
-      "raw_headline": "♥크러쉬 또 반하겠네‥레드벨벳 조이, 단발병 부르는 비주얼 - 뉴스엔",
-      "theme": "영상콘텐츠",
-      "reason": "♥크러쉬 또 반하겠네‥레드벨벳 조이, 단발병 부르는 비주얼 영향에"
+      "primary_theme": "바이오인식(생체인식)",
+      "jsr_spike": "보통주 510,000주 소각 결정 모멘텀 지속에 급등",
+      "catalyst": "기관 및 외국인 수급 집중 속",
+      "raw_headline": "[장중수급포착] 에프에스티, 외국인/기관 동시 순매수… 주가 +20.64% - 뉴스핌",
+      "theme": "바이오인식(생체인식)",
+      "reason": "기관 및 외국인 수급 집중 속"
     },
     {
-      "name": "KS인더스트리",
-      "display_name": "KS인더스트리",
-      "pct": 6.59,
-      "pct_val": 6.59,
-      "amt": 67071,
-      "trading_val": "670억",
-      "price": "954",
-      "volume": "68,780",
-      "change_pct": "+6.59%",
+      "name": "시선AI",
+      "display_name": "시선AI",
+      "pct": 18.76,
+      "pct_val": 18.76,
+      "amt": 1007857,
+      "trading_val": "10078억",
+      "price": "2,595",
+      "volume": "407,670",
+      "change_pct": "+18.76%",
       "is_limit_up": false,
       "jsr_themes": [
-        "조선기자재"
+        "바이오인식(생체인식)",
+        "보안주(물리)",
+        "지능형로봇/인공지능(AI)",
+        "딥페이크(deepfake)",
+        "의료AI"
       ],
-      "primary_theme": "조선기자재",
-      "jsr_spike": "최대주주 변경 모멘텀 지속 속 급등",
-      "catalyst": "최대주주 변경 모멘텀 지속 속 급등에",
+      "primary_theme": "바이오인식(생체인식)",
+      "jsr_spike": "자회사 유온로보틱스, 초정밀 '로봇 그리퍼' 개발 소식에 상승",
+      "catalyst": "국방망 AI 수주 소식에",
+      "raw_headline": "\"시선AI, 국방망 AI 수주·피지컬 AI 상용계약으로 신사업 확대\" - CMIR - 뉴스핌",
+      "theme": "바이오인식(생체인식)",
+      "reason": "국방망 AI 수주 소식에"
+    },
+    {
+      "name": "에프엔에스테크",
+      "display_name": "에프엔에스테크",
+      "pct": 18.72,
+      "pct_val": 18.72,
+      "amt": 4386510,
+      "trading_val": "43865억",
+      "price": "13,000",
+      "volume": "343,922",
+      "change_pct": "+18.72%",
+      "is_limit_up": false,
+      "jsr_themes": [
+        "OLED(유기 발광 다이오드)",
+        "유리 기판",
+        "반도체 재료/부품"
+      ],
+      "primary_theme": "OLED(유기 발광 다이오드)",
+      "jsr_spike": "일부 반도체 관련주 상승 속 수익성 개선 본격화 전망 등에 급등",
+      "catalyst": "기관 및 외국인 수급 집중 속",
+      "raw_headline": "[장중수급포착] 에프엔에스테크, 외국인/기관 동시 순매수… 주가 +20.00% - 뉴스핌",
+      "theme": "OLED(유기 발광 다이오드)",
+      "reason": "기관 및 외국인 수급 집중 속"
+    },
+    {
+      "name": "메가터치",
+      "display_name": "메가터치",
+      "pct": 18.62,
+      "pct_val": 18.62,
+      "amt": 3280736,
+      "trading_val": "32807억",
+      "price": "7,200",
+      "volume": "481,219",
+      "change_pct": "+18.62%",
+      "is_limit_up": false,
+      "jsr_themes": [
+        "2차전지",
+        "2차전지(소재/부품)",
+        "반도체 재료/부품",
+        "2차전지(나트륨이온)"
+      ],
+      "primary_theme": "2차전지",
+      "jsr_spike": "배터리 3사, ESS 중심으로 사업구조 전환 하반기 실적반등 전망 등에 2차전지 테마 상승 속 급등",
+      "catalyst": "이은주 전무 2000주 장내매수 영향에",
+      "raw_headline": "메가터치 이은주 전무 2000주 장내매수 - 비건뉴스",
+      "theme": "2차전지",
+      "reason": "이은주 전무 2000주 장내매수 영향에"
+    },
+    {
+      "name": "뉴파워프라즈마",
+      "display_name": "뉴파워프라즈마",
+      "pct": 18.39,
+      "pct_val": 18.39,
+      "amt": 27737470,
+      "trading_val": "277374억",
+      "price": "14,160",
+      "volume": "2,049,709",
+      "change_pct": "+18.39%",
+      "is_limit_up": false,
+      "jsr_themes": [
+        "OLED(유기 발광 다이오드)",
+        "반도체 재료/부품"
+      ],
+      "primary_theme": "OLED(유기 발광 다이오드)",
+      "jsr_spike": "지난해 반도체 수출 역대 최대치 기록 및 슈퍼사이클 기대감 지속 등에 반도체 관련주 상승 속 급등",
+      "catalyst": "반도체 소재·부품주 매수세 봇물…HBM 공정 고도화 기 영향에",
+      "raw_headline": "반도체 소재·부품주 매수세 봇물…HBM 공정 고도화 기대 커졌다 - 핀포인트뉴스",
+      "theme": "OLED(유기 발광 다이오드)",
+      "reason": "반도체 소재·부품주 매수세 봇물…HBM 공정 고도화 기 영향에"
+    },
+    {
+      "name": "타이거일렉",
+      "display_name": "타이거일렉",
+      "pct": 18.34,
+      "pct_val": 18.34,
+      "amt": 8140553,
+      "trading_val": "81405억",
+      "price": "107,100",
+      "volume": "80,325",
+      "change_pct": "+18.34%",
+      "is_limit_up": false,
+      "jsr_themes": [
+        "PCB(FPCB 등)",
+        "반도체 재료/부품"
+      ],
+      "primary_theme": "PCB(FPCB 등)",
+      "jsr_spike": "필라델피아 반도체지수 상승 영향 및 반도체 수출 호조세 지속 등에 반도체 관련주 상승 속 급등",
+      "catalyst": "11월 11일 52주 신고가 종목 및 최근 동향 영향에",
+      "raw_headline": "[표]11월 11일 52주 신고가 종목 및 최근 동향 - 뉴스핌",
+      "theme": "PCB(FPCB 등)",
+      "reason": "11월 11일 52주 신고가 종목 및 최근 동향 영향에"
+    },
+    {
+      "name": "코미코",
+      "display_name": "코미코",
+      "pct": 18.32,
+      "pct_val": 18.32,
+      "amt": 8718828,
+      "trading_val": "87188억",
+      "price": "20,800",
+      "volume": "437,794",
+      "change_pct": "+18.32%",
+      "is_limit_up": false,
+      "jsr_themes": [
+        "밸류업(25년 기업가치 제고계획 발표)",
+        "코리아 밸류업 지수(Korea Value-up Index)",
+        "태양광에너지",
+        "반도체 장비"
+      ],
+      "primary_theme": "밸류업(25년 기업가치 제고계획 발표)",
+      "jsr_spike": "반도체 관련주 상승 속 삼성 파운드리 회복의 최대 수혜주 분석 모멘텀 지속 등에 급등",
+      "catalyst": "반도체 관련주 상승 속 삼성 파운드리 회복의 최대 수혜주 분석 모멘텀 지속 등에 급등에",
       "raw_headline": "",
-      "theme": "조선기자재",
-      "reason": "최대주주 변경 모멘텀 지속 속 급등에"
+      "theme": "밸류업(25년 기업가치 제고계획 발표)",
+      "reason": "반도체 관련주 상승 속 삼성 파운드리 회복의 최대 수혜주 분석 모멘텀 지속 등에 급등에"
+    },
+    {
+      "name": "동부건설우",
+      "display_name": "동부건설우(우)",
+      "pct": 18.18,
+      "pct_val": 18.18,
+      "amt": 145,
+      "trading_val": "1억",
+      "price": "18,200",
+      "volume": "7,913",
+      "change_pct": "+18.18%",
+      "is_limit_up": false,
+      "jsr_themes": [],
+      "primary_theme": "",
+      "jsr_spike": "",
+      "catalyst": "",
+      "raw_headline": "",
+      "theme": "개별 특징주",
+      "reason": ""
+    },
+    {
+      "name": "피에스케이홀딩스",
+      "display_name": "피에스케이홀딩스",
+      "pct": 17.75,
+      "pct_val": 17.75,
+      "amt": 40362320,
+      "trading_val": "403623억",
+      "price": "151,900",
+      "volume": "279,071",
+      "change_pct": "+17.75%",
+      "is_limit_up": false,
+      "jsr_themes": [
+        "밸류업(25년 기업가치 제고계획 발표)",
+        "코리아 밸류업 지수(Korea Value-up Index)",
+        "반도체 장비",
+        "HBM(고대역폭메모리)"
+      ],
+      "primary_theme": "밸류업(25년 기업가치 제고계획 발표)",
+      "jsr_spike": "중동전쟁 종전 기대감 속 필라델피아 반도체지수(+6.24%) 폭등, 3월 반도체 수출 호조 등에 반도체 관련주 상승 속 급등",
+      "catalyst": "TSMC 설비투자 확대 수혜…  내년 5000억 매출 전망 영향에",
+      "raw_headline": "TSMC 설비투자 확대 수혜… 피에스케이홀딩스 내년 5000억 매출 전망 - 주간동아",
+      "theme": "밸류업(25년 기업가치 제고계획 발표)",
+      "reason": "TSMC 설비투자 확대 수혜…  내년 5000억 매출 전망 영향에"
+    },
+    {
+      "name": "지니너스",
+      "display_name": "지니너스",
+      "pct": 17.44,
+      "pct_val": 17.44,
+      "amt": 3366021,
+      "trading_val": "33660억",
+      "price": "1,562",
+      "volume": "2,207,141",
+      "change_pct": "+17.44%",
+      "is_limit_up": false,
+      "jsr_themes": [
+        "유전자 치료제/분석"
+      ],
+      "primary_theme": "유전자 치료제/분석",
+      "jsr_spike": "'AACR'서 자사 플랫폼 활용한 대장암 미세환경 규명 소식에 상한가",
+      "catalyst": "앤트로픽도 뛰어든 'AI+실험실 영향에",
+      "raw_headline": "앤트로픽도 뛰어든 'AI+실험실'…지니너스 도전 - 비즈워치",
+      "theme": "유전자 치료제/분석",
+      "reason": "앤트로픽도 뛰어든 'AI+실험실 영향에"
+    },
+    {
+      "name": "오킨스전자",
+      "display_name": "오킨스전자",
+      "pct": 17.41,
+      "pct_val": 17.41,
+      "amt": 15303620,
+      "trading_val": "153036억",
+      "price": "22,250",
+      "volume": "715,701",
+      "change_pct": "+17.41%",
+      "is_limit_up": false,
+      "jsr_themes": [
+        "CXL(컴퓨트익스프레스링크)",
+        "반도체 재료/부품"
+      ],
+      "primary_theme": "CXL(컴퓨트익스프레스링크)",
+      "jsr_spike": "美 필라델피아 반도체(+0.97%) 지수 상승 영향 및 일론 머스크 테라팹 팀, 세계 주요 반도체 장비 업체 장비 공급 가능성 타진 소식 등에 반도체 관련주 상승 속 급등",
+      "catalyst": "특징주, -CXL 테마 영향에",
+      "raw_headline": "특징주, 오킨스전자-CXL(컴퓨트익스프레스링크) 테마 상승세에 6.86% ↑ - 매일경제 마켓",
+      "theme": "CXL(컴퓨트익스프레스링크)",
+      "reason": "특징주, -CXL 테마 영향에"
+    },
+    {
+      "name": "나노신소재",
+      "display_name": "나노신소재",
+      "pct": 17.39,
+      "pct_val": 17.39,
+      "amt": 31819931,
+      "trading_val": "318199억",
+      "price": "75,600",
+      "volume": "428,108",
+      "change_pct": "+17.39%",
+      "is_limit_up": false,
+      "jsr_themes": [
+        "OLED(유기 발광 다이오드)",
+        "태양광에너지",
+        "LED",
+        "2차전지",
+        "2차전지(소재/부품)"
+      ],
+      "primary_theme": "OLED(유기 발광 다이오드)",
+      "jsr_spike": "머스크 우주 태양광 모멘텀 지속 및 머스크 실사팀 대만 태양광 기업 접촉 소식 등에 태양광에너지 테마 상승 속 급등",
+      "catalyst": "기관 및 외국인 수급 집중 속",
+      "raw_headline": "[장중수급포착] 나노신소재, 외국인/기관 동시 순매수… 주가 +18.32% - 뉴스핌",
+      "theme": "OLED(유기 발광 다이오드)",
+      "reason": "기관 및 외국인 수급 집중 속"
+    },
+    {
+      "name": "케이씨텍",
+      "display_name": "케이씨텍",
+      "pct": 17.25,
+      "pct_val": 17.25,
+      "amt": 26785,
+      "trading_val": "267억",
+      "price": "73,400",
+      "volume": "382,208",
+      "change_pct": "+17.25%",
+      "is_limit_up": false,
+      "jsr_themes": [
+        "반도체 장비",
+        "반도체 재료/부품",
+        "HBM(고대역폭메모리)"
+      ],
+      "primary_theme": "반도체 장비",
+      "jsr_spike": "SK하이닉스와 698.43억원 규모 반도체 제조 장비 공급계약 체결에 급등",
+      "catalyst": "성호전자·JW신약! 내일장 고래 종목은?! - 머니투데이 기대감에",
+      "raw_headline": "[고래사냥] '케이씨텍·성호전자·JW신약! 내일장 고래 종목은?! - 머니투데이 - 머니투데이",
+      "theme": "반도체 장비",
+      "reason": "성호전자·JW신약! 내일장 고래 종목은?! - 머니투데이 기대감에"
+    },
+    {
+      "name": "주성엔지니어링",
+      "display_name": "주성엔지니어링",
+      "pct": 17.14,
+      "pct_val": 17.14,
+      "amt": 359146738,
+      "trading_val": "3591467억",
+      "price": "178,400",
+      "volume": "2,120,870",
+      "change_pct": "+17.14%",
+      "is_limit_up": false,
+      "jsr_themes": [
+        "플렉서블 디스플레이",
+        "코리아 밸류업 지수(Korea Value-up Index)",
+        "OLED(유기 발광 다이오드)",
+        "태양광에너지",
+        "반도체 장비",
+        "LED장비"
+      ],
+      "primary_theme": "플렉서블 디스플레이",
+      "jsr_spike": "반도체 관련주 상승 속 中 태양광 장비 기술 수출 제한 움직임에 따른 반사 수혜 기대감 등에 상한가",
+      "catalyst": "기관 및 외국인 수급 집중 속",
+      "raw_headline": "[장중수급포착] 주성엔지니어링, 외국인/기관 동시 순매수… 주가 +14.38% - 뉴스핌",
+      "theme": "플렉서블 디스플레이",
+      "reason": "기관 및 외국인 수급 집중 속"
     }
   ]
 }

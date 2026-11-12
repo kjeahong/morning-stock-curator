@@ -1695,8 +1695,13 @@ def search_news_archive(query='', limit=250):
 
 
 # ==============================================================================
-# [신규 기능 2] 시황카세(sihwangkase.co.kr) 장전이슈 & 관심종목 100% 실시간 연동
+# [신규 기능 2] 독자 실시간 장전이슈 · 관심종목 · 매크로 · 선물 · 캘린더 수집
+# (외부 유료 게이트 의존 전면 제거 — 네이버/야후/DRAMeXchange/Investing 실시간 연동)
 # ==============================================================================
+
+_NAVER_HDR = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+}
 
 _sihwang_cache = {
     'issues': None,
@@ -1705,100 +1710,301 @@ _sihwang_cache = {
     'last_watchlist_time': 0
 }
 
+
+def _data_path(*parts):
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    return os.path.join(base_dir, 'data', *parts)
+
+
+def _load_json_safe(path, default=None):
+    if os.path.exists(path):
+        try:
+            with open(path, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except Exception:
+            pass
+    return default
+
+
+def _save_json_safe(path, data):
+    try:
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        with open(path, 'w', encoding='utf-8') as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+    except Exception:
+        pass
+
+
+def _fetch_text(url, timeout=8, encoding='utf-8', headers=None):
+    hdrs = dict(_NAVER_HDR)
+    if headers:
+        hdrs.update(headers)
+    req = urllib.request.Request(url, headers=hdrs)
+    with urllib.request.urlopen(req, timeout=timeout) as resp:
+        return resp.read().decode(encoding, errors='ignore')
+
+
+def _fetch_json(url, timeout=8, headers=None):
+    return json.loads(_fetch_text(url, timeout=timeout, encoding='utf-8', headers=headers))
+
+
+def _clean_num(val, default=0.0):
+    if val is None or isinstance(val, bool):
+        return default
+    if isinstance(val, (int, float)):
+        return float(val) if not math.isnan(val) else default
+    s = str(val).replace('▲', '').replace('↑', '').replace('▼', '-').replace('↓', '-')
+    s = re.sub(r'[,\s%+원배계약억]', '', s)
+    m = re.search(r'-?\d+(?:\.\d+)?', s)
+    return float(m.group(0)) if m else default
+
+
+def _parse_kr_eok(val, default=0.0):
+    """'1,227조 7,185억', '2조 5,006억', '7,291,445백만' -> 억원 단위 float 변환"""
+    if val is None:
+        return default
+    if isinstance(val, (int, float)):
+        return float(val)
+    s = str(val).strip()
+    if not s:
+        return default
+    sign = -1.0 if s.startswith('-') else 1.0
+    total = 0.0
+    matched = False
+    m_jo = re.search(r'([\d,]+(?:\.\d+)?)\s*조', s)
+    if m_jo:
+        total += float(m_jo.group(1).replace(',', '')) * 10000.0
+        matched = True
+    m_uk = re.search(r'([\d,]+(?:\.\d+)?)\s*억', s)
+    if m_uk:
+        total += float(m_uk.group(1).replace(',', ''))
+        matched = True
+    if not matched:
+        m_mm = re.search(r'([\d,]+(?:\.\d+)?)\s*백만', s)
+        if m_mm:
+            total += float(m_mm.group(1).replace(',', '')) / 100.0
+            matched = True
+    if not matched:
+        return _clean_num(s, default)
+    return sign * total
+
+
+def _build_stock_code_index():
+    """로컬 JSR 프로필 및 관심종목 카탈로그에서 종목명 -> 종목코드 맵 생성"""
+    name_to_code = {}
+    for prof in load_jsr_profiles().values():
+        nm = prof.get('name')
+        cd = prof.get('code')
+        if nm and cd:
+            name_to_code[nm] = cd
+    wl = _load_json_safe(_data_path('sihwang_watchlist.json'), {})
+    for g in (wl.get('groups') or []):
+        for r in (g.get('rows') or []):
+            nm, cd = r.get('name'), r.get('code')
+            if nm and cd:
+                name_to_code.setdefault(nm, cd)
+    return name_to_code
+
+
+def _looks_like_stock_list(line):
+    if not line or line.startswith('http') or line.startswith('#') or ' | ' in line:
+        return False
+    if line.count(',') < 2:
+        return False
+    parts = [p.strip() for p in line.split(',') if p.strip()]
+    if len(parts) < 3:
+        return False
+    short_parts = sum(1 for p in parts if len(p) <= 18)
+    return (short_parts / len(parts)) >= 0.75
+
+
+def _stock_link(name, name_to_code):
+    code = name_to_code.get(name, '')
+    if code:
+        return f'https://finance.naver.com/item/main.naver?code={code}'
+    return f'https://search.naver.com/search.naver?query={urllib.parse.quote(name + " 주가")}'
+
+
+def _parse_morning_blog_issues(log_no, post_title, name_to_code):
+    """네이버 블로그 (MM/DD) 장전 뉴스 및 관련주 본문 정밀 파싱"""
+    url = f'https://blog.naver.com/PostView.naver?blogId=crioppstock&logNo={log_no}'
+    html = _fetch_text(url, timeout=8)
+    soup = BeautifulSoup(html, 'html.parser')
+    main = soup.find('div', class_='se-main-container') or soup.find(id='postViewArea')
+    if not main:
+        return []
+
+    m_dt = re.search(r'\((\d{1,2}/\d{1,2})\)', post_title)
+    when_label = f"{m_dt.group(1)} 장전" if m_dt else '오늘 장전'
+
+    lines = [_clean_invisible(ln) for ln in main.get_text('\n').splitlines() if _clean_invisible(ln)]
+    start_idx = 0
+    for idx, ln in enumerate(lines):
+        if '주요 뉴스 및 관련주' in ln:
+            start_idx = idx + 1
+            break
+
+    issues = []
+    pending_tags = []
+    pending_groups = []
+    active_groups = []
+    has_issue_in_block = False
+    text_buf = []
+    domain_re = re.compile(r'^(?:www\.)?[a-z0-9.-]+\.[a-z]{2,}(?:/.*)?$', re.I)
+
+    i = start_idx
+    while i < len(lines):
+        ln = lines[i]
+        if any(stop in ln for stop in ('텔레그램 공개 채널', '공감과 댓글', '서로이웃 추가')):
+            break
+
+        if ln.startswith('#'):
+            if has_issue_in_block:
+                active_groups = []
+                has_issue_in_block = False
+                text_buf = []
+            tag_txt = ln.lstrip('#').strip()
+            if tag_txt:
+                pending_tags.append(tag_txt)
+            i += 1
+            continue
+
+        if _looks_like_stock_list(ln):
+            grp_label = ' / '.join(pending_tags) if pending_tags else '관련주'
+            chips = [
+                {'name': nm, 'link': _stock_link(nm, name_to_code), 'is_hot': False}
+                for nm in (p.strip() for p in ln.split(','))
+                if nm and not nm.endswith('...')
+            ]
+            if chips:
+                pending_groups.append({'group_name': grp_label, 'stocks': chips})
+            pending_tags = []
+            text_buf = []
+            has_issue_in_block = False
+            i += 1
+            continue
+
+        if ln.startswith('http://') or ln.startswith('https://'):
+            origin_link = ln
+            if pending_groups:
+                active_groups = pending_groups
+                pending_groups = []
+            elif pending_tags:
+                active_groups = [{'group_name': ' / '.join(pending_tags), 'stocks': []}]
+                pending_tags = []
+
+            news_title = text_buf[-1] if text_buf else ''
+            summary_candidates = []
+            j = i + 1
+            while j < min(i + 5, len(lines)):
+                nl = lines[j]
+                if nl.startswith('#') or nl.startswith('http') or _looks_like_stock_list(nl):
+                    break
+                if domain_re.match(nl):
+                    j += 1
+                    break
+                if news_title and (nl == news_title or nl.startswith(news_title[:25])):
+                    j += 1
+                    continue
+                summary_candidates.append(nl)
+                j += 1
+
+            summary_txt = max(summary_candidates, key=len) if summary_candidates else ''
+            if len(summary_txt) > 220:
+                summary_txt = summary_txt[:217] + '...'
+
+            if news_title:
+                tags = []
+                for g in active_groups:
+                    for part in g['group_name'].split('/'):
+                        clean_tag = re.sub(r'관련주$', '', part.strip()).strip()
+                        if clean_tag and clean_tag not in tags:
+                            tags.append(clean_tag)
+                copied_groups = [
+                    {'group_name': g['group_name'], 'stocks': [dict(c) for c in g['stocks']]}
+                    for g in active_groups if g.get('stocks')
+                ]
+                issues.append({
+                    'title': news_title,
+                    'when': when_label,
+                    'tags': tags[:4],
+                    'badge': '장전뉴스',
+                    'summary': summary_txt,
+                    'stock_groups': copied_groups,
+                    'origin_link': origin_link
+                })
+                has_issue_in_block = True
+
+            text_buf = []
+            i = j
+            continue
+
+        if not domain_re.match(ln):
+            text_buf.append(ln)
+            if len(text_buf) > 2:
+                text_buf = text_buf[-2:]
+        i += 1
+
+    return issues
+
+
 def get_sihwangkase_issues(force_refresh=False):
     """
-    시황카세 장전이슈 수집:
-    1. 오늘 3회 이상 언급된 종목 (핫박스 카운트 뱃지)
-    2. 장전 핵심 이슈 & 테마별 관련주 칩 목록
+    독자 장전 이슈 & 다빈도 언급 종목 수집:
+    1. 네이버 블로그(crioppstock) 최신 '(MM/DD) 장전 뉴스 및 관련주' 파싱
+    2. 이슈 내 중복 언급 종목 집계 -> hot_mentions / is_hot 자동 태깅
+    3. 블로그 미게시 시 로컬 캐시/실시간 속보 폴백
     """
     now_ts = time.time()
     if not force_refresh and _sihwang_cache['issues'] and (now_ts - _sihwang_cache['last_issues_time'] < 180):
         return _sihwang_cache['issues']
 
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-        'Referer': 'https://sihwangkase.co.kr/issue',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
-    }
-    
-    hot_mentions = []
+    cache_file = _data_path('sihwang_issues.json')
+    name_to_code = _build_stock_code_index()
     issues = []
-    
-    try:
-        req = urllib.request.Request('https://sihwangkase.co.kr/issue', headers=headers)
-        with urllib.request.urlopen(req, timeout=8) as resp:
-            html = resp.read().decode('utf-8', errors='ignore')
-        
-        soup = BeautifulSoup(html, 'html.parser')
-        
-        # 1. 오늘 3회 이상 언급된 종목 (핫박스)
-        hotbox = soup.find(class_='hotbox')
-        if hotbox:
-            for chip in hotbox.find_all('a', class_=re.compile(r'chip')):
-                sup = chip.find('sup')
-                cnt = int(sup.get_text(strip=True)) if sup else 1
-                if sup:
-                    sup.decompose()
-                name = chip.get_text(strip=True)
-                href = chip.get('href', '')
-                if name:
-                    hot_mentions.append({
-                        'name': name,
-                        'count': cnt,
-                        'link': href
-                    })
 
-        # 2. 핵심 이슈 및 섹터별 이슈 파싱
-        for item in soup.find_all('details', class_=re.compile(r'item')):
-            summary = item.find('summary')
-            if not summary:
-                continue
-            
-            when_tag = summary.find(class_='when')
-            when = when_tag.get_text(" ", strip=True) if when_tag else ""
-            
-            tt_tag = summary.find(class_='tt')
-            title = tt_tag.get_text(strip=True) if tt_tag else ""
-            
-            tags = [t.get_text(strip=True) for t in summary.find_all(class_='tag')]
-            badge = summary.find(class_='badge')
-            badge_text = badge.get_text(strip=True) if badge else ""
-            
-            detail = item.find(class_='detail')
-            body_p = detail.find(class_='body') if detail else None
-            body_text = body_p.get_text(strip=True) if body_p else ""
-            
-            stock_groups = []
-            if detail:
-                for sgrp in detail.find_all(class_='sgrp'):
-                    slabel = sgrp.find(class_='slabel')
-                    grp_name = slabel.get_text(strip=True) if slabel else "관련주"
-                    chips = []
-                    for chip in sgrp.find_all('a', class_=re.compile(r'chip')):
-                        c_name = chip.get_text(strip=True)
-                        c_href = chip.get('href', '')
-                        is_hot = 'hot' in chip.get('class', [])
-                        chips.append({'name': c_name, 'link': c_href, 'is_hot': is_hot})
-                    if chips:
-                        stock_groups.append({
-                            'group_name': grp_name,
-                            'stocks': chips
-                        })
-                        
-            origin_a = detail.find('a', href=re.compile(r'^http')) if detail else None
-            origin_link = origin_a.get('href') if origin_a else ""
-            
-            if title:
-                issues.append({
-                    'title': title,
-                    'when': when,
-                    'tags': tags,
-                    'badge': badge_text,
-                    'summary': body_text,
-                    'stock_groups': stock_groups,
-                    'origin_link': origin_link
-                })
-        
+    try:
+        api_url = (
+            'https://blog.naver.com/PostTitleListAsync.naver'
+            '?blogId=crioppstock&viewdate=&currentPage=1&categoryNo=0&parentCategoryNo=&countPerPage=20'
+        )
+        raw_b = _fetch_text(api_url, timeout=8, encoding='ms949')
+        for m in re.finditer(r'"logNo"\s*:\s*"(\d+)".*?"title"\s*:\s*"([^"]+)"', raw_b):
+            log_no = m.group(1)
+            post_title = urllib.parse.unquote_plus(m.group(2))
+            if '장전' in post_title and '뉴스' in post_title:
+                issues = _parse_morning_blog_issues(log_no, post_title, name_to_code)
+                if issues:
+                    break
+    except Exception as e:
+        print(f"[Morning Issues Error] blog fetch failed: {e}")
+
+    if issues:
+        counts = {}
+        for iss in issues:
+            seen_in_issue = set()
+            for grp in iss.get('stock_groups', []):
+                for chip in grp.get('stocks', []):
+                    nm = chip.get('name')
+                    if nm and nm not in seen_in_issue:
+                        seen_in_issue.add(nm)
+                        counts[nm] = counts.get(nm, 0) + 1
+
+        hot_sorted = sorted(
+            [(nm, cnt) for nm, cnt in counts.items() if cnt >= 2],
+            key=lambda x: (-x[1], x[0])
+        )[:15]
+        hot_names = {nm for nm, _ in hot_sorted}
+        hot_mentions = [
+            {'name': nm, 'count': cnt, 'link': _stock_link(nm, name_to_code)}
+            for nm, cnt in hot_sorted
+        ]
+        for iss in issues:
+            for grp in iss.get('stock_groups', []):
+                for chip in grp.get('stocks', []):
+                    if chip.get('name') in hot_names:
+                        chip['is_hot'] = True
+
         result = {
             'status': 'ok',
             'hot_mentions': hot_mentions,
@@ -1806,224 +2012,314 @@ def get_sihwangkase_issues(force_refresh=False):
             'count': len(issues),
             'updated_at': datetime.now().strftime('%H:%M:%S')
         }
-        # 로컬 영구 백업 캐시 저장 (서버 다운/차단 대비)
-        try:
-            cache_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data', 'sihwang_issues.json')
-            with open(cache_file, 'w', encoding='utf-8') as f:
-                json.dump(result, f, ensure_ascii=False, indent=2)
-        except Exception:
-            pass
-
+        _save_json_safe(cache_file, result)
         _sihwang_cache['issues'] = result
         _sihwang_cache['last_issues_time'] = now_ts
         return result
-    except Exception as e:
-        print(f"[Sihwang Error] issue fetch failed: {e}")
-        # 외부 사이트 장애나 네트워크 차단 시 로컬 백업 자동 복원
-        cache_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data', 'sihwang_issues.json')
-        if os.path.exists(cache_file):
-            try:
-                with open(cache_file, 'r', encoding='utf-8') as f:
-                    cached = json.load(f)
-                    cached['from_cache'] = True
-                    return cached
-            except Exception:
-                pass
-        return {
-            'status': 'error',
-            'message': str(e),
-            'hot_mentions': [],
-            'issues': []
-        }
+
+    cached = _load_json_safe(cache_file)
+    if cached:
+        cached['status'] = 'ok'
+        cached['from_cache'] = True
+        return cached
+    return {'status': 'error', 'message': 'morning issues unavailable', 'hot_mentions': [], 'issues': []}
+
+def _fetch_naver_realtime_items(codes):
+    """네이버 polling 실시간 API에서 종목코드 리스트 일괄 조회 (50종목/배치 병렬)"""
+    unique_codes = [c for c in dict.fromkeys(codes) if c and re.match(r'^\d{6}$', str(c))]
+    if not unique_codes:
+        return {}
+
+    chunks = [unique_codes[i:i + 50] for i in range(0, len(unique_codes), 50)]
+    live_map = {}
+
+    def _fetch_chunk(chunk):
+        url = f"https://polling.finance.naver.com/api/realtime?query=SERVICE_ITEM:{','.join(chunk)}"
+        data = _fetch_json(url, timeout=6)
+        out = {}
+        for area in (data.get('result') or {}).get('areas', []):
+            for item in area.get('datas', []):
+                cd = item.get('cd')
+                if not cd:
+                    continue
+                nv = int(item.get('nv') or 0)
+                rf = str(item.get('rf') or '3')
+                cr = float(item.get('cr') or 0.0)
+                if rf in ('4', '5'):
+                    rate = -abs(cr)
+                elif rf in ('1', '2'):
+                    rate = abs(cr)
+                else:
+                    rate = 0.0
+                aa = int(item.get('aa') or 0)
+                out[cd] = {
+                    'price': nv,
+                    'rate': round(rate, 2),
+                    'eok': int(round(aa / 100000000)),
+                }
+        return out
+
+    with ThreadPoolExecutor(max_workers=10) as ex:
+        for chunk_res in ex.map(lambda ch: _try_call(_fetch_chunk, ch, default={}), chunks):
+            live_map.update(chunk_res)
+    return live_map
+
+
+def _try_call(fn, *args, default=None, **kwargs):
+    try:
+        return fn(*args, **kwargs)
+    except Exception:
+        return default
+
+
+def _build_base_watchlist_groups(cache_file, catalog_file):
+    """로컬 관심종목 스냅샷 또는 테마 카탈로그에서 61개 테마 기본 구조 로드"""
+    cached = _load_json_safe(cache_file)
+    if cached and cached.get('groups'):
+        return cached.get('groups', []), cached.get('themes_of', {})
+
+    catalog = _load_json_safe(catalog_file, [])
+    groups = []
+    themes_of = {}
+    for entry in catalog:
+        g_name = entry.get('name', '')
+        rows = []
+        for s in entry.get('stocks', []):
+            cd = s.get('code', '')
+            nm = s.get('name', '')
+            if cd:
+                themes_of.setdefault(cd, [])
+                if g_name and g_name not in themes_of[cd]:
+                    themes_of[cd].append(g_name)
+            rows.append({'code': cd, 'name': nm, 'price': 0, 'rate': 0.0, 'eok': 0})
+        groups.append({
+            'name': g_name,
+            'sector': entry.get('sector', ''),
+            'broad': g_name,
+            'count': len(rows),
+            'rows': rows,
+            'avg_rate': 0.0,
+            'total_eok': 0,
+            'total_amount_str': '0억',
+        })
+    return groups, themes_of
+
 
 def get_sihwangkase_watchlist(force_refresh=False):
     """
-    시황카세 국내 관심종목(/api/krwatch):
-    - 61개 테마 그룹 (원전, 바이오, AI, 전력, 2차전지 등)
-    - 839개 종목별 실시간 시세, 등락률, 거래대금(억원)
-    - 다중 테마 중복 종목 태깅 및 정렬/전광판 데이터 제공
-    - 외부 차단/장애 대비 로컬 스냅샷 자동 백업 및 복원
+    독자 실시간 국내 관심종목 전광판(/api/sihwang/watchlist):
+    - 로컬 61개 테마/646종목 카탈로그 기반
+    - 네이버 실시간 polling API로 전 종목 현재가, 등락률, 거래대금(억원) 0.4초 내 일괄 갱신
     """
     now_ts = time.time()
     if not force_refresh and _sihwang_cache['watchlist'] and (now_ts - _sihwang_cache['last_watchlist_time'] < 60):
         return _sihwang_cache['watchlist']
 
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-        'Referer': 'https://sihwangkase.co.kr/krwatch',
-        'Accept': 'application/json'
+    cache_file = _data_path('sihwang_watchlist.json')
+    catalog_file = _data_path('themes_catalog.json')
+    groups, themes_of = _build_base_watchlist_groups(cache_file, catalog_file)
+
+    if not groups:
+        return {'status': 'error', 'message': 'watchlist catalog missing', 'groups': [], 'stocks_count': 0}
+
+    all_codes = [r.get('code') for g in groups for r in g.get('rows', []) if r.get('code')]
+    live_map = _fetch_naver_realtime_items(all_codes)
+
+    # themes_of 재검증 (누락 방지)
+    if not themes_of:
+        for g in groups:
+            g_name = g.get('name', '')
+            for r in g.get('rows', []):
+                cd = r.get('code', '')
+                if cd and g_name:
+                    lst = themes_of.setdefault(cd, [])
+                    if g_name not in lst:
+                        lst.append(g_name)
+
+    overlap2 = sum(1 for v in themes_of.values() if len(v) == 2)
+    overlap3 = sum(1 for v in themes_of.values() if len(v) == 3)
+    overlap4 = sum(1 for v in themes_of.values() if len(v) >= 4)
+
+    unique_updated = set()
+    for g in groups:
+        rows = g.get('rows', [])
+        tot_eok = 0
+        rate_sum = 0.0
+        for r in rows:
+            cd = r.get('code', '')
+            q = live_map.get(cd)
+            if q:
+                if q['price'] > 0:
+                    r['price'] = q['price']
+                r['rate'] = q['rate']
+                r['eok'] = q['eok']
+                unique_updated.add(cd)
+            tot_eok += int(r.get('eok') or 0)
+            rate_sum += float(r.get('rate') or 0.0)
+            t_list = themes_of.get(cd, [])
+            r['overlap_count'] = len(t_list)
+            r['overlap_themes'] = t_list
+
+        g['count'] = len(rows)
+        g['total_eok'] = tot_eok
+        g['total_amount_str'] = f"{tot_eok / 10000:.1f}조" if tot_eok >= 10000 else f"{tot_eok:,}억"
+        g['avg_rate'] = round(rate_sum / len(rows), 2) if rows else 0.0
+
+    result = {
+        'status': 'ok',
+        'groups': groups,
+        'stocks_count': len(set(all_codes)),
+        'live_updated_count': len(unique_updated),
+        'themes_count': len(groups),
+        'themes_of': themes_of,
+        'overlap_stats': {
+            'overlap_2': overlap2,
+            'overlap_3': overlap3,
+            'overlap_4_plus': overlap4
+        },
+        'market': 'KRX 실시간 (네이버)',
+        'updated_at': datetime.now().strftime('%H:%M:%S')
     }
+    if not live_map:
+        result['from_cache'] = True
 
-    cache_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data', 'sihwang_watchlist.json')
-    catalog_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data', 'themes_catalog.json')
-
-    try:
-        req = urllib.request.Request('https://sihwangkase.co.kr/api/krwatch', headers=headers)
-        with urllib.request.urlopen(req, timeout=8) as resp:
-            data = json.loads(resp.read().decode('utf-8'))
-            groups = data.get('groups', [])
-            themes_of = data.get('themes_of', {})
-
-            # 중복 테마 통계 산출
-            overlap2 = 0
-            overlap3 = 0
-            overlap4 = 0
-            for code, th_list in themes_of.items():
-                c = len(th_list)
-                if c == 2: overlap2 += 1
-                elif c == 3: overlap3 += 1
-                elif c >= 4: overlap4 += 1
-
-            for g in groups:
-                tot = 0
-                for r in g.get('rows', []):
-                    eok_val = r.get('eok') or 0
-                    try:
-                        tot += int(eok_val)
-                    except Exception:
-                        pass
-                    code = r.get('code', '')
-                    t_list = themes_of.get(code, [])
-                    r['overlap_count'] = len(t_list)
-                    r['overlap_themes'] = t_list
-                g['total_eok'] = tot
-                if tot >= 10000:
-                    g['total_amount_str'] = f"{tot / 10000:.1f}조"
-                else:
-                    g['total_amount_str'] = f"{tot:,}억"
-                # avg_rate float 보장
-                try:
-                    g['avg_rate'] = float(g.get('avg_rate', 0.0))
-                except Exception:
-                    g['avg_rate'] = 0.0
-
-            result = {
-                'status': 'ok',
-                'groups': groups,
-                'stocks_count': data.get('stocks', 839),
-                'themes_count': len(groups),
-                'themes_of': themes_of,
-                'overlap_stats': {
-                    'overlap_2': overlap2,
-                    'overlap_3': overlap3,
-                    'overlap_4_plus': overlap4
-                },
-                'market': data.get('market', 'KRX+NXT 통합'),
-                'updated_at': data.get('updated_at', datetime.now().strftime('%H:%M:%S'))
-            }
-
-            # 로컬 영구 백업 저장
-            try:
-                os.makedirs(os.path.dirname(cache_file), exist_ok=True)
-                with open(cache_file, 'w', encoding='utf-8') as f:
-                    json.dump(result, f, ensure_ascii=False, indent=2)
-                # 테마 카탈로그 구조 독립 영구 보존
-                catalog = [{
-                    'name': g.get('name'),
-                    'sector': g.get('sector'),
-                    'stocks': [{'code': r.get('code'), 'name': r.get('name')} for r in g.get('rows', [])]
-                } for g in groups]
-                with open(catalog_file, 'w', encoding='utf-8') as f:
-                    json.dump(catalog, f, ensure_ascii=False, indent=2)
-            except Exception:
-                pass
-
-            _sihwang_cache['watchlist'] = result
-            _sihwang_cache['last_watchlist_time'] = now_ts
-            return result
-    except Exception as e:
-        print(f"[Sihwang Error] watchlist fetch failed: {e}")
-        # 외부 사이트 장애나 네트워크 차단 시 로컬 백업 자동 복원
-        if os.path.exists(cache_file):
-            try:
-                with open(cache_file, 'r', encoding='utf-8') as f:
-                    cached = json.load(f)
-                    cached['from_cache'] = True
-                    return cached
-            except Exception:
-                pass
-        return {
-            'status': 'error',
-            'message': str(e),
-            'groups': [],
-            'stocks_count': 0
-        }
+    _save_json_safe(cache_file, result)
+    _sihwang_cache['watchlist'] = result
+    _sihwang_cache['last_watchlist_time'] = now_ts
+    return result
 
 # 개별 종목 상세 및 차트 캐시 (TTL: 180초)
 _stock_detail_cache = {}
 _stock_chart_cache = {}
 
+
 def get_stock_detail(code):
-    """
-    개별 종목 정밀 분석 데이터 (현재가, 등락률, 시총, 거래대금, 외인/기관 수급, RS점수, 상승사유 등)
-    """
+    """개별 종목 정밀 분석 데이터 (현재가, 등락률, 시총, 거래대금, 외인/기관 수급, 급등사유)"""
     if not code:
         return {'status': 'error', 'message': 'code required'}
-    
-    now_ts = time.time()
-    if code in _stock_detail_cache:
-        cached = _stock_detail_cache[code]
-        if now_ts - cached['time'] < 180:
-            return cached['data']
 
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-        'Referer': 'https://sihwangkase.co.kr/krwatch',
-    }
+    now_ts = time.time()
+    cached = _stock_detail_cache.get(code)
+    if cached and (now_ts - cached['time'] < 180):
+        return cached['data']
+
     try:
-        url = f'https://sihwangkase.co.kr/api/stock?q={code}'
-        req = urllib.request.Request(url, headers=headers)
-        with urllib.request.urlopen(req, timeout=4) as resp:
-            data = json.loads(resp.read().decode('utf-8'))
-            data['status'] = 'ok'
-            _stock_detail_cache[code] = {'data': data, 'time': now_ts}
-            return data
+        with ThreadPoolExecutor(max_workers=2) as ex:
+            f_basic = ex.submit(_fetch_json, f'https://m.stock.naver.com/api/stock/{code}/basic', 5)
+            f_integ = ex.submit(_try_call, _fetch_json, f'https://m.stock.naver.com/api/stock/{code}/integration', 5, default={})
+            nd = f_basic.result()
+            integ = f_integ.result() or {}
+
+        name = nd.get('stockName', '')
+        price = _clean_num(nd.get('closePrice'))
+        cmp_code = str((nd.get('compareToPreviousPrice') or {}).get('code', '3'))
+        raw_rate = _clean_num(nd.get('fluctuationsRatio'))
+        if cmp_code in ('4', '5'):
+            change_rate = -abs(raw_rate)
+        elif cmp_code in ('1', '2'):
+            change_rate = abs(raw_rate)
+        else:
+            change_rate = 0.0
+
+        ex_info = nd.get('stockExchangeType') or {}
+        market = '코스닥' if (
+            '코스닥' in str(ex_info.get('nameKor', ''))
+            or ex_info.get('code') == 'KQ'
+            or str(nd.get('sosok', '')) == '1'
+        ) else '코스피'
+
+        info_map = {it.get('code'): it.get('value') for it in integ.get('totalInfos', []) if it.get('code')}
+        market_cap_eok = round(_parse_kr_eok(info_map.get('marketValue')), 1)
+        trade_value_eok = round(_parse_kr_eok(info_map.get('accumulatedTradingValue')), 1)
+        acc_vol = _clean_num(info_map.get('accumulatedTradingVolume'))
+        value_cap_pct = round(trade_value_eok / market_cap_eok * 100, 2) if market_cap_eok > 0 else 0.0
+
+        deal_list = integ.get('dealTrendInfos') or []
+        dt0 = deal_list[0] if deal_list else {}
+        ref_price = _clean_num(dt0.get('closePrice')) or price
+        foreign_net_mm = round(_clean_num(dt0.get('foreignerPureBuyQuant')) * ref_price / 1_000_000, 1) if deal_list else None
+        inst_net_mm = round(_clean_num(dt0.get('organPureBuyQuant')) * ref_price / 1_000_000, 1) if deal_list else None
+
+        today_ymd = datetime.now().strftime('%Y%m%d')
+        prev_deal = deal_list[1] if (deal_list and dt0.get('bizdate') == today_ymd and len(deal_list) > 1) else dt0
+        prev_vol = _clean_num(prev_deal.get('accumulatedTradingVolume'))
+        ratio_pct = round((acc_vol / prev_vol - 1.0) * 100.0, 2) if (prev_vol > 0 and acc_vol > 0) else 0.0
+
+        profiles = load_jsr_profiles()
+        prof = profiles.get(name, {})
+        theme_name = prof.get('primary_theme', '')
+        if not theme_name:
+            wl_themes = (_load_json_safe(_data_path('sihwang_watchlist.json'), {}).get('themes_of') or {}).get(code, [])
+            theme_name = ', '.join(wl_themes[:3]) if wl_themes else ''
+        reason = prof.get('spike_reason', '') or integ.get('description', '') or f'{name} 실시간 증시 데이터'
+
+        rs_score = max(1, min(99, int(round(50 + change_rate * 4))))
+        res = {
+            'status': 'ok',
+            'code': code,
+            'name': name,
+            'price': price,
+            'change_rate': round(change_rate, 2),
+            'market': market,
+            'theme': theme_name,
+            'reason': reason,
+            'rs_rating': {'rs': rs_score, 'vs': market},
+            'market_cap_eok': int(round(market_cap_eok)),
+            'trade_value_eok': int(round(trade_value_eok)),
+            'value_cap_pct': value_cap_pct,
+            'ratio_pct': ratio_pct,
+            'foreign_net_mm': foreign_net_mm,
+            'inst_net_mm': inst_net_mm,
+            'program_net_mm': None
+        }
+        _stock_detail_cache[code] = {'data': res, 'time': now_ts}
+        return res
     except Exception as e:
-        try:
-            n_url = f'https://m.stock.naver.com/api/stock/{code}/basic'
-            n_req = urllib.request.Request(n_url, headers={'User-Agent': 'Mozilla/5.0'})
-            with urllib.request.urlopen(n_req, timeout=3) as n_resp:
-                nd = json.loads(n_resp.read().decode('utf-8'))
-                res = {
-                    'status': 'ok',
-                    'code': code,
-                    'name': nd.get('stockName', ''),
-                    'price': float(nd.get('closePrice', '0').replace(',', '')),
-                    'change_rate': float(nd.get('fluctuationsRatio', '0')),
-                    'market': '코스닥' if 'KOSDAQ' in str(nd.get('sosok', '')) else '코스피',
-                    'reason': '실시간 증시 데이터',
-                    'rs_rating': {'rs': 50, 'vs': '코스피'},
-                }
-                _stock_detail_cache[code] = {'data': res, 'time': now_ts}
-                return res
-        except Exception as e2:
-            return {'status': 'error', 'message': f"{e} / {e2}"}
+        return {'status': 'error', 'message': str(e)}
+
 
 def get_stock_chart(code):
-    """
-    개별 종목 캔들 차트 및 이동평균선, 거래량 시계열 데이터
-    """
+    """개별 종목 120일 일봉 OHLCV 및 MA5/MA20/MA60 이동평균선 데이터 (네이버 fchart API)"""
     if not code:
         return {'status': 'error', 'message': 'code required', 'rows': []}
-        
-    now_ts = time.time()
-    if code in _stock_chart_cache:
-        cached = _stock_chart_cache[code]
-        if now_ts - cached['time'] < 180:
-            return cached['data']
 
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
-        'Referer': 'https://sihwangkase.co.kr/krwatch',
-    }
+    now_ts = time.time()
+    cached = _stock_chart_cache.get(code)
+    if cached and (now_ts - cached['time'] < 180):
+        return cached['data']
+
     try:
-        url = f'https://sihwangkase.co.kr/api/chart?code={code}'
-        req = urllib.request.Request(url, headers=headers)
-        with urllib.request.urlopen(req, timeout=4) as resp:
-            data = json.loads(resp.read().decode('utf-8'))
-            data['status'] = 'ok'
-            _stock_chart_cache[code] = {'data': data, 'time': now_ts}
-            return data
+        url = f'https://fchart.stock.naver.com/sise.nhn?symbol={code}&timeframe=day&count=120&requestType=0'
+        xml_txt = _fetch_text(url, timeout=6, encoding='euc-kr')
+        root = ET.fromstring(xml_txt)
+        rows = []
+        closes = []
+        for elem in root.findall('.//item'):
+            parts = (elem.get('data') or '').split('|')
+            if len(parts) < 6:
+                continue
+            d_raw, o, h, l, c, v = parts[:6]
+            if c in ('null', '') or o in ('null', ''):
+                continue
+            close_val = float(c)
+            closes.append(close_val)
+            date_fmt = f"{d_raw[:4]}-{d_raw[4:6]}-{d_raw[6:8]}" if len(d_raw) == 8 else d_raw
+            n = len(closes)
+            rows.append({
+                'date': date_fmt,
+                'open': float(o),
+                'high': float(h),
+                'low': float(l),
+                'close': close_val,
+                'volume': int(float(v)),
+                'ma5': round(sum(closes[-5:]) / 5, 1) if n >= 5 else None,
+                'ma20': round(sum(closes[-20:]) / 20, 1) if n >= 20 else None,
+                'ma60': round(sum(closes[-60:]) / 60, 1) if n >= 60 else None,
+            })
+
+        data = {'status': 'ok', 'code': code, 'rows': rows}
+        _stock_chart_cache[code] = {'data': data, 'time': now_ts}
+        return data
     except Exception as e:
         return {'status': 'error', 'message': str(e), 'rows': []}
 
@@ -2032,138 +2328,528 @@ _macro_cache = {'data': None, 'time': 0}
 _indicators_cache = {'data': None, 'time': 0}
 _calendar_cache = {}
 
+_YF_MACRO_TICKERS = {
+    'sox': '^SOX',
+    'wti': 'CL=F',
+    'natgas': 'NG=F',
+    'uranium': 'URA',
+    'gold': 'GC=F',
+    'copper': 'HG=F',
+    'silver': 'SI=F',
+    'steel': 'HRC=F',
+    'lithium': 'LIT',
+    'soy': 'ZS=F',
+    'pulp': 'SUZ',
+    'usdkrw': 'KRW=X',
+    'dxy': 'DX-Y.NYB',
+    'usdjpy': 'JPY=X',
+}
+
+
+def _upsert_macro_point(points, date_str, val, max_len=400):
+    """시계열 [['YYYY-MM-DD', float], ...]에 날짜순 중복 없이 최신값 반영"""
+    if val is None or (isinstance(val, float) and math.isnan(val)):
+        return points
+    if not isinstance(points, list):
+        return [[date_str, val]]
+    for p in points:
+        if p and p[0] == date_str:
+            p[1] = val
+            return points
+    points.append([date_str, val])
+    points.sort(key=lambda x: x[0])
+    if len(points) > max_len:
+        points = points[-max_len:]
+    return points
+
+
+def _apply_macro_unit(key, raw_val, unit, prev_val):
+    """기준 시계열 단위(톤/부셸/백만/조 등)와 일치하도록 야후/공시 원천값 단위 자동 보정"""
+    if key == 'copper':
+        if '톤' in unit or '/t' in unit.lower() or (prev_val is not None and prev_val > 500 and raw_val < 30):
+            return round(raw_val * 2204.6226, 2)
+    elif key == 'soy':
+        if prev_val is not None and prev_val < 100 and raw_val > 200:
+            return round(raw_val / 100.0, 2)
+    elif key == 'deposit':
+        if '조' in unit:
+            return round(raw_val / 10000.0, 2)
+    elif key == 'deposit_chg':
+        if '조' in unit:
+            return round(raw_val / 10000.0, 2)
+    return round(raw_val, 3 if abs(raw_val) < 100 else 2)
+
+
+def _fetch_yf_macro():
+    """야후 파이낸스 14종 글로벌 매크로 티커 최근 5거래일 일괄 수집"""
+    tickers = list(_YF_MACRO_TICKERS.values())
+    df = yf.download(tickers, period='5d', progress=False, threads=False)
+    if df is None or df.empty:
+        return {}
+    closes = df['Close']
+    out = {}
+    for key, sym in _YF_MACRO_TICKERS.items():
+        if sym not in closes.columns:
+            continue
+        series = closes[sym].dropna()
+        pts = []
+        for ts, v in series.items():
+            pts.append((ts.strftime('%Y-%m-%d'), float(v)))
+        if pts:
+            out[key] = pts
+    return out
+
+
+def _fetch_trend_deposit():
+    """네이버 증시자금 동향(고객예탁금, 예탁금 증감, 신용융자 비율) 수집"""
+    data = _fetch_json('https://stock.naver.com/api/domestic/market/trendDeposit', timeout=6)
+    rows = data.get('content') or []
+    dep_pts, chg_pts, cred_pts = [], [], []
+    for row in reversed(rows[:10]):
+        bdate = str(row.get('bizdate') or '')
+        if len(bdate) != 8:
+            continue
+        dt_fmt = f"{bdate[:4]}-{bdate[4:6]}-{bdate[6:8]}"
+        cust = _clean_num(row.get('customerDeposit'))
+        diff = _clean_num(row.get('customerDepositDiff'))
+        cred = _clean_num(row.get('creditLoan'))
+        if cust > 0:
+            dep_pts.append((dt_fmt, cust))
+            chg_pts.append((dt_fmt, diff))
+            if cred > 0:
+                cred_pts.append((dt_fmt, (cred, cust)))
+    return {'deposit': dep_pts, 'deposit_chg': chg_pts, 'credit_ratio': cred_pts}
+
+
+def _fetch_dramexchange():
+    """DRAMeXchange(dramexchange.com) DDR5 16Gb & 512Gb TLC 현물평균가 직접 파싱"""
+    html = _fetch_text('https://www.dramexchange.com/', timeout=8)
+    soup = BeautifulSoup(html, 'html.parser')
+    full_txt = soup.get_text(' ', strip=True)
+    m_dt = re.search(r'Last Update:\s*([A-Za-z]+\.?\s*\d{1,2}\s+\d{4})', full_txt)
+    dt_str = datetime.now().strftime('%Y-%m-%d')
+    if m_dt:
+        cleaned_dt = re.sub(r'\s+', ' ', m_dt.group(1).replace('.', ' ')).strip()
+        for fmt in ('%b %d %Y', '%B %d %Y'):
+            try:
+                dt_str = datetime.strptime(cleaned_dt, fmt).strftime('%Y-%m-%d')
+                break
+            except Exception:
+                pass
+
+    out = {}
+    for tr in soup.find_all('tr'):
+        cells = [td.get_text(strip=True) for td in tr.find_all(['th', 'td'])]
+        if len(cells) < 6:
+            continue
+        name = cells[0]
+        if 'DDR5 16Gb (2Gx8) 4800/5600' in name:
+            val = _clean_num(cells[5], default=0.0)
+            if val > 0:
+                out['dram'] = [(dt_str, val)]
+        elif name == '512Gb TLC' or '512Gb TLC' in name:
+            val = _clean_num(cells[5], default=0.0)
+            if val > 0:
+                out['nand'] = [(dt_str, val)]
+    return out
+
+
+def _fetch_vkospi():
+    """인베스팅닷컴(kr.investing.com) VKOSPI 실시간 지수 수집"""
+    from curl_cffi import requests as cffi_requests
+    resp = cffi_requests.get(
+        'https://kr.investing.com/indices/kospi-volatility',
+        impersonate='chrome120',
+        timeout=8
+    )
+    if resp.status_code != 200:
+        return {}
+    soup = BeautifulSoup(resp.text, 'html.parser')
+    el = soup.select_one('[data-test="instrument-price-last"]')
+    val = _clean_num(el.get_text(strip=True)) if el else 0.0
+    if val <= 0:
+        return {}
+    return {'vkospi': [(datetime.now().strftime('%Y-%m-%d'), round(val, 2))]}
+
+
 def get_macro_data(force_refresh=False):
-    """원자재, 환율, 반도체(DRAM/NAND/SOX/수출), 증시자금 등 23종 매크로 데이터 수집"""
+    """원자재, 환율, 반도체(DRAM/NAND/SOX/수출), 증시자금 등 23종 매크로 데이터 독자 실시간 수집"""
     global _macro_cache
     now_ts = time.time()
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    cache_file = os.path.join(base_dir, 'data', 'sihwang_macro.json')
+    cache_file = _data_path('sihwang_macro.json')
 
     if not force_refresh and _macro_cache['data'] and (now_ts - _macro_cache['time'] < 300):
         return _macro_cache['data']
 
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-        'Referer': 'https://sihwangkase.co.kr/futures',
-        'Accept': 'application/json'
+    base_data = _load_json_safe(cache_file)
+    if not base_data or not base_data.get('items'):
+        return {'status': 'error', 'message': 'macro baseline missing', 'items': []}
+
+    with ThreadPoolExecutor(max_workers=4) as ex:
+        f_yf = ex.submit(_try_call, _fetch_yf_macro, default={})
+        f_dep = ex.submit(_try_call, _fetch_trend_deposit, default={})
+        f_dram = ex.submit(_try_call, _fetch_dramexchange, default={})
+        f_vk = ex.submit(_try_call, _fetch_vkospi, default={})
+        yf_res = f_yf.result() or {}
+        dep_res = f_dep.result() or {}
+        dram_res = f_dram.result() or {}
+        vk_res = f_vk.result() or {}
+
+    live_sources = {}
+    live_sources.update(yf_res)
+    live_sources.update(dram_res)
+    live_sources.update(vk_res)
+
+    items = base_data['items']
+    updated_map = {}
+
+    for it in items:
+        key = it.get('key', '')
+        unit = str(it.get('unit') or '')
+        pts = it.get('points') or []
+        prev_val = float(pts[-1][1]) if pts else None
+
+        if key in live_sources:
+            for d_str, raw_v in live_sources[key]:
+                scaled = _apply_macro_unit(key, raw_v, unit, prev_val)
+                pts = _upsert_macro_point(pts, d_str, scaled)
+                prev_val = scaled
+            it['points'] = pts
+            if pts:
+                updated_map[key] = pts[-1]
+        elif key in ('deposit', 'deposit_chg') and dep_res.get(key):
+            for d_str, raw_v in dep_res[key]:
+                scaled = _apply_macro_unit(key, raw_v, unit, prev_val)
+                pts = _upsert_macro_point(pts, d_str, scaled)
+                prev_val = scaled
+            it['points'] = pts
+        elif key == 'credit_ratio' and dep_res.get('credit_ratio'):
+            for d_str, (cred, cust) in dep_res['credit_ratio']:
+                if '%' in unit:
+                    val = round(cred / cust * 100.0, 2)
+                elif '조' in unit:
+                    val = round(cred / 10000.0, 2)
+                else:
+                    val = round(cred, 1)
+                pts = _upsert_macro_point(pts, d_str, val)
+            it['points'] = pts
+
+    # 구리/금 비율(cu_au) 파생 갱신 (최신 구리·금 종가 날짜 기준)
+    cu_item = next((x for x in items if x.get('key') == 'copper'), None)
+    au_item = next((x for x in items if x.get('key') == 'gold'), None)
+    cu_au_item = next((x for x in items if x.get('key') == 'cu_au'), None)
+    if cu_au_item is not None and cu_item and au_item and cu_item.get('points') and au_item.get('points'):
+        cu_dt, cu_val = cu_item['points'][-1]
+        au_val = au_item['points'][-1][1]
+        if au_val > 0:
+            ca_pts = cu_au_item.get('points') or []
+            prev_ca = float(ca_pts[-1][1]) if ca_pts else None
+            raw_ratio = cu_val / au_val
+            if prev_ca is not None and raw_ratio < 0.05 and prev_ca > 0.2:
+                raw_ratio *= 1000.0 if abs(raw_ratio * 1000.0 - prev_ca) < abs(raw_ratio * 2204.62 - prev_ca) else 2204.6226
+            cu_au_item['points'] = _upsert_macro_point(ca_pts, cu_dt, round(raw_ratio, 3))
+
+    base_data['status'] = 'ok'
+    base_data['updated_at'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    base_data.pop('from_cache', None)
+    if not (yf_res or dep_res or dram_res or vk_res):
+        base_data['from_cache'] = True
+
+    _save_json_safe(cache_file, base_data)
+    _macro_cache = {'data': base_data, 'time': now_ts}
+    return base_data
+
+
+def _parse_naver_prog_dict(integ):
+    p = (integ or {}).get('programTrendInfo') or {}
+    arb = int(round(_clean_num(p.get('indexDifferenceReal'))))
+    nonarb = int(round(_clean_num(p.get('indexBiDifferenceReal'))))
+    total = int(round(_clean_num(p.get('indexTotalReal'))))
+    return {'arb': arb, 'nonarb': nonarb, 'total': total}
+
+
+def _parse_naver_deal_dict(integ):
+    d = (integ or {}).get('dealTrendInfo') or {}
+    return {
+        'personal': int(round(_clean_num(d.get('personalValue')))),
+        'foreign': int(round(_clean_num(d.get('foreignValue')))),
+        'institutional': int(round(_clean_num(d.get('institutionalValue')))),
     }
 
-    try:
-        url = 'https://sihwangkase.co.kr/api/macro'
-        req = urllib.request.Request(url, headers=headers)
-        with urllib.request.urlopen(req, timeout=6) as resp:
-            data = json.loads(resp.read().decode('utf-8'))
-            data['status'] = 'ok'
-            data['updated_at'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            _macro_cache = {'data': data, 'time': now_ts}
-            try:
-                with open(cache_file, 'w', encoding='utf-8') as f:
-                    json.dump(data, f, ensure_ascii=False, indent=2)
-            except Exception:
-                pass
-            return data
-    except Exception as e:
-        if os.path.exists(cache_file):
-            try:
-                with open(cache_file, 'r', encoding='utf-8') as f:
-                    cached = json.load(f)
-                    cached['status'] = 'ok'
-                    cached['from_cache'] = True
-                    _macro_cache = {'data': cached, 'time': now_ts}
-                    return cached
-            except Exception:
-                pass
-        return {'status': 'error', 'message': str(e), 'items': []}
+
+def _build_intraday_points(fut_chart, kpi_chart):
+    """선물/현물 분봉(priceInfos) 기반 spot_points, basis_points, diverge_points, fut_vol_points 산출"""
+    k_infos = (kpi_chart or {}).get('priceInfos') or []
+    f_infos = (fut_chart or {}).get('priceInfos') or []
+    f_by_min = {}
+    for row in f_infos:
+        ldt = str(row.get('localDateTime') or '')
+        if len(ldt) >= 12:
+            f_by_min[ldt[:12]] = row
+
+    spot_pts, basis_pts, diverge_pts, vol_pts = [], [], [], []
+    for row in k_infos:
+        ldt = str(row.get('localDateTime') or '')
+        if len(ldt) < 12:
+            continue
+        try:
+            ts = int(datetime.strptime(ldt[:12], '%Y%m%d%H%M').timestamp())
+        except Exception:
+            continue
+        k_val = float(row.get('currentPrice') or 0)
+        if k_val <= 0:
+            continue
+        spot_pts.append([ts, round(k_val, 2)])
+        f_row = f_by_min.get(ldt[:12])
+        if f_row and float(f_row.get('currentPrice') or 0) > 0:
+            f_val = float(f_row['currentPrice'])
+            basis = round(f_val - k_val, 2)
+            div_r = round(basis / k_val * 100.0, 2)
+            basis_pts.append([ts, basis])
+            diverge_pts.append([ts, div_r])
+            vol = int(f_row.get('accumulatedTradingVolume') or 0)
+            vol_pts.append([ts, vol])
+
+    if not basis_pts and f_infos:
+        for row in f_infos:
+            ldt = str(row.get('localDateTime') or '')
+            if len(ldt) >= 12:
+                try:
+                    ts = int(datetime.strptime(ldt[:12], '%Y%m%d%H%M').timestamp())
+                    vol_pts.append([ts, int(row.get('accumulatedTradingVolume') or 0)])
+                except Exception:
+                    pass
+
+    return spot_pts, basis_pts, diverge_pts, vol_pts
+
 
 def get_indicators_data(force_refresh=False):
-    """코스피200 선물, 미결제약정(OI), 베이시스(콘탱고/백워데이션), 괴리율, 프로그램 비차익 순매수"""
+    """코스피200 선물, 코스피200 현물, 실시간 베이시스, 프로그램 차익/비차익, 투자자 수급 독자 수집"""
     global _indicators_cache
     now_ts = time.time()
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    cache_file = os.path.join(base_dir, 'data', 'sihwang_indicators.json')
+    cache_file = _data_path('sihwang_indicators.json')
 
     if not force_refresh and _indicators_cache['data'] and (now_ts - _indicators_cache['time'] < 30):
         return _indicators_cache['data']
 
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-        'Referer': 'https://sihwangkase.co.kr/futures',
-        'Accept': 'application/json'
+    prev_cached = _load_json_safe(cache_file, {})
+    today_str = datetime.now().strftime('%Y-%m-%d')
+    now_hhmm = datetime.now().strftime('%H:%M')
+
+    urls = {
+        'rt': 'https://polling.finance.naver.com/api/realtime?query=SERVICE_INDEX:KPI200,FUT',
+        'fut_integ': 'https://m.stock.naver.com/api/index/FUT/integration',
+        'kospi_integ': 'https://m.stock.naver.com/api/index/KOSPI/integration',
+        'kosdaq_integ': 'https://m.stock.naver.com/api/index/KOSDAQ/integration',
+        'fut_chart': 'https://api.stock.naver.com/chart/domestic/index/FUT?periodType=day',
+        'kpi_chart': 'https://api.stock.naver.com/chart/domestic/index/KPI200?periodType=day',
+    }
+    with ThreadPoolExecutor(max_workers=6) as ex:
+        futs = {k: ex.submit(_try_call, _fetch_json, u, 5, default={}) for k, u in urls.items()}
+        res = {k: fut.result() or {} for k, fut in futs.items()}
+
+    rt_items = {}
+    for area in (res['rt'].get('result') or {}).get('areas', []):
+        for d in area.get('datas', []):
+            if d.get('cd'):
+                rt_items[d['cd']] = d
+
+    kpi_rt = rt_items.get('KPI200') or {}
+    fut_rt = rt_items.get('FUT') or {}
+
+    if not kpi_rt and not fut_rt and not res['fut_integ']:
+        if prev_cached:
+            prev_cached['status'] = 'ok'
+            prev_cached['from_cache'] = True
+            _indicators_cache = {'data': prev_cached, 'time': now_ts}
+            return prev_cached
+        return {'status': 'error', 'message': 'indicators fetch failed'}
+
+    def _parse_idx_rt(d):
+        px = round(float(d.get('nv') or 0) / 100.0, 2)
+        chg_abs = round(float(d.get('cv') or 0) / 100.0, 2)
+        rate_abs = round(float(d.get('cr') or 0.0), 2)
+        rf = str(d.get('rf') or '3')
+        if rf in ('4', '5'):
+            return px, -abs(chg_abs), -abs(rate_abs)
+        if rf in ('1', '2'):
+            return px, abs(chg_abs), abs(rate_abs)
+        return px, 0.0, 0.0
+
+    f_price, f_chg, f_rate = _parse_idx_rt(fut_rt)
+    s_price, s_chg, s_rate = _parse_idx_rt(kpi_rt)
+
+    raw_bs = kpi_rt.get('bs')
+    if f_price > 0 and s_price > 0:
+        live_basis = round(f_price - s_price, 2)
+    elif raw_bs is not None:
+        live_basis = round(float(raw_bs) / 100.0, 2)
+    else:
+        live_basis = 0.0
+
+    basis_rate = round(live_basis / s_price * 100.0, 2) if s_price > 0 else 0.0
+    basis_state = '콘탱고' if live_basis >= 0 else '백워데이션'
+
+    prog_kospi = _parse_naver_prog_dict(res['kospi_integ'])
+    prog_kosdaq = _parse_naver_prog_dict(res['kosdaq_integ'])
+
+    # 일중 비차익 시리즈 누적 (당일자만 유지, 신규 일자면 초기화)
+    same_day = prev_cached.get('date') == today_str
+    prev_series = list(((prev_cached.get('program') or {}).get('series')) or []) if same_day else []
+    snap = {
+        'time': now_hhmm,
+        'arb': prog_kospi['arb'],
+        'nonarb': prog_kospi['nonarb'],
+        'total': prog_kospi['total']
+    }
+    if prev_series and prev_series[-1].get('time') == now_hhmm:
+        prev_series[-1] = snap
+    else:
+        prev_series.append(snap)
+        if len(prev_series) > 240:
+            prev_series = prev_series[-240:]
+
+    spot_pts, basis_pts, diverge_pts, vol_pts = _build_intraday_points(res['fut_chart'], res['kpi_chart'])
+
+    prev_fut = prev_cached.get('futures') or {}
+    oi_val = prev_fut.get('oi') or 0
+    oi_pts = prev_cached.get('oi_points') if same_day else []
+    oi_prev = prev_cached.get('oi_prev')
+
+    data = {
+        'status': 'ok',
+        'date': today_str,
+        'updated_at': datetime.now().strftime('%H:%M:%S'),
+        'futures': {
+            'price': f_price,
+            'change': f_chg,
+            'change_rate': f_rate,
+            'volume': int(fut_rt.get('aq') or 0),
+            'oi': oi_val,
+            'oi_delta': 0,
+            'market_basis': live_basis,
+            'diverge': basis_rate,
+            'contract': '코스피200 선물',
+        },
+        'spot': {
+            'name': '코스피 200',
+            'value': s_price,
+            'change': s_chg,
+            'change_rate': s_rate,
+        },
+        'basis': {
+            'live': live_basis,
+            'theory': 0.0,
+            'state': basis_state,
+            'rate': basis_rate,
+            'source': '네이버 실시간 (선물-현물)',
+        },
+        'diverge': {
+            'live': live_basis,
+            'theory': 0.0,
+            'rate': basis_rate,
+        },
+        'fs_gap': {
+            'futures': f_price,
+            'spot': s_price,
+            'rate': basis_rate,
+            'state': basis_state,
+            'value': live_basis,
+        },
+        'program': {
+            'arb': prog_kospi['arb'],
+            'nonarb': prog_kospi['nonarb'],
+            'total': prog_kospi['total'],
+            'series': prev_series,
+        },
+        'program_kospi': prog_kospi,
+        'program_kosdaq': prog_kosdaq,
+        'investors': {
+            'futures': _parse_naver_deal_dict(res['fut_integ']),
+            'kospi': _parse_naver_deal_dict(res['kospi_integ']),
+            'kosdaq': _parse_naver_deal_dict(res['kosdaq_integ']),
+        },
+        'spot_points': spot_pts,
+        'basis_points': basis_pts,
+        'diverge_points': diverge_pts,
+        'fut_vol_points': vol_pts,
+        'oi_points': oi_pts,
+        'oi_prev': oi_prev,
+        'spot_prev': _clean_num((res['kpi_chart'] or {}).get('lastClosePrice')) or s_price,
     }
 
+    _save_json_safe(cache_file, data)
+    _indicators_cache = {'data': data, 'time': now_ts}
+    return data
+
+
+def _generate_krx_calendar_events(month):
+    """월별 정기 KRX 파생 만기일 및 기본 증시 일정 자동 생성"""
     try:
-        url = 'https://sihwangkase.co.kr/api/indicators'
-        req = urllib.request.Request(url, headers=headers)
-        with urllib.request.urlopen(req, timeout=5) as resp:
-            data = json.loads(resp.read().decode('utf-8'))
-            data['status'] = 'ok'
-            _indicators_cache = {'data': data, 'time': now_ts}
-            try:
-                with open(cache_file, 'w', encoding='utf-8') as f:
-                    json.dump(data, f, ensure_ascii=False, indent=2)
-            except Exception:
-                pass
-            return data
-    except Exception as e:
-        if os.path.exists(cache_file):
-            try:
-                with open(cache_file, 'r', encoding='utf-8') as f:
-                    cached = json.load(f)
-                    cached['status'] = 'ok'
-                    cached['from_cache'] = True
-                    _indicators_cache = {'data': cached, 'time': now_ts}
-                    return cached
-            except Exception:
-                pass
-        return {'status': 'error', 'message': str(e)}
+        year, mon = map(int, month.split('-'))
+    except Exception:
+        return []
+    thursdays = []
+    d = datetime(year, mon, 1)
+    while d.month == mon:
+        if d.weekday() == 3:
+            thursdays.append(d.strftime('%Y-%m-%d'))
+        d += timedelta(days=1)
+
+    events = []
+    if len(thursdays) >= 2:
+        is_quad = mon in (3, 6, 9, 12)
+        events.append({
+            'id': f'krx-exp-{month}',
+            'date': thursdays[1],
+            'time': '15:20',
+            'kind': '옵션·선물만기',
+            'title': '선물·옵션 동시만기일 (네 마녀의 날)' if is_quad else '코스피200 옵션 만기일',
+            'important': True,
+            'memo': '매월 둘째 주 목요일 정기 만기 일정',
+            'stocks': []
+        })
+    return events
+
 
 def get_calendar_data(month=None, force_refresh=False):
-    """증시 캘린더 (실적발표, 공모주, FOMC, 경제지표, 만기일, 락업해제)"""
+    """증시 캘린더 (로컬 월별 JSON 스냅샷 + 미래 월 KRX 정기만기일 자동 생성)"""
     global _calendar_cache
     now_ts = time.time()
     if not month:
         month = datetime.now().strftime('%Y-%m')
 
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    cache_file = os.path.join(base_dir, 'data', f'sihwang_calendar_{month}.json')
-    default_cache_file = os.path.join(base_dir, 'data', 'sihwang_calendar.json')
-
     cached_entry = _calendar_cache.get(month)
     if not force_refresh and cached_entry and (now_ts - cached_entry['time'] < 600):
         return cached_entry['data']
 
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-        'Referer': 'https://sihwangkase.co.kr/calendar',
-        'Accept': 'application/json'
-    }
+    cache_file = _data_path(f'sihwang_calendar_{month}.json')
+    default_cache_file = _data_path('sihwang_calendar.json')
 
-    try:
-        url = f'https://sihwangkase.co.kr/api/calendar?month={month}'
-        req = urllib.request.Request(url, headers=headers)
-        with urllib.request.urlopen(req, timeout=6) as resp:
-            data = json.loads(resp.read().decode('utf-8'))
-            data['status'] = 'ok'
-            _calendar_cache[month] = {'data': data, 'time': now_ts}
-            try:
-                with open(cache_file, 'w', encoding='utf-8') as f:
-                    json.dump(data, f, ensure_ascii=False, indent=2)
-            except Exception:
-                pass
-            return data
-    except Exception as e:
-        for cf in [cache_file, default_cache_file]:
-            if os.path.exists(cf):
-                try:
-                    with open(cf, 'r', encoding='utf-8') as f:
-                        cached = json.load(f)
-                        cached['status'] = 'ok'
-                        cached['from_cache'] = True
-                        _calendar_cache[month] = {'data': cached, 'time': now_ts}
-                        return cached
-                except Exception:
-                    pass
-        return {'status': 'error', 'message': str(e), 'events': [], 'kinds': [], 'month': month}
+    data = _load_json_safe(cache_file)
+    if data and data.get('events') is not None:
+        data['status'] = 'ok'
+        data['month'] = month
+        _calendar_cache[month] = {'data': data, 'time': now_ts}
+        return data
+
+    # 기본 캐시에서 해당 월 일치 일정 필터링 + KRX 정기 만기일 생성
+    base = _load_json_safe(default_cache_file, {})
+    events = [ev for ev in (base.get('events') or []) if str(ev.get('date', '')).startswith(month)]
+    if not any(ev.get('kind') == '옵션·선물만기' for ev in events):
+        events.extend(_generate_krx_calendar_events(month))
+    events.sort(key=lambda e: (e.get('date', ''), e.get('time', '')))
+
+    kinds = sorted({ev.get('kind', '기타') for ev in events})
+    out = {
+        'status': 'ok',
+        'month': month,
+        'events': events,
+        'kinds': kinds,
+        'auto_generated': True
+    }
+    _calendar_cache[month] = {'data': out, 'time': now_ts}
+    return out
 
 
 if __name__ == '__main__':
