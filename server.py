@@ -53,13 +53,15 @@ def json_response(data):
 
 @app.route('/')
 def index():
+    html_path = os.path.join(BASE_DIR, 'templates', 'index.html')
+    if os.path.exists(html_path):
+        with open(html_path, 'r', encoding='utf-8') as f:
+            return f.read()
     disk_template = os.path.join(r'C:\Users\Administrator\Desktop\Overhang', 'templates', 'index.html')
     if os.path.exists(disk_template):
         with open(disk_template, 'r', encoding='utf-8') as f:
             return f.read()
-    html_path = os.path.join(BASE_DIR, 'templates', 'index.html')
-    with open(html_path, 'r', encoding='utf-8') as f:
-        return f.read()
+    return "Template not found."
 
 @app.route('/static/<filename:path>')
 def serve_static(filename):
@@ -206,13 +208,13 @@ def api_tunnel_stop():
 
 @app.route('/mini')
 def mini_window():
-    disk_mini = os.path.join(r'C:\Users\Administrator\Desktop\Overhang', 'templates', 'mini.html')
-    if os.path.exists(disk_mini):
-        with open(disk_mini, 'r', encoding='utf-8') as f:
-            return f.read()
     template_path = os.path.join(BASE_DIR, 'templates', 'mini.html')
     if os.path.exists(template_path):
         with open(template_path, 'r', encoding='utf-8') as f:
+            return f.read()
+    disk_mini = os.path.join(r'C:\Users\Administrator\Desktop\Overhang', 'templates', 'mini.html')
+    if os.path.exists(disk_mini):
+        with open(disk_mini, 'r', encoding='utf-8') as f:
             return f.read()
     return "Mini window template not found."
 
@@ -367,22 +369,27 @@ if __name__ == '__main__':
         from desktop_hud import run_hud_window
         run_hud_window(title, source, link, pos, dur)
         sys.exit(0)
-    # 이미 서버가 실행 중인 경우 브라우저만 띄우고 종료
-    if check_already_running(5000):
-        webbrowser.open('http://localhost:5000')
-        sys.exit(0)
+    # 클라우드 환경(PORT 환경 변수) 우선 처리
+    env_port = os.environ.get('PORT')
+    if env_port:
+        port = int(env_port)
+    else:
+        if check_already_running(5000):
+            if sys.platform == 'win32':
+                webbrowser.open('http://localhost:5000')
+            sys.exit(0)
+        port = find_free_port(5000)
+        if sys.platform == 'win32' and not os.environ.get('RENDER'):
+            Timer(1.5, open_browser, args=[port]).start()
 
-    port = find_free_port(5000)
     local_ip = get_local_ip()
     print("=" * 60)
     print(f"[Morning Stock Radar] 모닝 증시 큐레이터 서버 시작...")
-    print(f"▶ 로컬 PC 브라우저 주소: http://localhost:{port}")
-    print(f"▶ 같은 Wi-Fi 제자/스마트폰/태블릿 접속 주소: http://{local_ip}:{port}")
-    print("잠시 후 브라우저가 자동으로 열립니다. (창을 닫으면 종료)")
+    print(f"▶ 서버 포트: {port}")
+    if sys.platform == 'win32':
+        print(f"▶ 로컬 PC 브라우저 주소: http://localhost:{port}")
+        print(f"▶ 같은 Wi-Fi 제자/스마트폰/태블릿 접속 주소: http://{local_ip}:{port}")
     print("=" * 60)
-    
-    # 1.5초 후 브라우저 자동 오픈
-    Timer(1.5, open_browser, args=[port]).start()
     
     # HTS 위 속보 오버레이 백그라운드 감시 스레드 시작
     threading.Thread(target=background_news_watcher, daemon=True).start()

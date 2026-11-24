@@ -9,12 +9,24 @@ import os
 import time
 import webbrowser
 import subprocess
-import tkinter as tk
+try:
+    import tkinter as tk
+except Exception:
+    tk = None
 
 def run_hud_window(title, source="속보", link=None, position="top-center", duration_sec=7):
     """
     독립 프로세스 메인 스레드에서 단독 실행되는 HUD 창
     """
+    if sys.platform != 'win32' or os.environ.get('RENDER'):
+        return
+    try:
+        try:
+    import tkinter as tk
+except Exception:
+    tk = None
+    except Exception:
+        return
     root = tk.Tk()
     root.title("MorningStockCurator_Alert")
     root.overrideredirect(True) # 타이틀바 제거
@@ -130,6 +142,8 @@ def show_desktop_hud(title, source="속보", link=None, position="top-center", d
     """
     독립 백그라운드 프로세스로 HUD 창을 띄워 메인 서버와 Tcl/Tk가 절대 충돌하지 않도록 보장
     """
+    if sys.platform != 'win32' or os.environ.get('RENDER'):
+        return
     try:
         if getattr(sys, 'frozen', False):
             # PyInstaller exe 환경
