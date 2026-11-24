@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """
 증시 뉴스 및 지수 데이터 통합 수집 모듈 (collector.py)
 - 네이버 증권/경제 실시간 속보 크롤링 (증권, 산업/재계, 글로벌경제)
@@ -37,11 +37,11 @@ def load_jsr_profiles():
     
     # 만약 local data 폴더에 없으면 원본 경로 확인
     if not os.path.exists(theme_file):
-        alt_theme = r'C:\종산8기\JSR v10\JSR v10\data\theme_stock_data.json'
+        alt_theme = os.path.join(base_dir, 'data', 'theme_stock_data.json')
         if os.path.exists(alt_theme):
             theme_file = alt_theme
     if not os.path.exists(spike_file):
-        alt_spike = r'C:\Users\Administrator\Desktop\주식알리미 최종 수정본10.22\stock_spike_reasons.json'
+        alt_spike = os.path.join(base_dir, 'data', 'stock_spike_reasons.json')
         if os.path.exists(alt_spike):
             spike_file = alt_spike
             
